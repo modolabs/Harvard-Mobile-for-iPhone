@@ -233,6 +233,15 @@
         frame.origin.y += heightAdded;
         self.detailTextLabel.frame = frame;
     }
+    if (self.detailTextLabel.text && 
+        (self.accessoryView != nil)) {
+        // If we have a single line detailTextLabel with an accessory view, we need to bring in
+        // the right margin to make sure the text doesn't touch the accessory image.
+        CGRect detailTextFrame = self.detailTextLabel.frame;
+        self.detailTextLabel.frame = 
+        CGRectMake(detailTextFrame.origin.x, detailTextFrame.origin.y, 
+                   detailTextFrame.size.width - 2, detailTextFrame.size.height);
+    }
     
     /*
     if (self.textLabel.frame.size.height > 0) {

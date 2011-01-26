@@ -321,6 +321,9 @@ NSString * const RequestLookupAddress = @"address";
 		if ([tag isEqualToString:[personDetails displayNameForKey:@"mail"]]) {
             cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
             cell.accessoryView = [UIImageView accessoryViewWithMITType:MITAccessoryViewEmail];
+            cell.detailTextLabel.numberOfLines = 1;
+            cell.detailTextLabel.minimumFontSize = 8;
+            cell.detailTextLabel.adjustsFontSizeToFitWidth = YES;
 		} else if ([tag isEqualToString:[personDetails displayNameForKey:@"telephonenumber"]]) {
             cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
             cell.accessoryView = [UIImageView accessoryViewWithMITType:MITAccessoryViewPhone];
@@ -340,6 +343,28 @@ NSString * const RequestLookupAddress = @"address";
 		return cell;
 	}	
 }
+
+- (void)tableView:(UITableView *)tableView 
+  willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (self.sectionArray.count > indexPath.section) {
+        NSArray *rowArray = [self.sectionArray objectAtIndex:indexPath.section];
+        if (rowArray.count > indexPath.row) {
+            NSArray *personInfo = [rowArray objectAtIndex:indexPath.row];
+            if (personInfo.count > 0) {            
+                NSString *personTag = [personInfo objectAtIndex:0];
+                if ([personTag isEqualToString:@"email"]) {            
+                    cell.detailTextLabel.font = [UIFont boldSystemFontOfSize:[UIFont systemFontSize]];
+                    cell.detailTextLabel.numberOfLines = 1;
+                    cell.detailTextLabel.minimumFontSize = 8;
+                    cell.detailTextLabel.adjustsFontSizeToFitWidth = YES;
+                }
+            }
+        }
+    }
+    
+}
+
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
 	
