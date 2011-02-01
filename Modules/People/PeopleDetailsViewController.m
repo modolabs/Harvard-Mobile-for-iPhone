@@ -13,6 +13,9 @@
 #import "AnalyticsWrapper.h"
 #import "MITMailComposeController.h"
 
+static const CGFloat kEmailLineBreakThresholdWidth = 190.0f;
+static const CGFloat kMaxHeightOfSingleLineOfEmailText = 18.0f;
+
 @interface PeopleDetailsViewController (Private)
 
 // Finds values in PersonDetails corresponding to the given ldapKey and adds them to multiValue without 
@@ -321,9 +324,7 @@ NSString * const RequestLookupAddress = @"address";
 		if ([tag isEqualToString:[personDetails displayNameForKey:@"mail"]]) {
             cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
             cell.accessoryView = [UIImageView accessoryViewWithMITType:MITAccessoryViewEmail];
-            cell.detailTextLabel.numberOfLines = 1;
             cell.detailTextLabel.minimumFontSize = 8;
-            cell.detailTextLabel.adjustsFontSizeToFitWidth = YES;
 		} else if ([tag isEqualToString:[personDetails displayNameForKey:@"telephonenumber"]]) {
             cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
             cell.accessoryView = [UIImageView accessoryViewWithMITType:MITAccessoryViewPhone];
@@ -353,11 +354,22 @@ NSString * const RequestLookupAddress = @"address";
             NSArray *personInfo = [rowArray objectAtIndex:indexPath.row];
             if (personInfo.count > 0) {            
                 NSString *personTag = [personInfo objectAtIndex:0];
-                if ([personTag isEqualToString:@"email"]) {            
-                    cell.detailTextLabel.font = [UIFont boldSystemFontOfSize:[UIFont systemFontSize]];
-                    cell.detailTextLabel.numberOfLines = 1;
-                    cell.detailTextLabel.minimumFontSize = 8;
-                    cell.detailTextLabel.adjustsFontSizeToFitWidth = YES;
+                if ([personTag isEqualToString:@"email"]) {
+                    // Is this going to be one or two lines?
+                    CGSize textSize = 
+                    [cell.detailTextLabel.text 
+                     sizeWithFont:[UIFont boldSystemFontOfSize:[UIFont systemFontSize]]
+                     constrainedToSize:CGSizeMake(kEmailLineBreakThresholdWidth, 1000)
+                     lineBreakMode:UILineBreakModeCharacterWrap];
+                    if (textSize.height <= kMaxHeightOfSingleLineOfEmailText) {
+                        // If it's going to fit on one line, set font size adjustment 
+                        // up so that things don't touch the accessory view.
+                        cell.detailTextLabel.numberOfLines = 1;
+                        cell.detailTextLabel.font = 
+                        [UIFont boldSystemFontOfSize:[UIFont systemFontSize]];
+                        cell.detailTextLabel.adjustsFontSizeToFitWidth = YES;
+                    }
+                     
                 }
             }
         }
