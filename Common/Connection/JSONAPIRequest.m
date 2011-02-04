@@ -106,6 +106,7 @@
 	NSMutableArray *components = [NSMutableArray arrayWithCapacity:[keys count]];
 	for (NSString *key in keys) {
 		NSString *value = [[dict objectForKey:key] stringByReplacingOccurrencesOfString:@" " withString:@"+"];
+        value = [[value stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] stringByReplacingOccurrencesOfString:@"&" withString:@"%26"];
 		[components addObject:[NSString stringWithFormat:@"%@=%@", key, value]];
 	}
 	return [components componentsJoinedByString:@"&"];
@@ -114,7 +115,7 @@
 // internal method used to construct URL
 + (NSURL *)buildURL:(NSDictionary *)dict queryBase:(NSString *)base {
 	NSString *urlString = [NSString stringWithFormat:@"%@?%@", base, [JSONAPIRequest buildQuery:dict]];	
-	NSURL *url = [NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+	NSURL *url = [NSURL URLWithString:urlString];
 	return url;
 }
 
