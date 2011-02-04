@@ -67,7 +67,7 @@
 	
 	if (prevClass != nil) {
 		if ([prevClass.name length]) {
-			if ([prevClass.name isEqualToString:class.name])
+			if ([prevClass.name isEqualToString:class.name] && staffName.length)
 				name = [name stringByAppendingFormat:@" (%@)", staffName];
 		}
 	}
