@@ -107,9 +107,7 @@
             category.title = [CalendarConstants titleForEventType:CalendarEventListTypeExhibits];
         }
         [CoreDataManager saveData];
-	} else {
-        DLog(@"%@", [[category.events allObjects] description]);
-    }
+	}
 	return category;
 }
 

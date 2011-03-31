@@ -1054,10 +1054,6 @@
 			
 			for (NSDictionary *eventDict in result) {
 				MITCalendarEvent *event = [CalendarDataManager eventWithDict:eventDict];
-                // assign a category if we know already what it is
-                if (category != nil) {
-                    [event addCategory:category];
-                }
 				[arrayForTable addObject:event];
 			}
 			

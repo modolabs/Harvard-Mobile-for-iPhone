@@ -106,49 +106,48 @@
 		description = [NSMutableString stringWithFormat:@"%@<br /><br />",[dict objectForKey:@"description"]];
 	
 	
-	NSDictionary *customDict = nil;
+	NSDictionary *customDict = [dict objectForKey:@"custom"];
 	
-	
-	 if (customDict = [dict objectForKey:@"custom"]) 
-	 {
-	 NSArray *fields = nil;
-	 fields = [customDict allKeys];
-	 
-	 for (int j=0; j <[fields count]; j++)
-	 {
-	 NSString *fieldKeyString = [fields objectAtIndex:j];
-	 
-	 NSString *fieldValueString= [[customDict objectForKey:fieldKeyString] description];
-	 fieldKeyString = [fieldKeyString stringByReplacingOccurrencesOfString:@"\"" withString:@""];
-	 fieldValueString = [fieldValueString stringByReplacingOccurrencesOfString:@"\\" withString:@""];
-	 
-	 if (![fieldKeyString isEqualToString:@"Location"] && 
-		 ![fieldKeyString isEqualToString:@"Event Type"] &&
-		 ![fieldKeyString isEqualToString:@"Contact Info"] &&
-		 ![fieldKeyString isEqualToString:@"Ticket Web Link"] &&
-		 ![fieldKeyString isEqualToString:@"Gazette Classification"]) 
-	 {
-	 
-	 fieldKeyString = [NSString stringWithFormat:@"<b><font color=\"#554c41\">%@</font></b>", fieldKeyString];
-	 [description appendString:fieldKeyString];
-	 [description appendString:@": "];
-	 [description appendString:fieldValueString];
-	 description = [NSMutableString stringWithFormat:@"%@<br /><br />", description];
-	 
-	 }
-	 }
-	 
-	 // use this oppoprtunity to extract contact info as well
-	 if ([customDict objectForKey:@"\"Contact Info\""]) {
-	 contactInfoAvailable = YES;
-	 contactInfo = [customDict objectForKey:@"\"Contact Info\""];
-	 }
-	 
-	 if ([customDict objectForKey:@"\"Location\""]) {
-	 locationDetailAvailable = YES;
-	 locationDetail = [customDict objectForKey:@"\"Location\""];
-	 }
-	 }
+    if (customDict) 
+    {
+        NSArray *fields = nil;
+        fields = [customDict allKeys];
+        
+        for (int j=0; j <[fields count]; j++)
+        {
+            NSString *fieldKeyString = [fields objectAtIndex:j];
+            
+            NSString *fieldValueString= [[customDict objectForKey:fieldKeyString] description];
+            fieldKeyString = [fieldKeyString stringByReplacingOccurrencesOfString:@"\"" withString:@""];
+            fieldValueString = [fieldValueString stringByReplacingOccurrencesOfString:@"\\" withString:@""];
+            
+            if (![fieldKeyString isEqualToString:@"Location"] && 
+                ![fieldKeyString isEqualToString:@"Event Type"] &&
+                ![fieldKeyString isEqualToString:@"Contact Info"] &&
+                ![fieldKeyString isEqualToString:@"Ticket Web Link"] &&
+                ![fieldKeyString isEqualToString:@"Gazette Classification"]) 
+            {
+                
+                fieldKeyString = [NSString stringWithFormat:@"<b><font color=\"#554c41\">%@</font></b>", fieldKeyString];
+                [description appendString:fieldKeyString];
+                [description appendString:@": "];
+                [description appendString:fieldValueString];
+                description = [NSMutableString stringWithFormat:@"%@<br /><br />", description];
+                
+            }
+        }
+        
+        // use this oppoprtunity to extract contact info as well
+        if ([customDict objectForKey:@"\"Contact Info\""]) {
+            contactInfoAvailable = YES;
+            contactInfo = [customDict objectForKey:@"\"Contact Info\""];
+        }
+        
+        if ([customDict objectForKey:@"\"Location\""]) {
+            locationDetailAvailable = YES;
+            locationDetail = [customDict objectForKey:@"\"Location\""];
+        }
+    }
 
 	self.title = [dict objectForKey:@"title"];	
 	// optional strings
@@ -253,17 +252,17 @@
 			}
 			
 			if ([customContactText length] > 0) {
-			NSString *fieldName = [NSString stringWithFormat:@"<b><u>%@</b></u>", @"More Information"];
-
-			[description appendString:fieldName];
-			[description appendString:@": "];
-			[description appendString:customContactText];
-			description = [NSMutableString stringWithFormat:@"%@<br /><br />", description];
+                NSString *fieldName = [NSString stringWithFormat:@"<b><u>%@</b></u>", @"More Information"];
+                
+                [description appendString:fieldName];
+                [description appendString:@": "];
+                [description appendString:customContactText];
+                description = [NSMutableString stringWithFormat:@"%@<br /><br />", description];
 			}
 		}		
 	}
-
-		self.summary = description;
+    
+    self.summary = description;
 	
 	if ([dict objectForKey:@"url"]) {
 		self.url = [dict objectForKey:@"url"];
@@ -294,48 +293,34 @@
 		
 	}
 	
-	if (customDict = [dict objectForKey:@"custom"]) 
+    customDict = [dict objectForKey:@"custom"];
+	if (customDict)
 	{
 		NSString *gazetteClassification = @"\"Gazette Classification\"";
 		NSString *classificationString = [customDict objectForKey:gazetteClassification];
 		
-		NSArray *classificationArray = [classificationString componentsSeparatedByString: @"\\, "];
+		NSArray *classificationArray = [classificationString componentsSeparatedByString: @","];
+        NSCharacterSet *charset = [NSCharacterSet characterSetWithCharactersInString:@"\\ "];
 		
 		for (int i=0; i < [classificationArray count]; i++) {
 			NSString *catName	= [classificationArray objectAtIndex:i];
 			
-			NSString *subcat = [catName substringFromIndex:1];
+			NSString *subcat = [catName stringByTrimmingCharactersInSet:charset];
 			NSInteger cat_id = [[CalendarDataManager idForCategory:subcat] integerValue];
 			EventCategory *category = [CalendarDataManager categoryWithID:cat_id];
-			
+
 			if (category.title == nil) {
                 category.title = catName;
             }
-			
-            [self addCategory:category];
-			
+            if (![self.categories containsObject:category]) {
+                [self addCategoriesObject:category];
+            }
+            self.isRegular = [NSNumber numberWithBool:YES]; // not academic calendar
 		}
 	}
     
     self.lastUpdated = [NSDate date];
 	[CoreDataManager saveData];
-}
-
-- (void)addCategory:(EventCategory *)category
-{
-    if (![self.categories containsObject:category]) {
-        [self addCategoriesObject:category];
-        
-        NSInteger catID = [category.catID intValue];
-        if (catID == kCalendarExhibitCategoryID
-            || catID == kCalendarAcademicCategoryID
-            || catID == kCalendarHolidayCategoryID) {
-            
-            self.isRegular = [NSNumber numberWithBool:NO];
-        }
-        
-        [CoreDataManager saveData];
-    }
 }
 
 /*

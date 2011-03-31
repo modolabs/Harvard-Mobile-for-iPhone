@@ -28,9 +28,6 @@
 - (BOOL)hasCoords;
 - (void)updateWithDict:(NSDictionary *)dict;
 
-// wrapper for addCategoriesObject that sets isRegular
-- (void)addCategory:(EventCategory *)category;
-
 @end
 
 
