@@ -32,63 +32,24 @@
 		29A0D12110CDD0E8009FC010 /* StellarCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 29A0D11E10CDD0E8009FC010 /* StellarCache.m */; };
 		29C4546D118B55E100A321B0 /* jQueryInject.txt in Resources */ = {isa = PBXBuildFile; fileRef = 29C45425118B55E100A321B0 /* jQueryInject.txt */; };
 		29C4546E118B55E100A321B0 /* jQueryInjectLandscape.txt in Resources */ = {isa = PBXBuildFile; fileRef = 29C45426118B55E100A321B0 /* jQueryInjectLandscape.txt */; };
-		29C4546F118B55E100A321B0 /* ExchangeCredentialsOperation.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = 29C45429118B55E100A321B0 /* ExchangeCredentialsOperation.h */; settings = {JAVA_ARCHIVE_SUBDIR = "Common/Libraries & Headers"; }; };
 		29C45470118B55E100A321B0 /* ExchangeCredentialsOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 29C4542A118B55E100A321B0 /* ExchangeCredentialsOperation.m */; };
-		29C45471118B55E100A321B0 /* ExchangeCredentialsOperationDelegate.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = 29C4542B118B55E100A321B0 /* ExchangeCredentialsOperationDelegate.h */; settings = {JAVA_ARCHIVE_SUBDIR = "Common/Libraries & Headers"; }; };
-		29C45472118B55E100A321B0 /* XAuthTwitterEngine.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = 29C4542C118B55E100A321B0 /* XAuthTwitterEngine.h */; settings = {JAVA_ARCHIVE_SUBDIR = "Common/Libraries & Headers"; }; };
 		29C45473118B55E100A321B0 /* XAuthTwitterEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 29C4542D118B55E100A321B0 /* XAuthTwitterEngine.m */; };
-		29C45474118B55E100A321B0 /* XAuthTwitterEngineDelegate.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = 29C4542E118B55E100A321B0 /* XAuthTwitterEngineDelegate.h */; settings = {JAVA_ARCHIVE_SUBDIR = "Common/Libraries & Headers"; }; };
 		29C45475118B55E100A321B0 /* libOAuth.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 29C45430118B55E100A321B0 /* libOAuth.a */; };
-		29C45476118B55E100A321B0 /* NSMutableURLRequest+Parameters.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = 29C45431118B55E100A321B0 /* NSMutableURLRequest+Parameters.h */; settings = {JAVA_ARCHIVE_SUBDIR = "Common/Libraries & Headers/OAuthConsumer"; }; };
-		29C45477118B55E100A321B0 /* NSString+URLEncoding.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = 29C45432118B55E100A321B0 /* NSString+URLEncoding.h */; settings = {JAVA_ARCHIVE_SUBDIR = "Common/Libraries & Headers/OAuthConsumer"; }; };
-		29C45478118B55E100A321B0 /* NSURL+Base.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = 29C45433118B55E100A321B0 /* NSURL+Base.h */; settings = {JAVA_ARCHIVE_SUBDIR = "Common/Libraries & Headers/OAuthConsumer"; }; };
-		29C45479118B55E100A321B0 /* OAAsynchronousDataFetcher.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = 29C45434118B55E100A321B0 /* OAAsynchronousDataFetcher.h */; settings = {JAVA_ARCHIVE_SUBDIR = "Common/Libraries & Headers/OAuthConsumer"; }; };
-		29C4547A118B55E100A321B0 /* OAConsumer.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = 29C45435118B55E100A321B0 /* OAConsumer.h */; settings = {JAVA_ARCHIVE_SUBDIR = "Common/Libraries & Headers/OAuthConsumer"; }; };
-		29C4547B118B55E100A321B0 /* OADataFetcher.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = 29C45436118B55E100A321B0 /* OADataFetcher.h */; settings = {JAVA_ARCHIVE_SUBDIR = "Common/Libraries & Headers/OAuthConsumer"; }; };
-		29C4547C118B55E100A321B0 /* OAHMAC_SHA1SignatureProvider.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = 29C45437118B55E100A321B0 /* OAHMAC_SHA1SignatureProvider.h */; settings = {JAVA_ARCHIVE_SUBDIR = "Common/Libraries & Headers/OAuthConsumer"; }; };
-		29C4547D118B55E100A321B0 /* OAMutableURLRequest.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = 29C45438118B55E100A321B0 /* OAMutableURLRequest.h */; settings = {JAVA_ARCHIVE_SUBDIR = "Common/Libraries & Headers/OAuthConsumer"; }; };
-		29C4547E118B55E100A321B0 /* OAPlaintextSignatureProvider.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = 29C45439118B55E100A321B0 /* OAPlaintextSignatureProvider.h */; settings = {JAVA_ARCHIVE_SUBDIR = "Common/Libraries & Headers/OAuthConsumer"; }; };
-		29C4547F118B55E100A321B0 /* OARequestParameter.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = 29C4543A118B55E100A321B0 /* OARequestParameter.h */; settings = {JAVA_ARCHIVE_SUBDIR = "Common/Libraries & Headers/OAuthConsumer"; }; };
-		29C45480118B55E100A321B0 /* OAServiceTicket.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = 29C4543B118B55E100A321B0 /* OAServiceTicket.h */; settings = {JAVA_ARCHIVE_SUBDIR = "Common/Libraries & Headers/OAuthConsumer"; }; };
-		29C45481118B55E100A321B0 /* OASignatureProviding.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = 29C4543C118B55E100A321B0 /* OASignatureProviding.h */; settings = {JAVA_ARCHIVE_SUBDIR = "Common/Libraries & Headers/OAuthConsumer"; }; };
-		29C45482118B55E100A321B0 /* OAToken.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = 29C4543D118B55E100A321B0 /* OAToken.h */; settings = {JAVA_ARCHIVE_SUBDIR = "Common/Libraries & Headers/OAuthConsumer"; }; };
-		29C45483118B55E100A321B0 /* OAToken_KeychainExtensions.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = 29C4543E118B55E100A321B0 /* OAToken_KeychainExtensions.h */; settings = {JAVA_ARCHIVE_SUBDIR = "Common/Libraries & Headers/OAuthConsumer"; }; };
-		29C45484118B55E100A321B0 /* OAuthConsumer.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = 29C4543F118B55E100A321B0 /* OAuthConsumer.h */; settings = {JAVA_ARCHIVE_SUBDIR = "Common/Libraries & Headers/OAuthConsumer"; }; };
-		29C45485118B55E100A321B0 /* MGTwitterEngine.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = 29C45441118B55E100A321B0 /* MGTwitterEngine.h */; settings = {JAVA_ARCHIVE_SUBDIR = "Common/Libraries & Headers"; }; };
 		29C45486118B55E100A321B0 /* MGTwitterEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 29C45442118B55E100A321B0 /* MGTwitterEngine.m */; };
-		29C45487118B55E100A321B0 /* MGTwitterEngineDelegate.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = 29C45443118B55E100A321B0 /* MGTwitterEngineDelegate.h */; settings = {JAVA_ARCHIVE_SUBDIR = "Common/Libraries & Headers"; }; };
-		29C45488118B55E100A321B0 /* MGTwitterEngineGlobalHeader.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = 29C45444118B55E100A321B0 /* MGTwitterEngineGlobalHeader.h */; settings = {JAVA_ARCHIVE_SUBDIR = "Common/Libraries & Headers"; }; };
-		29C45489118B55E100A321B0 /* MGTwitterHTTPURLConnection.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = 29C45445118B55E100A321B0 /* MGTwitterHTTPURLConnection.h */; settings = {JAVA_ARCHIVE_SUBDIR = "Common/Libraries & Headers"; }; };
 		29C4548A118B55E100A321B0 /* MGTwitterHTTPURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 29C45446118B55E100A321B0 /* MGTwitterHTTPURLConnection.m */; };
-		29C4548B118B55E100A321B0 /* MGTwitterLibXMLParser.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = 29C45447118B55E100A321B0 /* MGTwitterLibXMLParser.h */; settings = {JAVA_ARCHIVE_SUBDIR = "Common/Libraries & Headers"; }; };
 		29C4548C118B55E100A321B0 /* MGTwitterLibXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 29C45448118B55E100A321B0 /* MGTwitterLibXMLParser.m */; };
-		29C4548D118B55E100A321B0 /* MGTwitterMessagesLibXMLParser.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = 29C45449118B55E100A321B0 /* MGTwitterMessagesLibXMLParser.h */; settings = {JAVA_ARCHIVE_SUBDIR = "Common/Libraries & Headers"; }; };
 		29C4548E118B55E100A321B0 /* MGTwitterMessagesLibXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 29C4544A118B55E100A321B0 /* MGTwitterMessagesLibXMLParser.m */; };
-		29C4548F118B55E100A321B0 /* MGTwitterMessagesParser.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = 29C4544B118B55E100A321B0 /* MGTwitterMessagesParser.h */; settings = {JAVA_ARCHIVE_SUBDIR = "Common/Libraries & Headers"; }; };
 		29C45490118B55E100A321B0 /* MGTwitterMessagesParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 29C4544C118B55E100A321B0 /* MGTwitterMessagesParser.m */; };
-		29C45493118B55E100A321B0 /* MGTwitterMiscLibXMLParser.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = 29C4544F118B55E100A321B0 /* MGTwitterMiscLibXMLParser.h */; settings = {JAVA_ARCHIVE_SUBDIR = "Common/Libraries & Headers"; }; };
 		29C45494118B55E100A321B0 /* MGTwitterMiscLibXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 29C45450118B55E100A321B0 /* MGTwitterMiscLibXMLParser.m */; };
-		29C45495118B55E100A321B0 /* MGTwitterMiscParser.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = 29C45451118B55E100A321B0 /* MGTwitterMiscParser.h */; settings = {JAVA_ARCHIVE_SUBDIR = "Common/Libraries & Headers"; }; };
 		29C45496118B55E100A321B0 /* MGTwitterMiscParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 29C45452118B55E100A321B0 /* MGTwitterMiscParser.m */; };
-		29C45499118B55E100A321B0 /* MGTwitterParserDelegate.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = 29C45455118B55E100A321B0 /* MGTwitterParserDelegate.h */; settings = {JAVA_ARCHIVE_SUBDIR = "Common/Libraries & Headers"; }; };
-		29C4549A118B55E100A321B0 /* MGTwitterRequestTypes.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = 29C45456118B55E100A321B0 /* MGTwitterRequestTypes.h */; settings = {JAVA_ARCHIVE_SUBDIR = "Common/Libraries & Headers"; }; };
-		29C4549D118B55E100A321B0 /* MGTwitterStatusesLibXMLParser.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = 29C45459118B55E100A321B0 /* MGTwitterStatusesLibXMLParser.h */; settings = {JAVA_ARCHIVE_SUBDIR = "Common/Libraries & Headers"; }; };
 		29C4549E118B55E100A321B0 /* MGTwitterStatusesLibXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 29C4545A118B55E100A321B0 /* MGTwitterStatusesLibXMLParser.m */; };
-		29C4549F118B55E100A321B0 /* MGTwitterStatusesParser.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = 29C4545B118B55E100A321B0 /* MGTwitterStatusesParser.h */; settings = {JAVA_ARCHIVE_SUBDIR = "Common/Libraries & Headers"; }; };
 		29C454A0118B55E100A321B0 /* MGTwitterStatusesParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 29C4545C118B55E100A321B0 /* MGTwitterStatusesParser.m */; };
-		29C454A3118B55E100A321B0 /* MGTwitterUsersLibXMLParser.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = 29C4545F118B55E100A321B0 /* MGTwitterUsersLibXMLParser.h */; settings = {JAVA_ARCHIVE_SUBDIR = "Common/Libraries & Headers"; }; };
 		29C454A4118B55E100A321B0 /* MGTwitterUsersLibXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 29C45460118B55E100A321B0 /* MGTwitterUsersLibXMLParser.m */; };
-		29C454A5118B55E100A321B0 /* MGTwitterUsersParser.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = 29C45461118B55E100A321B0 /* MGTwitterUsersParser.h */; settings = {JAVA_ARCHIVE_SUBDIR = "Common/Libraries & Headers"; }; };
 		29C454A6118B55E100A321B0 /* MGTwitterUsersParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 29C45462118B55E100A321B0 /* MGTwitterUsersParser.m */; };
-		29C454A9118B55E100A321B0 /* MGTwitterXMLParser.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = 29C45465118B55E100A321B0 /* MGTwitterXMLParser.h */; settings = {JAVA_ARCHIVE_SUBDIR = "Common/Libraries & Headers"; }; };
 		29C454AA118B55E100A321B0 /* MGTwitterXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 29C45466118B55E100A321B0 /* MGTwitterXMLParser.m */; };
-		29C454AD118B55E100A321B0 /* NSData+MGTwitterBase64.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = 29C45469118B55E100A321B0 /* NSData+MGTwitterBase64.h */; settings = {JAVA_ARCHIVE_SUBDIR = "Common/Libraries & Headers"; }; };
 		29C454AE118B55E100A321B0 /* NSData+MGTwitterBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 29C4546A118B55E100A321B0 /* NSData+MGTwitterBase64.m */; };
-		29C454AF118B55E100A321B0 /* NSString+UUID.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = 29C4546B118B55E100A321B0 /* NSString+UUID.h */; settings = {JAVA_ARCHIVE_SUBDIR = "Common/Libraries & Headers"; }; };
 		29C454B0118B55E100A321B0 /* NSString+UUID.m in Sources */ = {isa = PBXBuildFile; fileRef = 29C4546C118B55E100A321B0 /* NSString+UUID.m */; };
-		29C454C0118B61CA00A321B0 /* SFHFKeychainUtils.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = 29C454BE118B61CA00A321B0 /* SFHFKeychainUtils.h */; settings = {JAVA_ARCHIVE_SUBDIR = Common; }; };
 		29C454C1118B61CA00A321B0 /* SFHFKeychainUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 29C454BF118B61CA00A321B0 /* SFHFKeychainUtils.m */; };
-		29E308861176018C005211A7 /* MITModuleURL.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = 29E308841176018C005211A7 /* MITModuleURL.h */; settings = {JAVA_ARCHIVE_SUBDIR = Common; }; };
 		29E308871176018C005211A7 /* MITModuleURL.m in Sources */ = {isa = PBXBuildFile; fileRef = 29E308851176018C005211A7 /* MITModuleURL.m */; };
 		3A827081103DAA0500BB4109 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A827080103DAA0500BB4109 /* Reachability.m */; };
 		3A82708D103DAA2400BB4109 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A82708C103DAA2400BB4109 /* SystemConfiguration.framework */; };
@@ -104,59 +65,35 @@
 		4463CCB210D6F5750048CA83 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4463CCB110D6F5750048CA83 /* CoreLocation.framework */; };
 		4463D09410D92CB00048CA83 /* MITMapDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4463D09210D92CB00048CA83 /* MITMapDetailViewController.m */; };
 		4463D09510D92CB00048CA83 /* MITMapDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4463D09310D92CB00048CA83 /* MITMapDetailViewController.xib */; };
-		4499341E11A5E53D00A7041B /* CategoriesTableViewController.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = 4499341C11A5E53D00A7041B /* CategoriesTableViewController.h */; settings = {JAVA_ARCHIVE_SUBDIR = "Modules/Campus Map"; }; };
 		4499341F11A5E53D00A7041B /* CategoriesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4499341D11A5E53D00A7041B /* CategoriesTableViewController.m */; };
 		44ACF76E1187884300F1F4B2 /* MapBookmarkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 44ACF76A1187884300F1F4B2 /* MapBookmarkManager.m */; };
-		44ACF76F1187884300F1F4B2 /* MapBookmarkManager.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = 44ACF76B1187884300F1F4B2 /* MapBookmarkManager.h */; settings = {JAVA_ARCHIVE_SUBDIR = "Modules/Campus Map"; }; };
 		44C1A2A811A2F49B000FD653 /* CampusMap.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 44C1A2A711A2F49B000FD653 /* CampusMap.xcdatamodeld */; };
-		44C1A3CE11A33905000FD653 /* MapSelectionController.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = 44C1A3CC11A33905000FD653 /* MapSelectionController.h */; settings = {JAVA_ARCHIVE_SUBDIR = "Modules/Campus Map"; }; };
 		44C1A3CF11A33905000FD653 /* MapSelectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44C1A3CD11A33905000FD653 /* MapSelectionController.m */; };
-		44C1A4C411A412E2000FD653 /* MapSearch.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = 44C1A4C211A412E2000FD653 /* MapSearch.h */; settings = {JAVA_ARCHIVE_SUBDIR = "Modules/Campus Map/CampusMap.xcdatamodeld"; }; };
 		44C1A4C511A412E2000FD653 /* MapSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = 44C1A4C311A412E2000FD653 /* MapSearch.m */; };
-		5623DEC112B15AB600212D5C /* RequestWebViewModalViewController.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = 5623DEBF12B15AB600212D5C /* RequestWebViewModalViewController.h */; settings = {JAVA_ARCHIVE_SUBDIR = Modules/Libraries; }; };
 		5623DEC212B15AB600212D5C /* RequestWebViewModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5623DEC012B15AB600212D5C /* RequestWebViewModalViewController.m */; };
-		5623E7A312B7F81000212D5C /* UnderlinedUILabel.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = 5623E7A112B7F81000212D5C /* UnderlinedUILabel.h */; settings = {JAVA_ARCHIVE_SUBDIR = Modules/Libraries; }; };
 		5623E7A412B7F81100212D5C /* UnderlinedUILabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5623E7A212B7F81000212D5C /* UnderlinedUILabel.m */; };
-		5623EBC712B9ED6C00212D5C /* LibraryAdvancedSearch.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = 5623EBC412B9ED6C00212D5C /* LibraryAdvancedSearch.h */; settings = {JAVA_ARCHIVE_SUBDIR = Modules/Libraries; }; };
 		5623EBC812B9ED6C00212D5C /* LibraryAdvancedSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = 5623EBC512B9ED6C00212D5C /* LibraryAdvancedSearch.m */; };
 		5623EBC912B9ED6C00212D5C /* LibraryAdvancedSearch.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5623EBC612B9ED6C00212D5C /* LibraryAdvancedSearch.xib */; };
-		5623EEA112BBD43C00212D5C /* MobileResearchLinksViewController.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = 5623EE9F12BBD43C00212D5C /* MobileResearchLinksViewController.h */; settings = {JAVA_ARCHIVE_SUBDIR = Modules/Libraries; }; };
 		5623EEA212BBD43C00212D5C /* MobileResearchLinksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5623EEA012BBD43C00212D5C /* MobileResearchLinksViewController.m */; };
-		5689D6C71297066F00A9EFA0 /* LibraryDetailViewController.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = 5689D6C51297066F00A9EFA0 /* LibraryDetailViewController.h */; settings = {JAVA_ARCHIVE_SUBDIR = Modules/Libraries; }; };
 		5689D6C81297066F00A9EFA0 /* LibraryDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5689D6C61297066F00A9EFA0 /* LibraryDetailViewController.m */; };
-		5689D9681297BF0C00A9EFA0 /* LibraryWeeklyScheduleViewController.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = 5689D9661297BF0C00A9EFA0 /* LibraryWeeklyScheduleViewController.h */; settings = {JAVA_ARCHIVE_SUBDIR = Modules/Libraries; }; };
 		5689D9691297BF0C00A9EFA0 /* LibraryWeeklyScheduleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5689D9671297BF0C00A9EFA0 /* LibraryWeeklyScheduleViewController.m */; };
-		5689DAD0129BAE2A00A9EFA0 /* LibrariesSearchViewController.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = 5689DACE129BAE2A00A9EFA0 /* LibrariesSearchViewController.h */; settings = {JAVA_ARCHIVE_SUBDIR = Modules/Libraries; }; };
 		5689DAD1129BAE2A00A9EFA0 /* LibrariesSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5689DACF129BAE2A00A9EFA0 /* LibrariesSearchViewController.m */; };
-		5689DBA6129BD3DD00A9EFA0 /* LibrariesMultiLineCell.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = 5689DBA4129BD3DD00A9EFA0 /* LibrariesMultiLineCell.h */; settings = {JAVA_ARCHIVE_SUBDIR = Modules/Libraries; }; };
 		5689DBA7129BD3DD00A9EFA0 /* LibrariesMultiLineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5689DBA5129BD3DD00A9EFA0 /* LibrariesMultiLineCell.m */; };
-		5689DD78129D294200A9EFA0 /* LibItemDetailViewController.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = 5689DD76129D294100A9EFA0 /* LibItemDetailViewController.h */; settings = {JAVA_ARCHIVE_SUBDIR = Modules/Libraries; }; };
 		5689DD79129D294200A9EFA0 /* LibItemDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5689DD77129D294100A9EFA0 /* LibItemDetailViewController.m */; };
 		56B6DA29128EC10200818071 /* Secret.m in Sources */ = {isa = PBXBuildFile; fileRef = 56B6DA28128EC10200818071 /* Secret.m */; };
 		56B6DA30128EC24700818071 /* libGoogleAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EB4C2CCD127F120400058748 /* libGoogleAnalytics.a */; };
-		56B6DA4212914C8000818071 /* LibrariesMainViewController.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = 56B6DA4012914C8000818071 /* LibrariesMainViewController.h */; settings = {JAVA_ARCHIVE_SUBDIR = Modules/Libraries; }; };
 		56B6DA4312914C8000818071 /* LibrariesMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 56B6DA4112914C8000818071 /* LibrariesMainViewController.m */; };
-		56B6DA4612914C8D00818071 /* LibrariesModule.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = 56B6DA4412914C8D00818071 /* LibrariesModule.h */; settings = {JAVA_ARCHIVE_SUBDIR = Modules/Libraries; }; };
 		56B6DA4712914C8D00818071 /* LibrariesModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 56B6DA4512914C8D00818071 /* LibrariesModule.m */; };
-		56B6DB8C12926C0800818071 /* LibraryItem.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = 56B6DB8A12926C0800818071 /* LibraryItem.h */; settings = {JAVA_ARCHIVE_SUBDIR = Modules/Libraries; }; };
 		56B6DB8D12926C0800818071 /* LibraryItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 56B6DB8B12926C0800818071 /* LibraryItem.m */; };
-		56B6DB9112926E2B00818071 /* Library.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = 56B6DB8F12926E2B00818071 /* Library.h */; settings = {JAVA_ARCHIVE_SUBDIR = Modules/Libraries; }; };
 		56B6DB9212926E2B00818071 /* Library.m in Sources */ = {isa = PBXBuildFile; fileRef = 56B6DB9012926E2B00818071 /* Library.m */; };
 		56B6DD151292729300818071 /* Libraries.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 56B6DD141292729300818071 /* Libraries.xcdatamodel */; };
 		56B6DD281292748B00818071 /* Libraries.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 56B6DD271292748B00818071 /* Libraries.xcdatamodeld */; };
-		56B6DDB91295220000818071 /* HoursAndLocationsViewController.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = 56B6DDB61295220000818071 /* HoursAndLocationsViewController.h */; settings = {JAVA_ARCHIVE_SUBDIR = Modules/Libraries; }; };
 		56B6DDBA1295220000818071 /* HoursAndLocationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 56B6DDB71295220000818071 /* HoursAndLocationsViewController.m */; };
-		56B6E22A12965B8A00818071 /* LibraryLocationsMapViewController.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = 56B6E22812965B8A00818071 /* LibraryLocationsMapViewController.h */; settings = {JAVA_ARCHIVE_SUBDIR = Modules/Libraries; }; };
 		56B6E22B12965B8A00818071 /* LibraryLocationsMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 56B6E22912965B8A00818071 /* LibraryLocationsMapViewController.m */; };
-		56B6E23012965E7C00818071 /* LibraryAnnotation.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = 56B6E22E12965E7C00818071 /* LibraryAnnotation.h */; settings = {JAVA_ARCHIVE_SUBDIR = Modules/Libraries; }; };
 		56B6E23112965E7C00818071 /* LibraryAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 56B6E22F12965E7C00818071 /* LibraryAnnotation.m */; };
-		56E8505A12A52A290022E162 /* LibraryPhone.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = 56E8505812A52A290022E162 /* LibraryPhone.h */; settings = {JAVA_ARCHIVE_SUBDIR = Modules/Libraries; }; };
 		56E8505B12A52A290022E162 /* LibraryPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = 56E8505912A52A290022E162 /* LibraryPhone.m */; };
-		56E859CF12ACEC810022E162 /* ItemAvailabilityDetailViewController.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = 56E859CD12ACEC810022E162 /* ItemAvailabilityDetailViewController.h */; settings = {JAVA_ARCHIVE_SUBDIR = Modules/Libraries; }; };
 		56E859D012ACEC810022E162 /* ItemAvailabilityDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 56E859CE12ACEC810022E162 /* ItemAvailabilityDetailViewController.m */; };
-		56E85C6F12AE76070022E162 /* BookmarkedLibItemListView.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = 56E85C6D12AE76070022E162 /* BookmarkedLibItemListView.h */; settings = {JAVA_ARCHIVE_SUBDIR = Modules/Libraries; }; };
 		56E85C7012AE76070022E162 /* BookmarkedLibItemListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 56E85C6E12AE76070022E162 /* BookmarkedLibItemListView.m */; };
-		A163D3F612C9523A004E423B /* LibrarySearchCode.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = A163D3F212C9523A004E423B /* LibrarySearchCode.h */; settings = {JAVA_ARCHIVE_SUBDIR = Modules/Libraries/Libraries.xcdatamodeld; }; };
 		A163D3F712C9523A004E423B /* LibrarySearchCode.m in Sources */ = {isa = PBXBuildFile; fileRef = A163D3F312C9523A004E423B /* LibrarySearchCode.m */; };
 		A1EFCEA212B164710092D9E1 /* aasincos.c in Sources */ = {isa = PBXBuildFile; fileRef = A1EFCDF512B164710092D9E1 /* aasincos.c */; };
 		A1EFCEA312B164710092D9E1 /* adjlon.c in Sources */ = {isa = PBXBuildFile; fileRef = A1EFCDF612B164710092D9E1 /* adjlon.c */; };
@@ -305,9 +242,7 @@
 		A1EFCF4612B164710092D9E1 /* vector1.c in Sources */ = {isa = PBXBuildFile; fileRef = A1EFCEA012B164710092D9E1 /* vector1.c */; };
 		A1EFCF5112B164D20092D9E1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		A1EFCFBF12B166440092D9E1 /* libProj.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A1EFCDDE12B163EE0092D9E1 /* libProj.a */; };
-		A623F1F1120A035A00341C5E /* ModoThreeStateSwitchControl.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = A623F1EF120A035A00341C5E /* ModoThreeStateSwitchControl.h */; settings = {JAVA_ARCHIVE_SUBDIR = Modules; }; };
 		A623F1F2120A035A00341C5E /* ModoThreeStateSwitchControl.m in Sources */ = {isa = PBXBuildFile; fileRef = A623F1F0120A035A00341C5E /* ModoThreeStateSwitchControl.m */; };
-		A64C313D11FDFAB8006FE056 /* AddressFormatter.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = A64C313B11FDFAB8006FE056 /* AddressFormatter.h */; settings = {JAVA_ARCHIVE_SUBDIR = Common; }; };
 		A64C313E11FDFAB8006FE056 /* AddressFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = A64C313C11FDFAB8006FE056 /* AddressFormatter.m */; };
 		A64C36CB1207066D006FE056 /* peopleSearchStaticPhoneRowsArray.plist in Resources */ = {isa = PBXBuildFile; fileRef = A64C36CA1207066D006FE056 /* peopleSearchStaticPhoneRowsArray.plist */; };
 		A6FC4C72120A2C200046FF36 /* settings in Resources */ = {isa = PBXBuildFile; fileRef = A623F2E5120A1BFC00341C5E /* settings */; };
@@ -319,89 +254,50 @@
 		BD1E930E103B5D60004429AA /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = BD1E9300103B5D60004429AA /* SBJsonWriter.m */; };
 		BD9FA7EE1047A05E00BC3C0A /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD9FA7ED1047A05E00BC3C0A /* MessageUI.framework */; };
 		C704F06111E3E31F00621406 /* DiningFirstViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C704F05211E3E31F00621406 /* DiningFirstViewController.xib */; };
-		C704F06211E3E31F00621406 /* DiningFirstViewController.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = C704F05311E3E31F00621406 /* DiningFirstViewController.h */; settings = {JAVA_ARCHIVE_SUBDIR = Modules/Dining; }; };
 		C704F06311E3E31F00621406 /* DiningFirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C704F05411E3E31F00621406 /* DiningFirstViewController.m */; };
-		C704F06411E3E31F00621406 /* DiningModule.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = C704F05511E3E31F00621406 /* DiningModule.h */; settings = {JAVA_ARCHIVE_SUBDIR = Modules/Dining; }; };
 		C704F06511E3E31F00621406 /* DiningModule.m in Sources */ = {isa = PBXBuildFile; fileRef = C704F05611E3E31F00621406 /* DiningModule.m */; };
-		C704F06611E3E31F00621406 /* DiningTabViewControl.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = C704F05711E3E31F00621406 /* DiningTabViewControl.h */; settings = {JAVA_ARCHIVE_SUBDIR = Modules/Dining; }; };
 		C704F06711E3E31F00621406 /* DiningTabViewControl.m in Sources */ = {isa = PBXBuildFile; fileRef = C704F05811E3E31F00621406 /* DiningTabViewControl.m */; };
-		C704F06C11E3E31F00621406 /* MenuDetailsController.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = C704F05D11E3E31F00621406 /* MenuDetailsController.h */; settings = {JAVA_ARCHIVE_SUBDIR = Modules/Dining; }; };
 		C704F06D11E3E31F00621406 /* MenuDetailsController.m in Sources */ = {isa = PBXBuildFile; fileRef = C704F05E11E3E31F00621406 /* MenuDetailsController.m */; };
-		C704F06E11E3E31F00621406 /* MenuItems.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = C704F05F11E3E31F00621406 /* MenuItems.h */; settings = {JAVA_ARCHIVE_SUBDIR = Modules/Dining; }; };
 		C704F06F11E3E31F00621406 /* MenuItems.m in Sources */ = {isa = PBXBuildFile; fileRef = C704F06011E3E31F00621406 /* MenuItems.m */; };
-		C71D95801238037A009369C5 /* SampleViewClass.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = C71D957E1238037A009369C5 /* SampleViewClass.h */; settings = {JAVA_ARCHIVE_SUBDIR = Modules/ShuttleTrack; }; };
 		C71D95811238037A009369C5 /* SampleViewClass.m in Sources */ = {isa = PBXBuildFile; fileRef = C71D957F1238037A009369C5 /* SampleViewClass.m */; };
-		C71D9B4B1243E054009369C5 /* ShuttlesMainViewController.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = C71D9B481243E054009369C5 /* ShuttlesMainViewController.h */; settings = {JAVA_ARCHIVE_SUBDIR = Modules/ShuttleTrack; }; };
 		C71D9B4C1243E054009369C5 /* ShuttlesMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C71D9B491243E054009369C5 /* ShuttlesMainViewController.m */; };
 		C71D9B4D1243E054009369C5 /* ShuttlesMainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C71D9B4A1243E054009369C5 /* ShuttlesMainViewController.xib */; };
-		C71D9B941243EE55009369C5 /* ShuttlesTabViewControl.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = C71D9B921243EE55009369C5 /* ShuttlesTabViewControl.h */; settings = {JAVA_ARCHIVE_SUBDIR = Modules/ShuttleTrack; }; };
 		C71D9B951243EE55009369C5 /* ShuttlesTabViewControl.m in Sources */ = {isa = PBXBuildFile; fileRef = C71D9B931243EE55009369C5 /* ShuttlesTabViewControl.m */; };
-		C71DA6D7124A6442009369C5 /* AnnouncementsTableViewController.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = C71DA6D5124A6442009369C5 /* AnnouncementsTableViewController.h */; settings = {JAVA_ARCHIVE_SUBDIR = Modules; }; };
 		C71DA6D8124A6442009369C5 /* AnnouncementsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C71DA6D6124A6442009369C5 /* AnnouncementsTableViewController.m */; };
-		C71DA7E4124A858C009369C5 /* AnnouncementWebViewController.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = C71DA7E2124A858C009369C5 /* AnnouncementWebViewController.h */; settings = {JAVA_ARCHIVE_SUBDIR = Modules; }; };
 		C71DA7E5124A858C009369C5 /* AnnouncementWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C71DA7E3124A858C009369C5 /* AnnouncementWebViewController.m */; };
-		C727B53A11F4E245007D53BB /* CalendarCategoriesViewController.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = C727B53811F4E245007D53BB /* CalendarCategoriesViewController.h */; settings = {JAVA_ARCHIVE_SUBDIR = Modules/Calendar; }; };
 		C727B53B11F4E245007D53BB /* CalendarCategoriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C727B53911F4E245007D53BB /* CalendarCategoriesViewController.m */; };
 		C759593E12074B47008474A9 /* HallDetailsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C759593812074B47008474A9 /* HallDetailsTableViewController.m */; };
-		C759593F12074B47008474A9 /* HallDetailsTableViewController.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = C759593912074B47008474A9 /* HallDetailsTableViewController.h */; settings = {JAVA_ARCHIVE_SUBDIR = Modules/Dining; }; };
 		C759594012074B47008474A9 /* DiningMultiLineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C759593A12074B47008474A9 /* DiningMultiLineCell.m */; };
-		C759594112074B47008474A9 /* DiningMultiLineCell.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = C759593B12074B47008474A9 /* DiningMultiLineCell.h */; settings = {JAVA_ARCHIVE_SUBDIR = Modules/Dining; }; };
 		C759594212074B47008474A9 /* DiningHallStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = C759593C12074B47008474A9 /* DiningHallStatus.m */; };
-		C759594312074B47008474A9 /* DiningHallStatus.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = C759593D12074B47008474A9 /* DiningHallStatus.h */; settings = {JAVA_ARCHIVE_SUBDIR = Modules/Dining; }; };
 		C76FBB74123001A600968920 /* ShuttleSubscriptionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C76FBB56123001A600968920 /* ShuttleSubscriptionManager.m */; };
-		C76FBB75123001A600968920 /* ShuttleSubscriptionManager.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = C76FBB57123001A600968920 /* ShuttleSubscriptionManager.h */; settings = {JAVA_ARCHIVE_SUBDIR = Modules/ShuttleTrack; }; };
 		C76FBB76123001A600968920 /* ShuttleStopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C76FBB58123001A600968920 /* ShuttleStopViewController.m */; };
-		C76FBB77123001A600968920 /* ShuttleStopViewController.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = C76FBB59123001A600968920 /* ShuttleStopViewController.h */; settings = {JAVA_ARCHIVE_SUBDIR = Modules/ShuttleTrack; }; };
 		C76FBB78123001A600968920 /* ShuttleStopCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C76FBB5A123001A600968920 /* ShuttleStopCell.xib */; };
 		C76FBB79123001A600968920 /* ShuttleStopCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C76FBB5B123001A600968920 /* ShuttleStopCell.m */; };
-		C76FBB7A123001A600968920 /* ShuttleStopCell.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = C76FBB5C123001A600968920 /* ShuttleStopCell.h */; settings = {JAVA_ARCHIVE_SUBDIR = Modules/ShuttleTrack; }; };
 		C76FBB7B123001A600968920 /* ShuttleStop.m in Sources */ = {isa = PBXBuildFile; fileRef = C76FBB5D123001A600968920 /* ShuttleStop.m */; };
-		C76FBB7C123001A600968920 /* ShuttleStop.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = C76FBB5E123001A600968920 /* ShuttleStop.h */; settings = {JAVA_ARCHIVE_SUBDIR = Modules/ShuttleTrack; }; };
 		C76FBB7D123001A600968920 /* ShuttleRouteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C76FBB5F123001A600968920 /* ShuttleRouteViewController.xib */; };
 		C76FBB7E123001A600968920 /* ShuttleRouteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C76FBB60123001A600968920 /* ShuttleRouteViewController.m */; };
-		C76FBB7F123001A600968920 /* ShuttleRouteViewController.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = C76FBB61123001A600968920 /* ShuttleRouteViewController.h */; settings = {JAVA_ARCHIVE_SUBDIR = Modules/ShuttleTrack; }; };
 		C76FBB80123001A600968920 /* ShuttleRoutes.xib in Resources */ = {isa = PBXBuildFile; fileRef = C76FBB62123001A600968920 /* ShuttleRoutes.xib */; };
 		C76FBB81123001A600968920 /* ShuttleRoutes.m in Sources */ = {isa = PBXBuildFile; fileRef = C76FBB63123001A600968920 /* ShuttleRoutes.m */; };
-		C76FBB82123001A600968920 /* ShuttleRoutes.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = C76FBB64123001A600968920 /* ShuttleRoutes.h */; settings = {JAVA_ARCHIVE_SUBDIR = Modules/ShuttleTrack; }; };
 		C76FBB83123001A600968920 /* ShuttleRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = C76FBB65123001A600968920 /* ShuttleRoute.m */; };
-		C76FBB84123001A600968920 /* ShuttleRoute.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = C76FBB66123001A600968920 /* ShuttleRoute.h */; settings = {JAVA_ARCHIVE_SUBDIR = Modules/ShuttleTrack; }; };
 		C76FBB85123001A600968920 /* ShuttleModule.m in Sources */ = {isa = PBXBuildFile; fileRef = C76FBB67123001A600968920 /* ShuttleModule.m */; };
-		C76FBB86123001A600968920 /* ShuttleModule.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = C76FBB68123001A600968920 /* ShuttleModule.h */; settings = {JAVA_ARCHIVE_SUBDIR = Modules/ShuttleTrack; }; };
 		C76FBB87123001A600968920 /* ShuttleLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = C76FBB69123001A600968920 /* ShuttleLocation.m */; };
-		C76FBB88123001A600968920 /* ShuttleLocation.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = C76FBB6A123001A600968920 /* ShuttleLocation.h */; settings = {JAVA_ARCHIVE_SUBDIR = Modules/ShuttleTrack; }; };
 		C76FBB89123001A600968920 /* ShuttleDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C76FBB6B123001A600968920 /* ShuttleDataManager.m */; };
-		C76FBB8A123001A600968920 /* ShuttleDataManager.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = C76FBB6C123001A600968920 /* ShuttleDataManager.h */; settings = {JAVA_ARCHIVE_SUBDIR = Modules/ShuttleTrack; }; };
 		C76FBB8B123001A600968920 /* RouteStopSchedule.m in Sources */ = {isa = PBXBuildFile; fileRef = C76FBB6D123001A600968920 /* RouteStopSchedule.m */; };
-		C76FBB8C123001A600968920 /* RouteStopSchedule.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = C76FBB6E123001A600968920 /* RouteStopSchedule.h */; settings = {JAVA_ARCHIVE_SUBDIR = Modules/ShuttleTrack; }; };
 		C76FBB8D123001A600968920 /* RouteMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C76FBB6F123001A600968920 /* RouteMapViewController.xib */; };
 		C76FBB8E123001A600968920 /* RouteMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C76FBB70123001A600968920 /* RouteMapViewController.m */; };
-		C76FBB8F123001A600968920 /* RouteMapViewController.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = C76FBB71123001A600968920 /* RouteMapViewController.h */; settings = {JAVA_ARCHIVE_SUBDIR = Modules/ShuttleTrack; }; };
 		C76FBB90123001A600968920 /* RouteInfoTitleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C76FBB72123001A600968920 /* RouteInfoTitleCell.m */; };
-		C76FBB91123001A600968920 /* RouteInfoTitleCell.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = C76FBB73123001A600968920 /* RouteInfoTitleCell.h */; settings = {JAVA_ARCHIVE_SUBDIR = Modules/ShuttleTrack; }; };
 		C76FBB9B123001CB00968920 /* ShuttleTrack.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C76FBB93123001CB00968920 /* ShuttleTrack.xcdatamodeld */; };
 		C76FBB9C123001CB00968920 /* ShuttleStopLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = C76FBB95123001CB00968920 /* ShuttleStopLocation.m */; };
-		C76FBB9D123001CB00968920 /* ShuttleStopLocation.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = C76FBB96123001CB00968920 /* ShuttleStopLocation.h */; settings = {JAVA_ARCHIVE_SUBDIR = Modules/ShuttleTrack/Model; }; };
 		C76FBB9E123001CB00968920 /* ShuttleRouteStop.m in Sources */ = {isa = PBXBuildFile; fileRef = C76FBB97123001CB00968920 /* ShuttleRouteStop.m */; };
-		C76FBB9F123001CB00968920 /* ShuttleRouteStop.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = C76FBB98123001CB00968920 /* ShuttleRouteStop.h */; settings = {JAVA_ARCHIVE_SUBDIR = Modules/ShuttleTrack/Model; }; };
 		C76FBBA0123001CB00968920 /* ShuttleRouteCache.m in Sources */ = {isa = PBXBuildFile; fileRef = C76FBB99123001CB00968920 /* ShuttleRouteCache.m */; };
-		C76FBBA1123001CB00968920 /* ShuttleRouteCache.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = C76FBB9A123001CB00968920 /* ShuttleRouteCache.h */; settings = {JAVA_ARCHIVE_SUBDIR = Modules/ShuttleTrack/Model; }; };
-		C776675911F733E3005496DD /* DatePickerViewController.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = C776675711F733E3005496DD /* DatePickerViewController.h */; settings = {JAVA_ARCHIVE_SUBDIR = Modules/Calendar; }; };
 		C776675A11F733E3005496DD /* DatePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C776675811F733E3005496DD /* DatePickerViewController.m */; };
-		C7B10CFF12130E2300CFB837 /* StellarCoursesViewController.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = C7B10CFD12130E2300CFB837 /* StellarCoursesViewController.h */; settings = {JAVA_ARCHIVE_SUBDIR = Modules/Stellar; }; };
 		C7B10D0012130E2300CFB837 /* StellarCoursesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7B10CFE12130E2300CFB837 /* StellarCoursesViewController.m */; };
-		C7B10E031213270200CFB837 /* StellarClassesViewController.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = C7B10E011213270200CFB837 /* StellarClassesViewController.h */; settings = {JAVA_ARCHIVE_SUBDIR = Modules/Stellar; }; };
 		C7B10E041213270200CFB837 /* StellarClassesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7B10E021213270200CFB837 /* StellarClassesViewController.m */; };
-		C7B10F531213488100CFB837 /* StellarMainSearch.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = C7B10F511213488100CFB837 /* StellarMainSearch.h */; settings = {JAVA_ARCHIVE_SUBDIR = Modules/Stellar; }; };
 		C7B10F541213488100CFB837 /* StellarMainSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = C7B10F521213488100CFB837 /* StellarMainSearch.m */; };
-		C7B10F7312134F2800CFB837 /* CoursesSearchTableViewController.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = C7B10F7112134F2800CFB837 /* CoursesSearchTableViewController.h */; settings = {JAVA_ARCHIVE_SUBDIR = Modules/Stellar; }; };
 		C7B10F7412134F2800CFB837 /* CoursesSearchTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7B10F7212134F2800CFB837 /* CoursesSearchTableViewController.m */; };
 		C7B897F111F535C8002B3619 /* HoursTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7B897EF11F535C8002B3619 /* HoursTableViewController.m */; };
-		C7B897F211F535C8002B3619 /* HoursTableViewController.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = C7B897F011F535C8002B3619 /* HoursTableViewController.h */; settings = {JAVA_ARCHIVE_SUBDIR = Modules/Dining; }; };
-		C7DA11B912138C2F00FE8756 /* MainSearchGroupedCoursesTableViewController.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = C7DA11B712138C2F00FE8756 /* MainSearchGroupedCoursesTableViewController.h */; settings = {JAVA_ARCHIVE_SUBDIR = Modules/Stellar; }; };
 		C7DA11BA12138C2F00FE8756 /* MainSearchGroupedCoursesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7DA11B812138C2F00FE8756 /* MainSearchGroupedCoursesTableViewController.m */; };
-		C7F74E14124D509400853674 /* ContactsTableViewController.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = C7F74E12124D509400853674 /* ContactsTableViewController.h */; settings = {JAVA_ARCHIVE_SUBDIR = Modules; }; };
 		C7F74E15124D509400853674 /* ContactsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7F74E13124D509400853674 /* ContactsTableViewController.m */; };
-		C7F750EC124EA60900853674 /* ContactsSystemDetailsViewController.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = C7F750EA124EA60900853674 /* ContactsSystemDetailsViewController.h */; settings = {JAVA_ARCHIVE_SUBDIR = Modules; }; };
 		C7F750ED124EA60900853674 /* ContactsSystemDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7F750EB124EA60900853674 /* ContactsSystemDetailsViewController.m */; };
 		DE0A62AC10CDAEA90058B2C2 /* MITBuildInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = DE0A62AB10CDAEA90058B2C2 /* MITBuildInfo.m */; };
 		DE0F6B3411109BC500F064D6 /* AboutMITVC.m in Sources */ = {isa = PBXBuildFile; fileRef = DE0F6B3311109BC500F064D6 /* AboutMITVC.m */; };
@@ -441,71 +337,45 @@
 		DED3CCE910418F5F003D3B74 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = DED3CCE810418F5F003D3B74 /* Default.png */; };
 		DEE6B1CD111774300037F03C /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = DEE6B1CC111774300037F03C /* Entitlements.plist */; };
 		EB137B5412DFE4EE004DBB7C /* libraries in Resources */ = {isa = PBXBuildFile; fileRef = EB137B4B12DFE4EE004DBB7C /* libraries */; };
-		EB1383A612E89D82004DBB7C /* MITMailComposeController.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = EB1383A412E89D82004DBB7C /* MITMailComposeController.h */; settings = {JAVA_ARCHIVE_SUBDIR = Common; }; };
 		EB1383A712E89D82004DBB7C /* MITMailComposeController.m in Sources */ = {isa = PBXBuildFile; fileRef = EB1383A512E89D82004DBB7C /* MITMailComposeController.m */; };
-		EB1DC7A612D213330080C2A1 /* LibraryAlias.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = EB1DC7A412D213330080C2A1 /* LibraryAlias.h */; settings = {JAVA_ARCHIVE_SUBDIR = Modules/Libraries; }; };
 		EB1DC7A712D213330080C2A1 /* LibraryAlias.m in Sources */ = {isa = PBXBuildFile; fileRef = EB1DC7A512D213330080C2A1 /* LibraryAlias.m */; };
-		EB32946F1166777500DEDC8A /* CalendarEventMapAnnotation.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = EB32946D1166777500DEDC8A /* CalendarEventMapAnnotation.h */; settings = {JAVA_ARCHIVE_SUBDIR = Modules/Calendar; }; };
 		EB3294701166777500DEDC8A /* CalendarEventMapAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = EB32946E1166777500DEDC8A /* CalendarEventMapAnnotation.m */; };
-		EB3721AA11FA2F5200705180 /* NewsImage.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = EB3721A811FA2F5200705180 /* NewsImage.h */; settings = {JAVA_ARCHIVE_SUBDIR = Modules/News; }; };
 		EB3721AB11FA2F5200705180 /* NewsImage.m in Sources */ = {isa = PBXBuildFile; fileRef = EB3721A911FA2F5200705180 /* NewsImage.m */; };
-		EB3F0951118F0FFE00540B8A /* CalendarMapView.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = EB3F094F118F0FFE00540B8A /* CalendarMapView.h */; settings = {JAVA_ARCHIVE_SUBDIR = Modules/Calendar; }; };
 		EB3F0952118F0FFE00540B8A /* CalendarMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = EB3F0950118F0FFE00540B8A /* CalendarMapView.m */; };
-		EB4210D5120B81D500089FE0 /* MITSearchDisplayController.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = EB4210C7120B81D500089FE0 /* MITSearchDisplayController.h */; settings = {JAVA_ARCHIVE_SUBDIR = Common/UIWidgets; }; };
 		EB4210D6120B81D500089FE0 /* MITSearchDisplayController.m in Sources */ = {isa = PBXBuildFile; fileRef = EB4210C8120B81D500089FE0 /* MITSearchDisplayController.m */; };
-		EB4210D7120B81D500089FE0 /* ModoNavigationBar.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = EB4210C9120B81D500089FE0 /* ModoNavigationBar.h */; settings = {JAVA_ARCHIVE_SUBDIR = Common/UIWidgets; }; };
 		EB4210D8120B81D500089FE0 /* ModoNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = EB4210CA120B81D500089FE0 /* ModoNavigationBar.m */; };
-		EB4210D9120B81D500089FE0 /* ModoNavigationController.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = EB4210CB120B81D500089FE0 /* ModoNavigationController.h */; settings = {JAVA_ARCHIVE_SUBDIR = Common/UIWidgets; }; };
 		EB4210DA120B81D500089FE0 /* ModoNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = EB4210CC120B81D500089FE0 /* ModoNavigationController.m */; };
-		EB4210DB120B81D500089FE0 /* ModoSearchBar.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = EB4210CD120B81D500089FE0 /* ModoSearchBar.h */; settings = {JAVA_ARCHIVE_SUBDIR = Common/UIWidgets; }; };
 		EB4210DC120B81D500089FE0 /* ModoSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = EB4210CE120B81D500089FE0 /* ModoSearchBar.m */; };
-		EB4210DD120B81D500089FE0 /* MultiLineTableViewCell.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = EB4210CF120B81D500089FE0 /* MultiLineTableViewCell.h */; settings = {JAVA_ARCHIVE_SUBDIR = Common/UIWidgets; }; };
 		EB4210DE120B81D500089FE0 /* MultiLineTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EB4210D0120B81D500089FE0 /* MultiLineTableViewCell.m */; };
-		EB4210DF120B81D500089FE0 /* NavScrollerView.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = EB4210D1120B81D500089FE0 /* NavScrollerView.h */; settings = {JAVA_ARCHIVE_SUBDIR = Common/UIWidgets; }; };
 		EB4210E0120B81D500089FE0 /* NavScrollerView.m in Sources */ = {isa = PBXBuildFile; fileRef = EB4210D2120B81D500089FE0 /* NavScrollerView.m */; };
-		EB4210E1120B81D500089FE0 /* TabViewControl.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = EB4210D3120B81D500089FE0 /* TabViewControl.h */; settings = {JAVA_ARCHIVE_SUBDIR = Common/UIWidgets; }; };
 		EB4210E2120B81D500089FE0 /* TabViewControl.m in Sources */ = {isa = PBXBuildFile; fileRef = EB4210D4120B81D500089FE0 /* TabViewControl.m */; };
-		EB4210E7120B82C000089FE0 /* TwitterViewController.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = EB4210E5120B82C000089FE0 /* TwitterViewController.h */; settings = {JAVA_ARCHIVE_SUBDIR = Common; }; };
 		EB4210E8120B82C000089FE0 /* TwitterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EB4210E6120B82C000089FE0 /* TwitterViewController.m */; };
 		EB421101120B831500089FE0 /* dining in Resources */ = {isa = PBXBuildFile; fileRef = EB4210E9120B831500089FE0 /* dining */; };
-		EB4211B8120C92C600089FE0 /* MapSavedAnnotation.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = EB4211B6120C92C600089FE0 /* MapSavedAnnotation.h */; settings = {JAVA_ARCHIVE_SUBDIR = "Modules/Campus Map"; }; };
 		EB4211B9120C92C600089FE0 /* MapSavedAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = EB4211B7120C92C600089FE0 /* MapSavedAnnotation.m */; };
 		EB49AD5511F4BFCE00854791 /* courses in Resources */ = {isa = PBXBuildFile; fileRef = EB49AD4911F4BFCE00854791 /* courses */; };
 		EB49AD5711F4BFCE00854791 /* events in Resources */ = {isa = PBXBuildFile; fileRef = EB49AD5211F4BFCE00854791 /* events */; };
 		EB49AD6411F4BFE200854791 /* home in Resources */ = {isa = PBXBuildFile; fileRef = EB49AD5811F4BFE200854791 /* home */; };
 		EB49AD7A11F4BFF100854791 /* maps in Resources */ = {isa = PBXBuildFile; fileRef = EB49AD6511F4BFF100854791 /* maps */; };
 		EB49AD9811F4BFFF00854791 /* news in Resources */ = {isa = PBXBuildFile; fileRef = EB49AD7B11F4BFFF00854791 /* news */; };
-		EB4C2CCA127F118400058748 /* AnalyticsWrapper.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = EB4C2CC8127F118400058748 /* AnalyticsWrapper.h */; settings = {JAVA_ARCHIVE_SUBDIR = Common/Analytics; }; };
 		EB4C2CCB127F118400058748 /* AnalyticsWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = EB4C2CC9127F118400058748 /* AnalyticsWrapper.m */; };
-		EB4C2CCE127F120400058748 /* GANTracker.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = EB4C2CCC127F120400058748 /* GANTracker.h */; settings = {JAVA_ARCHIVE_SUBDIR = Common/Analytics; }; };
 		EB4C2CDF127F138100058748 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = EB4C2CDE127F138100058748 /* libsqlite3.dylib */; };
 		EB4C2CE1127F138900058748 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB4C2CE0127F138900058748 /* CFNetwork.framework */; };
 		EB54943810DFF03600B708B3 /* icons in Resources */ = {isa = PBXBuildFile; fileRef = EB54942710DFF03600B708B3 /* icons */; };
 		EB54947310DFF7E200B708B3 /* global in Resources */ = {isa = PBXBuildFile; fileRef = EB54947210DFF7E200B708B3 /* global */; };
 		EB67B0FD12CA6BC30080C0AA /* en.lproj in Resources */ = {isa = PBXBuildFile; fileRef = EB67B0FA12CA6BC30080C0AA /* en.lproj */; };
-		EB67B16412CA95630080C0AA /* LibraryDataManager.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = EB67B16212CA95630080C0AA /* LibraryDataManager.h */; settings = {JAVA_ARCHIVE_SUBDIR = Modules/Libraries; }; };
 		EB67B16512CA95630080C0AA /* LibraryDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EB67B16312CA95630080C0AA /* LibraryDataManager.m */; };
 		EB6D02A911E3784100B65CE3 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB6D02A811E3784100B65CE3 /* MapKit.framework */; };
-		EB6D076811E50E5B00B65CE3 /* JSONAPIRequest.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = EB6D076611E50E5B00B65CE3 /* JSONAPIRequest.h */; settings = {JAVA_ARCHIVE_SUBDIR = Common/Connection; }; };
 		EB6D076911E50E5B00B65CE3 /* JSONAPIRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = EB6D076711E50E5B00B65CE3 /* JSONAPIRequest.m */; };
-		EB6D10DA11EE13F100B65CE3 /* MapTileOverlay.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = EB6D10D411EE13F100B65CE3 /* MapTileOverlay.h */; settings = {JAVA_ARCHIVE_SUBDIR = "Modules/Campus Map"; }; };
 		EB6D10DB11EE13F100B65CE3 /* MapTileOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = EB6D10D511EE13F100B65CE3 /* MapTileOverlay.m */; };
-		EB6D10DC11EE13F100B65CE3 /* MapTileOverlayView.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = EB6D10D611EE13F100B65CE3 /* MapTileOverlayView.h */; settings = {JAVA_ARCHIVE_SUBDIR = "Modules/Campus Map"; }; };
 		EB6D10DD11EE13F100B65CE3 /* MapTileOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = EB6D10D711EE13F100B65CE3 /* MapTileOverlayView.m */; };
-		EB6D10DE11EE13F100B65CE3 /* MapZoomLevel.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = EB6D10D811EE13F100B65CE3 /* MapZoomLevel.h */; settings = {JAVA_ARCHIVE_SUBDIR = "Modules/Campus Map"; }; };
 		EB6D10DF11EE13F100B65CE3 /* MapZoomLevel.m in Sources */ = {isa = PBXBuildFile; fileRef = EB6D10D911EE13F100B65CE3 /* MapZoomLevel.m */; };
-		EB6D111611EE143900B65CE3 /* TileServerManager.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = EB6D111411EE143900B65CE3 /* TileServerManager.h */; settings = {JAVA_ARCHIVE_SUBDIR = "Modules/Campus Map"; }; };
 		EB6D111711EE143900B65CE3 /* TileServerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EB6D111511EE143900B65CE3 /* TileServerManager.m */; };
-		EB6D141511EE979500B65CE3 /* NewsCategory.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = EB6D141311EE979500B65CE3 /* NewsCategory.h */; settings = {JAVA_ARCHIVE_SUBDIR = Modules/News; }; };
 		EB6D141611EE979500B65CE3 /* NewsCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = EB6D141411EE979500B65CE3 /* NewsCategory.m */; };
-		EB6DFFF011DE69F600B65CE3 /* SpringboardViewController.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = EB6DFFEE11DE69F600B65CE3 /* SpringboardViewController.h */; settings = {JAVA_ARCHIVE_SUBDIR = "App Delegate"; }; };
 		EB6DFFF111DE69F600B65CE3 /* SpringboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EB6DFFEF11DE69F600B65CE3 /* SpringboardViewController.m */; };
 		EB6F2B6610E901E000A29A2A /* UITableView+MITUIAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = EB6F2B6210E901E000A29A2A /* UITableView+MITUIAdditions.m */; };
 		EB6F2B6710E901E000A29A2A /* UITableViewCell+MITUIAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = EB6F2B6410E901E000A29A2A /* UITableViewCell+MITUIAdditions.m */; };
 		EB6FD1F910E19D7900D56BE1 /* SecondaryGroupedTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EB6FD1F810E19D7900D56BE1 /* SecondaryGroupedTableViewCell.m */; };
-		EB74ED2E11924E7C006673F9 /* ShareDetailViewController.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = EB74ED2C11924E7C006673F9 /* ShareDetailViewController.h */; settings = {JAVA_ARCHIVE_SUBDIR = Common; }; };
 		EB74ED2F11924E7C006673F9 /* ShareDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EB74ED2D11924E7C006673F9 /* ShareDetailViewController.m */; };
-		EB7BA33E11F7677F00B3DDA6 /* PolygonOverlay.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = EB7BA33C11F7677F00B3DDA6 /* PolygonOverlay.h */; settings = {JAVA_ARCHIVE_SUBDIR = "Modules/Campus Map"; }; };
 		EB7BA33F11F7677F00B3DDA6 /* PolygonOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = EB7BA33D11F7677F00B3DDA6 /* PolygonOverlay.m */; };
 		EB7F327F10CD6C5B00188BCD /* PeopleDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EB7F326A10CD6C5B00188BCD /* PeopleDataModel.xcdatamodeld */; };
 		EB7F328210CD6C5B00188BCD /* PartialHighlightTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EB7F327110CD6C5B00188BCD /* PartialHighlightTableViewCell.m */; };
@@ -518,23 +388,16 @@
 		EB7F32AE10CD6CB100188BCD /* StellarModule.m in Sources */ = {isa = PBXBuildFile; fileRef = EB7F32A010CD6CB100188BCD /* StellarModule.m */; };
 		EB7F32D310CD6FB300188BCD /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB7F32D210CD6FB300188BCD /* AddressBook.framework */; };
 		EB7F32D710CD6FBB00188BCD /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB7F32D610CD6FBB00188BCD /* AddressBookUI.framework */; };
-		EB83923C1163ECC20067C0A3 /* CalendarDetailViewController.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = EB83923A1163ECC20067C0A3 /* CalendarDetailViewController.h */; settings = {JAVA_ARCHIVE_SUBDIR = Modules/Calendar; }; };
 		EB83923D1163ECC20067C0A3 /* CalendarDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EB83923B1163ECC20067C0A3 /* CalendarDetailViewController.m */; };
-		EB8392461163EF340067C0A3 /* MITCalendarEvent.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = EB8392421163EF340067C0A3 /* MITCalendarEvent.h */; settings = {JAVA_ARCHIVE_SUBDIR = Modules/Calendar; }; };
 		EB8392471163EF340067C0A3 /* MITCalendarEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = EB8392431163EF340067C0A3 /* MITCalendarEvent.m */; };
-		EB8392481163EF340067C0A3 /* EventCategory.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = EB8392441163EF340067C0A3 /* EventCategory.h */; settings = {JAVA_ARCHIVE_SUBDIR = Modules/Calendar; }; };
 		EB8392491163EF340067C0A3 /* EventCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = EB8392451163EF340067C0A3 /* EventCategory.m */; };
-		EB83926B1163F7B00067C0A3 /* CalendarDataManager.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = EB8392691163F7B00067C0A3 /* CalendarDataManager.h */; settings = {JAVA_ARCHIVE_SUBDIR = Modules/Calendar; }; };
 		EB83926C1163F7B00067C0A3 /* CalendarDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EB83926A1163F7B00067C0A3 /* CalendarDataManager.m */; };
 		EB8392A01163FD6E0067C0A3 /* Calendar.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EB83929F1163FD6E0067C0A3 /* Calendar.xcdatamodeld */; };
 		EB86CA6F115D276700C8F3D1 /* CalendarModule.m in Sources */ = {isa = PBXBuildFile; fileRef = EB86CA6E115D276700C8F3D1 /* CalendarModule.m */; };
 		EB86CAC6115D4ED500C8F3D1 /* CalendarEventsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EB86CAC5115D4ED500C8F3D1 /* CalendarEventsViewController.m */; };
-		EB976D17116CF6630036A18E /* EventListTableView.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = EB976D15116CF6630036A18E /* EventListTableView.h */; settings = {JAVA_ARCHIVE_SUBDIR = Modules/Calendar; }; };
 		EB976D18116CF6630036A18E /* EventListTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = EB976D16116CF6630036A18E /* EventListTableView.m */; };
-		EB976D1B116CF6A10036A18E /* EventCategoriesTableView.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = EB976D19116CF6A10036A18E /* EventCategoriesTableView.h */; settings = {JAVA_ARCHIVE_SUBDIR = Modules/Calendar; }; };
 		EB976D1C116CF6A10036A18E /* EventCategoriesTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = EB976D1A116CF6A10036A18E /* EventCategoriesTableView.m */; };
 		EBA0A46710D405F5005B0D96 /* Stellar.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EBA0A46610D405F5005B0D96 /* Stellar.xcdatamodeld */; };
-		EBA273E911760BAE0033DD27 /* CalendarConstants.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = EBA273E711760BAE0033DD27 /* CalendarConstants.h */; settings = {JAVA_ARCHIVE_SUBDIR = Modules/Calendar; }; };
 		EBA273EA11760BAE0033DD27 /* CalendarConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = EBA273E811760BAE0033DD27 /* CalendarConstants.m */; };
 		EBA2865610E07E140003BA01 /* PeopleSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EBA2865510E07E140003BA01 /* PeopleSearchViewController.m */; };
 		EBA2867910E082010003BA01 /* MITLoadingActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = EBA2867810E082010003BA01 /* MITLoadingActivityView.m */; };
@@ -543,17 +406,12 @@
 		EBAE86411215FB0D00F370BE /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EBAE863F1215FB0D00F370BE /* Icon@2x.png */; };
 		EBAE86451215FB4900F370BE /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EBAE86441215FB4900F370BE /* Default@2x.png */; };
 		EBAE877612197EF400F370BE /* schools.plist in Resources */ = {isa = PBXBuildFile; fileRef = EBAE877512197EF400F370BE /* schools.plist */; };
-		EBAE878512198B2500F370BE /* SchoolsModule.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = EBAE878112198B2500F370BE /* SchoolsModule.h */; settings = {JAVA_ARCHIVE_SUBDIR = Modules/Schools; }; };
 		EBAE878612198B2500F370BE /* SchoolsModule.m in Sources */ = {isa = PBXBuildFile; fileRef = EBAE878212198B2500F370BE /* SchoolsModule.m */; };
-		EBAE878712198B2500F370BE /* SchoolsViewController.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = EBAE878312198B2500F370BE /* SchoolsViewController.h */; settings = {JAVA_ARCHIVE_SUBDIR = Modules/Schools; }; };
 		EBAE878812198B2500F370BE /* SchoolsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EBAE878412198B2500F370BE /* SchoolsViewController.m */; };
-		EBAE88051219960700F370BE /* Secret.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = EBAE88031219960700F370BE /* Secret.h */; settings = {JAVA_ARCHIVE_SUBDIR = Common; }; };
 		EBAE89C4121A081900F370BE /* schools in Resources */ = {isa = PBXBuildFile; fileRef = EBAE89A4121A081900F370BE /* schools */; };
-		EBAE92B7121D733200F370BE /* PersonDetails.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = EBAE92B5121D733200F370BE /* PersonDetails.h */; settings = {JAVA_ARCHIVE_SUBDIR = Modules/People/Model; }; };
 		EBAE92B8121D733200F370BE /* PersonDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = EBAE92B6121D733200F370BE /* PersonDetails.m */; };
 		EBAE9401121DB1C700F370BE /* loading-animation in Resources */ = {isa = PBXBuildFile; fileRef = EBAE93FF121DB1C700F370BE /* loading-animation */; };
 		EBB61F3B1253ECBC0099A883 /* shuttles in Resources */ = {isa = PBXBuildFile; fileRef = EBB61F171253ECBC0099A883 /* shuttles */; };
-		EBB61F9F12540A180099A883 /* ShuttleStopMapAnnotation.h in JavaArchive */ = {isa = PBXBuildFile; fileRef = EBB61F9D12540A180099A883 /* ShuttleStopMapAnnotation.h */; settings = {JAVA_ARCHIVE_SUBDIR = Modules/ShuttleTrack; }; };
 		EBB61FA012540A180099A883 /* ShuttleStopMapAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = EBB61F9E12540A180099A883 /* ShuttleStopMapAnnotation.m */; };
 /* End PBXBuildFile section */
 
@@ -2308,158 +2166,6 @@
 		};
 /* End PBXHeadersBuildPhase section */
 
-/* Begin PBXJavaArchiveBuildPhase section */
-		EB83923E1163ECC30067C0A3 /* JavaArchive */ = {
-			isa = PBXJavaArchiveBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				EB83923C1163ECC20067C0A3 /* CalendarDetailViewController.h in JavaArchive */,
-				EB8392461163EF340067C0A3 /* MITCalendarEvent.h in JavaArchive */,
-				EB8392481163EF340067C0A3 /* EventCategory.h in JavaArchive */,
-				EB83926B1163F7B00067C0A3 /* CalendarDataManager.h in JavaArchive */,
-				EB32946F1166777500DEDC8A /* CalendarEventMapAnnotation.h in JavaArchive */,
-				EB976D17116CF6630036A18E /* EventListTableView.h in JavaArchive */,
-				EB976D1B116CF6A10036A18E /* EventCategoriesTableView.h in JavaArchive */,
-				EBA273E911760BAE0033DD27 /* CalendarConstants.h in JavaArchive */,
-				29E308861176018C005211A7 /* MITModuleURL.h in JavaArchive */,
-				44ACF76F1187884300F1F4B2 /* MapBookmarkManager.h in JavaArchive */,
-				29C4546F118B55E100A321B0 /* ExchangeCredentialsOperation.h in JavaArchive */,
-				29C45471118B55E100A321B0 /* ExchangeCredentialsOperationDelegate.h in JavaArchive */,
-				29C45472118B55E100A321B0 /* XAuthTwitterEngine.h in JavaArchive */,
-				29C45474118B55E100A321B0 /* XAuthTwitterEngineDelegate.h in JavaArchive */,
-				29C45476118B55E100A321B0 /* NSMutableURLRequest+Parameters.h in JavaArchive */,
-				29C45477118B55E100A321B0 /* NSString+URLEncoding.h in JavaArchive */,
-				29C45478118B55E100A321B0 /* NSURL+Base.h in JavaArchive */,
-				29C45479118B55E100A321B0 /* OAAsynchronousDataFetcher.h in JavaArchive */,
-				29C4547A118B55E100A321B0 /* OAConsumer.h in JavaArchive */,
-				29C4547B118B55E100A321B0 /* OADataFetcher.h in JavaArchive */,
-				29C4547C118B55E100A321B0 /* OAHMAC_SHA1SignatureProvider.h in JavaArchive */,
-				29C4547D118B55E100A321B0 /* OAMutableURLRequest.h in JavaArchive */,
-				29C4547E118B55E100A321B0 /* OAPlaintextSignatureProvider.h in JavaArchive */,
-				29C4547F118B55E100A321B0 /* OARequestParameter.h in JavaArchive */,
-				29C45480118B55E100A321B0 /* OAServiceTicket.h in JavaArchive */,
-				29C45481118B55E100A321B0 /* OASignatureProviding.h in JavaArchive */,
-				29C45482118B55E100A321B0 /* OAToken.h in JavaArchive */,
-				29C45483118B55E100A321B0 /* OAToken_KeychainExtensions.h in JavaArchive */,
-				29C45484118B55E100A321B0 /* OAuthConsumer.h in JavaArchive */,
-				29C45485118B55E100A321B0 /* MGTwitterEngine.h in JavaArchive */,
-				29C45487118B55E100A321B0 /* MGTwitterEngineDelegate.h in JavaArchive */,
-				29C45488118B55E100A321B0 /* MGTwitterEngineGlobalHeader.h in JavaArchive */,
-				29C45489118B55E100A321B0 /* MGTwitterHTTPURLConnection.h in JavaArchive */,
-				29C4548B118B55E100A321B0 /* MGTwitterLibXMLParser.h in JavaArchive */,
-				29C4548D118B55E100A321B0 /* MGTwitterMessagesLibXMLParser.h in JavaArchive */,
-				29C4548F118B55E100A321B0 /* MGTwitterMessagesParser.h in JavaArchive */,
-				29C45493118B55E100A321B0 /* MGTwitterMiscLibXMLParser.h in JavaArchive */,
-				29C45495118B55E100A321B0 /* MGTwitterMiscParser.h in JavaArchive */,
-				29C45499118B55E100A321B0 /* MGTwitterParserDelegate.h in JavaArchive */,
-				29C4549A118B55E100A321B0 /* MGTwitterRequestTypes.h in JavaArchive */,
-				29C4549D118B55E100A321B0 /* MGTwitterStatusesLibXMLParser.h in JavaArchive */,
-				29C4549F118B55E100A321B0 /* MGTwitterStatusesParser.h in JavaArchive */,
-				29C454A3118B55E100A321B0 /* MGTwitterUsersLibXMLParser.h in JavaArchive */,
-				29C454A5118B55E100A321B0 /* MGTwitterUsersParser.h in JavaArchive */,
-				29C454A9118B55E100A321B0 /* MGTwitterXMLParser.h in JavaArchive */,
-				29C454AD118B55E100A321B0 /* NSData+MGTwitterBase64.h in JavaArchive */,
-				29C454AF118B55E100A321B0 /* NSString+UUID.h in JavaArchive */,
-				29C454C0118B61CA00A321B0 /* SFHFKeychainUtils.h in JavaArchive */,
-				EB3F0951118F0FFE00540B8A /* CalendarMapView.h in JavaArchive */,
-				EB74ED2E11924E7C006673F9 /* ShareDetailViewController.h in JavaArchive */,
-				44C1A3CE11A33905000FD653 /* MapSelectionController.h in JavaArchive */,
-				44C1A4C411A412E2000FD653 /* MapSearch.h in JavaArchive */,
-				4499341E11A5E53D00A7041B /* CategoriesTableViewController.h in JavaArchive */,
-				EB6DFFF011DE69F600B65CE3 /* SpringboardViewController.h in JavaArchive */,
-				C704F06211E3E31F00621406 /* DiningFirstViewController.h in JavaArchive */,
-				C704F06411E3E31F00621406 /* DiningModule.h in JavaArchive */,
-				C704F06611E3E31F00621406 /* DiningTabViewControl.h in JavaArchive */,
-				C704F06C11E3E31F00621406 /* MenuDetailsController.h in JavaArchive */,
-				C704F06E11E3E31F00621406 /* MenuItems.h in JavaArchive */,
-				EB6D076811E50E5B00B65CE3 /* JSONAPIRequest.h in JavaArchive */,
-				EB6D10DA11EE13F100B65CE3 /* MapTileOverlay.h in JavaArchive */,
-				EB6D10DC11EE13F100B65CE3 /* MapTileOverlayView.h in JavaArchive */,
-				EB6D10DE11EE13F100B65CE3 /* MapZoomLevel.h in JavaArchive */,
-				EB6D111611EE143900B65CE3 /* TileServerManager.h in JavaArchive */,
-				EB6D141511EE979500B65CE3 /* NewsCategory.h in JavaArchive */,
-				C727B53A11F4E245007D53BB /* CalendarCategoriesViewController.h in JavaArchive */,
-				C7B897F211F535C8002B3619 /* HoursTableViewController.h in JavaArchive */,
-				EB7BA33E11F7677F00B3DDA6 /* PolygonOverlay.h in JavaArchive */,
-				C776675911F733E3005496DD /* DatePickerViewController.h in JavaArchive */,
-				EB3721AA11FA2F5200705180 /* NewsImage.h in JavaArchive */,
-				A64C313D11FDFAB8006FE056 /* AddressFormatter.h in JavaArchive */,
-				C759593F12074B47008474A9 /* HallDetailsTableViewController.h in JavaArchive */,
-				C759594112074B47008474A9 /* DiningMultiLineCell.h in JavaArchive */,
-				C759594312074B47008474A9 /* DiningHallStatus.h in JavaArchive */,
-				A623F1F1120A035A00341C5E /* ModoThreeStateSwitchControl.h in JavaArchive */,
-				EB4210D5120B81D500089FE0 /* MITSearchDisplayController.h in JavaArchive */,
-				EB4210D7120B81D500089FE0 /* ModoNavigationBar.h in JavaArchive */,
-				EB4210D9120B81D500089FE0 /* ModoNavigationController.h in JavaArchive */,
-				EB4210DB120B81D500089FE0 /* ModoSearchBar.h in JavaArchive */,
-				EB4210DD120B81D500089FE0 /* MultiLineTableViewCell.h in JavaArchive */,
-				EB4210DF120B81D500089FE0 /* NavScrollerView.h in JavaArchive */,
-				EB4210E1120B81D500089FE0 /* TabViewControl.h in JavaArchive */,
-				EB4210E7120B82C000089FE0 /* TwitterViewController.h in JavaArchive */,
-				EB4211B8120C92C600089FE0 /* MapSavedAnnotation.h in JavaArchive */,
-				C7B10CFF12130E2300CFB837 /* StellarCoursesViewController.h in JavaArchive */,
-				C7B10E031213270200CFB837 /* StellarClassesViewController.h in JavaArchive */,
-				C7B10F531213488100CFB837 /* StellarMainSearch.h in JavaArchive */,
-				C7B10F7312134F2800CFB837 /* CoursesSearchTableViewController.h in JavaArchive */,
-				C7DA11B912138C2F00FE8756 /* MainSearchGroupedCoursesTableViewController.h in JavaArchive */,
-				EBAE878512198B2500F370BE /* SchoolsModule.h in JavaArchive */,
-				EBAE878712198B2500F370BE /* SchoolsViewController.h in JavaArchive */,
-				EBAE88051219960700F370BE /* Secret.h in JavaArchive */,
-				EBAE92B7121D733200F370BE /* PersonDetails.h in JavaArchive */,
-				C76FBB75123001A600968920 /* ShuttleSubscriptionManager.h in JavaArchive */,
-				C76FBB77123001A600968920 /* ShuttleStopViewController.h in JavaArchive */,
-				C76FBB7A123001A600968920 /* ShuttleStopCell.h in JavaArchive */,
-				C76FBB7C123001A600968920 /* ShuttleStop.h in JavaArchive */,
-				C76FBB7F123001A600968920 /* ShuttleRouteViewController.h in JavaArchive */,
-				C76FBB82123001A600968920 /* ShuttleRoutes.h in JavaArchive */,
-				C76FBB84123001A600968920 /* ShuttleRoute.h in JavaArchive */,
-				C76FBB86123001A600968920 /* ShuttleModule.h in JavaArchive */,
-				C76FBB88123001A600968920 /* ShuttleLocation.h in JavaArchive */,
-				C76FBB8A123001A600968920 /* ShuttleDataManager.h in JavaArchive */,
-				C76FBB8C123001A600968920 /* RouteStopSchedule.h in JavaArchive */,
-				C76FBB8F123001A600968920 /* RouteMapViewController.h in JavaArchive */,
-				C76FBB91123001A600968920 /* RouteInfoTitleCell.h in JavaArchive */,
-				C76FBB9D123001CB00968920 /* ShuttleStopLocation.h in JavaArchive */,
-				C76FBB9F123001CB00968920 /* ShuttleRouteStop.h in JavaArchive */,
-				C76FBBA1123001CB00968920 /* ShuttleRouteCache.h in JavaArchive */,
-				C71D95801238037A009369C5 /* SampleViewClass.h in JavaArchive */,
-				C71D9B4B1243E054009369C5 /* ShuttlesMainViewController.h in JavaArchive */,
-				C71D9B941243EE55009369C5 /* ShuttlesTabViewControl.h in JavaArchive */,
-				C71DA6D7124A6442009369C5 /* AnnouncementsTableViewController.h in JavaArchive */,
-				C71DA7E4124A858C009369C5 /* AnnouncementWebViewController.h in JavaArchive */,
-				C7F74E14124D509400853674 /* ContactsTableViewController.h in JavaArchive */,
-				C7F750EC124EA60900853674 /* ContactsSystemDetailsViewController.h in JavaArchive */,
-				EBB61F9F12540A180099A883 /* ShuttleStopMapAnnotation.h in JavaArchive */,
-				EB4C2CCA127F118400058748 /* AnalyticsWrapper.h in JavaArchive */,
-				EB4C2CCE127F120400058748 /* GANTracker.h in JavaArchive */,
-				56B6DA4212914C8000818071 /* LibrariesMainViewController.h in JavaArchive */,
-				56B6DA4612914C8D00818071 /* LibrariesModule.h in JavaArchive */,
-				56B6DB8C12926C0800818071 /* LibraryItem.h in JavaArchive */,
-				56B6DB9112926E2B00818071 /* Library.h in JavaArchive */,
-				56B6DDB91295220000818071 /* HoursAndLocationsViewController.h in JavaArchive */,
-				56B6E22A12965B8A00818071 /* LibraryLocationsMapViewController.h in JavaArchive */,
-				56B6E23012965E7C00818071 /* LibraryAnnotation.h in JavaArchive */,
-				5689D6C71297066F00A9EFA0 /* LibraryDetailViewController.h in JavaArchive */,
-				5689D9681297BF0C00A9EFA0 /* LibraryWeeklyScheduleViewController.h in JavaArchive */,
-				5689DAD0129BAE2A00A9EFA0 /* LibrariesSearchViewController.h in JavaArchive */,
-				5689DBA6129BD3DD00A9EFA0 /* LibrariesMultiLineCell.h in JavaArchive */,
-				5689DD78129D294200A9EFA0 /* LibItemDetailViewController.h in JavaArchive */,
-				56E8505A12A52A290022E162 /* LibraryPhone.h in JavaArchive */,
-				56E859CF12ACEC810022E162 /* ItemAvailabilityDetailViewController.h in JavaArchive */,
-				56E85C6F12AE76070022E162 /* BookmarkedLibItemListView.h in JavaArchive */,
-				5623DEC112B15AB600212D5C /* RequestWebViewModalViewController.h in JavaArchive */,
-				5623E7A312B7F81000212D5C /* UnderlinedUILabel.h in JavaArchive */,
-				5623EBC712B9ED6C00212D5C /* LibraryAdvancedSearch.h in JavaArchive */,
-				5623EEA112BBD43C00212D5C /* MobileResearchLinksViewController.h in JavaArchive */,
-				A163D3F612C9523A004E423B /* LibrarySearchCode.h in JavaArchive */,
-				EB67B16412CA95630080C0AA /* LibraryDataManager.h in JavaArchive */,
-				EB1DC7A612D213330080C2A1 /* LibraryAlias.h in JavaArchive */,
-				EB1383A612E89D82004DBB7C /* MITMailComposeController.h in JavaArchive */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXJavaArchiveBuildPhase section */
-
 /* Begin PBXNativeTarget section */
 		1D6058900D05DD3D006BFB54 /* Harvard Mobile */ = {
 			isa = PBXNativeTarget;
@@ -2469,7 +2175,6 @@
 				1D60588D0D05DD3D006BFB54 /* Resources */,
 				1D60588E0D05DD3D006BFB54 /* Sources */,
 				1D60588F0D05DD3D006BFB54 /* Frameworks */,
-				EB83923E1163ECC30067C0A3 /* JavaArchive */,
 			);
 			buildRules = (
 			);
