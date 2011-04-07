@@ -2670,7 +2670,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -2690,7 +2689,6 @@
 					"${SDK_DIR}/usr/include/libxml2",
 					"\"$(SRCROOT)/Common/Analytics\"",
 				);
-				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "Harvard Mobile";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
@@ -2701,13 +2699,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = MIT_Mobile_Prefix.pch;
 				HEADER_SEARCH_PATHS = (
-					"${SYMROOT}/${CONFIGURATION}-${PLATFORM_NAME}/usr/local/include",
+					"\"${SYMROOT}/${CONFIGURATION}-${PLATFORM_NAME}/usr/local/include\"",
 					"\"Facebook Connect\"",
 					"${SDK_DIR}/usr/include/libxml2",
 				);
@@ -2719,7 +2716,6 @@
 					"${SDK_DIR}/usr/include/libxml2",
 					"\"$(SRCROOT)/Common/Analytics\"",
 				);
-				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "Harvard Mobile";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
@@ -2835,7 +2831,7 @@
 					"\"Facebook Connect\"",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = (
 					"-DDEBUG",
 					"-DUSE_MOBILE_DEV",
@@ -2865,7 +2861,7 @@
 					"\"Facebook Connect\"",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-ObjC",
@@ -2890,7 +2886,7 @@
 					"${PROJECT_DIR}/../libProj/build/${BUILD_STYLE}-${PLATFORM_NAME}/usr/local/include",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = (
 					"-DDEBUG",
 					"-DUSE_MOBILE_STAGE",
@@ -2908,7 +2904,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -2926,7 +2921,6 @@
 					"${SDK_DIR}/usr/include/libxml2",
 					"\"$(SRCROOT)/Common/Analytics\"",
 				);
-				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "Harvard Mobile";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
@@ -2946,7 +2940,7 @@
 					"\"Facebook Connect\"",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = "-DDEBUG";
 				OTHER_LDFLAGS = (
 					"-all_load",
@@ -2961,7 +2955,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -2979,7 +2972,6 @@
 					"${SDK_DIR}/usr/include/libxml2",
 					"\"$(SRCROOT)/Common/Analytics\"",
 				);
-				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "Harvard Mobile";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
@@ -2999,7 +2991,7 @@
 					"\"Facebook Connect\"",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = "-DUSE_MOBILE_STAGE";
 				OTHER_LDFLAGS = (
 					"-all_load",
@@ -3014,13 +3006,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = MIT_Mobile_Prefix.pch;
 				HEADER_SEARCH_PATHS = (
-					"${SYMROOT}/${CONFIGURATION}-${PLATFORM_NAME}/usr/local/include",
+					"\"${BUILT_PRODUCTS_DIR}/${CONFIGURATION}-${PLATFORM_NAME}/usr/local/include\"",
 					"\"Facebook Connect\"",
 					"${SDK_DIR}/usr/include/libxml2",
 				);
@@ -3032,7 +3023,6 @@
 					"${SDK_DIR}/usr/include/libxml2",
 					"\"$(SRCROOT)/Common/Analytics\"",
 				);
-				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "Harvard Mobile";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
@@ -3052,7 +3042,7 @@
 					"\"Facebook Connect\"",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = (
 					"-DDEBUG",
 					"-DUSE_MOBILE_TEST",
@@ -3071,7 +3061,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -3091,7 +3080,6 @@
 					"${SDK_DIR}/usr/include/libxml2",
 					"\"$(SRCROOT)/Common/Analytics\"",
 				);
-				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "Harvard Mobile";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
@@ -3111,7 +3099,7 @@
 					"\"Facebook Connect\"",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = "-DUSE_MOBILE_TEST";
 				OTHER_LDFLAGS = (
 					"-all_load",
@@ -3126,7 +3114,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -3144,7 +3131,6 @@
 					"${SDK_DIR}/usr/include/libxml2",
 					"\"$(SRCROOT)/Common/Analytics\"",
 				);
-				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "Harvard Mobile";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
