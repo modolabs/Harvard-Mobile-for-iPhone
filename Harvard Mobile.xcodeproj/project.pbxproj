@@ -235,7 +235,7 @@
 		A1EFCF3C12B164710092D9E1 /* PJ_wink1.c in Sources */ = {isa = PBXBuildFile; fileRef = A1EFCE9212B164710092D9E1 /* PJ_wink1.c */; };
 		A1EFCF3D12B164710092D9E1 /* PJ_wink2.c in Sources */ = {isa = PBXBuildFile; fileRef = A1EFCE9312B164710092D9E1 /* PJ_wink2.c */; };
 		A1EFCF3E12B164710092D9E1 /* pj_zpoly1.c in Sources */ = {isa = PBXBuildFile; fileRef = A1EFCE9412B164710092D9E1 /* pj_zpoly1.c */; };
-		A1EFCF4012B164710092D9E1 /* proj_api.h in Headers */ = {isa = PBXBuildFile; fileRef = A1EFCE9712B164710092D9E1 /* proj_api.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A1EFCF4012B164710092D9E1 /* proj_api.h in Headers */ = {isa = PBXBuildFile; fileRef = A1EFCE9712B164710092D9E1 /* proj_api.h */; settings = {ATTRIBUTES = (); }; };
 		A1EFCF4212B164710092D9E1 /* proj_mdist.c in Sources */ = {isa = PBXBuildFile; fileRef = A1EFCE9B12B164710092D9E1 /* proj_mdist.c */; };
 		A1EFCF4312B164710092D9E1 /* proj_rouss.c in Sources */ = {isa = PBXBuildFile; fileRef = A1EFCE9C12B164710092D9E1 /* proj_rouss.c */; };
 		A1EFCF4512B164710092D9E1 /* rtodms.c in Sources */ = {isa = PBXBuildFile; fileRef = A1EFCE9E12B164710092D9E1 /* rtodms.c */; };
@@ -2734,6 +2734,7 @@
 				PREBINDING = NO;
 				PRODUCT_NAME = Proj;
 				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
 			};
 			name = "Debug - Development";
 		};
@@ -2748,6 +2749,7 @@
 				PREBINDING = NO;
 				PRODUCT_NAME = Proj;
 				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
 			};
 			name = "Debug - Testing";
 		};
@@ -2762,6 +2764,7 @@
 				PREBINDING = NO;
 				PRODUCT_NAME = Proj;
 				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
 			};
 			name = "Debug - Staging";
 		};
@@ -2776,6 +2779,7 @@
 				PREBINDING = NO;
 				PRODUCT_NAME = Proj;
 				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
 			};
 			name = "Debug - Production";
 		};
@@ -2789,6 +2793,7 @@
 				PREBINDING = NO;
 				PRODUCT_NAME = Proj;
 				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
 			};
 			name = "Release - Staging";
 		};
@@ -2802,6 +2807,7 @@
 				PREBINDING = NO;
 				PRODUCT_NAME = Proj;
 				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
 			};
 			name = "Release - Testing";
 		};
@@ -2815,6 +2821,7 @@
 				PREBINDING = NO;
 				PRODUCT_NAME = Proj;
 				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
 			};
 			name = "Release - Production";
 		};
