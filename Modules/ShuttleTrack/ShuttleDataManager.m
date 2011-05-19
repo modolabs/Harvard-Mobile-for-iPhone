@@ -385,10 +385,10 @@ static ShuttleDataManager* s_dataManager = nil;
 
             if (stop != nil) {
                 NSNumber* next = [routeAtStop objectForKey:@"next"];
-                if (nil == next)
-                    next = [routeAtStop objectForKey:@"nextScheduled"];
-                stop.nextScheduled = [next intValue];
-                stop.predictions = [routeAtStop objectForKey:@"predictions"];
+                if (next) {
+                    stop.nextScheduled = [next intValue];
+                    stop.predictions = [routeAtStop objectForKey:@"predictions"];
+                }
                 
                 [schedules addObject:stop];
             }

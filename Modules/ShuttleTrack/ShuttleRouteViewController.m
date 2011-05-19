@@ -189,33 +189,36 @@
     
     static NSString *StopCellIdentifier = @"StopCell";
 
-	ShuttleStopCell* cell = (ShuttleStopCell*)[tableView dequeueReusableCellWithIdentifier:StopCellIdentifier];
-	
-	if (nil == cell) {
-		[[NSBundle mainBundle] loadNibNamed:@"ShuttleStopCell" owner:self options:nil];
-		cell = _shuttleStopCell;
-	}
-	
-    // Set up the cell...
-    ShuttleStop *aStop = nil;
-	if(nil != self.route && self.route.stops.count > indexPath.row) {
-		aStop = [self.route.stops objectAtIndex:indexPath.row];
-	}
-	
-	
-	/*NSURL *urlLink = [NSURL URLWithString:self.route.genericUrlForMarker];
-	NSData *data = [NSData dataWithContentsOfURL:urlLink];
-	genericNextStopImageView.image = [[UIImage alloc] initWithData:data];*/
-	
-	if (nil != self.route.genericShuttleMarker) {
-		//[cell setShuttleInfo:aStop urlLinkForImage:genericNextStopImageView.image];
-		[cell setShuttleInfo:aStop image:self.route.genericShuttleMarker];
-	}
-	
-	else {
-		[cell setShuttleInfo:aStop image:nil];
-	}
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:StopCellIdentifier];
+    if (!cell) {
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:StopCellIdentifier] autorelease];
+    }
+    
+    if (self.route && self.route.stops.count > indexPath.row) {
+        ShuttleStop *aStop = [self.route.stops objectAtIndex:indexPath.row];
+        cell.textLabel.text = aStop.title;
+        
+        if (aStop.upcoming) {
+            cell.imageView.image = [UIImage imageNamed:@"shuttles/shuttle-stop-dot-next.png"];
+        } else {
+            cell.imageView.image = nil;
+        }
 
+        if (aStop.nextScheduled) {
+            NSMutableString *arrivalTimes = nil;
+            NSTimeInterval currentTimestamp = [[NSDate date] timeIntervalSince1970];
+            NSTimeInterval seconds = aStop.nextScheduled - currentTimestamp;
+            NSTimeInterval minutes = floor(seconds / 60);
+            arrivalTimes = (minutes < 1) ? [NSMutableString stringWithString:@"<1"] : [NSMutableString stringWithFormat:@"%.0f", minutes];
+            for (NSNumber *prediction in aStop.predictions) {
+                NSTimeInterval predictionSeconds = [prediction floatValue] - currentTimestamp;
+                minutes = floor(predictionSeconds / 60);
+                [arrivalTimes appendFormat:@", %.0f", minutes];
+            }
+            cell.detailTextLabel.text = [NSString stringWithFormat:@"Arriving in %@ mins", arrivalTimes];
+        }
+    }
+    
 	cell.selectionStyle = UITableViewCellSelectionStyleGray;
     return cell;
 }
@@ -225,28 +228,18 @@
 	
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 	
-	/*[self pushStopViewControllerWithStop:[self.route.stops objectAtIndex:indexPath.row] 
-							  annotation:[self.route.annotations objectAtIndex:indexPath.row] 
-								animated:YES];*/
-	
-	
 	ShuttleStop *stop = (ShuttleStop *)[self.route.stops objectAtIndex:indexPath.row]; 
-	ShuttleStopMapAnnotation *annoToPass;
-	
-	for (int i=0; i < [self.route.annotations count]; i++) {
-		
-		ShuttleStopMapAnnotation *tempAnno = (ShuttleStopMapAnnotation *)[self.route.annotations objectAtIndex:i];
-		
-		if ([tempAnno.shuttleStop.stopID isEqualToString:stop.stopID])
-			annoToPass = tempAnno;
-	}
-	
-	if (nil == annoToPass)
-		annoToPass = (ShuttleStopMapAnnotation *)[self.route.annotations objectAtIndex:indexPath.row];
+	ShuttleStopMapAnnotation *annoToPass = nil;
+    
+    for (ShuttleStopMapAnnotation *anAnnotation in self.route.annotations) {
+		if ([anAnnotation.shuttleStop.stopID isEqualToString:stop.stopID]) {
+			annoToPass = anAnnotation;
+        }
+    }
 	
 	[self pushStopViewControllerWithStop:stop
-	 annotation:annoToPass 
-	 animated:YES];
+                              annotation:annoToPass 
+                                animated:YES];
 }
 
 -(void) pushStopViewControllerWithStop:(ShuttleStop *)stop annotation:(ShuttleStopMapAnnotation *)annotation animated:(BOOL)animated {
@@ -255,7 +248,7 @@
 	shuttleStopVC.shuttleStop = stop;
 	shuttleStopVC.annotation = annotation;
 	[self.navigationController pushViewController:shuttleStopVC animated:animated];
-	shuttleStopVC.view;
+	[shuttleStopVC view];
 	[shuttleStopVC.mapButton addTarget:self action:@selector(showSelectedStop:) forControlEvents:UIControlEventTouchUpInside];
 }
 	

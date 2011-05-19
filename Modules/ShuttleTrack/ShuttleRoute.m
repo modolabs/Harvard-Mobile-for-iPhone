@@ -232,20 +232,31 @@
 	self.gpsActive = [[routeInfo objectForKey:@"gpsActive"] boolValue];
 	self.isRunning = [[routeInfo objectForKey:@"isRunning"] boolValue];
     
-    NSArray *array = nil;
-	if ((array = [routeInfo objectForKey:@"path"]) != nil)
+    NSArray *array = [routeInfo objectForKey:@"path"];
+	if (array) {
 		self.path = array;
-	
-    if ((array = [routeInfo objectForKey:@"stops"]) != nil) {
-		self.stops = (NSMutableArray *)array;
-		
-		NSArray *tempArray = [routeInfo objectForKey:@"stops"];
-		
-		for(int i=0; i < [tempArray count]; i++){
-			NSDictionary *tempDict = [tempArray objectAtIndex:i];
-			if ([tempDict objectForKey:@"upcoming"])
-				self.nextStopId = [tempDict objectForKey:@"id"];
-		}
+    }
+
+	array = [routeInfo objectForKey:@"stops"];
+    if (array) {
+        self.stops = [NSMutableArray array];
+        [_stopAnnotations release];
+        _stopAnnotations = [[NSMutableArray alloc] initWithCapacity:array.count];
+
+        NSError *error = nil;
+        for (NSDictionary *aDict in array) {
+            NSString *stopID = [aDict objectForKey:@"id"];
+            ShuttleStop *aStop = [ShuttleDataManager stopWithRoute:self.routeID stopID:stopID error:&error];
+            if (aStop) {
+                [aStop updateInfo:aDict];
+                [self.stops addObject:aStop];
+                ShuttleStopMapAnnotation* annotation = [[[ShuttleStopMapAnnotation alloc] initWithShuttleStop:aStop] autorelease];
+                [_stopAnnotations addObject:annotation];
+            }
+            if ([aDict objectForKey:@"upcoming"]) {
+                self.nextStopId = [aDict objectForKey:stopID];
+            }
+        }
 	}
 	
     if ((array = [routeInfo objectForKey:@"vehicleLocations"]) != nil) {

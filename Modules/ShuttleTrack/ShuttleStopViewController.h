@@ -60,7 +60,7 @@
 
 @property (nonatomic, retain) ShuttleStop* shuttleStop;
 //@property (nonatomic, retain) ShuttleStopLocation *stopLocation;
-@property (nonatomic, assign) ShuttleStopMapAnnotation* annotation;
+@property (nonatomic, retain) ShuttleStopMapAnnotation* annotation;
 
 //@property (nonatomic, retain) NSDictionary* routes;
 //@property (nonatomic, retain) ShuttleRoute* route;

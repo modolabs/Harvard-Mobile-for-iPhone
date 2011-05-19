@@ -190,14 +190,11 @@
 		self.latitude = [num doubleValue];
 	self.upcoming = ([stopInfo objectForKey:@"upcoming"] != nil); // upcoming only appears if it's true
 	
-	if ((num = [stopInfo objectForKey:@"next"]) != nil ||
-		(num = [stopInfo objectForKey:@"nextScheduled"]) != nil)
+	if ((num = [stopInfo objectForKey:@"next"]) != nil)
 		self.nextScheduled = [num unsignedLongValue];
 
-	NSArray *array = nil;
-	//if ((array = [stopInfo objectForKey:@"path"]) != nil)
-	//	self.path = array;
-    if ((array = [stopInfo objectForKey:@"predictions"]) != nil)
+	NSArray *array = [stopInfo objectForKey:@"predictions"];
+    if (array)
         self.predictions = array;
 	
 }
