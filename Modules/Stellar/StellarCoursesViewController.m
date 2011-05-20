@@ -96,7 +96,7 @@
 	[self.view addSubview:coursesTableView];
     [searchBar addDropShadow];
     
-    NSString *detailString = [NSString stringWithFormat:@"/courses/group?id=%@", self.courseGroup.short_name];
+    NSString *detailString = [NSString stringWithFormat:@"/courses/courses?school=%@", self.courseGroup.short_name];
     [[AnalyticsWrapper sharedWrapper] trackPageview:detailString];
 }
 
@@ -213,6 +213,8 @@
 	
 	[self.url setPath:@"search-complete" query:theSearchBar.text];
 	[self.url setAsModulePath];
+    
+    [[AnalyticsWrapper sharedWrapper] trackPageview:[NSString stringWithFormat:@"/courses/search?filter=%@", theSearchBar.text]];
 }
 
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar {

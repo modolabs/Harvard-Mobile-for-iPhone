@@ -10,6 +10,7 @@
 #import "ModoSearchBar.h"
 #import "MITUIConstants.h"
 #import "MITSearchDisplayController.h"
+#import "AnalyticsWrapper.h"
 
 #define searchBarHeight NAVIGATION_BAR_HEIGHT
 
@@ -132,6 +133,9 @@
 	[StellarModel loadClassesForCourse:course delegate:self.currentClassLoader];
 	
 	[url setPathWithViewController:self extension:course.number];
+    
+    [[AnalyticsWrapper sharedWrapper] trackPageview:
+     [NSString stringWithFormat:@"/courses/course?course=%@&school=%@", course.title, course.courseGroup]];
 }
 
 - (void) viewDidAppear: (BOOL)animated {
@@ -242,6 +246,8 @@
 	
 	[self.url setPath:@"search-complete" query:theSearchBar.text];
 	[self.url setAsModulePath];
+
+    [[AnalyticsWrapper sharedWrapper] trackPageview:[NSString stringWithFormat:@"/courses/search?filter=%@", theSearchBar.text]];
 }
 
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar {

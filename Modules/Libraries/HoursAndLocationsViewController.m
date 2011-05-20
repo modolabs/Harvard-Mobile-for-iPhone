@@ -196,12 +196,12 @@
     
     NSString *pageName = nil;
     if (showBookmarks) {
-        pageName = @"bookmarks";
+        pageName = @"/libraries/bookmarks";
         [queryParams addObject:@"type=library|archive"];
     } else if (showArchives) {
-        pageName = @"archives";
+        pageName = @"/libraries/archives";
     } else {
-        pageName = @"libraries";
+        pageName = @"/libraries/libraries";
     }
     
     if (showingOnlyOpen) {

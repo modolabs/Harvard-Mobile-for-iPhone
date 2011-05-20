@@ -14,6 +14,7 @@
 #import "MITSearchDisplayController.h"
 #import "StellarClassesViewController.h"
 #import "CoreDataManager.h"
+#import "AnalyticsWrapper.h"
 
 #define myStellarGroup 0
 #define browseGroup 1
@@ -312,6 +313,8 @@
 	[StellarModel executeStellarSearch:theSearchBar.text courseGroupName:@"" courseName:@"" delegate:stellarSearch];
 	[self.url setPath:@"search-complete" query:theSearchBar.text];
 	[self.url setAsModulePath];
+    
+    [[AnalyticsWrapper sharedWrapper] trackPageview:[NSString stringWithFormat:@"/courses/searchCourses?filter=%@", theSearchBar.text]];
 }
 
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar {

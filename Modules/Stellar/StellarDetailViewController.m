@@ -199,7 +199,7 @@ NSString * termText(NSString *termCode) {
 	[url setPath:[NSString stringWithFormat:@"class/%@/News", self.stellarClass.masterSubjectId] query:nil];
     
     
-    NSString *detailString = [NSString stringWithFormat:@"/courses/id=%@", self.stellarClass.masterSubjectId];
+    NSString *detailString = [NSString stringWithFormat:@"/courses/detail?class=%@", self.stellarClass.masterSubjectId];
     [[AnalyticsWrapper sharedWrapper] trackPageview:detailString];
 }
 
@@ -301,6 +301,12 @@ NSString * termText(NSString *termCode) {
 
 // this method is always called when tabs change (no matter what initiates the change)
 - (void) switchTab: (NSInteger)index {
+    if (index >= 0 && index < currentTabNames.count) {
+        [[AnalyticsWrapper sharedWrapper] trackEvent:@"courses"
+                                              action:[currentTabNames objectAtIndex:index]
+                                               label:nil];
+    }
+    
 	// set the dataSource and delegate based on current tab
 	// and tell the tabViewControl the tab we want open
 	self.tableView.delegate = [dataSources objectAtIndex:index];
@@ -314,20 +320,11 @@ NSString * termText(NSString *termCode) {
 - (void) setCurrentTab: (NSString *)tabName {
 	self.currentTabName = tabName;
 	if (currentTabNames.count) {
-		// manually search for the tab, could not find a builtin API to do this
-		NSUInteger activeIndex = NSNotFound;
-		for (NSUInteger index=0; index < currentTabNames.count; index++) {
-			if ([[currentTabNames objectAtIndex:index] isEqualToString:tabName]) {
-				activeIndex = index;
-				break;
-			}
-		}
-
-		if(activeIndex == NSNotFound) {
+        NSInteger activeIndex = [currentTabNames indexOfObject:tabName];
+		if (activeIndex == NSNotFound) {
 			self.currentTabName = [currentTabNames objectAtIndex:0];
 			activeIndex = 0;
 		}
-
 		[self switchTab:activeIndex];
 	}
 }
