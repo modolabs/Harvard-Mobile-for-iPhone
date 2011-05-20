@@ -10,6 +10,7 @@
 #import "MITUIConstants.h"
 #import "MIT_MobileAppDelegate.h"
 #import "DiningMultiLineCell.h"
+#import "AnalyticsWrapper.h"
 
 #define kBreakfastTab 0
 #define kLunchTab 1
@@ -479,8 +480,8 @@ JSONAPIRequest *mitapi;
 		dinnerTable.tableHeaderView = nil;
 		/*breakfastTable.tableHeaderView = glossaryForMealTypesView;
 		 breakfastTable.tableHeaderView = breakfastTable.tableHeaderView;*/
-		
-	}	
+		[[AnalyticsWrapper sharedWrapper] trackEvent:@"dining" action:@"breakfast tab" label:nil];
+	}
 	else if (tabIndex == kLunchTab)
 	{
 		[control setSelectedTab:kLunchTab];
@@ -490,7 +491,7 @@ JSONAPIRequest *mitapi;
 		dinnerTable.tableHeaderView = nil;
 		/*lunchTable.tableHeaderView = glossaryForMealTypesView;
 		 lunchTable.tableHeaderView = lunchTable.tableHeaderView;*/
-		
+		[[AnalyticsWrapper sharedWrapper] trackEvent:@"dining" action:@"lunch tab" label:nil];
 	}	
 	
 	else if (tabIndex == kDinnerTab)
@@ -502,7 +503,7 @@ JSONAPIRequest *mitapi;
 		lunchTable.tableHeaderView = nil;
 		/*dinnerTable.tableHeaderView = glossaryForMealTypesView;
 		 dinnerTable.tableHeaderView = dinnerTable.tableHeaderView;*/
-		
+		[[AnalyticsWrapper sharedWrapper] trackEvent:@"dining" action:@"dinner tab" label:nil];
 	}	
 	
 	else if (tabIndex == kHoursTab)
@@ -537,6 +538,8 @@ JSONAPIRequest *mitapi;
 			requestDispatched = NO;
 			[self removeLoadingIndicator];
 		}
+
+		[[AnalyticsWrapper sharedWrapper] trackEvent:@"dining" action:@"locations tab" label:nil];
 	}
 	
 	// set the size of the scroll view based on the size of the view being added and its parent's offset
@@ -931,8 +934,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 - (void)datePickerViewController:(DatePickerViewController *)controller didSelectDate:(NSDate *)date {
 	
 	if ([controller class] == [DatePickerViewController class]) {
-		self.todayDate = nil;
-		self.todayDate = [[[NSDate alloc] initWithTimeInterval:0 sinceDate:date] retain];   
+		self.todayDate = date;
 		
 		MIT_MobileAppDelegate *appDelegate = (MIT_MobileAppDelegate *)[[UIApplication sharedApplication] delegate];
 		[appDelegate dismissAppModalViewControllerAnimated:YES];
@@ -967,6 +969,8 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 		
 		self.view.backgroundColor = [UIColor clearColor];
 		_tabViewContainer.backgroundColor = [UIColor whiteColor];
+        
+        [[AnalyticsWrapper sharedWrapper] trackPageview:[NSString stringWithFormat:@"/dining/index?time=%.0f", [date timeIntervalSince1970]]];
 	}
 	return;
 }

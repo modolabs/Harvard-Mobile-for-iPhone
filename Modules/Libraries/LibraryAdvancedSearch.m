@@ -13,6 +13,7 @@
 #import "LibrariesSearchViewController.h"
 #import "LibraryDataManager.h"
 #import "JSONAPIRequest.h"
+#import "AnalyticsWrapper.h"
 
 @implementation LibraryAdvancedSearch
 @synthesize keywords;
@@ -155,6 +156,8 @@
     [[LibraryDataManager sharedManager] updateSearchCodes];
     
 	[self setupLayout];
+    
+    [[AnalyticsWrapper sharedWrapper] trackPageview:@"/libraries/advanced"];
 }
 
 

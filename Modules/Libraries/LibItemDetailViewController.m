@@ -16,6 +16,7 @@
 #import "MIT_MobileAppDelegate.h"
 #import "RequestWebViewModalViewController.h"
 #import "Foundation+MITAdditions.h"
+#import "AnalyticsWrapper.h"
 
 @interface LibItemDetailViewController (Private)
 
@@ -85,11 +86,9 @@
     // while loading full availability
     //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(libraryDetailsDidLoad:) name:LibraryRequestDidCompleteNotification object:LibraryDataRequestLibraryDetail];
     //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(libraryDetailsDidLoad:) name:LibraryRequestDidCompleteNotification object:LibraryDataRequestArchiveDetail];
-}
-
-- (void) viewWillAppear:(BOOL)animated {
-	[super viewWillAppear:animated];
-	//[self setupLayout];
+    
+    NSString *pageName = [NSString stringWithFormat:@"/libraries/detail?id=%@", libItem.itemId];
+    [[AnalyticsWrapper sharedWrapper] trackPageview:pageName];
 }
 
 - (void)setupNavBar {
@@ -757,6 +756,12 @@
         if ([libURL length]) {
             MIT_MobileAppDelegate *appDelegate = (MIT_MobileAppDelegate *)[[UIApplication sharedApplication] delegate];
             RequestWebViewModalViewController *modalVC = [[[RequestWebViewModalViewController alloc] initWithRequestUrl:libURL title:title] autorelease];
+            
+            NSString *pageName = [NSString stringWithFormat:
+                                  @"/libraries/request?itemId=%@",
+                                  libItem.itemId];
+            [[AnalyticsWrapper sharedWrapper] trackPageview:pageName];
+
             [appDelegate presentAppModalViewController:modalVC animated:YES];
         }
 	}

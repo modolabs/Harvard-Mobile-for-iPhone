@@ -11,6 +11,7 @@
 #import "LibraryAnnotation.h"
 #import "LibraryDetailViewController.h"
 #import "LibraryAlias.h"
+#import "AnalyticsWrapper.h"
 
 @implementation LibraryLocationsMapViewController
 @synthesize mapView;
@@ -30,7 +31,6 @@
 	return self;
 }
 
-
 -(void) viewDidLoad {
 	
 	if (self.showingOpenOnly != YES) {
@@ -38,6 +38,9 @@
 	}
 	
 	[self.view addSubview:self.mapView];
+    
+    NSString *pageName = @"/libraries/map";
+    [[AnalyticsWrapper sharedWrapper] trackPageview:pageName];
 }
 
 

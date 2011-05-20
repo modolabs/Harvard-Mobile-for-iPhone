@@ -193,13 +193,16 @@ static NSString const * kShuttlesCalendar = @"Shuttles Calendar";
                 if (key == kAboutHarvardShuttles) {
                     [request requestObjectFromModule:@"shuttles" command:@"about"
                                           parameters:[NSDictionary dictionaryWithObjectsAndKeys:@"harvard", @"agency", nil]];
+                    detailsViewController.pageID = @"harvard";
                 }
                 else if (key == kAboutMASCOShuttles) {
                     [request requestObjectFromModule:@"shuttles" command:@"about"
                                           parameters:[NSDictionary dictionaryWithObjectsAndKeys:@"masco", @"agency", nil]];
+                    detailsViewController.pageID = @"masco";
                 }
                 else if (key == kShuttlesCalendar) {
                     [request requestObjectFromModule:@"shuttles" command:@"calendar" parameters:nil];
+                    detailsViewController.pageID = @"calendar";
                 }
             }
             else {

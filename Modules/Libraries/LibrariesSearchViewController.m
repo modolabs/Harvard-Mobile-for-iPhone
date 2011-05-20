@@ -16,6 +16,7 @@
 #import "LibraryItem.h"
 #import "CoreDataManager.h"
 #import "LibraryAdvancedSearch.h"
+#import "AnalyticsWrapper.h"
 
 @class LibrariesMultiLineCell;
 
@@ -150,6 +151,25 @@
     _tableView.dataSource = self;
 	
 	[self.view addSubview:_tableView];
+    
+    
+    NSMutableArray *params = [NSMutableArray array];
+    if (self.keywordText.length) {
+        [params addObject:[NSString stringWithFormat:@"keywords=%@", self.keywordText]];
+    } else if (self.searchTerms.length) {
+        [params addObject:[NSString stringWithFormat:@"keywords=%@", self.searchTerms]];
+    }
+    
+    if (self.titleText.length) {
+        [params addObject:[NSString stringWithFormat:@"title=%@", self.titleText]];
+    }
+    
+    if (self.authorText.length) {
+        [params addObject:[NSString stringWithFormat:@"author=%@", self.authorText]];
+    }
+    
+    [[AnalyticsWrapper sharedWrapper] trackPageview:[NSString stringWithFormat:@"/libraries/search?%@",
+                                                     [params componentsJoinedByString:@"&"]]];
 }
 
 

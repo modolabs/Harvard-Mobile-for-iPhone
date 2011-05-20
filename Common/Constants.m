@@ -43,17 +43,17 @@ NSString * const MITInternalURLScheme = @"harvardmobile";
 // module tags
 NSString * const CalendarTag   = @"calendar";
 NSString * const EmergencyTag  = @"emergencyinfo";
-NSString * const CampusMapTag  = @"campusmap";
-NSString * const NewsOfficeTag = @"newsoffice";
+NSString * const CampusMapTag  = @"map";
+NSString * const NewsOfficeTag = @"news";
 NSString * const DirectoryTag  = @"people";
 NSString * const StellarTag    = @"courses";
-NSString * const ShuttleTag    = @"shuttletrack";
+NSString * const ShuttleTag    = @"shuttleschedule";
 NSString * const MobileWebTag  = @"mobileweb";
 NSString * const SettingsTag   = @"settings";
 NSString * const AboutTag      = @"about";
 NSString * const DiningTag	   = @"dining";
-NSString * const SchoolsTag    = @"schools";
-NSString * const LibrariesTag  = @"library";
+NSString * const SchoolsTag    = @"links";
+NSString * const LibrariesTag  = @"libraries";
 
 // notification names
 NSString * const EmergencyInfoDidLoadNotification = @"MITEmergencyInfoDidLoadNotification";

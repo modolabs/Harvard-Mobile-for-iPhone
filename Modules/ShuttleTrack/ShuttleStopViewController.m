@@ -187,7 +187,7 @@
 	routesRunningCurrentlyThroughThisStop = [[NSMutableArray alloc] init];
 	routesNotRunningCurrentlyThroughThisStop = [[NSMutableArray alloc] init];
 
-    NSString *detailString = [NSString stringWithFormat:@"/shuttles/stop?id=%@", self.shuttleStop.title];
+    NSString *detailString = [NSString stringWithFormat:@"/shuttleschedule/stop?id=%@", self.shuttleStop.stopID];
     [[AnalyticsWrapper sharedWrapper] trackPageview:detailString];
 }
 

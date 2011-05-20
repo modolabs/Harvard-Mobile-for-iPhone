@@ -10,6 +10,7 @@
 #import "MITUIConstants.h"
 #import "Constants.h"
 #import "LibrariesMultiLineCell.h"
+#import "AnalyticsWrapper.h"
 
 @implementation MobileResearchLinksViewController
 
@@ -76,6 +77,7 @@
 	
 	[self.tableView applyStandardColors];
 	
+    [[AnalyticsWrapper sharedWrapper] trackPageview:@"/libraries/links"];
 }
 
 

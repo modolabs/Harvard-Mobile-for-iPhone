@@ -54,7 +54,7 @@
 	hasNarrowedRegion = NO;
 	[self fallBackViewDidLoad];
     
-    NSString *detailString = [NSString stringWithFormat:@"/shuttles/map?route_id=%@", _route.title];
+    NSString *detailString = [NSString stringWithFormat:@"/shuttleschedule/route?id=%@&view=map", _route.routeID];
     [[AnalyticsWrapper sharedWrapper] trackPageview:detailString];
 }
 

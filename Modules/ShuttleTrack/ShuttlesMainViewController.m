@@ -8,6 +8,7 @@
 
 #import "ShuttlesMainViewController.h"
 #import "MITUIConstants.h"
+#import "AnalyticsWrapper.h"
 
 #define RunningTabIndex 0
 #define OfflineTabIndex 1
@@ -144,10 +145,15 @@ static const NSInteger kAnnouncementBadgeLabel = 0x41;
 
 
 - (void)dealloc {
-    [super dealloc];
 	[tabView release];
 	[tabViewContainer release];
 	[shuttleRoutesTableView release];
+
+    [announcementsTab release];
+    [contactsTab release];
+    [loadingIndicator release];
+    [_tabViewsArray release];
+    [super dealloc];
 }
 
 
@@ -169,6 +175,7 @@ static const NSInteger kAnnouncementBadgeLabel = 0x41;
 		//[self removeLoadingIndicator];
 		[tabViewContainer addSubview:[_tabViewsArray objectAtIndex:tabIndex]];
 		shuttleRoutesTableView.view.hidden = NO;
+        [[AnalyticsWrapper sharedWrapper] trackEvent:@"shuttleschedule" action:@"running tab pressed" label:nil];
 	}
 	
 	else if (tabIndex == OfflineTabIndex) {
@@ -179,6 +186,7 @@ static const NSInteger kAnnouncementBadgeLabel = 0x41;
 		[shuttleRoutesTableView.tableView reloadData];
 		[tabViewContainer addSubview:[_tabViewsArray objectAtIndex:tabIndex]];
 		shuttleRoutesTableView.view.hidden = NO;
+        [[AnalyticsWrapper sharedWrapper] trackEvent:@"shuttleschedule" action:@"offline tab pressed" label:nil];
 	}
 	
 	else if (tabIndex == NewsTabIndex) {
@@ -189,6 +197,7 @@ static const NSInteger kAnnouncementBadgeLabel = 0x41;
 		[tabViewContainer addSubview:[_tabViewsArray objectAtIndex:tabIndex]];
 		[announcementsTab.tableView reloadData];
 		announcementsTab.view.hidden = NO;
+        [[AnalyticsWrapper sharedWrapper] trackEvent:@"shuttleschedule" action:@"news tab pressed" label:nil];
 	}
 	
 	else {
@@ -200,6 +209,7 @@ static const NSInteger kAnnouncementBadgeLabel = 0x41;
 		[tabViewContainer addSubview:[_tabViewsArray objectAtIndex:tabIndex]];
 		[contactsTab.tableView reloadData];
 		contactsTab.view.hidden = NO;
+        [[AnalyticsWrapper sharedWrapper] trackEvent:@"shuttleschedule" action:@"info tab pressed" label:nil];
 	}
 	
 	if (haveNewAnnouncements == YES) {
@@ -211,18 +221,13 @@ static const NSInteger kAnnouncementBadgeLabel = 0x41;
 		[[newAnnouncement superview] sendSubviewToBack:newAnnouncement];
 	}
 
-
 }
 
 
 - (void)request:(JSONAPIRequest *)request jsonLoaded:(id)result {
 	
 	NSArray * agencies =(NSArray *)[result objectForKey:@"agencies"];	
-	NSMutableArray * announcementsTemp = [[NSMutableArray alloc] init];
-	NSMutableArray * emptyTemp = [[NSMutableArray alloc] init];
-	
-	announcementsTab.harvardAnnouncements = emptyTemp;
-	announcementsTab.mascoAnnouncements = emptyTemp;
+	NSMutableArray * announcementsTemp = [NSMutableArray array];
 	
 	int new = 0;
 	for (int i =0; i < [agencies count]; i++) {

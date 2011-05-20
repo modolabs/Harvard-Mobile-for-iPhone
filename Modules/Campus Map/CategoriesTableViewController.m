@@ -5,6 +5,7 @@
 #import "MITUIConstants.h"
 #import "ModoSearchBar.h"
 #import "MITSearchDisplayController.h"
+#import "AnalyticsWrapper.h"
 
 @implementation CategoriesTableViewController
 @synthesize mapSelectionController = _mapSelectionController;
@@ -28,6 +29,8 @@
         _loadingView = [[[MITLoadingActivityView alloc] initWithFrame:self.tableView.frame] retain];
         [self.view addSubview:_loadingView];
     }
+    
+    [[AnalyticsWrapper sharedWrapper] trackPageview:[NSString stringWithFormat:@"/map/category?category=%@", self.category]];
 }
 
 - (void)didReceiveMemoryWarning {

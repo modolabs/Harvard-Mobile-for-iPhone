@@ -9,6 +9,7 @@
 #import "TileServerManager.h"
 #import "EventListTableView.h"
 #import "ModoSearchBar.h"
+#import "AnalyticsWrapper.h"
 
 #define SCROLL_TAB_HORIZONTAL_PADDING 5.0
 #define SCROLL_TAB_HORIZONTAL_MARGIN  5.0
@@ -285,7 +286,7 @@
     [self.tableView removeFromSuperview];
     
 	BOOL requestNeeded = YES;
-	
+    
 	if (listType != activeEventList) {
 		activeEventList = listType;
         [self returnToToday];
@@ -313,6 +314,30 @@
 
 	if (dateRangeDidChange && activeEventList != CalendarEventListTypeCategory) {
 		requestNeeded = YES;
+        
+        NSString *pageName = nil;
+        switch (activeEventList) {
+            case CalendarEventListTypeEvents:
+                pageName = @"/calendar/day?type=events";
+                if (dateRangeDidChange) {
+                    pageName = [NSString stringWithFormat:@"%@&time=%.0f", pageName, [self.startDate timeIntervalSince1970]];
+                }
+                break;
+            case CalendarEventListTypeAcademic:
+                pageName = @"/calendar/year?type=academic";
+                if (dateRangeDidChange) {
+                    NSDateComponents *comps = [[NSCalendar currentCalendar] components:NSYearCalendarUnit | NSMonthCalendarUnit
+                                                                              fromDate:self.startDate];
+                    pageName = [NSString stringWithFormat:@"%@&year=%d&month=%d", pageName, [comps year], [comps month]];
+                }
+                break;
+            case CalendarEventListTypeCategory:
+                pageName = @"/calendar/categories";
+                break;
+        }
+        if (pageName) {
+            [[AnalyticsWrapper sharedWrapper] trackPageview:pageName];
+        }
 	}
 	
 	if (showScroller) {
@@ -631,6 +656,8 @@
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
 	[self makeSearchRequest:searchBar.text];
+    
+    [[AnalyticsWrapper sharedWrapper] trackPageview:[NSString stringWithFormat:@"/calendar/search?filter=%@", searchBar.text]];
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
@@ -686,11 +713,15 @@
 - (void)mapButtonToggled {
 	showList = NO;
 	[self reloadView:activeEventList];
+    
+    [[AnalyticsWrapper sharedWrapper] trackEvent:@"calendar" action:@"map button pressed" label:nil];
 }
 
 - (void)listButtonToggled {
 	showList = YES;
 	[self reloadView:activeEventList];
+
+    [[AnalyticsWrapper sharedWrapper] trackEvent:@"calendar" action:@"list button pressed" label:nil];
 }
 
 - (void)buttonPressed:(id)sender {

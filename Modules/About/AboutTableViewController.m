@@ -5,6 +5,7 @@
 #import "UITableView+MITUIAdditions.h"
 #import "MITUIConstants.h"
 #import "MITMailComposeController.h"
+#import "AnalyticsWrapper.h"
 
 @implementation AboutTableViewController
 
@@ -25,6 +26,8 @@
     self.tableView.tableFooterView = footerView;
     [footerLabel release];
     [footerView release];
+    
+    [[AnalyticsWrapper sharedWrapper] trackPageview:@"/mobile-about"];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {

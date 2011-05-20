@@ -372,6 +372,8 @@ static NSInteger numTries = 0;
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
 	self.searchQuery = searchBar.text;
 	[self loadSearchResultsFromServer:NO forQuery:self.searchQuery];
+    
+    [[AnalyticsWrapper sharedWrapper] trackPageview:[NSString stringWithFormat:@"/news/search?filter=%@", searchBar.text]];
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
@@ -465,6 +467,9 @@ static NSInteger numTries = 0;
 		//[storyTable reloadData];
 		showingBookmarks = (category == BOOKMARK_BUTTON_TAG) ? YES : NO;
 		[self loadFromCache]; // makes request to server if no request has been made this session
+        
+        NSString *pageName = [NSString stringWithFormat:@"/news/?section=%d", self.activeCategoryId];
+        [[AnalyticsWrapper sharedWrapper] trackPageview:pageName];
     }
 }
 

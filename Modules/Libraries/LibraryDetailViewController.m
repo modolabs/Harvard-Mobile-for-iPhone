@@ -18,6 +18,7 @@
 #import "Library.h"
 #import "LibraryAlias.h"
 #import "MITMailComposeController.h"
+#import "AnalyticsWrapper.h"
 
 @implementation LibraryDetailViewController
 @synthesize weeklySchedule;
@@ -153,7 +154,17 @@ NSInteger phoneNumberSort(id num1, id num2, void *context){
     [[LibraryDataManager sharedManager] setLibDelegate:self];
 	
 	[self setupLayout];
-	
+    
+    NSString *pageName = @"/libraries/locationsAndHours";
+    NSMutableArray *parameters = [NSArray arrayWithObjects:
+                                  [NSString stringWithFormat:@"type=%@", lib.library.type],
+                                  [NSString stringWithFormat:@"id=%@", lib.library.identityTag],
+                                  [NSString stringWithFormat:@"name=%@", lib.name],
+                                  nil];
+    [[AnalyticsWrapper sharedWrapper] trackPageview:[NSString stringWithFormat:
+                                                     @"%@?%@",
+                                                     pageName,
+                                                     [parameters componentsJoinedByString:@"&"]]];
 }
 
 -(void) viewWillAppear:(BOOL)animated {
@@ -535,6 +546,18 @@ NSInteger phoneNumberSort(id num1, id num2, void *context){
                 vc.title = @"Weekly Schedule";
                 vc.daysOfTheWeek = daysOfWeek;
                 vc.weeklySchedule = weeklySchedule;
+                
+                NSString *pageName = @"/libraries/fullHours";
+                NSMutableArray *parameters = [NSArray arrayWithObjects:
+                                              [NSString stringWithFormat:@"type=%@", lib.library.type],
+                                              [NSString stringWithFormat:@"id=%@", lib.library.identityTag],
+                                              [NSString stringWithFormat:@"name=%@", lib.name],
+                                              nil];
+                [[AnalyticsWrapper sharedWrapper] trackPageview:[NSString stringWithFormat:
+                                                                 @"%@?%@",
+                                                                 pageName,
+                                                                 [parameters componentsJoinedByString:@"&"]]];
+                
                 [self.navigationController pushViewController:vc animated:YES];
                 [vc release];
             }

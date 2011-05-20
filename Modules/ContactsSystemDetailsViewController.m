@@ -7,12 +7,12 @@
 //
 
 #import "ContactsSystemDetailsViewController.h"
-
+#import "AnalyticsWrapper.h"
 
 @implementation ContactsSystemDetailsViewController
 @synthesize titleString;
 @synthesize detailsString = _detailsString;
-
+@synthesize pageID;
 
 - (void)loadView {
     [super loadView];
@@ -30,6 +30,8 @@
     [self.view addSubview:systemTextDetailsView];
     systemTextDetailsView.delegate = self;
     systemTextDetailsView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    
+    [[AnalyticsWrapper sharedWrapper] trackPageview:[NSString stringWithFormat:@"/shuttleschedule/info?id=%@", self.pageID]];
 }
 
 - (NSString *)detailsString {

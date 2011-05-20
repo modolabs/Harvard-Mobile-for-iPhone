@@ -7,7 +7,7 @@
 //
 
 #import "AnnouncementWebViewController.h"
-
+#import "AnalyticsWrapper.h"
 
 @implementation AnnouncementWebViewController
 
@@ -42,24 +42,21 @@
 	CGRect frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
 	CGRect webViewFrame = CGRectMake(5, 0, self.view.frame.size.width - 10, self.view.frame.size.height - 10);
 	
-	UIView *webViewContainer = [[UIView alloc] initWithFrame:frame];
+	UIView *webViewContainer = [[[UIView alloc] initWithFrame:frame] autorelease];
 	webView = [[UIWebView alloc] initWithFrame:webViewFrame];
 	
-	NSString *tempString;
-	//tempString = @"<p>Harvard Shuttle Services is pleased to announce that the <font color=\"#800000\"><strong>ShuttleTracker &#160;iPhone App <\/strong><\/font>is now available in the iTunes App Store (link&#160;<a title=\"http:\/\/itunes.apple.com\/us\/app\/transloc-transit-visualization\/id367023550?mt=8\" target=\"_blank\" href=\"http:\/\/itunes.apple.com\/us\/app\/transloc-transit-visualization\/id367023550?mt=8\">here<\/a>). &#160;This enhancement--<font color=\"#800000\"><strong>at no additional charge<\/strong>-- <\/font>allows faster loading of the map, viewing of multiple routes, and geolocation features. &#160;Please share this news with your friends and download it today for your iPhone or iPod Touch!&#160;&#160;<\/p><div><a href=\"http:\/\/itunes.apple.com\/us\/app\/transloc-transit-visualization\/id367023550?mt=8\">http:\/\/itunes.apple.com\/us\/app\/transloc-transit-visualization\/id367023550?mt=8<\/a><\/div><div><br \/>  &#160;<\/div>";
-
-	tempString = self.htmlStringToDisplay;
-	NSString *descriptionString = [[NSString alloc] initWithFormat:@"<p><font face=\"Georgia\" size=5>%@ </font></p>", self.titleString];
-	
-	descriptionString = [descriptionString stringByAppendingFormat:@"<font face=\"Georgia\" size=3 color=\"gray\">%@</font>", self.dateString];	
-	descriptionString = [descriptionString stringByAppendingFormat:@"<font face=\"dimgray\">%@</font>", tempString];						   
-	 
+	NSString *descriptionString = [NSString stringWithFormat:
+                                   @"<p><font face=\"Georgia\" size=5>%@ </font></p>"
+                                   "<font face=\"Georgia\" size=3 color=\"gray\">%@</font>"
+                                   "<font face=\"dimgray\">%@</font>",
+                                   self.titleString, self.dateString, self.htmlStringToDisplay];
 		 
 	[webView loadHTMLString:[self htmlStringFromString:descriptionString] baseURL:nil];
 	[webViewContainer addSubview: webView];
 	webViewContainer.backgroundColor = [UIColor whiteColor];
 	[self.view addSubview:webViewContainer];
 	
+    [[AnalyticsWrapper sharedWrapper] trackPageview:@"/shuttleschedule/announcement"];
 }
 
 

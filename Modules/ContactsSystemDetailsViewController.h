@@ -18,6 +18,7 @@
 
 @property (nonatomic, retain) NSString * titleString;
 @property (nonatomic, retain) NSString * detailsString;
+@property (nonatomic, retain) NSString * pageID;
 
 
 @end

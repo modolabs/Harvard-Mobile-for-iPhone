@@ -15,6 +15,7 @@
 #import "UIKit+MITAdditions.h"
 #import "ModoSearchBar.h"
 #import "MITSearchDisplayController.h"
+#import "AnalyticsWrapper.h"
 
 static const NSUInteger kPhoneDirectorySection = 0;
 
@@ -210,6 +211,8 @@ NSInteger strLenSort(NSString *str1, NSString *str2, void *context)
 {
 	self.searchTerms = searchBar.text;
 	[self performSearch];
+    
+    [[AnalyticsWrapper sharedWrapper] trackPageview:[NSString stringWithFormat:@"/people/search?filter=%@", self.searchTerms]];
 }
 
 - (void)performSearch

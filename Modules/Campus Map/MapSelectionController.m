@@ -113,6 +113,8 @@
             	self.editButtonItem.enabled = NO;
             }
             
+            [[AnalyticsWrapper sharedWrapper] trackEvent:@"map" action:@"bookmarks segment" label:nil];
+            
 			break;
         }
 		case MapSelectionControllerSegmentRecents:
@@ -125,6 +127,8 @@
             NSSortDescriptor* sortDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"date" ascending:NO] autorelease];
             self.tableItems = [[CoreDataManager fetchDataForAttribute:CampusMapSearchEntityName sortDescriptor:sortDescriptor] retain];
             
+            [[AnalyticsWrapper sharedWrapper] trackEvent:@"map" action:@"recents segment" label:nil];
+
 			break;
         }
 		case MapSelectionControllerSegmentBrowse:
@@ -146,6 +150,8 @@
                 }
             }
             
+            [[AnalyticsWrapper sharedWrapper] trackEvent:@"map" action:@"browse segment" label:nil];
+
 			break;
         }
 		default:
@@ -159,9 +165,6 @@
     
     [self.view addSubview:self.tableView];
     [self.tableView reloadData];
-    
-    NSString *detailString = [NSString stringWithFormat:@"/maps/%@", self.navigationItem.title];
-    [[AnalyticsWrapper sharedWrapper] trackPageview:detailString];
 }
 
 

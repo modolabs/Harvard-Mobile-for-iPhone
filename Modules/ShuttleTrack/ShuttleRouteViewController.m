@@ -80,7 +80,7 @@
 	
     [self setMapViewMode:YES animated:NO];
     
-    NSString *detailString = [NSString stringWithFormat:@"/shuttles/route?id=%@", _route.title];
+    NSString *detailString = [NSString stringWithFormat:@"/shuttleschedule/route?id=%@&view=list", _route.routeID];
     [[AnalyticsWrapper sharedWrapper] trackPageview:detailString];
 }
 

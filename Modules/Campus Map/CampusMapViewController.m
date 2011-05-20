@@ -11,7 +11,7 @@
 #import "TileServerManager.h"
 #import "CampusMapToolbar.h"
 #import "MITSearchDisplayController.h"
-
+#import "AnalyticsWrapper.h"
 #import "MapSelectionController.h"
 
 #define kAPISearch		@"Search"
@@ -603,7 +603,8 @@
 	
 	// ask the campus map view controller to perform the search
 	[self search:searchBar.text params:nil];
-	
+    
+    [[AnalyticsWrapper sharedWrapper] trackPageview:[NSString stringWithFormat:@"/map/search?filter=%@", searchBar.text]];
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
@@ -719,18 +720,19 @@
 
 - (void)mapView:(MKMapView *)mapView didAddAnnotationViews:(NSArray *)views {
     // if this is the user location, don't do anything
-    if ([views count] == 1 && ((MKAnnotationView *)[views lastObject]).annotation == _mapView.userLocation)
-        return;
-    
-    _mapView.region = [self regionForAnnotations:_searchResults];
-    
-    if ([_mapView.annotations count] == 1 && [_mapView.selectedAnnotations count] == 0) {
-        id<MKAnnotation> annotation = [_mapView.annotations lastObject];
-        // check if annotation has lat/lon
-        if (![annotation isKindOfClass:[ArcGISMapAnnotation class]]
-            || ((ArcGISMapAnnotation *)annotation).coordinate.longitude != 0) {
-            [_mapView selectAnnotation:[_mapView.annotations lastObject] animated:YES];
+    NSInteger count = 0;
+    id<MKAnnotation> selectAnnotation = nil;
+    for (MKAnnotationView *aView in views) {
+        if ([aView.annotation isKindOfClass:[ArcGISMapAnnotation class]] && aView.annotation.coordinate.latitude != 0) {
+            selectAnnotation = aView.annotation;
+            count++;
+            if (count > 1)
+                break;
         }
+    }
+    
+    if (count == 1) {
+        [_mapView selectAnnotation:selectAnnotation animated:YES];
     }
 }
 

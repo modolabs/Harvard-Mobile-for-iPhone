@@ -98,7 +98,7 @@
 		_tabViewControl.selectedTab = _startingTab;
 	}
     
-    NSString *detailString = [NSString stringWithFormat:@"/maps/detail=%@", self.annotation.name];
+    NSString *detailString = [NSString stringWithFormat:@"/maps/detail?selectvalues=%@", self.annotation.name];
     [[AnalyticsWrapper sharedWrapper] trackPageview:detailString];
 }
 

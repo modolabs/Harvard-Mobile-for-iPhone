@@ -2,6 +2,7 @@
 #import "EventCategory.h"
 #import "CalendarEventsViewController.h"
 #import "CalendarConstants.h"
+#import "AnalyticsWrapper.h"
 
 @implementation EventCategoriesTableView
 
@@ -66,6 +67,9 @@
 		vc.activeEventList = CalendarEventListTypeEvents;
 		vc.showList = YES;
 		vc.categoriesRequestDispatched = YES;
+        
+        NSString *pageName = [NSString stringWithFormat:@"/calendar/category?catid=%@&name=%@", category.catID, category.title];
+        [[AnalyticsWrapper sharedWrapper] trackPageview:pageName];
 	}
 
 	[self.parentViewController.navigationController pushViewController:vc animated:YES];

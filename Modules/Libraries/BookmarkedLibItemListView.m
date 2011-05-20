@@ -11,6 +11,7 @@
 #import "CoreDataManager.h"
 #import "LibrariesMultiLineCell.h"
 #import "LibItemDetailViewController.h"
+#import "AnalyticsWrapper.h"
 
 @implementation BookmarkedLibItemListView
 
@@ -59,6 +60,9 @@ NSInteger bookmarkedItemsNameSorted(id item1, id item2, void *context) {
 
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    NSString *pageName = @"/libraries/bookmarks?type=item";
+    [[AnalyticsWrapper sharedWrapper] trackPageview:pageName];
 }
 
 

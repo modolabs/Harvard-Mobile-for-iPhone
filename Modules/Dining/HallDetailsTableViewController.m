@@ -71,7 +71,7 @@
 	detailsTableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 	[self.view addSubview:detailsTableView];
     
-    NSString *detailString = [NSString stringWithFormat:@"/dining/hall?id=%@", hallStatus.hallName];
+    NSString *detailString = [NSString stringWithFormat:@"/dining/detail?location=%@", hallStatus.hallName];
     [[AnalyticsWrapper sharedWrapper] trackPageview:detailString];
 }
 

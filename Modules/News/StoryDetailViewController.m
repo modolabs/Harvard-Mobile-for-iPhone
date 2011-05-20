@@ -108,7 +108,7 @@
 	[storyView loadHTMLString:htmlString baseURL:baseURL];
 
     // analytics
-    NSString *detailString = [NSString stringWithFormat:@"/news/story?id=%d", [self.story.story_id integerValue]];
+    NSString *detailString = [NSString stringWithFormat:@"/news/story?storyID=%d", [self.story.story_id integerValue]];
     [[AnalyticsWrapper sharedWrapper] trackPageview:detailString];
 }
 

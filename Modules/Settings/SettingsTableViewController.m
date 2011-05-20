@@ -5,6 +5,7 @@
 #import "MITUIConstants.h"
 #import "ModoThreeStateSwitchControl.h"
 #import <MapKit/MapKit.h>
+#import "AnalyticsWrapper.h"
 
 #define TITLE_HEIGHT 20.0
 #define SUBTITLE_HEIGHT NAVIGATION_BAR_HEIGHT
@@ -138,6 +139,8 @@ typedef enum {
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.tableView applyStandardColors];
+    
+    [[AnalyticsWrapper sharedWrapper] trackPageview:@"/settings"];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -6,6 +6,7 @@
  *****************************************************************/
 
 #import "SchoolsViewController.h"
+#import "AnalyticsWrapper.h"
 
 // height to allocate to icon text label
 #define ICON_LABEL_HEIGHT 22
@@ -160,6 +161,8 @@
     
     [self.view addSubview:hintLabel];
     [self layoutIcons];
+    
+    [[AnalyticsWrapper sharedWrapper] trackPageview:@"/links"];
 }
 
 

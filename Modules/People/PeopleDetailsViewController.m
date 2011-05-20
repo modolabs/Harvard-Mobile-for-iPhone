@@ -139,7 +139,7 @@ NSString * const RequestLookupAddress = @"address";
 		}
 	}
 
-    NSString *detailString = [NSString stringWithFormat:@"/people/detail?id=%@", self.personDetails.uid];
+    NSString *detailString = [NSString stringWithFormat:@"/people/detail?uid=%@", self.personDetails.uid];
     [[AnalyticsWrapper sharedWrapper] trackPageview:detailString];
 }
 

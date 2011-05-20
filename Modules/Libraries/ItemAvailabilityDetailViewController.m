@@ -14,6 +14,7 @@
 #import "LibrariesMultiLineCell.h"
 #import "LibraryAlias.h"
 #import "LibraryDetailViewController.h"
+#import "AnalyticsWrapper.h"
 
 @implementation ItemAvailabilityDetailViewController
 @synthesize libraryItem;
@@ -144,6 +145,13 @@
     }
     
 	[self setupLayout];
+    
+    NSString *pageName = [NSString stringWithFormat:
+                          @"/libraries/availability?itemId=%@&type=%@&id=%@",
+                          libraryItem.itemId,
+                          libraryAlias.library.type,
+                          libraryAlias.library.identityTag];
+    [[AnalyticsWrapper sharedWrapper] trackPageview:pageName];
 }
 
 - (NSString *)description {
@@ -609,6 +617,14 @@
 - (void)showModalViewForRequest:(NSString *)title url:(NSString *)urlString {
     MIT_MobileAppDelegate *appDelegate = (MIT_MobileAppDelegate *)[[UIApplication sharedApplication] delegate];
     RequestWebViewModalViewController *modalVC = [[RequestWebViewModalViewController alloc] initWithRequestUrl:urlString title:title];
+    
+    NSString *pageName = [NSString stringWithFormat:
+                          @"/libraries/request?itemId=%@&type=%@&id=%@",
+                          libraryItem.itemId,
+                          libraryAlias.library.type,
+                          libraryAlias.library.identityTag];
+    [[AnalyticsWrapper sharedWrapper] trackPageview:pageName];
+    
     [appDelegate presentAppModalViewController:modalVC animated:YES];
     [modalVC release];
 }

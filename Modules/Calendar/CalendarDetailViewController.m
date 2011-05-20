@@ -76,7 +76,7 @@ enum CalendarDetailRowTypes {
 	
 	descriptionHeight = 0;
     
-    NSString *detailString = [NSString stringWithFormat:@"/events/detail?id=%@", self.event.title];
+    NSString *detailString = [NSString stringWithFormat:@"/calendar/detail?id=%@", self.event.eventID];
     [[AnalyticsWrapper sharedWrapper] trackPageview:detailString];
 }
 

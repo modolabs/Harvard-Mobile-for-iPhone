@@ -265,7 +265,6 @@
 		C71D9B951243EE55009369C5 /* ShuttlesTabViewControl.m in Sources */ = {isa = PBXBuildFile; fileRef = C71D9B931243EE55009369C5 /* ShuttlesTabViewControl.m */; };
 		C71DA6D8124A6442009369C5 /* AnnouncementsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C71DA6D6124A6442009369C5 /* AnnouncementsTableViewController.m */; };
 		C71DA7E5124A858C009369C5 /* AnnouncementWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C71DA7E3124A858C009369C5 /* AnnouncementWebViewController.m */; };
-		C727B53B11F4E245007D53BB /* CalendarCategoriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C727B53911F4E245007D53BB /* CalendarCategoriesViewController.m */; };
 		C759593E12074B47008474A9 /* HallDetailsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C759593812074B47008474A9 /* HallDetailsTableViewController.m */; };
 		C759594012074B47008474A9 /* DiningMultiLineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C759593A12074B47008474A9 /* DiningMultiLineCell.m */; };
 		C759594212074B47008474A9 /* DiningHallStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = C759593C12074B47008474A9 /* DiningHallStatus.m */; };
@@ -822,8 +821,6 @@
 		C71DA6D6124A6442009369C5 /* AnnouncementsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnnouncementsTableViewController.m; sourceTree = "<group>"; };
 		C71DA7E2124A858C009369C5 /* AnnouncementWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnnouncementWebViewController.h; sourceTree = "<group>"; };
 		C71DA7E3124A858C009369C5 /* AnnouncementWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnnouncementWebViewController.m; sourceTree = "<group>"; };
-		C727B53811F4E245007D53BB /* CalendarCategoriesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarCategoriesViewController.h; sourceTree = "<group>"; };
-		C727B53911F4E245007D53BB /* CalendarCategoriesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarCategoriesViewController.m; sourceTree = "<group>"; };
 		C759593812074B47008474A9 /* HallDetailsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HallDetailsTableViewController.m; path = Dining/HallDetailsTableViewController.m; sourceTree = "<group>"; };
 		C759593912074B47008474A9 /* HallDetailsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HallDetailsTableViewController.h; path = Dining/HallDetailsTableViewController.h; sourceTree = "<group>"; };
 		C759593A12074B47008474A9 /* DiningMultiLineCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DiningMultiLineCell.m; path = Dining/DiningMultiLineCell.m; sourceTree = "<group>"; };
@@ -2116,8 +2113,6 @@
 			isa = PBXGroup;
 			children = (
 				EB83923F1163ED140067C0A3 /* Model */,
-				C727B53811F4E245007D53BB /* CalendarCategoriesViewController.h */,
-				C727B53911F4E245007D53BB /* CalendarCategoriesViewController.m */,
 				EB86CA6E115D276700C8F3D1 /* CalendarModule.m */,
 				EB86CA6D115D276700C8F3D1 /* CalendarModule.h */,
 				EB86CAC4115D4ED500C8F3D1 /* CalendarEventsViewController.h */,
@@ -2422,7 +2417,6 @@
 				EB6D10DF11EE13F100B65CE3 /* MapZoomLevel.m in Sources */,
 				EB6D111711EE143900B65CE3 /* TileServerManager.m in Sources */,
 				EB6D141611EE979500B65CE3 /* NewsCategory.m in Sources */,
-				C727B53B11F4E245007D53BB /* CalendarCategoriesViewController.m in Sources */,
 				C7B897F111F535C8002B3619 /* HoursTableViewController.m in Sources */,
 				EB7BA33F11F7677F00B3DDA6 /* PolygonOverlay.m in Sources */,
 				C776675A11F733E3005496DD /* DatePickerViewController.m in Sources */,

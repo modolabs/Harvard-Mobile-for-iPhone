@@ -10,7 +10,7 @@
     [self.tableView applyStandardColors];
     self.navigationItem.title = @"About Harvard";
     
-    [[AnalyticsWrapper sharedWrapper] trackPageview:@"/about/harvard"];
+    [[AnalyticsWrapper sharedWrapper] trackPageview:@"/mobile-about/about"];
 }
 
 #pragma mark Table view methods

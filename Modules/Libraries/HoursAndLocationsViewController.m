@@ -13,6 +13,7 @@
 #import "Constants.h"
 #import "LibraryAlias.h"
 #import "MITLoadingActivityView.h"
+#import "AnalyticsWrapper.h"
 
 @interface HoursAndLocationsViewController (Private)
 
@@ -190,6 +191,28 @@
     [self.view addSubview:_tableView];
     
     [self pingLibraries];
+    
+    NSMutableArray *queryParams = [NSMutableArray array];
+    
+    NSString *pageName = nil;
+    if (showBookmarks) {
+        pageName = @"bookmarks";
+        [queryParams addObject:@"type=library|archive"];
+    } else if (showArchives) {
+        pageName = @"archives";
+    } else {
+        pageName = @"libraries";
+    }
+    
+    if (showingOnlyOpen) {
+        [queryParams addObject:@"openOnly=1"];
+    }
+    if (showingMapView) {
+        [queryParams addObject:@"mapView=1"];
+    }
+    
+    pageName = [NSString stringWithFormat:@"%@?%@", pageName, [queryParams componentsJoinedByString:@"&"]];
+    [[AnalyticsWrapper sharedWrapper] trackPageview:pageName];
 }
 
 - (void)librariesDidLoad {
