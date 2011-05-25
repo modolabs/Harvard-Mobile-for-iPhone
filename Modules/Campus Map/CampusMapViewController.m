@@ -242,7 +242,11 @@
 	}
     
     if ([TileServerManager isInitialized]) {
-        [_mapView addAnnotations:_searchResults];
+        for (id<MKAnnotation> anAnnotation in _searchResults) {
+            if (fabs(anAnnotation.coordinate.latitude) > 0.1 && fabs(anAnnotation.coordinate.longitude) > 0.1) {
+                [_mapView addAnnotation:anAnnotation];
+            }
+        }
     }
 }
 

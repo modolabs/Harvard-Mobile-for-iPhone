@@ -115,7 +115,7 @@
     [self.mapSelectionController.mapVC.searchController hideSearchOverlayAnimated:NO];
     
     // on the map, select the current annotation
-    [[self.mapSelectionController.mapVC mapView] selectAnnotation:annotation animated:NO];
+    //[[self.mapSelectionController.mapVC mapView] selectAnnotation:annotation animated:NO];
     
     [self dismissModalViewControllerAnimated:YES];
 }
