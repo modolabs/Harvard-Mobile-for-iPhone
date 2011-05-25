@@ -170,6 +170,10 @@
                 }
             }
         }
+        
+        if (!_pathLocations) {
+            [self updatePath];
+        }
 	}
 	
     if ((array = [routeInfo objectForKey:@"vehicleLocations"]) != nil) {
@@ -226,7 +230,7 @@
 	
 	_pathLocations = [[NSMutableArray alloc] init];
 
-    for(NSDictionary* pathComponent in self.path) {
+    for (NSDictionary* pathComponent in self.path) {
         CLLocation* location = [[[CLLocation alloc] initWithLatitude:[[pathComponent objectForKey:@"lat"] doubleValue]
                                                            longitude:[[pathComponent objectForKey:@"lon"] doubleValue]
                                  ] autorelease];
