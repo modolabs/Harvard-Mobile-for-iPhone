@@ -102,6 +102,11 @@
 	titleLabel.font = [UIFont fontWithName:CONTENT_TITLE_FONT size:CONTENT_TITLE_FONT_SIZE];//[UIFont boldSystemFontOfSize:20];
 	titleLabel.lineBreakMode = UILineBreakModeWordWrap;
 	titleLabel.numberOfLines = 0;
+    
+    mapBufferY = titleSize.height + 20;
+    CGRect rect = headerView.frame;
+    rect.size.height += mapBufferY - 45;
+    headerView.frame = rect;
 	
 	[headerView addSubview:titleLabel];
 	

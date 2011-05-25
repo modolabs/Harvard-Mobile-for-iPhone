@@ -22,7 +22,6 @@
 @synthesize routeStop = _routeStop;
 
 // live stop-route properties
-@synthesize nextScheduled = _nextScheduled;
 @synthesize upcoming = _upcoming;
 @synthesize predictions = _predictions;
 @synthesize nextScheduledDate;
