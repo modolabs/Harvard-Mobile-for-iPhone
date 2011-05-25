@@ -204,14 +204,13 @@
             cell.imageView.image = nil;
         }
 
-        if (aStop.nextScheduled) {
+        if (aStop.nextScheduledDate) {
             NSMutableString *arrivalTimes = nil;
-            NSTimeInterval currentTimestamp = [[NSDate date] timeIntervalSince1970];
-            NSTimeInterval seconds = aStop.nextScheduled - currentTimestamp;
+            NSTimeInterval seconds = [aStop.nextScheduledDate timeIntervalSinceNow];
             NSTimeInterval minutes = floor(seconds / 60);
             arrivalTimes = (minutes < 1) ? [NSMutableString stringWithString:@"<1"] : [NSMutableString stringWithFormat:@"%.0f", minutes];
-            for (NSNumber *prediction in aStop.predictions) {
-                NSTimeInterval predictionSeconds = [prediction floatValue] - currentTimestamp;
+            for (NSDate *prediction in aStop.predictions) {
+                NSTimeInterval predictionSeconds = [prediction timeIntervalSinceNow];
                 minutes = floor(predictionSeconds / 60);
                 [arrivalTimes appendFormat:@", %.0f", minutes];
             }

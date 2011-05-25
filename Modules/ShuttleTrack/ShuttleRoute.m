@@ -22,13 +22,14 @@
 @synthesize urlForStopMarker;
 @synthesize nextStopId;
 @synthesize genericShuttleMarker;
+@synthesize stops = _stops;
 
 // cached properties
 @dynamic routeDescription;
 @dynamic title;
 @dynamic summary;
 @dynamic interval;
-@dynamic stops;
+//@dynamic stops;
 @dynamic routeID;
 @dynamic sortOrder;
 @dynamic path;
@@ -89,102 +90,6 @@
 		self.cache.interval = [NSNumber numberWithInt:interval];
 }
 
-- (NSMutableArray *)stops {
-	return _stops;
-}
-
-- (void)setStops:(NSMutableArray *)stops {
-	
-	BOOL pathShouldUpdate = NO;
-	
-	if (_stopAnnotations == nil) {
-		_stopAnnotations = [[NSMutableArray alloc] initWithCapacity:stops.count];
-		pathShouldUpdate = YES;
-	}
-	
-	if (_pathLocations == nil) {
-		pathShouldUpdate = YES;
-	}
-	
-	NSMutableArray *newStops = [NSMutableArray array];
-	BOOL hasNewStops = NO;
-	
-	NSMutableSet *oldRouteStops = [[NSMutableSet alloc] initWithSet:self.cache.stops];
-	NSMutableSet *newRouteStops = [NSMutableSet setWithCapacity:[stops count]];
-	
-	NSInteger order = 0;
-	for (NSDictionary *stopInfo in stops) {
-		ShuttleStop *shuttleStop = nil;
-		BOOL isOldStop = NO;
-		
-		NSString *stopID = [stopInfo objectForKey:@"stop_id"];
-		if (stopID == nil) {
-			stopID = [stopInfo objectForKey:@"id"];
-			//NSLog(@"using 'id' for stopID for %@", stopID); // should clean up this inconsistency in the API
-		}
-		//else { NSLog(@"using 'stop_id' for stopID for %@", stopID); }
-		
-		for (ShuttleStop *stop in _stops) {
-			if ([stop.stopID isEqualToString:stopID]) {
-				shuttleStop = stop;
-				isOldStop = YES;
-                [newRouteStops addObject:shuttleStop.routeStop];
-				break;
-			}
-		}
-		
-		if (!isOldStop) {
-			ShuttleStopLocation *stopLocation = [ShuttleDataManager stopLocationWithID:stopID];				
-			shuttleStop = [[[ShuttleStop alloc] initWithStopLocation:stopLocation routeID:self.routeID] autorelease];
-			
-			[newRouteStops addObject:shuttleStop.routeStop];
-			
-			ShuttleStopMapAnnotation* annotation = [[[ShuttleStopMapAnnotation alloc] initWithShuttleStop:shuttleStop] autorelease];
-			[_stopAnnotations addObject:annotation];
-
-			hasNewStops = YES;
-		}
-		
-		[shuttleStop updateInfo:stopInfo];
-		[newStops addObject:shuttleStop];
-
-		shuttleStop.order = order;
-		order++;
-	}
-	
-	// check if we added new stops or shouldn't include old ones
-	if (hasNewStops || [_stops count] > [stops count]) {
-		
-		_stops = [newStops retain];
-		
-		// prune cached stops no longer on the route
-		self.cache.stops = newRouteStops;
-		[oldRouteStops minusSet:newRouteStops];
-        //NSLog(@"deleting route stops: %@", [oldRouteStops description]);
-		[CoreDataManager deleteObjects:[oldRouteStops allObjects]];
-		
-		pathShouldUpdate = YES;
-	}
-
-	if (pathShouldUpdate) {
-		// get rid of obsolete map annotations
-		NSMutableArray *oldStops = [[NSMutableArray alloc] initWithCapacity:[stops count]];
-		for (ShuttleStopMapAnnotation *annotation in _stopAnnotations) {
-			if (![_stops containsObject:annotation.shuttleStop]) {
-				[oldStops addObject:annotation];
-			}
-		}
-		for (ShuttleStopMapAnnotation *annotation in oldStops) {
-			[_stopAnnotations removeObject:annotation];
-		}
-		[oldStops release];
-		
-		[self updatePath];
-	}
-	
-	[oldRouteStops release];
-}
-
 - (NSInteger)sortOrder {
     return [self.cache.sortOrder intValue];
 }
@@ -232,6 +137,12 @@
 	self.gpsActive = [[routeInfo objectForKey:@"gpsActive"] boolValue];
 	self.isRunning = [[routeInfo objectForKey:@"isRunning"] boolValue];
     
+    NSDate *now = [NSDate date];
+    NSNumber *nowSeconds = [routeInfo objectForKey:@"now"];
+    if (nowSeconds && [nowSeconds isKindOfClass:[NSNumber class]]) {
+        now = [NSDate dateWithTimeIntervalSince1970:[nowSeconds doubleValue]];
+    }
+    
     NSArray *array = [routeInfo objectForKey:@"path"];
 	if (array) {
 		self.path = array;
@@ -246,15 +157,17 @@
         NSError *error = nil;
         for (NSDictionary *aDict in array) {
             NSString *stopID = [aDict objectForKey:@"id"];
-            ShuttleStop *aStop = [ShuttleDataManager stopWithRoute:self.routeID stopID:stopID error:&error];
-            if (aStop) {
-                [aStop updateInfo:aDict];
-                [self.stops addObject:aStop];
-                ShuttleStopMapAnnotation* annotation = [[[ShuttleStopMapAnnotation alloc] initWithShuttleStop:aStop] autorelease];
-                [_stopAnnotations addObject:annotation];
-            }
-            if ([aDict objectForKey:@"upcoming"]) {
-                self.nextStopId = [aDict objectForKey:stopID];
+            if (stopID) {
+                ShuttleStop *aStop = [ShuttleDataManager stopWithRoute:self.routeID stopID:stopID error:&error];
+                if (aStop) {
+                    [aStop updateInfo:aDict referenceDate:now];
+                    [self.stops addObject:aStop];
+                    ShuttleStopMapAnnotation* annotation = [[[ShuttleStopMapAnnotation alloc] initWithShuttleStop:aStop] autorelease];
+                    [_stopAnnotations addObject:annotation];
+                }
+                if ([aDict objectForKey:@"upcoming"]) {
+                    self.nextStopId = [aDict objectForKey:stopID];
+                }
             }
         }
 	}
@@ -395,7 +308,7 @@
 	}
 	
 	ShuttleStop *aStop = [self.stops lastObject];
-	if (aStop.nextScheduled) { // we have something from the server
+	if (aStop.nextScheduledDate) { // we have something from the server
 		if (self.vehicleLocations && self.vehicleLocations.count > 0) {
 			summaryString = [NSString stringWithString:@"Real time bus tracking online."];
 		} else if (self.isRunning) {

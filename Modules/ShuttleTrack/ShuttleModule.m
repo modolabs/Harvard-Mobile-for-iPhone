@@ -1,7 +1,6 @@
 #import "ShuttleModule.h"
 //#import "ShuttleRoutes.h"
 #import "ShuttleRouteViewController.h"
-#import "ShuttleSubscriptionManager.h"
 #import "ShuttleStopMapAnnotation.h"
 #import "ShuttlesMainViewController.h"
 
@@ -25,39 +24,6 @@
 - (void) didAppear {
 	// for now mark all shuttle notifications as read as soon as the module appears to the user
 	//[MITUnreadNotifications removeNotifications:[MITUnreadNotifications unreadNotificationsForModuleTag:self.tag]];
-}
-
-
-- (void) removeSubscriptionByNotification: (MITNotification *)notification {
-	NSArray *parts = [notification.noticeId componentsSeparatedByString: @":"];
-	NSString *routeID = [parts objectAtIndex:0];
-	NSString *stopID = [parts objectAtIndex:1];
-	[ShuttleSubscriptionManager removeSubscriptionForRouteID:routeID atStopID:stopID];
-	
-	[[NSNotificationCenter defaultCenter] postNotificationName:ShuttleAlertRemoved object:notification];
-}
-	
-- (BOOL) handleNotification:(MITNotification *)notification appDelegate: (MIT_MobileAppDelegate *)appDelegate shouldOpen: (BOOL)shouldOpen {
-	// for now just open the module in response to a notification
-	//[self removeSubscriptionByNotification:notification];
-	
-	if(shouldOpen) {
-		NSString *routeID = [[notification.noticeId componentsSeparatedByString:@":"] objectAtIndex:0];
-		[appDelegate showModuleForTag:self.tag];
-		[self handleLocalPath:[NSString stringWithFormat:@"route-list/%@", routeID] query:nil];
-	}
-	
-	return YES;
-}
-
-- (void) handleUnreadNotificationsSync: (NSArray *)unreadNotifications {
-	for(MITNotification *aNotification in unreadNotifications) {
-		[self removeSubscriptionByNotification:aNotification];
-	}
-	
-	if([self isActiveTab]) {
-		[MITUnreadNotifications removeNotificationsForModuleTag:self.tag];
-	}
 }
 
 - (BOOL) handleLocalPath:(NSString *)localPath query:(NSString *)query {

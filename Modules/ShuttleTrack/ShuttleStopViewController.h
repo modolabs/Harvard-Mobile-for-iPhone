@@ -1,14 +1,14 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 #import "ShuttleDataManager.h"
-#import "ShuttleSubscriptionManager.h"
 #import "MITModuleURL.h"
 
 @class ShuttleStop;
 @class ShuttleStopMapAnnotation;
 @class ShuttleRoute;
 
-@interface ShuttleStopViewController : UITableViewController <ShuttleDataManagerDelegate, ShuttleSubscriptionDelegate, MKMapViewDelegate> 
+@interface ShuttleStopViewController : UITableViewController <
+ShuttleDataManagerDelegate, MKMapViewDelegate> 
 {
 	// the shuttle stop at which we are looking
 	ShuttleStop* _shuttleStop;
@@ -66,9 +66,6 @@
 //@property (nonatomic, retain) ShuttleRoute* route;
 
 @property (nonatomic, retain) NSArray* shuttleStopSchedules;
-
-@property (nonatomic, retain) NSMutableDictionary* subscriptions;
-@property (nonatomic, retain) NSMutableArray* loadingSubscriptionRequests;
 
 @property (readonly) UIButton* mapButton;
 

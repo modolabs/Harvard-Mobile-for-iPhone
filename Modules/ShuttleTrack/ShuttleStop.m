@@ -24,9 +24,10 @@
 // live stop-route properties
 @synthesize nextScheduled = _nextScheduled;
 @synthesize upcoming = _upcoming;
-//@synthesize predictions = _predictions;
-@dynamic nextScheduledDate;
-@dynamic predictions;
+@synthesize predictions = _predictions;
+@synthesize nextScheduledDate;
+//@dynamic nextScheduledDate;
+//@dynamic predictions;
 
 #pragma mark getters and setters
 
@@ -104,7 +105,7 @@
 {
 	self.routeStop.order = [NSNumber numberWithInt:order];
 }
-
+/*
 - (NSArray *)predictions
 {
     if (self.nextScheduled == 0) {
@@ -125,7 +126,7 @@
     [_predictions release];
     _predictions = [predictions retain];
 }
-
+*/
 #pragma mark initializers
 
 - (id)initWithRouteStop:(ShuttleRouteStop *)routeStop
@@ -166,7 +167,7 @@
     return self.title;
 }
 
-
+/*
 - (NSDate *)nextScheduledDate {
     NSDate *result = nil;
     if (self.nextScheduled) {
@@ -174,8 +175,9 @@
     }
     return result;
 }
-
-- (void)updateInfo:(NSDictionary *)stopInfo
+*/
+// predictions are provided as offsets from the "now" field in the API
+- (void)updateInfo:(NSDictionary *)stopInfo referenceDate:(NSDate *)refDate
 {
 	NSString *property = nil;
 	if ((property = [stopInfo objectForKey:@"title"]) != nil)
@@ -189,35 +191,23 @@
 	if ((num = [stopInfo objectForKey:@"lat"]) != nil)
 		self.latitude = [num doubleValue];
 	self.upcoming = ([stopInfo objectForKey:@"upcoming"] != nil); // upcoming only appears if it's true
-	
-	if ((num = [stopInfo objectForKey:@"next"]) != nil)
-		self.nextScheduled = [num unsignedLongValue];
 
-	NSArray *array = [stopInfo objectForKey:@"predictions"];
-    if (array)
-        self.predictions = array;
+	// sometimes the predictions show up like "predictions: {1: 1398}"
+ 	NSArray *array = [stopInfo objectForKey:@"predictions"];
+    if ([array isKindOfClass:[NSDictionary class]]) {
+        array = [(NSDictionary *)array allValues];
+    }
+    if (array.count) {
+        NSNumber *firstArrival = [array objectAtIndex:0];
+        self.nextScheduledDate = [refDate dateByAddingTimeInterval:[firstArrival doubleValue]];
+        NSMutableArray *moreTimes = [NSMutableArray array];
+        for (int i = 1; i < array.count; i++) {
+            NSNumber *anArrival = [array objectAtIndex:i];
+            [moreTimes addObject:[refDate dateByAddingTimeInterval:[anArrival doubleValue]]];
+        }
+        self.predictions = moreTimes;
+    }
 	
-}
-
-#pragma mark methods from RouteStopSchedule
-
--(NSInteger) predictionCount
-{
-	return self.predictions.count + 1;
-}
-
--(NSDate*) dateForPredictionAtIndex:(int)index
-{
-	NSInteger prediction = 0;
-	
-	if (index == 0) {
-		prediction = self.nextScheduled;
-	}
-	else {
-		prediction = [[self.predictions objectAtIndex:index - 1] intValue];
-	}
-	
-	return [NSDate dateWithTimeIntervalSince1970:prediction];
 }
 
 #pragma mark -

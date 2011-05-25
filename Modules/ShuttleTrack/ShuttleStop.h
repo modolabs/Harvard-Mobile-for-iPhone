@@ -20,18 +20,10 @@
 	ShuttleRouteStop *_routeStop;
 }
 
-- (void)updateInfo:(NSDictionary *)stopInfo;
+- (void)updateInfo:(NSDictionary *)stopInfo referenceDate:(NSDate *)refDate;
 
 - (id)initWithRouteStop:(ShuttleRouteStop *)routeStop;
 - (id)initWithStopLocation:(ShuttleStopLocation *)stopLocation routeID:(NSString *)routeID;
-
-/// methods from RouteStopSchedule
-
-// index 0 will be nextScheduled. Everything after that will come from predicitons array
--(NSDate*) dateForPredictionAtIndex:(int)index;
-
-// number of available predictions. We add one for the next scheduled stop
--(NSInteger) predictionCount;
 
 @property (nonatomic, retain) NSString *title;
 @property (nonatomic, retain) NSString *stopID;
@@ -46,7 +38,7 @@
 @property (nonatomic, retain) ShuttleRouteStop *routeStop;
 
 @property NSInteger nextScheduled;
-@property (readonly) NSDate *nextScheduledDate;
+@property (nonatomic, retain) NSDate *nextScheduledDate;
 @property (nonatomic, retain) NSArray* predictions;
 @property BOOL upcoming;
 

@@ -1,7 +1,6 @@
 #import "ShuttleStopViewController.h"
 #import "ShuttleStop.h"
 #import "ShuttleRoute.h"
-#import "ShuttleSubscriptionManager.h"
 #import "UITableViewCell+MITUIAdditions.h"
 #import "UITableView+MITUIAdditions.h"
 #import "MITUIConstants.h"
@@ -27,14 +26,6 @@
 
 - (void)requestStop;
 
--(void) findScheduledSubscriptions;
-
--(BOOL) hasSubscriptionRequestLoading: (NSIndexPath *)theIndexPath;
-
--(BOOL) hasSubscription: (NSIndexPath *)theIndexPath;
-
--(void) removeFromLoadingSubscriptionRequests: (NSIndexPath *)indexPath;
-
 //-(ShuttleRoute *) routeForSection: (NSInteger)section;
 
 @end
@@ -44,8 +35,6 @@
 @synthesize shuttleStop = _shuttleStop;
 @synthesize annotation = _shuttleStopAnnotation;
 @synthesize shuttleStopSchedules = _shuttleStopSchedules;
-@synthesize subscriptions = _subscriptions;
-@synthesize loadingSubscriptionRequests = _loadingSubscriptionRequests;
 @synthesize mapButton = _mapButton;
 
 - (void)dealloc 
@@ -56,9 +45,7 @@
 	self.shuttleStop = nil;
 
 	self.annotation = nil;
-	self.loadingSubscriptionRequests = nil;
 	self.shuttleStopSchedules = nil;
-	self.subscriptions = nil;
 	
 	[_timeFormatter release];
 	[_tableFooterLabel release];
@@ -175,8 +162,6 @@
 	[self.tableView applyStandardColors];
 	
 	[self requestStop];
-	
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadSubscriptions) name:ShuttleAlertRemoved object:nil];
 	
 	url = [[MITModuleURL alloc] initWithTag:ShuttleTag];
 	
@@ -322,12 +307,11 @@
         for (ShuttleStop *aStop in self.shuttleStopSchedules) {
             if ([aStop.routeID isEqualToString:aRoute.routeID]) {
                 NSMutableString *arrivalTimes = nil;
-                NSTimeInterval currentTimestamp = [[NSDate date] timeIntervalSince1970];
-                NSTimeInterval seconds = aStop.nextScheduled - currentTimestamp;
+                NSTimeInterval seconds = [aStop.nextScheduledDate timeIntervalSinceNow];
                 NSTimeInterval minutes = floor(seconds / 60);
                 arrivalTimes = (minutes < 1) ? [NSMutableString stringWithString:@"<1"] : [NSMutableString stringWithFormat:@"%.0f", minutes];
-                for (NSNumber *prediction in aStop.predictions) {
-                    NSTimeInterval predictionSeconds = [prediction floatValue] - currentTimestamp;
+                for (NSDate *prediction in aStop.predictions) {
+                    NSTimeInterval predictionSeconds = [prediction timeIntervalSinceNow];
                     minutes = floor(predictionSeconds / 60);
                     [arrivalTimes appendFormat:@", %.0f", minutes];
                 }
@@ -405,27 +389,6 @@
 	[parentController.parentShuttleRoutes.navigationController pushViewController:routeVC animated:YES];
 	
 	
-}
-
-- (void) subscriptionSucceededWithObject: (id)object {
-	[self removeFromLoadingSubscriptionRequests:((NSIndexPath *)object)];
-	[self findScheduledSubscriptions];
-	[self.tableView reloadData];
-}		
-
-- (void) subscriptionFailedWithObject: (id)object {
-	[self removeFromLoadingSubscriptionRequests:((NSIndexPath *)object)];
-	[self.tableView reloadData];
-    
-	UIAlertView *alertView = [[UIAlertView alloc]
-                              initWithTitle:NSLocalizedString(@"Subscription failed", nil)
-                              message:NSLocalizedString(@"Failed to register your device for a push notification. Please try again later.", nil)
-                              delegate:nil 
-                              cancelButtonTitle:@"OK"
-                              otherButtonTitles:nil];
-    
-	[alertView show];
-	[alertView release];	
 }
 
 #pragma mark MKMapViewDelegate
@@ -506,10 +469,6 @@
         
 		_tableFooterLabel.text = [NSString stringWithFormat:@"Last updated at %@", [_timeFormatter stringFromDate:[NSDate date]]];
 		
-		self.loadingSubscriptionRequests = [NSMutableArray array];
-		
-		[self findScheduledSubscriptions];
-		
 		dataLoaded = YES;
 		[self.tableView reloadData];	
 	}
@@ -527,69 +486,6 @@
     
 }
 */
-
--(void) reloadSubscriptions {
-	[self findScheduledSubscriptions];
-	[self.tableView reloadData];
-}
-
--(void) findScheduledSubscriptions {
-	// determine which schedule stops are subscribed for notifications;		
-	self.subscriptions = [NSMutableDictionary dictionary];
-    
-	for(ShuttleStop *schedule in self.shuttleStopSchedules) {
-		//ShuttleRoute *route = [self.routes objectForKey:schedule.routeID];
-		
-		NSInteger i;
-		
-		for(i=0; i < [schedule predictionCount]; i++) {
-            
-			NSDate *prediction = [schedule dateForPredictionAtIndex:i];
-			NSString *routeID = schedule.routeID;
-			
-			if([ShuttleSubscriptionManager hasSubscription:routeID atStop:self.shuttleStop.stopID scheduleTime:prediction]) {
-                
-				[self.subscriptions setObject:[NSNumber numberWithInt:i] forKey:routeID];
-                
-				break;
-			}
-		}
-	}
-}	
-
--(BOOL) hasSubscriptionRequestLoading: (NSIndexPath *)theIndexPath {
-    
-	for(NSIndexPath *aIndexPath in self.loadingSubscriptionRequests) {
-        
-		if((aIndexPath.section == theIndexPath.section) && (aIndexPath.row == theIndexPath.row)) {
-			return YES;
-		}
-	}
-	return NO;
-}
-
--(BOOL) hasSubscription: (NSIndexPath *)indexPath {
-	NSString *routeID = ((ShuttleStop *)[self.shuttleStopSchedules objectAtIndex:indexPath.section]).routeID;
-	NSNumber *subscriptionIndex = [self.subscriptions objectForKey:routeID];
-	if(subscriptionIndex) {
-		if([subscriptionIndex intValue] == indexPath.row) {
-			return YES;
-		}
-	}	
-	return NO;
-}
-
--(void) removeFromLoadingSubscriptionRequests: (NSIndexPath *)theIndexPath {
-	NSInteger index;
-	NSIndexPath *aIndexPath;
-	for(index=0; index < [self.loadingSubscriptionRequests count]; index++) {
-		aIndexPath = [self.loadingSubscriptionRequests objectAtIndex:index];
-		if((aIndexPath.section == theIndexPath.section) && (aIndexPath.row == theIndexPath.row)) {
-			[self.loadingSubscriptionRequests removeObjectAtIndex:index];
-		}
-	}
-}
-
 
 
 - (void)addLoadingIndicator:(UIView *) headerView
