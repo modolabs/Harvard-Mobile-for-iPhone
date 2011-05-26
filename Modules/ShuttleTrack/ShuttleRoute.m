@@ -171,7 +171,7 @@
             }
         }
         
-        if (!_pathLocations) {
+        if (!_pathLocations.count) {
             [self updatePath];
         }
 	}
