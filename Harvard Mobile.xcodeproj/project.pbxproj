@@ -70,6 +70,8 @@
 		44C1A2A811A2F49B000FD653 /* CampusMap.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 44C1A2A711A2F49B000FD653 /* CampusMap.xcdatamodeld */; };
 		44C1A3CF11A33905000FD653 /* MapSelectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44C1A3CD11A33905000FD653 /* MapSelectionController.m */; };
 		44C1A4C511A412E2000FD653 /* MapSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = 44C1A4C311A412E2000FD653 /* MapSearch.m */; };
+		4B2D289F139FBDB70004F7CC /* VideoButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B2D289E139FBDB70004F7CC /* VideoButton.m */; };
+		4B2D28A2139FCC3A0004F7CC /* MITThumbnailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B2D28A1139FCC3A0004F7CC /* MITThumbnailView.m */; };
 		4B5D1789139D9D1200B3541C /* VideoModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B5D1787139D9D1200B3541C /* VideoModule.m */; };
 		4B5D178E139D9E3100B3541C /* Video.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4B5D178C139D9E3100B3541C /* Video.xcdatamodeld */; };
 		4B5D1791139DA3EA00B3541C /* VideoDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B5D1790139DA3EA00B3541C /* VideoDataManager.m */; };
@@ -567,6 +569,11 @@
 		44C1A3CD11A33905000FD653 /* MapSelectionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapSelectionController.m; sourceTree = "<group>"; };
 		44C1A4C211A412E2000FD653 /* MapSearch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapSearch.h; sourceTree = "<group>"; };
 		44C1A4C311A412E2000FD653 /* MapSearch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapSearch.m; sourceTree = "<group>"; };
+		4B2D289D139FBDB70004F7CC /* VideoButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoButton.h; sourceTree = "<group>"; };
+		4B2D289E139FBDB70004F7CC /* VideoButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoButton.m; sourceTree = "<group>"; };
+		4B2D28A0139FCC3A0004F7CC /* MITThumbnailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MITThumbnailView.h; sourceTree = "<group>"; };
+		4B2D28A1139FCC3A0004F7CC /* MITThumbnailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MITThumbnailView.m; sourceTree = "<group>"; };
+		4B2D28A3139FCD230004F7CC /* ThumbnailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThumbnailView.h; sourceTree = "<group>"; };
 		4B5D1786139D9D1200B3541C /* VideoModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoModule.h; sourceTree = "<group>"; };
 		4B5D1787139D9D1200B3541C /* VideoModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoModule.m; sourceTree = "<group>"; };
 		4B5D178D139D9E3100B3541C /* Video.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Video.xcdatamodel; sourceTree = "<group>"; };
@@ -932,7 +939,6 @@
 		DE715348102FC897005E6111 /* MITModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MITModule.m; sourceTree = "<group>"; };
 		DE71537A102FD66A005E6111 /* MITModuleList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MITModuleList.h; path = "App Delegate/MITModuleList.h"; sourceTree = "<group>"; };
 		DE71537B102FD66A005E6111 /* MITModuleList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MITModuleList.m; path = "App Delegate/MITModuleList.m"; sourceTree = "<group>"; };
-		DE728E4510D6FF4700BFED37 /* ThumbnailView.h */ = {isa = PBXFileReference; fileEncoding = 4; path = ThumbnailView.h; sourceTree = "<group>"; };
 		DE728E4610D6FF4700BFED37 /* ThumbnailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThumbnailView.m; sourceTree = "<group>"; };
 		DE728E6410D6FF4700BFED37 /* StoryDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoryDetailViewController.h; sourceTree = "<group>"; };
 		DE728E6510D6FF4700BFED37 /* StoryDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoryDetailViewController.m; sourceTree = "<group>"; };
@@ -1437,6 +1443,8 @@
 				4B5D1798139E952500B3541C /* VideoHomeViewController.h */,
 				4B5D1799139E952500B3541C /* VideoHomeViewController.m */,
 				4B5D179A139E952500B3541C /* VideoHomeViewController.xib */,
+				4B2D289D139FBDB70004F7CC /* VideoButton.h */,
+				4B2D289E139FBDB70004F7CC /* VideoButton.m */,
 			);
 			path = Video;
 			sourceTree = "<group>";
@@ -2007,7 +2015,7 @@
 				DEAFEFA810FFE35B00F0573E /* StoryGalleryViewController.m */,
 				DEAFF07B110001E300F0573E /* StoryImageView.h */,
 				DEAFF07C110001E300F0573E /* StoryImageView.m */,
-				DE728E4510D6FF4700BFED37 /* ThumbnailView.h */,
+				4B2D28A3139FCD230004F7CC /* ThumbnailView.h */,
 				DE728E4610D6FF4700BFED37 /* ThumbnailView.m */,
 				DE728E6A10D6FF4700BFED37 /* StoryXMLParser.h */,
 				DE728E6B10D6FF4700BFED37 /* StoryXMLParser.m */,
@@ -2039,6 +2047,8 @@
 		EB4210C6120B81D500089FE0 /* UIWidgets */ = {
 			isa = PBXGroup;
 			children = (
+				4B2D28A0139FCC3A0004F7CC /* MITThumbnailView.h */,
+				4B2D28A1139FCC3A0004F7CC /* MITThumbnailView.m */,
 				EB4210C7120B81D500089FE0 /* MITSearchDisplayController.h */,
 				EB4210C8120B81D500089FE0 /* MITSearchDisplayController.m */,
 				EB4210C9120B81D500089FE0 /* ModoNavigationBar.h */,
@@ -2541,6 +2551,8 @@
 				4B5D1791139DA3EA00B3541C /* VideoDataManager.m in Sources */,
 				4B5D1797139E81A900B3541C /* Video.m in Sources */,
 				4B5D179B139E952600B3541C /* VideoHomeViewController.m in Sources */,
+				4B2D289F139FBDB70004F7CC /* VideoButton.m in Sources */,
+				4B2D28A2139FCC3A0004F7CC /* MITThumbnailView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

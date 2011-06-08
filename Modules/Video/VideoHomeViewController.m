@@ -3,19 +3,25 @@
 #import "VideoHomeViewController.h"
 #import "VideoDataManager.h"
 #import "Video.h"
+#import "VideoButton.h"
+
+#define FEATURED_VIDEO_COUNT 5
 
 
 @interface VideoHomeViewController (Private)
 
 - (void)deallocViews;
 - (void)showVideo:(Video *)video;
+- (void)videoButtonTapped:(id)sender;
 
 @end
 
 @implementation VideoHomeViewController
 @synthesize featuredVideoWebview;
+@synthesize thumbnailsContainer;
 @synthesize loadingView;
 @synthesize selectedVideo;
+@synthesize selectedButton;
 @synthesize videos;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -31,12 +37,14 @@
 {
     self.featuredVideoWebview = nil;
     self.loadingView = nil;
+    self.selectedButton = nil;
 }
 
 - (void)dealloc
 {
     [self deallocViews];
     self.selectedVideo = nil;
+    self.thumbnailsContainer = nil;
     [super dealloc];
 }
 
@@ -62,6 +70,26 @@
         [self showVideo:self.selectedVideo];
         [self.loadingView removeFromSuperview];
         self.loadingView = nil;
+        
+        // load thumbnail buttons
+        CGFloat buttonWidth = self.thumbnailsContainer.frame.size.width / FEATURED_VIDEO_COUNT;
+        for (int i=0; i < FEATURED_VIDEO_COUNT; i++) {
+            Video *aVideo = [self.videos objectAtIndex:i];
+            
+            VideoButton *button = [[[VideoButton alloc] 
+                                    initWithFrame:CGRectMake(buttonWidth*i, 0, buttonWidth, 
+                                                             self.thumbnailsContainer.frame.size.height)] autorelease];
+            if(i == 0) {
+                self.selectedButton = button;
+                button.selected = YES;
+            }
+            
+            button.userData = aVideo;
+            button.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin);
+            [button addTarget:self action:@selector(videoButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+            [self.thumbnailsContainer addSubview:button];
+            [button setImageURL:aVideo.thumbnailURL]; 
+        }
     }];
 }
 
@@ -123,4 +151,14 @@
         [self.featuredVideoWebview loadHTMLString:featuredHTMLString baseURL:baseURL];
 }
 
+- (void)videoButtonTapped:(id)sender {
+    VideoButton *button = sender;
+    if (![self.selectedVideo isEqual:button.userData]) {
+        self.selectedButton.selected = NO;
+        self.selectedButton = button;
+        self.selectedButton.selected = YES;
+        self.selectedVideo = button.userData;
+        [self showVideo:self.selectedVideo];
+    }
+}
 @end

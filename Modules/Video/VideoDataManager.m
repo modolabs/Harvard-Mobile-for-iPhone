@@ -41,7 +41,7 @@
         Video *video = [[CoreDataManager coreDataManager] insertNewObjectForEntityForName:VideoEntityName];
         video.mediaSource = [videoDict objectForKey:@"mediaSource"];
         
-        if ([video.mediaSource isEqualToString:@"BrightCove"]) {
+        if ([video.mediaSource isEqualToString:@"Brightcove"]) {
             video.videoID = [videoDict objectForKey:@"brightCoveId"];
         } else if ([video.mediaSource isEqualToString:@"Youtube"]) {
             video.videoID = [videoDict objectForKey:@"youtubeId"];
