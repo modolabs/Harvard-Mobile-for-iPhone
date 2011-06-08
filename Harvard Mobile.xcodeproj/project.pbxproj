@@ -322,7 +322,7 @@
 		DE6F046311139CA40046684B /* FBConnect.bundle in Resources */ = {isa = PBXBuildFile; fileRef = DE6F045911139CA40046684B /* FBConnect.bundle */; };
 		DE715349102FC897005E6111 /* MITModule.m in Sources */ = {isa = PBXBuildFile; fileRef = DE715348102FC897005E6111 /* MITModule.m */; };
 		DE71537C102FD66A005E6111 /* MITModuleList.m in Sources */ = {isa = PBXBuildFile; fileRef = DE71537B102FD66A005E6111 /* MITModuleList.m */; };
-		DE728E6C10D6FF4700BFED37 /* StoryThumbnailView.m in Sources */ = {isa = PBXBuildFile; fileRef = DE728E4610D6FF4700BFED37 /* StoryThumbnailView.m */; };
+		DE728E6C10D6FF4700BFED37 /* ThumbnailView.m in Sources */ = {isa = PBXBuildFile; fileRef = DE728E4610D6FF4700BFED37 /* ThumbnailView.m */; };
 		DE728E7B10D6FF4700BFED37 /* StoryDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE728E6510D6FF4700BFED37 /* StoryDetailViewController.m */; };
 		DE728E7C10D6FF4700BFED37 /* StoryListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE728E6710D6FF4700BFED37 /* StoryListViewController.m */; };
 		DE728E7E10D6FF4700BFED37 /* StoryXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = DE728E6B10D6FF4700BFED37 /* StoryXMLParser.m */; };
@@ -932,8 +932,8 @@
 		DE715348102FC897005E6111 /* MITModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MITModule.m; sourceTree = "<group>"; };
 		DE71537A102FD66A005E6111 /* MITModuleList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MITModuleList.h; path = "App Delegate/MITModuleList.h"; sourceTree = "<group>"; };
 		DE71537B102FD66A005E6111 /* MITModuleList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MITModuleList.m; path = "App Delegate/MITModuleList.m"; sourceTree = "<group>"; };
-		DE728E4510D6FF4700BFED37 /* StoryThumbnailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoryThumbnailView.h; sourceTree = "<group>"; };
-		DE728E4610D6FF4700BFED37 /* StoryThumbnailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoryThumbnailView.m; sourceTree = "<group>"; };
+		DE728E4510D6FF4700BFED37 /* ThumbnailView.h */ = {isa = PBXFileReference; fileEncoding = 4; path = ThumbnailView.h; sourceTree = "<group>"; };
+		DE728E4610D6FF4700BFED37 /* ThumbnailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThumbnailView.m; sourceTree = "<group>"; };
 		DE728E6410D6FF4700BFED37 /* StoryDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoryDetailViewController.h; sourceTree = "<group>"; };
 		DE728E6510D6FF4700BFED37 /* StoryDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoryDetailViewController.m; sourceTree = "<group>"; };
 		DE728E6610D6FF4700BFED37 /* StoryListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoryListViewController.h; sourceTree = "<group>"; };
@@ -2007,8 +2007,8 @@
 				DEAFEFA810FFE35B00F0573E /* StoryGalleryViewController.m */,
 				DEAFF07B110001E300F0573E /* StoryImageView.h */,
 				DEAFF07C110001E300F0573E /* StoryImageView.m */,
-				DE728E4510D6FF4700BFED37 /* StoryThumbnailView.h */,
-				DE728E4610D6FF4700BFED37 /* StoryThumbnailView.m */,
+				DE728E4510D6FF4700BFED37 /* ThumbnailView.h */,
+				DE728E4610D6FF4700BFED37 /* ThumbnailView.m */,
 				DE728E6A10D6FF4700BFED37 /* StoryXMLParser.h */,
 				DE728E6B10D6FF4700BFED37 /* StoryXMLParser.m */,
 			);
@@ -2370,7 +2370,7 @@
 				4463CC9110D6F4A50048CA83 /* CampusMapViewController.m in Sources */,
 				4463CC9810D6F4A50048CA83 /* CMModule.m in Sources */,
 				4463CC9B10D6F4A50048CA83 /* MapSearchResultAnnotation.m in Sources */,
-				DE728E6C10D6FF4700BFED37 /* StoryThumbnailView.m in Sources */,
+				DE728E6C10D6FF4700BFED37 /* ThumbnailView.m in Sources */,
 				DE728E7B10D6FF4700BFED37 /* StoryDetailViewController.m in Sources */,
 				DE728E7C10D6FF4700BFED37 /* StoryListViewController.m in Sources */,
 				DE728E7E10D6FF4700BFED37 /* StoryXMLParser.m in Sources */,
