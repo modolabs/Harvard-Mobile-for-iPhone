@@ -76,5 +76,6 @@
 @property (nonatomic, retain) ConnectionWrapper *connectionWrapper;
 @property (nonatomic, retain) NSDictionary *params; // make it easy for creator to identify requests
 @property (nonatomic, retain) id userData; // allow creator to add additional information to request
+@property (assign) BOOL useKurogoApi; // set this to use the api supplied by kurogo, rather than legacy apis (ie use /rest instead of /a
 
 @end

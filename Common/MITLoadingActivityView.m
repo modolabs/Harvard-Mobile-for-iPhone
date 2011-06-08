@@ -34,7 +34,7 @@
 
 // TODO: see if whoever wrote this was just looking for something that autoresized properly.
 - (id)initWithFrame:(CGRect)frame xDimensionScaling: (double)xdim yDimensionScaling: (double) ydim{
-    if (self = [super initWithFrame:frame]) {
+    if ((self = [super initWithFrame:frame])) {
 		// Initialization code
 		
 		UIActivityIndicatorView *spinny = [[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray] autorelease];

@@ -70,6 +70,13 @@
 		44C1A2A811A2F49B000FD653 /* CampusMap.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 44C1A2A711A2F49B000FD653 /* CampusMap.xcdatamodeld */; };
 		44C1A3CF11A33905000FD653 /* MapSelectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44C1A3CD11A33905000FD653 /* MapSelectionController.m */; };
 		44C1A4C511A412E2000FD653 /* MapSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = 44C1A4C311A412E2000FD653 /* MapSearch.m */; };
+		4B5D1789139D9D1200B3541C /* VideoModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B5D1787139D9D1200B3541C /* VideoModule.m */; };
+		4B5D178E139D9E3100B3541C /* Video.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4B5D178C139D9E3100B3541C /* Video.xcdatamodeld */; };
+		4B5D1791139DA3EA00B3541C /* VideoDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B5D1790139DA3EA00B3541C /* VideoDataManager.m */; };
+		4B5D1797139E81A900B3541C /* Video.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B5D1796139E81A900B3541C /* Video.m */; };
+		4B5D179B139E952600B3541C /* VideoHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B5D1799139E952500B3541C /* VideoHomeViewController.m */; };
+		4B5D179C139E952600B3541C /* VideoHomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B5D179A139E952500B3541C /* VideoHomeViewController.xib */; };
+		4B5D17A3139ED3CC00B3541C /* video in Resources */ = {isa = PBXBuildFile; fileRef = 4B5D17A2139ED3CC00B3541C /* video */; };
 		5623DEC212B15AB600212D5C /* RequestWebViewModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5623DEC012B15AB600212D5C /* RequestWebViewModalViewController.m */; };
 		5623E7A412B7F81100212D5C /* UnderlinedUILabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5623E7A212B7F81000212D5C /* UnderlinedUILabel.m */; };
 		5623EBC812B9ED6C00212D5C /* LibraryAdvancedSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = 5623EBC512B9ED6C00212D5C /* LibraryAdvancedSearch.m */; };
@@ -560,6 +567,17 @@
 		44C1A3CD11A33905000FD653 /* MapSelectionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapSelectionController.m; sourceTree = "<group>"; };
 		44C1A4C211A412E2000FD653 /* MapSearch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapSearch.h; sourceTree = "<group>"; };
 		44C1A4C311A412E2000FD653 /* MapSearch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapSearch.m; sourceTree = "<group>"; };
+		4B5D1786139D9D1200B3541C /* VideoModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoModule.h; sourceTree = "<group>"; };
+		4B5D1787139D9D1200B3541C /* VideoModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoModule.m; sourceTree = "<group>"; };
+		4B5D178D139D9E3100B3541C /* Video.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Video.xcdatamodel; sourceTree = "<group>"; };
+		4B5D178F139DA3EA00B3541C /* VideoDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoDataManager.h; sourceTree = "<group>"; };
+		4B5D1790139DA3EA00B3541C /* VideoDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoDataManager.m; sourceTree = "<group>"; };
+		4B5D1795139E81A900B3541C /* Video.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Video.h; sourceTree = "<group>"; };
+		4B5D1796139E81A900B3541C /* Video.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Video.m; sourceTree = "<group>"; };
+		4B5D1798139E952500B3541C /* VideoHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoHomeViewController.h; sourceTree = "<group>"; };
+		4B5D1799139E952500B3541C /* VideoHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoHomeViewController.m; sourceTree = "<group>"; };
+		4B5D179A139E952500B3541C /* VideoHomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoHomeViewController.xib; sourceTree = "<group>"; };
+		4B5D17A2139ED3CC00B3541C /* video */ = {isa = PBXFileReference; lastKnownFileType = folder; name = video; path = Resources/video; sourceTree = "<group>"; };
 		5623DEBF12B15AB600212D5C /* RequestWebViewModalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestWebViewModalViewController.h; sourceTree = "<group>"; };
 		5623DEC012B15AB600212D5C /* RequestWebViewModalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestWebViewModalViewController.m; sourceTree = "<group>"; };
 		5623E7A112B7F81000212D5C /* UnderlinedUILabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnderlinedUILabel.h; sourceTree = "<group>"; };
@@ -1203,6 +1221,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				4B5D17A2139ED3CC00B3541C /* video */,
 				EB137B4B12DFE4EE004DBB7C /* libraries */,
 				EB67B0FA12CA6BC30080C0AA /* en.lproj */,
 				EBB61F171253ECBC0099A883 /* shuttles */,
@@ -1405,6 +1424,31 @@
 				4499341D11A5E53D00A7041B /* CategoriesTableViewController.m */,
 			);
 			name = Selection;
+			sourceTree = "<group>";
+		};
+		4B5D1783139D9D1200B3541C /* Video */ = {
+			isa = PBXGroup;
+			children = (
+				4B5D178B139D9E2000B3541C /* Model */,
+				4B5D1786139D9D1200B3541C /* VideoModule.h */,
+				4B5D1787139D9D1200B3541C /* VideoModule.m */,
+				4B5D178F139DA3EA00B3541C /* VideoDataManager.h */,
+				4B5D1790139DA3EA00B3541C /* VideoDataManager.m */,
+				4B5D1798139E952500B3541C /* VideoHomeViewController.h */,
+				4B5D1799139E952500B3541C /* VideoHomeViewController.m */,
+				4B5D179A139E952500B3541C /* VideoHomeViewController.xib */,
+			);
+			path = Video;
+			sourceTree = "<group>";
+		};
+		4B5D178B139D9E2000B3541C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				4B5D1795139E81A900B3541C /* Video.h */,
+				4B5D1796139E81A900B3541C /* Video.m */,
+				4B5D178C139D9E3100B3541C /* Video.xcdatamodeld */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		56B6DA3F12914C5C00818071 /* Libraries */ = {
@@ -1834,6 +1878,7 @@
 		DE715445102FE468005E6111 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				4B5D1783139D9D1200B3541C /* Video */,
 				56B6DA3F12914C5C00818071 /* Libraries */,
 				C76FBB551230019400968920 /* ShuttleTrack */,
 				C704F02311E3E13E00621406 /* Dining */,
@@ -2259,6 +2304,8 @@
 				5623EBC912B9ED6C00212D5C /* LibraryAdvancedSearch.xib in Resources */,
 				EB67B0FD12CA6BC30080C0AA /* en.lproj in Resources */,
 				EB137B5412DFE4EE004DBB7C /* libraries in Resources */,
+				4B5D179C139E952600B3541C /* VideoHomeViewController.xib in Resources */,
+				4B5D17A3139ED3CC00B3541C /* video in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2489,6 +2536,11 @@
 				EB67B16512CA95630080C0AA /* LibraryDataManager.m in Sources */,
 				EB1DC7A712D213330080C2A1 /* LibraryAlias.m in Sources */,
 				EB1383A712E89D82004DBB7C /* MITMailComposeController.m in Sources */,
+				4B5D1789139D9D1200B3541C /* VideoModule.m in Sources */,
+				4B5D178E139D9E3100B3541C /* Video.xcdatamodeld in Sources */,
+				4B5D1791139DA3EA00B3541C /* VideoDataManager.m in Sources */,
+				4B5D1797139E81A900B3541C /* Video.m in Sources */,
+				4B5D179B139E952600B3541C /* VideoHomeViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3186,6 +3238,16 @@
 			);
 			currentVersion = 44C1A26E11A2EA04000FD653 /* CampusMap.xcdatamodel */;
 			path = CampusMap.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+		4B5D178C139D9E3100B3541C /* Video.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				4B5D178D139D9E3100B3541C /* Video.xcdatamodel */,
+			);
+			currentVersion = 4B5D178D139D9E3100B3541C /* Video.xcdatamodel */;
+			path = Video.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

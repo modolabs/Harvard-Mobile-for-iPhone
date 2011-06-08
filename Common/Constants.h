@@ -5,6 +5,7 @@
 // common URLs
 extern NSString * const MITMobileWebDomainString;
 extern NSString * const MITMobileWebAPIURLString;
+extern NSString * const KurogoAPIURLString;
 
 // keys for NSUserDefaults dictionary go here (app preferences)
 extern NSString * const MITModuleTabOrderKey;
@@ -34,6 +35,7 @@ extern NSString * const CalendarTag;
 extern NSString * const EmergencyTag;
 extern NSString * const CampusMapTag;
 extern NSString * const NewsOfficeTag;
+extern NSString * const VideoTag;
 extern NSString * const DirectoryTag;
 extern NSString * const StellarTag;
 extern NSString * const ShuttleTag;
@@ -64,6 +66,7 @@ extern NSString * const NewsStoryEntityName;
 extern NSString * const NewsCategoryEntityName;
 extern NSString * const NewsImageEntityName;
 extern NSString * const NewsImageRepEntityName;
+extern NSString * const VideoEntityName;
 extern NSString * const PersonDetailsEntityName;
 extern NSString * const PersonDetailEntityName;
 extern NSString * const StellarCourseEntityName;

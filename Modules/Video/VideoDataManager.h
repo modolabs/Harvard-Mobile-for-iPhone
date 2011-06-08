@@ -1,0 +1,15 @@
+#import <UIKit/UIKit.h>
+#import "JSONAPIRequest.h"
+
+typedef void (^VideosHandler)(NSArray *videos);
+
+
+@interface VideoDataManager : NSObject <JSONAPIDelegate> {
+    
+}
+
++ (VideoDataManager *)sharedManager;
+
+- (void)requestVideosWithHandler:(VideosHandler)handler;
+
+@end
