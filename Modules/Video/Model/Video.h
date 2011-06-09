@@ -12,5 +12,6 @@
 @property (nonatomic, retain) NSString * mediaSource;
 @property (nonatomic, retain) NSString * videoID;
 @property (nonatomic, retain) NSDate * published;
+@property (nonatomic, retain) NSNumber * duration;
 
 @end

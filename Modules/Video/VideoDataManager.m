@@ -27,12 +27,27 @@
     JSONAPIRequest *api = [JSONAPIRequest requestWithJSONAPIDelegate:self];
     api.userData = [handler copy];
     api.useKurogoApi = YES;
-    NSDictionary *params = [NSDictionary dictionaryWithObject:@"0" forKey:@"section"];    
+    NSDictionary *params = [NSDictionary dictionaryWithObject:@"0" forKey:@"section"];
     [api requestObject:params pathExtension:@"video/videos"];    
 }
 
+- (void)searchWithQuery:(NSString *)query withHandler:(VideosHandler)handler {
+    JSONAPIRequest *api = [JSONAPIRequest requestWithJSONAPIDelegate:self];
+    api.userData = [handler copy];
+    api.useKurogoApi = YES;
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:2];
+    [params setObject:@"0" forKey:@"section"];
+    [params setObject:query forKey:@"q"];
+    [api requestObject:params pathExtension:@"video/search"];    
+}
+
 - (void)request:(JSONAPIRequest *)request jsonLoaded:(id)JSONObject {
-    [self purgeOldVideos];
+    
+    if (![request.params objectForKey:@"q"]) {
+        // we purge old videos after requesting the featured videos
+        // (do not purge for "video/search" request just purge "video/videos" request
+        [self purgeOldVideos];
+    }
     
     NSDictionary *responseDict = JSONObject;
     NSArray *videoDicts = [responseDict objectForKey:@"response"];
@@ -52,6 +67,7 @@
         video.largeImageURL = [videoDict objectForKey:@"stillImage"];
         video.thumbnailURL = [videoDict objectForKey:@"image"];
         video.published = [NSDate dateWithTimeIntervalSince1970:[[videoDict objectForKey:@"publishedTimestamp"] intValue]];
+        video.duration = [videoDict objectForKey:@"duration"];
         [videos addObject:video];
                         
     }

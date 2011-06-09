@@ -1,9 +1,11 @@
 #import "Foundation+MITAdditions.h"
 #import "MITLoadingActivityView.h"
+#import "MITSearchDisplayController.h"
 #import "VideoHomeViewController.h"
 #import "VideoDataManager.h"
 #import "Video.h"
 #import "VideoButton.h"
+#import "VideoTableViewCell.h"
 
 #define FEATURED_VIDEO_COUNT 5
 
@@ -18,6 +20,11 @@
 
 @implementation VideoHomeViewController
 @synthesize featuredVideoWebview;
+@synthesize searchBar;
+@synthesize searchResults;
+@synthesize searchController;
+@synthesize searchDisplayContent;
+@synthesize videoCell;
 @synthesize thumbnailsContainer;
 @synthesize loadingView;
 @synthesize selectedVideo;
@@ -38,6 +45,9 @@
     self.featuredVideoWebview = nil;
     self.loadingView = nil;
     self.selectedButton = nil;
+    self.searchBar = nil;
+    self.searchController = nil;
+    self.searchDisplayContent = nil;
 }
 
 - (void)dealloc
@@ -64,6 +74,14 @@
     self.loadingView = [[[MITLoadingActivityView alloc] initWithFrame:self.view.frame xDimensionScaling:2 yDimensionScaling:2] autorelease];
     [self.view addSubview:self.loadingView];
     VideoDataManager *dataManager = [VideoDataManager sharedManager];
+    
+    self.searchBar.delegate = self;
+    
+    self.searchController = [[[MITSearchDisplayController alloc] initWithFrame:self.searchDisplayContent.frame searchBar:self.searchBar contentsController:self] autorelease];
+    self.searchController.delegate = self;
+    self.searchController.searchResultsDataSource = self;
+    self.searchController.searchResultsDelegate = self;
+    
     [dataManager requestVideosWithHandler:^(NSArray *featuredVideos) {
         self.videos = featuredVideos;
         self.selectedVideo = [featuredVideos objectAtIndex:0];
@@ -124,12 +142,10 @@
             NSLog(@"%@", error);
             return;
         }
-        
-        
-        NSDateFormatter *timeFormatter = [[NSDateFormatter alloc] init];
-        [timeFormatter setDateFormat:@"hh:mm"];
-        NSString *time = [timeFormatter stringFromDate:video.published];
-        [timeFormatter release];
+    
+        NSInteger minutes = [video.duration intValue] / 60;
+        NSInteger seconds = [video.duration intValue] % 60;
+        NSString *durationString = [NSString stringWithFormat:@"%i:%02d", minutes, seconds];
     
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateFormat:@"MMMM F, yyyy"];
@@ -145,7 +161,7 @@
 
         NSArray *keys = [NSArray arrayWithObjects:@"__BOOKMARKED__", @"__VIDEO_PLAYER__", 
                          @"__TITLE__", @"__TIME__", @"__DATE__", @"__SUMMARY__", nil];
-        NSArray *values = [NSArray arrayWithObjects:@"", playerHTMLString, video.title, time, date, video.summary, nil];
+        NSArray *values = [NSArray arrayWithObjects:@"", playerHTMLString, video.title, durationString, date, video.summary, nil];
         [featuredHTMLString replaceOccurrencesOfStrings:keys withStrings:values options:NSLiteralSearch];
         
         [self.featuredVideoWebview loadHTMLString:featuredHTMLString baseURL:baseURL];
@@ -161,4 +177,35 @@
         [self showVideo:self.selectedVideo];
     }
 }
+
+#pragma mark - UISearchBarDelegate
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)aSearchBar {
+    [[VideoDataManager sharedManager] searchWithQuery:aSearchBar.text withHandler:^(NSArray *theVideos) {
+        self.searchResults = theVideos;
+        self.searchController.searchResultsTableView.rowHeight = 50;
+        [self.searchController.searchResultsTableView reloadData];
+        [self.view addSubview:self.searchController.searchResultsTableView];
+    }];
+}
+
+#pragma mark - UITableView delegate methods for search results
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.searchResults.count; 
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *tourStopCellIdentifier = @"TourStepCell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:tourStopCellIdentifier];
+    if(cell == nil) {
+        [[NSBundle mainBundle] loadNibNamed:@"VideoTableViewCell" owner:self options:nil];
+        cell = self.videoCell;
+        self.videoCell = nil;
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    }
+
+    populateCell(cell, [self.searchResults objectAtIndex:indexPath.row]);
+    return cell;
+}
+
 @end

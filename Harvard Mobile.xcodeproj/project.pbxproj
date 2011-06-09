@@ -79,6 +79,8 @@
 		4B5D179B139E952600B3541C /* VideoHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B5D1799139E952500B3541C /* VideoHomeViewController.m */; };
 		4B5D179C139E952600B3541C /* VideoHomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B5D179A139E952500B3541C /* VideoHomeViewController.xib */; };
 		4B5D17A3139ED3CC00B3541C /* video in Resources */ = {isa = PBXBuildFile; fileRef = 4B5D17A2139ED3CC00B3541C /* video */; };
+		4B6E1A5413A0353100A4921A /* VideoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B6E1A5213A0353100A4921A /* VideoTableViewCell.xib */; };
+		4B6E1A5713A03D9600A4921A /* VideoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B6E1A5613A03D9600A4921A /* VideoTableViewCell.m */; };
 		5623DEC212B15AB600212D5C /* RequestWebViewModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5623DEC012B15AB600212D5C /* RequestWebViewModalViewController.m */; };
 		5623E7A412B7F81100212D5C /* UnderlinedUILabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5623E7A212B7F81000212D5C /* UnderlinedUILabel.m */; };
 		5623EBC812B9ED6C00212D5C /* LibraryAdvancedSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = 5623EBC512B9ED6C00212D5C /* LibraryAdvancedSearch.m */; };
@@ -585,6 +587,9 @@
 		4B5D1799139E952500B3541C /* VideoHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoHomeViewController.m; sourceTree = "<group>"; };
 		4B5D179A139E952500B3541C /* VideoHomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoHomeViewController.xib; sourceTree = "<group>"; };
 		4B5D17A2139ED3CC00B3541C /* video */ = {isa = PBXFileReference; lastKnownFileType = folder; name = video; path = Resources/video; sourceTree = "<group>"; };
+		4B6E1A5213A0353100A4921A /* VideoTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoTableViewCell.xib; sourceTree = "<group>"; };
+		4B6E1A5513A039AA00A4921A /* VideoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoTableViewCell.h; sourceTree = "<group>"; };
+		4B6E1A5613A03D9600A4921A /* VideoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoTableViewCell.m; sourceTree = "<group>"; };
 		5623DEBF12B15AB600212D5C /* RequestWebViewModalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestWebViewModalViewController.h; sourceTree = "<group>"; };
 		5623DEC012B15AB600212D5C /* RequestWebViewModalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestWebViewModalViewController.m; sourceTree = "<group>"; };
 		5623E7A112B7F81000212D5C /* UnderlinedUILabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnderlinedUILabel.h; sourceTree = "<group>"; };
@@ -1445,6 +1450,9 @@
 				4B5D179A139E952500B3541C /* VideoHomeViewController.xib */,
 				4B2D289D139FBDB70004F7CC /* VideoButton.h */,
 				4B2D289E139FBDB70004F7CC /* VideoButton.m */,
+				4B6E1A5213A0353100A4921A /* VideoTableViewCell.xib */,
+				4B6E1A5513A039AA00A4921A /* VideoTableViewCell.h */,
+				4B6E1A5613A03D9600A4921A /* VideoTableViewCell.m */,
 			);
 			path = Video;
 			sourceTree = "<group>";
@@ -2316,6 +2324,7 @@
 				EB137B5412DFE4EE004DBB7C /* libraries in Resources */,
 				4B5D179C139E952600B3541C /* VideoHomeViewController.xib in Resources */,
 				4B5D17A3139ED3CC00B3541C /* video in Resources */,
+				4B6E1A5413A0353100A4921A /* VideoTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2553,6 +2562,7 @@
 				4B5D179B139E952600B3541C /* VideoHomeViewController.m in Sources */,
 				4B2D289F139FBDB70004F7CC /* VideoButton.m in Sources */,
 				4B2D28A2139FCC3A0004F7CC /* MITThumbnailView.m in Sources */,
+				4B6E1A5713A03D9600A4921A /* VideoTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

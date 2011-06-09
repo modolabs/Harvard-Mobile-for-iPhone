@@ -1,22 +1,40 @@
 #import "MITThumbnailView.h"
 #import "MIT_MobileAppDelegate.h"
 
+@interface MITThumbnailView (Private)
+
+- (void)initHelper;
+
+@end
+
 @implementation MITThumbnailView
 
 @synthesize imageURL, connection, loadingView, imageView, delegate;
 
+- (void)initHelper {
+    connection = nil;
+    imageURL = nil;
+    _imageData = nil;
+    loadingView = nil;
+    imageView = nil;
+    self.opaque = YES;
+    self.clipsToBounds = YES;
+    self.contentMode = UIViewContentModeScaleAspectFill;
+}
+
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self != nil) {
-        connection = nil;
-        imageURL = nil;
-        _imageData = nil;
-        loadingView = nil;
-        imageView = nil;
-        self.opaque = YES;
-        self.clipsToBounds = YES;
+        [self initHelper];
         self.backgroundColor = [UIColor clearColor];
-        self.contentMode = UIViewContentModeScaleAspectFill;
+    }
+    return self;
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self != nil) {
+        [self initHelper];
     }
     return self;
 }
@@ -96,7 +114,8 @@
     if (!self.loadingView) {
         loadingView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
         [self addSubview:self.loadingView];
-        loadingView.center = self.center;
+        loadingView.center = CGPointMake(self.frame.size.width/2, self.frame.size.height/2);
+        loadingView.backgroundColor = self.backgroundColor;
     }
     imageView.hidden = YES;
     loadingView.hidden = NO;

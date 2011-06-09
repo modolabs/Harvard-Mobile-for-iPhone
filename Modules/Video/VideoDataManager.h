@@ -11,5 +11,6 @@ typedef void (^VideosHandler)(NSArray *videos);
 + (VideoDataManager *)sharedManager;
 
 - (void)requestVideosWithHandler:(VideosHandler)handler;
+- (void)searchWithQuery:(NSString *)query withHandler:(VideosHandler)handler;
 
 @end

@@ -9,5 +9,6 @@
 @dynamic mediaSource;
 @dynamic videoID;
 @dynamic published;
+@dynamic duration;
 
 @end
