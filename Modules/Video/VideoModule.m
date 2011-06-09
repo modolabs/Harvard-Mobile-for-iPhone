@@ -7,8 +7,8 @@
     self = [super init];
     if (self != nil) {
         self.tag = VideoTag;
-        self.shortName = @"Video";
-        self.longName = @"Video";
+        self.shortName = @"Multimedia";
+        self.longName = @"Multimedia";
         self.iconName = @"news";
         self.supportsFederatedSearch = NO;
         mainViewController = [[VideoHomeViewController alloc] initWithNibName:@"VideoHomeViewController" bundle:nil];
