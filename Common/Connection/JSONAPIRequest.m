@@ -14,12 +14,14 @@
 @implementation JSONAPIRequest
 
 @synthesize jsonDelegate, connectionWrapper, params, userData;
+@synthesize useKurogoApi;
 
 - (id)initWithJSONAPIDelegate:(id<JSONAPIDelegate>)delegate {
-	if (self = [super init]) {
+	if ((self = [super init])) {
 		jsonDelegate = [delegate retain];
         connectionWrapper = nil;
 		userData = nil;
+        useKurogoApi = NO;
 	}
 	return self;
 }
@@ -80,11 +82,9 @@
 	
     self.params = parameters;
 	
-	NSString *path;
+	NSString *path = useKurogoApi ? KurogoAPIURLString : MITMobileWebAPIURLString;
 	if(extendedPath) {
-		path = [MITMobileWebAPIURLString stringByAppendingString:extendedPath];
-	} else {
-		path = MITMobileWebAPIURLString;
+		path = [path stringByAppendingString:extendedPath];
 	}
 	
 	NSAssert(!self.connectionWrapper, @"The connection wrapper is already in use");
