@@ -1,9 +1,9 @@
 #import "MIT_MobileAppDelegate.h"
 #import "MITModuleList.h"
 #import "MITModule.h"
-//#import "MITDeviceRegistration.h"
-//#import "MITUnreadNotifications.h"
-//#import "AudioToolbox/AudioToolbox.h"
+#import "MITDeviceRegistration.h"
+#import "MITUnreadNotifications.h"
+#import "AudioToolbox/AudioToolbox.h"
 #import "SpringboardViewController.h"
 #import "AnalyticsWrapper.h"
 
@@ -66,24 +66,24 @@
     // set up analytics
     [[AnalyticsWrapper sharedWrapper] setupWithProvider:ModoAnalyticsProviderGoogle];
 
-    /*
     // Register for push notifications
     [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound)];
     // get deviceToken if it exists
-    self.deviceToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"MITDeviceToken"];
+    self.deviceToken = [[NSUserDefaults standardUserDefaults] objectForKey:DeviceTokenKey];
 	
 	[MITUnreadNotifications updateUI];
 	[MITUnreadNotifications synchronizeWithMIT];
 	
 	// check if application was opened in response to a notofication
-	if(apnsDict) {
-		MITNotification *notification = [MITUnreadNotifications addNotification:apnsDict];
-		[[self moduleForTag:notification.moduleName] handleNotification:notification appDelegate:self shouldOpen:YES];
-		NSLog(@"Application opened in response to notification=%@", notification);
+	if (apnsDict) {
+        // TODO: decide what we want to do here
+		//MITNotification *notification = [MITUnreadNotifications addNotification:apnsDict];
+		//[[self moduleForTag:notification.moduleName] handleNotification:notification appDelegate:self shouldOpen:YES];
+		DLog(@"Application opened in response to notification=%@", apnsDict);
 	}	
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(returnToHome) name:@"shake" object:nil];
-    */
+
     return YES;
 }
 
@@ -197,35 +197,38 @@
     }
 }
 
-/*
+
 #pragma mark -
 #pragma mark Push notifications
 
-- (void)application:(UIApplication *)application 
-didReceiveRemoteNotification:(NSDictionary *)userInfo {
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
 	[MITUnreadNotifications updateUI];
 	
-	// vibrate the phone
-	AudioServicesPlayAlertSound(kSystemSoundID_Vibrate);
-	
-	// display the notification in an alert
-	UIAlertView *notificationView =[[UIAlertView alloc]
-		initWithTitle:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"]  
-		message:[[userInfo objectForKey:@"aps"] objectForKey:@"alert"]
-		delegate:[[[APNSUIDelegate alloc] initWithApnsDictionary:userInfo appDelegate:self] autorelease]
-		cancelButtonTitle:@"Close"
-		otherButtonTitles:@"View", nil];
-	[notificationView show];
-	[notificationView release];
+    NSDictionary *infoDict = [[NSBundle mainBundle] infoDictionary];
+    NSString *name = [infoDict objectForKey:@"CFBundleName"];
+    
+    NSString *message = [[userInfo objectForKey:@"aps"] objectForKey:@"alert"];
+    
+    if (message) {    
+        // vibrate the phone
+        AudioServicesPlayAlertSound(kSystemSoundID_Vibrate);
+        
+        UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:name
+                                                             message:message
+                                                            delegate:nil
+                                                   cancelButtonTitle:NSLocalizedString(@"OK", nil)
+                                                   otherButtonTitles:nil] autorelease];
+        [alertView show];
+    }
 }
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
 	NSLog(@"Registered for push notifications. deviceToken == %@", deviceToken);
     self.deviceToken = deviceToken;
-    
+    [MITDeviceRegistration registerNewDeviceWithToken:deviceToken];
+    /*
 	MITIdentity *identity = [MITDeviceRegistration identity];
 	if(!identity) {
-		[MITDeviceRegistration registerNewDeviceWithToken:deviceToken];
 	} else {
 		NSData *oldToken = [[NSUserDefaults standardUserDefaults] objectForKey:DeviceTokenKey];
 		
@@ -233,48 +236,21 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo {
 			[MITDeviceRegistration newDeviceToken:deviceToken];
 		}
 	}
+    */
 }
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
     NSLog(@"Failed to register for remote notifications. Error: %@", error);
+    /*
 	MITIdentity *identity = [MITDeviceRegistration identity];
 	if(!identity) {
 		[MITDeviceRegistration registerNewDeviceWithToken:nil];
 	}
+     */
 }
 
 @end
 
-
-
-@implementation APNSUIDelegate
-
-- (id) initWithApnsDictionary: (NSDictionary *)apns appDelegate: (MIT_MobileAppDelegate *)delegate;
-{
-	self = [super init];
-	if (self != nil) {
-		apnsDictionary = [apns retain];
-		appDelegate = [delegate retain];
-		[self retain]; // releases when delegate method called
-	}
-	return self;
-}
-
-- (void) dealloc {
-	[apnsDictionary release];
-	[super dealloc];
-}
-
-// this is the delegate method for responding to the push notification UIAlertView
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-	
-	MITNotification *notification = [MITUnreadNotifications addNotification:apnsDictionary];
-	[[appDelegate moduleForTag:notification.moduleName] handleNotification:notification appDelegate:appDelegate shouldOpen:(buttonIndex == 1)];
-	
-	[self release];
-}
-*/
-@end
 
 @implementation MotionDetectorWindow
 

@@ -37,13 +37,3 @@
 
 @end
 
-@interface APNSUIDelegate : NSObject <UIAlertViewDelegate>
-{
-	NSDictionary *apnsDictionary;
-	MIT_MobileAppDelegate *appDelegate;
-}
-
-- (id) initWithApnsDictionary: (NSDictionary *)apns appDelegate: (MIT_MobileAppDelegate *)delegate;
-
-@end
-

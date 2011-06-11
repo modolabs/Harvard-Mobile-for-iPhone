@@ -1,19 +1,23 @@
 #import "Constants.h"
 
 #ifdef USE_MOBILE_DEV
-NSString * const MITMobileWebDomainString =        @"localhost:8888";
-NSString * const MITMobileWebAPIURLString = @"http://localhost:8888/api/";
+NSString * const MITMobileWebDomainString =        @"10.0.0.119/harvard";
+NSString * const MITMobileWebAPIURLString = @"http://10.0.0.119/harvard/api/";
+NSString * const KurogoAPIURLString = @"http://10.0.0.119/harvard/rest/";
 #else
     #ifdef USE_MOBILE_TEST
     NSString * const MITMobileWebDomainString = @"mobile-dev.harvard.edu";
     NSString * const MITMobileWebAPIURLString = @"http://mobile-dev.harvard.edu/api/";
+    NSString * const KurogoAPIURLString = @"http://mobile-dev.harvard.edu/rest/";
     #else
         #ifdef USE_MOBILE_STAGE
         NSString * const MITMobileWebDomainString = @"mobile-staging.harvard.edu";
         NSString * const MITMobileWebAPIURLString = @"http://mobile-staging.harvard.edu/api/";
+        NSString * const KurogoAPIURLString = @"http://mobile-staging.harvard.edu/rest/";
         #else
         NSString * const MITMobileWebDomainString = @"m.harvard.edu";
         NSString * const MITMobileWebAPIURLString = @"http://m.harvard.edu/api/";
+        NSString * const KurogoAPIURLString = @"http://m.harvard.edu/rest/";
         #endif
     #endif
 #endif

@@ -5,6 +5,7 @@
 // common URLs
 extern NSString * const MITMobileWebDomainString;
 extern NSString * const MITMobileWebAPIURLString;
+extern NSString * const KurogoAPIURLString;
 
 // keys for NSUserDefaults dictionary go here (app preferences)
 extern NSString * const MITModuleTabOrderKey;

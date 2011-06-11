@@ -1,13 +1,17 @@
 
 #import "MITDeviceRegistration.h"
-#define APPLE @"apple"
-#define DEVICE_TYPE_KEY @"device_type"
 
 @implementation MITIdentity
 @synthesize deviceID, passKey;
 
 - (id) initWithDeviceId: (NSString *)aDeviceId passKey: (NSString *)aPassKey {
-	if(self = [super init]) {
+    if (!aDeviceId || !aPassKey) {
+        [self release];
+        return nil;
+    }
+    
+    self = [super init];
+	if (self) {
 		deviceID = [aDeviceId retain];
 		passKey = [aPassKey retain];
 	}
@@ -18,7 +22,7 @@
 	NSMutableDictionary *mutableDictionary = [NSMutableDictionary dictionary];
 	[mutableDictionary setObject:deviceID forKey:MITDeviceIdKey];
 	[mutableDictionary setObject:passKey forKey:MITPassCodeKey];
-	[mutableDictionary setObject:APPLE forKey:DEVICE_TYPE_KEY];
+	[mutableDictionary setObject:@"ios" forKey:@"platform"];
 	return mutableDictionary;
 }
 
@@ -42,24 +46,23 @@
 }
 	
 + (void) registerNewDeviceWithToken: (NSData *)deviceToken {
-	NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithObject:APPLE forKey:DEVICE_TYPE_KEY];
-	if(deviceToken) {		
+	NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithObject:@"ios" forKey:@"platform"];
+	if(deviceToken) {
 		[parameters setObject:[self stringFromToken:deviceToken] forKey:@"device_token"];
-		[parameters setObject:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleIdentifier"] forKey:@"app_id"];
-	}		
-		
-	[[JSONAPIRequest requestWithJSONAPIDelegate:[MITIdentityLoadedDelegate withDeviceToken:deviceToken]]
-		requestObjectFromModule:@"push" command:@"register" parameters:parameters];
+	}
+    JSONAPIRequest *request = [JSONAPIRequest requestWithJSONAPIDelegate:[MITIdentityLoadedDelegate withDeviceToken:deviceToken]];
+    request.useKurogoApi = YES;
+    [request requestObject:parameters pathExtension:@"push/register"];
 }
 
 + (void) newDeviceToken: (NSData *)deviceToken {
 	NSMutableDictionary *parameters = [[self identity] mutableDictionary];
-	[parameters setObject:APPLE forKey:DEVICE_TYPE_KEY];
+	[parameters setObject:@"ios" forKey:@"platform"];
 	[parameters setObject:[self stringFromToken:deviceToken] forKey:@"device_token"];
-	[parameters setObject:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleIdentifier"] forKey:@"app_id"];
 	
-	[[JSONAPIRequest requestWithJSONAPIDelegate:[MITIdentityLoadedDelegate withDeviceToken:deviceToken]]
-		requestObjectFromModule:@"push" command:@"newDeviceToken" parameters:parameters];
+    JSONAPIRequest *request = [JSONAPIRequest requestWithJSONAPIDelegate:[MITIdentityLoadedDelegate withDeviceToken:deviceToken]];
+    request.useKurogoApi = YES;
+    [request requestObject:parameters pathExtension:@"push/register"];
 }
 	
 + (MITIdentity *) identity {
@@ -93,10 +96,13 @@
 	
 	[[NSUserDefaults standardUserDefaults] setObject:self.deviceToken forKey:DeviceTokenKey];
 
-	if (JSONObject && [JSONObject isKindOfClass:[NSDictionary class]]) {
-		NSDictionary *jsonDict = JSONObject;
-		[[NSUserDefaults standardUserDefaults] setObject:[jsonDict objectForKey:MITDeviceIdKey] forKey:MITDeviceIdKey];
-		[[NSUserDefaults standardUserDefaults] setObject:[jsonDict objectForKey:MITPassCodeKey] forKey:MITPassCodeKey];
+	if ([JSONObject isKindOfClass:[NSDictionary class]]) {
+        id result = [JSONObject objectForKey:@"response"];
+        if ([result isKindOfClass:[NSDictionary class]]) {
+            NSDictionary *jsonDict = result;
+            [[NSUserDefaults standardUserDefaults] setObject:[jsonDict objectForKey:MITDeviceIdKey] forKey:MITDeviceIdKey];
+            [[NSUserDefaults standardUserDefaults] setObject:[jsonDict objectForKey:MITPassCodeKey] forKey:MITPassCodeKey];
+        }
 	}
 }
 

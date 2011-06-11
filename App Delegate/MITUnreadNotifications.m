@@ -49,7 +49,8 @@
 	NSMutableDictionary *modulesBadgeString = [NSMutableDictionary dictionary];
 	NSArray *notifications = [self unreadNotifications];
 	for(MITNotification *notification in notifications) {
-		if(badgeCount = [modulesBadgeString objectForKey:notification.moduleName]) {
+        badgeCount = [modulesBadgeString objectForKey:notification.moduleName];
+		if(badgeCount) {
 			badgeCountInt = [badgeCount intValue] + 1;
 		} else {
 			badgeCountInt = 1;
@@ -62,9 +63,9 @@
 	// update the badge values for each tab item
 	MIT_MobileAppDelegate *appDelegate = (MIT_MobileAppDelegate *)[[UIApplication sharedApplication] delegate];
 	for(MITModule *module in appDelegate.modules) {
-		NSNumber *badgeValue = nil;
+		NSNumber *badgeValue = [modulesBadgeString objectForKey:module.tag];
 		NSString *badgeString = nil;
-		if(badgeValue = [modulesBadgeString objectForKey:module.tag]) {
+		if(badgeValue) {
 			badgeString = [badgeValue description];
 		}
 		[module setBadgeValue:badgeString];
@@ -111,11 +112,13 @@
 // and save it on the phone
 + (void) synchronizeWithMIT {
 	MITIdentity *identity = [MITDeviceRegistration identity];
+    DLog(@"saved identity: %@", [identity mutableDictionary]);
 	
-	if(identity) {
+	if (identity) {
 		NSMutableDictionary *parameters = [identity mutableDictionary];
-		[[JSONAPIRequest requestWithJSONAPIDelegate:[[SynchronizeUnreadNotificationsDelegate new] autorelease]]
-			requestObjectFromModule:@"push" command:@"getUnreadNotifications" parameters:parameters];
+        JSONAPIRequest *request = [JSONAPIRequest requestWithJSONAPIDelegate:[[SynchronizeUnreadNotificationsDelegate new] autorelease]];
+        request.useKurogoApi = YES;
+        [request requestObject:parameters pathExtension:@"push/messages"];
 	}
 }
 
@@ -188,7 +191,8 @@
 }
 	
 - (id) initWithModuleName: (NSString *)aModuleName noticeId: (NSString *)anId {
-	if(self = [super init]) {
+    self = [super init];
+    if (self) {
 		moduleName = [aModuleName retain];
 		noticeId = [anId retain];
 	}
