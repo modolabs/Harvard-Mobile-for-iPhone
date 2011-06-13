@@ -68,9 +68,9 @@
 -(void)assignRoutePoints;
 -(void)setRouteOverLayBounds:(CLLocationCoordinate2D)center latDelta:(double)latDelta  lonDelta:(double) lonDelta;
 
--(void)fallBackViewDidLoad;
--(void) refreshRouteTitleInfo;
--(void)selectAnnon:(id <MKAnnotation>)annotation;
+-(void)setupMapView;
+-(void)refreshRouteTitleInfo;
+//-(void)selectAnnon:(id <MKAnnotation>)annotation;
 
 -(void)addLoadingIndicator;
 -(void)removeLoadingIndicator;

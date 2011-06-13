@@ -28,7 +28,7 @@
 
 - (void)addTranslocLogo;
 
-- (void)startPolling;
+//- (void)startPolling;
 - (void)pollShuttleLocations;
 
 @end
@@ -50,15 +50,13 @@
 	
     [super viewDidLoad];
 	[self addLoadingIndicator];
-	hasStopInfoForMap == NO;
-	hasNarrowedRegion = NO;
-	[self fallBackViewDidLoad];
+	[self setupMapView];
     
     NSString *detailString = [NSString stringWithFormat:@"/shuttleschedule/route?id=%@&view=map", _route.routeID];
     [[AnalyticsWrapper sharedWrapper] trackPageview:detailString];
 }
 
--(void)fallBackViewDidLoad {
+-(void)setupMapView {
 	self.mapView.delegate = self;
 	self.mapView.scrollEnabled = YES;
 	
@@ -81,15 +79,8 @@
 	[self refreshRouteTitleInfo];
 	self.title = NSLocalizedString(@"Route", nil);	
 	
-	/*if ([self.route.pathLocations count]) {
-		[self narrowRegion];
-	}*/
-	if ([self.route.pathLocations count]) {
-	 //[self narrowRegion];
-	 }
-	else {
+	if (![self.route.pathLocations count]) {
 		hasStopInfoForMap = NO;
-		
 		
 		CLLocationCoordinate2D center;
 		center.latitude = 42.37640;
@@ -98,20 +89,17 @@
 		double latDelta = 0.004;
 		double lonDelta = 0.004; 
 		
-		
-		MKCoordinateSpan span = {latitudeDelta: latDelta, longitudeDelta: lonDelta};
-		MKCoordinateRegion region = {center, span};
-		
+		MKCoordinateSpan span = MKCoordinateSpanMake(latDelta, lonDelta);
+		MKCoordinateRegion region = MKCoordinateRegionMake(center, span);
+        
 		region.span.latitudeDelta = latDelta;
 		region.span.longitudeDelta = lonDelta;
 		
 		self.mapView.region = region;
 		[self setRouteOverLayBounds:center latDelta:latDelta lonDelta:lonDelta];
+        
 		hasNarrowedRegion = NO;
-		
 	}
-	
-	
 	
 	// get the extended route info
 	[[ShuttleDataManager sharedDataManager] registerDelegate:self];
@@ -123,6 +111,7 @@
 	[self.mapView setShowsUserLocation:YES];
 	self.mapView.hidden = YES;
 	
+    [logoView release];
     logoView = nil;
 }
 
@@ -151,7 +140,6 @@
 	if ([self.route.pathLocations count]) {
 		self.mapView.region = [self regionForRoute];
 		hasStopInfoForMap = YES;
-		//[self drawRect];
 		[self assignRoutePoints];
 		hasNarrowedRegion = YES;
 	}
@@ -159,30 +147,20 @@
 
 
 -(void)assignRoutePoints {
-	MKMapPoint* pointArr = malloc(sizeof(CLLocationCoordinate2D) * self.route.pathLocations.count);
-	for(int idx = 0; idx < self.route.pathLocations.count; idx++)
-	{
+    MKMapPoint* pointArr = malloc(sizeof(CLLocationCoordinate2D) * self.route.pathLocations.count);
+    for (int idx = 0; idx < self.route.pathLocations.count; idx++) {
 		CLLocation* location = [self.route.pathLocations objectAtIndex:idx];
 		CLLocationCoordinate2D coordinate = location.coordinate;
 		MKMapPoint point = MKMapPointForCoordinate(coordinate);
-		//CGPoint point = [_mapView convertCoordinate:location.coordinate toPointToView:self.mapView];
-	
-		
 		pointArr[idx] = point;
 	}
 	
 	// create the polyline based on the array of points. 
-		self.routeLine = [MKPolyline polylineWithPoints:pointArr count:self.route.pathLocations.count];
-		free(pointArr);
-		
-	/*for(int i=0; i< [[self.mapView overlays] count]; i++){
-		[self.mapView removeOverlay:[[self.mapView overlays] objectAtIndex:i]];
-	}*/
-	
-	
-		if (nil != self.routeLine) {
-			[self.mapView addOverlay:self.routeLine];
-		}
+    self.routeLine = [MKPolyline polylineWithPoints:pointArr count:self.route.pathLocations.count];
+    free(pointArr);
+    if (nil != self.routeLine) {
+        [self.mapView addOverlay:self.routeLine];
+    }
 }
 
 -(void)setRouteOverLayBounds:(CLLocationCoordinate2D)center latDelta:(double)latDelta  lonDelta:(double) lonDelta {	
@@ -190,7 +168,7 @@
 	return;
 }
 							  
-
+/*
 -(void)selectAnnon:(id <MKAnnotation>)annotation {
 	
 	// determine the region for the route and zoom to that region
@@ -211,7 +189,7 @@
 	[self.mapView selectAnnotation:annotation animated:YES];
 
 }
-
+*/
 -(void)refreshRouteTitleInfo {
 	_routeTitleLabel.text = _route.title;
 	_routeTitleLabel.font = [UIFont fontWithName:CONTENT_TITLE_FONT size:CONTENT_TITLE_FONT_SIZE - 1];
@@ -228,7 +206,7 @@
 {
 	[super viewWillAppear:animated];
 	[[ShuttleDataManager sharedDataManager] registerDelegate:self];
-	[self fallBackViewDidLoad];
+	[self setupMapView];
 }
 
 -(void) viewDidAppear:(BOOL)animated
@@ -395,9 +373,9 @@
     
     //latDelta *= 1.1;
     //lonDelta *= 1.1;
-		
-	MKCoordinateSpan span = {latitudeDelta: latDelta, longitudeDelta: lonDelta};
-	MKCoordinateRegion region = {center, span};
+    
+	MKCoordinateSpan span = MKCoordinateSpanMake(latDelta, lonDelta);
+    MKCoordinateRegion region = MKCoordinateRegionMake(center, span);
 	
 	region.span.latitudeDelta = latDelta;
 	region.span.longitudeDelta = lonDelta;
@@ -501,8 +479,8 @@
 	double lonDelta = maxLon - minLon; 
 	
 	
-	MKCoordinateSpan span = {latitudeDelta: latDelta, longitudeDelta: lonDelta};
-	MKCoordinateRegion region = {center, span};
+	MKCoordinateSpan span = MKCoordinateSpanMake(latDelta, lonDelta);
+	MKCoordinateRegion region = MKCoordinateRegionMake(center, span);
 	
 	region.span.latitudeDelta = latDelta;
 	region.span.longitudeDelta = lonDelta;
@@ -687,7 +665,7 @@ static int compareLatitudes(id p1, id p2, void *context) {
 		shuttleStopVC.annotation = (ShuttleStopMapAnnotation*)view.annotation;
 		
 		[self.navigationController pushViewController:shuttleStopVC animated:YES];
-		shuttleStopVC.view;
+		(void)[shuttleStopVC view];
 		//[shuttleStopVC.mapButton addTarget:self action:@selector(showSelectedStop:) forControlEvents:UIControlEventTouchUpInside];
 	}
 }
