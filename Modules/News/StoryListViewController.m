@@ -1000,29 +1000,40 @@ static NSInteger numTries = 0;
                 titleLabel.textColor = ([story.read boolValue]) ? [UIColor colorWithHexString:@"#666666"] : [UIColor blackColor];
                 titleLabel.highlightedTextColor = [UIColor whiteColor];
                 
+                CGFloat x = THUMBNAIL_WIDTH;
+                CGFloat width = STORY_TEXT_WIDTH;
+                
+                if (story.thumbImage) {
+                    thumbnailView.hidden = NO;
+                    thumbnailView.image = story.thumbImage;
+                    [thumbnailView loadImage];
+                } else {
+                    thumbnailView.hidden = YES;
+                    x = 0;
+                    width += THUMBNAIL_WIDTH;
+                }
+                
                 // Calculate height
                 CGFloat availableHeight = STORY_TEXT_HEIGHT;
-                CGSize titleDimensions = [titleLabel.text sizeWithFont:titleLabel.font constrainedToSize:CGSizeMake(STORY_TEXT_WIDTH, availableHeight) lineBreakMode:UILineBreakModeTailTruncation];
+                CGSize titleDimensions = [titleLabel.text sizeWithFont:titleLabel.font
+                                                     constrainedToSize:CGSizeMake(width, availableHeight)
+                                                         lineBreakMode:UILineBreakModeTailTruncation];
                 availableHeight -= titleDimensions.height;
                 
                 CGSize dekDimensions = CGSizeZero;
                 // if not even one line will fit, don't show the deck at all
                 if (availableHeight > dekLabel.font.leading) {
-                    dekDimensions = [dekLabel.text sizeWithFont:dekLabel.font constrainedToSize:CGSizeMake(STORY_TEXT_WIDTH, availableHeight) lineBreakMode:UILineBreakModeTailTruncation];
+                    dekDimensions = [dekLabel.text sizeWithFont:dekLabel.font
+                                              constrainedToSize:CGSizeMake(width, availableHeight)
+                                                  lineBreakMode:UILineBreakModeTailTruncation];
                 }
                 
                 
-                titleLabel.frame = CGRectMake(THUMBNAIL_WIDTH + STORY_TEXT_PADDING_LEFT, 
-                                              STORY_TEXT_PADDING_TOP, 
-                                              STORY_TEXT_WIDTH, 
-                                              titleDimensions.height);
-                dekLabel.frame = CGRectMake(THUMBNAIL_WIDTH + STORY_TEXT_PADDING_LEFT, 
+                titleLabel.frame = CGRectMake(x + STORY_TEXT_PADDING_LEFT, STORY_TEXT_PADDING_TOP, 
+                                              width, titleDimensions.height);
+                dekLabel.frame = CGRectMake(x + STORY_TEXT_PADDING_LEFT, 
                                             ceil(CGRectGetMaxY(titleLabel.frame)), 
-                                            STORY_TEXT_WIDTH, 
-                                            dekDimensions.height);
-                
-                thumbnailView.image = story.thumbImage;
-                [thumbnailView loadImage];
+                                            width, dekDimensions.height);
                 
                 result = cell;
             }
