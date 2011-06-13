@@ -13,8 +13,8 @@
 	NSString *nextStopId;
 	NSString *urlForStopMarker;
 	
-	
     NSMutableArray *_stops;
+	NSMutableDictionary *_stopsById;
 	
 	// parsed path locations for the entire route. 
 	NSMutableArray* _pathLocations;

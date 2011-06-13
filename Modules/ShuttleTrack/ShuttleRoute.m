@@ -146,33 +146,26 @@
     NSArray *array = [routeInfo objectForKey:@"path"];
 	if (array) {
 		self.path = array;
+        
+        if (!_pathLocations.count) {
+            [self updatePath];
+        }
     }
 
 	array = [routeInfo objectForKey:@"stops"];
     if (array) {
-        self.stops = [NSMutableArray array];
-        [_stopAnnotations release];
-        _stopAnnotations = [[NSMutableArray alloc] initWithCapacity:array.count];
-
-        NSError *error = nil;
         for (NSDictionary *aDict in array) {
             NSString *stopID = [aDict objectForKey:@"id"];
             if (stopID) {
-                ShuttleStop *aStop = [ShuttleDataManager stopWithRoute:self.routeID stopID:stopID error:&error];
+                // assume stop list won't change over this route's in-memory lifetime
+                ShuttleStop *aStop = [_stopsById objectForKey:stopID];
                 if (aStop) {
                     [aStop updateInfo:aDict referenceDate:now];
-                    [self.stops addObject:aStop];
-                    ShuttleStopMapAnnotation* annotation = [[[ShuttleStopMapAnnotation alloc] initWithShuttleStop:aStop] autorelease];
-                    [_stopAnnotations addObject:annotation];
                 }
                 if ([aDict objectForKey:@"upcoming"]) {
-                    self.nextStopId = [aDict objectForKey:stopID];
+                    self.nextStopId = stopID;
                 }
             }
-        }
-        
-        if (!_pathLocations.count) {
-            [self updatePath];
         }
 	}
 	
@@ -189,15 +182,14 @@
 
 - (void)getStopsFromCache
 {
-	[_stops release];
-	_stops = nil;
-	
 	[_stopAnnotations release];
 	_stopAnnotations = nil;
 	
 	NSSet *cachedStops = self.cache.stops;
-	_stops = [[NSMutableArray alloc] initWithCapacity:[cachedStops count]];
-	_stopAnnotations = [[NSMutableArray alloc] initWithCapacity:[cachedStops count]];
+    NSUInteger count = cachedStops.count;
+    self.stops = [[[NSMutableArray alloc] initWithCapacity:count] autorelease];
+    _stopsById = [[NSMutableDictionary alloc] initWithCapacity:count];
+	_stopAnnotations = [[NSMutableSet alloc] initWithCapacity:[cachedStops count]];
 	
 	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"order" ascending:YES];
 	NSArray *sortedStops = [[cachedStops allObjects] sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];		
@@ -209,8 +201,8 @@
 		if (shuttleStop == nil) {
 			shuttleStop = [[[ShuttleStop alloc] initWithRouteStop:routeStop] autorelease];
 		}
-		//NSLog(@"initialized stop %@ while initializing route %@", [shuttleStop description], self.routeID);
-		[_stops addObject:shuttleStop];
+		[self.stops addObject:shuttleStop];
+        [_stopsById setObject:shuttleStop forKey:shuttleStop.stopID];
 
 		ShuttleStopMapAnnotation* annotation = [[[ShuttleStopMapAnnotation alloc] initWithShuttleStop:shuttleStop] autorelease];
 		[_stopAnnotations addObject:annotation];
