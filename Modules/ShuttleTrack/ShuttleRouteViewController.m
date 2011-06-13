@@ -197,13 +197,13 @@
     if (self.route && self.route.stops.count > indexPath.row) {
         ShuttleStop *aStop = [self.route.stops objectAtIndex:indexPath.row];
         cell.textLabel.text = aStop.title;
-        
-        if (aStop.upcoming) {
-            cell.imageView.image = [UIImage imageNamed:@"shuttles/shuttle-stop-dot-next.png"];
-        } else {
-            cell.imageView.image = nil;
-        }
 
+        if (aStop.upcoming) {
+            cell.imageView.image = self.route.genericShuttleMarker;
+        } else {
+            cell.imageView.image = [UIImage blankImageOfSize:CGSizeMake(18, 18)];
+        }
+        
         if (aStop.nextScheduledDate) {
             NSMutableString *arrivalTimes = nil;
             NSTimeInterval seconds = [aStop.nextScheduledDate timeIntervalSinceNow];

@@ -92,3 +92,24 @@
 }
 
 @end
+
+@implementation UIImage (KGOAdditions)
+
++ (UIImage *)blankImageOfSize:(CGSize)size
+{
+    UIGraphicsBeginImageContextWithOptions(size, NO, 1.0);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetRGBFillColor(context, 0, 0, 0, 0);
+    
+    CGContextFillRect(context, CGRectMake(0, 0, size.width, size.height));
+    
+	UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+	UIGraphicsEndImageContext();
+    
+    return image;
+}
+
+@end
+
+
+

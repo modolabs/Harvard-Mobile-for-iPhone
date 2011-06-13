@@ -13,3 +13,10 @@
 + (UIImageView *)accessoryViewWithMITType:(MITAccessoryViewType)type;
 
 @end
+
+@interface UIImage (KGOAdditions)
+
++ (UIImage *)blankImageOfSize:(CGSize)size;
+
+@end
+
