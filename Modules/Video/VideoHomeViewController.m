@@ -2,6 +2,7 @@
 #import "MITLoadingActivityView.h"
 #import "MITSearchDisplayController.h"
 #import "VideoHomeViewController.h"
+#import "VideoDetailViewController.h"
 #import "VideoDataManager.h"
 #import "Video.h"
 #import "VideoButton.h"
@@ -122,6 +123,7 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
+    return YES;
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
@@ -142,16 +144,6 @@
             NSLog(@"%@", error);
             return;
         }
-    
-        NSInteger minutes = [video.duration intValue] / 60;
-        NSInteger seconds = [video.duration intValue] % 60;
-        NSString *durationString = [NSString stringWithFormat:@"%i:%02d", minutes, seconds];
-    
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateFormat:@"MMMM F, yyyy"];
-        NSString *date = [dateFormatter stringFromDate:video.published];
-        [dateFormatter release];
-
         
         //NSString *isBookmarked = ([self.story.bookmarked boolValue]) ? @"on" : @"";
         
@@ -161,7 +153,7 @@
 
         NSArray *keys = [NSArray arrayWithObjects:@"__BOOKMARKED__", @"__VIDEO_PLAYER__", 
                          @"__TITLE__", @"__TIME__", @"__DATE__", @"__SUMMARY__", nil];
-        NSArray *values = [NSArray arrayWithObjects:@"", playerHTMLString, video.title, durationString, date, video.summary, nil];
+        NSArray *values = [NSArray arrayWithObjects:@"", playerHTMLString, video.title, [video durationString], [video dateString], video.summary, nil];
         [featuredHTMLString replaceOccurrencesOfStrings:keys withStrings:values options:NSLiteralSearch];
         
         [self.featuredVideoWebview loadHTMLString:featuredHTMLString baseURL:baseURL];
@@ -206,6 +198,13 @@
 
     populateCell(cell, [self.searchResults objectAtIndex:indexPath.row]);
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    Video *video = [self.searchResults objectAtIndex:indexPath.row];
+    VideoDetailViewController *vc = [[[VideoDetailViewController alloc] initWithNibName:@"VideoDetailViewController" bundle:nil] autorelease];
+    vc.currentVideo = video;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 @end

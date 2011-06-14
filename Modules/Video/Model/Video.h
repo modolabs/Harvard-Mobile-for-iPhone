@@ -14,4 +14,7 @@
 @property (nonatomic, retain) NSDate * published;
 @property (nonatomic, retain) NSNumber * duration;
 
+- (NSString *)durationString;
+- (NSString *)dateString;
+- (NSString *)uploadedString;
 @end

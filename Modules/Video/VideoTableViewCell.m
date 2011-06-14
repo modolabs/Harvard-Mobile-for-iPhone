@@ -16,17 +16,8 @@ void populateCell(UITableViewCell *cell, Video *video) {
     UILabel *titleLabel = (UILabel *)[cell viewWithTag:VIDEO_CELL_TITLE_TAG];
     titleLabel.text = video.title;
     
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"MMMM F, yyyy"];
-    NSString *date = [dateFormatter stringFromDate:video.published];
-    [dateFormatter release];
-    
-    NSInteger minutes = [video.duration intValue] / 60;
-    NSInteger seconds = [video.duration intValue] % 60;
-    NSString *durationString = [NSString stringWithFormat:@"%i:%02d", minutes, seconds];
-    
     UILabel *subtileLabel = (UILabel *)[cell viewWithTag:VIDEO_CELL_SUBTITLE_TAG];
-    subtileLabel.text = [NSString stringWithFormat:@"%@ | Uploaded %@", durationString, date];
+    subtileLabel.text = [NSString stringWithFormat:@"%@ | %@", [video durationString], [video uploadedString]];
     
 }
 
