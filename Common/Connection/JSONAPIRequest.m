@@ -105,8 +105,11 @@
 	NSArray *keys = [dict allKeys];
 	NSMutableArray *components = [NSMutableArray arrayWithCapacity:[keys count]];
 	for (NSString *key in keys) {
-		NSString *value = [[dict objectForKey:key] stringByReplacingOccurrencesOfString:@" " withString:@"+"];
-        value = [[value stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] stringByReplacingOccurrencesOfString:@"&" withString:@"%26"];
+		NSString *value = [(NSString *)CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
+                                                                               (CFStringRef)[dict objectForKey:key],
+                                                                               NULL,
+                                                                               (CFStringRef)@"!*'\"();:@&=+$,/?%#[]% ",
+                                                                               kCFStringEncodingUTF8) autorelease];
 		[components addObject:[NSString stringWithFormat:@"%@=%@", key, value]];
 	}
 	return [components componentsJoinedByString:@"&"];
