@@ -731,7 +731,15 @@
             selectAnnotation = aView.annotation;
             count++;
             if (count > 1)
-                break;
+                return;
+        }
+    }
+    
+    for (id<MKAnnotation> annotation in _mapView.annotations) {
+        if ([annotation isKindOfClass:[ArcGISMapAnnotation class]] && annotation.coordinate.latitude != 0) {
+            count++;
+            if (count > 1)
+                return;
         }
     }
     
