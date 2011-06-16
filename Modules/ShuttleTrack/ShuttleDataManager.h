@@ -40,6 +40,9 @@
 	
 	// registered delegates
 	NSMutableSet* _registeredDelegates;
+	
+	// counter to limit error dialogs from requests on the 2 second timer
+	NSInteger _requestRouteErrorCount;
 }
 
 @property (readonly) NSArray* shuttleRoutes;

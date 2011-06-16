@@ -21,6 +21,9 @@ static ShuttleDataManager* s_dataManager = nil;
 
 @end
 
+// At 2 queries per second this results in an error dialog every 20 seconds
+#define MAX_CONSECUTIVE_ERROR_COUNT 10
+
 
 @implementation ShuttleDataManager
 @synthesize shuttleRoutes = _shuttleRoutes;
@@ -55,6 +58,8 @@ static ShuttleDataManager* s_dataManager = nil;
 	_shuttleRoutesByID = nil;
 	_stopLocations = nil;
 	_stopLocationsByID = nil;
+	
+	_requestRouteErrorCount = 0;
 	
 	// populate route cache in memory
 	_shuttleRoutes = [[NSMutableArray alloc] init];	
@@ -422,6 +427,7 @@ static ShuttleDataManager* s_dataManager = nil;
 		}
 		[route updateInfo:result];
 		
+		_requestRouteErrorCount = 0;
 		[self sendRouteToDelegates:route forRouteID:route.routeID];
 	}
 }
@@ -439,7 +445,14 @@ static ShuttleDataManager* s_dataManager = nil;
 		[self sendStopToDelegates:nil forStopID:[request.params valueForKey:@"id"]];
 	}
 	else if ([[request.params valueForKey:@"command"] isEqualToString:@"routeInfo"]) {
-		[self sendRouteToDelegates:nil forRouteID:[request.params valueForKey:@"id"]];
+		if (++_requestRouteErrorCount > MAX_CONSECUTIVE_ERROR_COUNT) {
+			// This command is called really frequently so only generate an error
+			// when there are a large number of consecutive errors
+			_requestRouteErrorCount = 0;
+			[self sendRouteToDelegates:nil forRouteID:[request.params valueForKey:@"id"]];
+		} else {
+			DLog(@"Got connection error #%d, ignoring", _requestRouteErrorCount);
+		}
 	}
 }
 
