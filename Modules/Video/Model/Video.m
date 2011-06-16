@@ -30,4 +30,8 @@
     
 }
 
+- (CGFloat)aspectRatio {
+    // for now we assume all videos have the same aspect ratio
+    return 320.0f / 180.0f;
+}
 @end

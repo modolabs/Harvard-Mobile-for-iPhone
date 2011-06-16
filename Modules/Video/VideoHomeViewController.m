@@ -147,8 +147,11 @@
         
         //NSString *isBookmarked = ([self.story.bookmarked boolValue]) ? @"on" : @"";
         
-        NSArray *playerKeys = [NSArray arrayWithObjects:@"__VIDEO_ID__", nil];
-        NSArray *playerValues = [NSArray arrayWithObjects:video.videoID, nil]; 
+        CGFloat width = self.featuredVideoWebview.frame.size.width;
+        NSString *widthString = [NSString stringWithFormat:@"%i", (int)roundf(width)];
+        NSString *heightString = [NSString stringWithFormat:@"%i", (int)roundf(width / [video aspectRatio])];
+        NSArray *playerKeys = [NSArray arrayWithObjects:@"__VIDEO_ID__", @"__WIDTH__", @"__HEIGHT__", nil];
+        NSArray *playerValues = [NSArray arrayWithObjects:video.videoID, widthString, heightString, nil]; 
         [playerHTMLString replaceOccurrencesOfStrings:playerKeys withStrings:playerValues options:NSLiteralSearch];
 
         NSArray *keys = [NSArray arrayWithObjects:@"__BOOKMARKED__", @"__VIDEO_PLAYER__", 

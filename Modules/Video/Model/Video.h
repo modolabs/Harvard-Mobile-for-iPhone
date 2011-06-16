@@ -17,4 +17,5 @@
 - (NSString *)durationString;
 - (NSString *)dateString;
 - (NSString *)uploadedString;
+- (CGFloat)aspectRatio;
 @end
