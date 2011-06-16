@@ -10,8 +10,7 @@
 @property (nonatomic, retain) IBOutlet UILabel *durationLabel;
 @property (nonatomic, retain) IBOutlet UILabel *uploadedLabel;
 @property (nonatomic, retain) IBOutlet UILabel *summaryLabel;
-@property (nonatomic, retain) IBOutlet UIControl *videoPlayControl;
-@property (nonatomic, retain) IBOutlet MITThumbnailView *previewImage;
+@property (nonatomic, retain) IBOutlet UIWebView *playerWebview;
 
 @property (nonatomic, retain) NSArray *videos;
 @property (nonatomic, retain) Video *currentVideo;
