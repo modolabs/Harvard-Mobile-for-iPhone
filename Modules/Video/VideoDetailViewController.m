@@ -13,6 +13,8 @@
 @synthesize uploadedLabel;
 @synthesize summaryLabel;
 @synthesize playerWebview;
+@synthesize relatedNewsTableView;
+
 @synthesize videos;
 @synthesize currentVideo;
 
@@ -31,6 +33,9 @@
     self.durationLabel = nil;
     self.uploadedLabel = nil;
     self.playerWebview = nil;
+    self.relatedNewsTableView.delegate = nil;
+    self.relatedNewsTableView.dataSource = nil;
+    self.relatedNewsTableView = nil;
 }
 
 - (void)dealloc
@@ -118,9 +123,41 @@
     
     CGSize summarySize =[self.currentVideo.summary sizeWithFont:self.summaryLabel.font constrainedToSize:CGSizeMake(self.summaryLabel.frame.size.width, 1000) lineBreakMode:self.summaryLabel.lineBreakMode];
     CGRect summaryFrame = self.summaryLabel.frame;
+    CGFloat initialHeight = summaryFrame.size.height;
     summaryFrame.size = summarySize;
+    CGFloat finalHeight = summaryFrame.size.height;
     self.summaryLabel.frame = summaryFrame;
     self.summaryLabel.text = self.currentVideo.summary;
+    
+    CGFloat deltaHeight = finalHeight - initialHeight;
+    
+    CGRect tableViewFrame = self.relatedNewsTableView.tableHeaderView.frame;
+    tableViewFrame.size.height = tableViewFrame.size.height + deltaHeight;
+    self.relatedNewsTableView.tableHeaderView.frame = tableViewFrame;
+    // the lovely tableHeaderView hack
+    self.relatedNewsTableView.tableHeaderView = self.relatedNewsTableView.tableHeaderView;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 3;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    return @"Related News";
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSString *identifier = @"relatedStory";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    if(!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+    }
+    cell.textLabel.text = [NSString stringWithFormat:@"%i", indexPath.row];
+    return cell;
 }
 
 @end
