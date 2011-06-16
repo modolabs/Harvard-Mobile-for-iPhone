@@ -1,4 +1,5 @@
 #import "Video.h"
+#import "VideoRelatedPost.h"
 #import "VideoDataManager.h"
 #import "CoreDataManager.h"
 #import "Constants.h"
@@ -73,6 +74,19 @@
         video.thumbnailURL = [videoDict objectForKey:@"image"];
         video.published = [NSDate dateWithTimeIntervalSince1970:[[videoDict objectForKey:@"publishedTimestamp"] intValue]];
         video.duration = [videoDict objectForKey:@"duration"];
+        
+        NSArray *relatedPostDicts = [videoDict objectForKey:@"relatedPosts"];
+        NSMutableSet *posts = [NSMutableSet set];
+        for (NSDictionary *relatedPostDict in relatedPostDicts) {
+            VideoRelatedPost *post = [[CoreDataManager coreDataManager] insertNewObjectForEntityForName:VideoRelatedPostEntityName];
+            post.guid = [relatedPostDict objectForKey:@"guid"];
+            post.title = [relatedPostDict objectForKey:@"title"];
+            NSString *wpidString = [relatedPostDict objectForKey:@"wpid"];
+            post.wpid = [NSNumber numberWithInteger:[wpidString integerValue]];
+            [relatedPostDict objectForKey:@"wpid"];
+            [posts addObject:post];
+        }
+        video.relatedPosts = posts;        
         [videos addObject:video];
                         
     }
