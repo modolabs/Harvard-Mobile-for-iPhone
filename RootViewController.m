@@ -78,7 +78,7 @@
     // Return YES for supported orientations
     int viewIndex = [self.view.superview.subviews indexOfObject:self.view];
     if(viewIndex > 0 && viewIndex == self.view.superview.subviews.count - 1) {
-        return UIInterfaceOrientationIsLandscape(interfaceOrientation);
+        return (interfaceOrientation == UIInterfaceOrientationLandscapeLeft);
     }
     
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
@@ -86,7 +86,7 @@
 
 - (void)rootView:(RootView *)view didAddSubview:(UIView *)subview {
     UIWindow *window = [[UIApplication sharedApplication] keyWindow];
-    [[UIApplication sharedApplication] setStatusBarOrientation:self.interfaceOrientation animated:YES];
+    [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationLandscapeLeft animated:YES];
     [window bringSubviewToFront:view];
 }
 
