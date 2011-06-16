@@ -56,6 +56,11 @@
         Video *video = [[CoreDataManager coreDataManager] insertNewObjectForEntityForName:VideoEntityName];
         video.mediaSource = [videoDict objectForKey:@"mediaSource"];
         
+        if ([video.mediaSource length] == 0) {
+            // default to brightCove
+            video.mediaSource = @"Brightcove";
+        }
+        
         if ([video.mediaSource isEqualToString:@"Brightcove"]) {
             video.videoID = [videoDict objectForKey:@"brightCoveId"];
         } else if ([video.mediaSource isEqualToString:@"Youtube"]) {
