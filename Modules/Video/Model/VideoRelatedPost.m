@@ -6,6 +6,7 @@
 @dynamic guid;
 @dynamic title;
 @dynamic wpid;
+@dynamic sortOrder;
 @dynamic video;
 
 

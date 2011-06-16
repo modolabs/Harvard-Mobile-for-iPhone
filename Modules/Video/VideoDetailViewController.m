@@ -1,4 +1,5 @@
 #import "VideoDetailViewController.h"
+#import "VideoRelatedPost.h"
 #import "Foundation+MITAdditions.h"
 
 @interface VideoDetailViewController (Private)
@@ -17,6 +18,7 @@
 
 @synthesize videos;
 @synthesize currentVideo;
+@synthesize relatedPosts;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -136,6 +138,10 @@
     self.relatedNewsTableView.tableHeaderView.frame = tableViewFrame;
     // the lovely tableHeaderView hack
     self.relatedNewsTableView.tableHeaderView = self.relatedNewsTableView.tableHeaderView;
+    
+    self.relatedPosts = [self.currentVideo.relatedPosts sortedArrayUsingDescriptors:
+                         [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"sortOrder" ascending:YES]]];
+    [self.relatedNewsTableView reloadData];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -143,7 +149,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 3;
+    return self.relatedPosts.count;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
@@ -156,7 +162,8 @@
     if(!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
     }
-    cell.textLabel.text = [NSString stringWithFormat:@"%i", indexPath.row];
+    VideoRelatedPost *post = [self.relatedPosts objectAtIndex:indexPath.row];
+    cell.textLabel.text = post.title;
     return cell;
 }
 

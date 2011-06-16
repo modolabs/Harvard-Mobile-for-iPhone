@@ -9,6 +9,7 @@
 @property (nonatomic, retain) NSString * guid;
 @property (nonatomic, retain) NSString * title;
 @property (nonatomic, retain) NSNumber * wpid;
+@property (nonatomic, retain) NSNumber * sortOrder;
 @property (nonatomic, retain) Video * video;
 
 @end

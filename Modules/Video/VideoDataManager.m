@@ -77,8 +77,10 @@
         
         NSArray *relatedPostDicts = [videoDict objectForKey:@"relatedPosts"];
         NSMutableSet *posts = [NSMutableSet set];
-        for (NSDictionary *relatedPostDict in relatedPostDicts) {
+        for (NSInteger index=0; index < relatedPostDicts.count; index++) {
+            NSDictionary *relatedPostDict = [relatedPostDicts objectAtIndex:index];
             VideoRelatedPost *post = [[CoreDataManager coreDataManager] insertNewObjectForEntityForName:VideoRelatedPostEntityName];
+            post.sortOrder = [NSNumber numberWithInteger:index];
             post.guid = [relatedPostDict objectForKey:@"guid"];
             post.title = [relatedPostDict objectForKey:@"title"];
             NSString *wpidString = [relatedPostDict objectForKey:@"wpid"];

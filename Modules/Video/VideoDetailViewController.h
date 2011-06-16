@@ -15,5 +15,6 @@
 
 @property (nonatomic, retain) NSArray *videos;
 @property (nonatomic, retain) Video *currentVideo;
+@property (nonatomic, retain) NSArray *relatedPosts;
 
 @end

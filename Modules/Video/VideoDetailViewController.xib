@@ -45,18 +45,18 @@
 				<int key="NSvFlags">274</int>
 				<object class="NSMutableArray" key="NSSubviews">
 					<bool key="EncodedWithXMLCoder">YES</bool>
-					<object class="IBUITableView" id="124367709">
+					<object class="IBUITableView" id="572867588">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">274</int>
 						<object class="NSMutableArray" key="NSSubviews">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="IBUIView" id="794163489">
-								<reference key="NSNextResponder" ref="124367709"/>
+							<object class="IBUIView" id="930962427">
+								<reference key="NSNextResponder" ref="572867588"/>
 								<int key="NSvFlags">292</int>
 								<object class="NSMutableArray" key="NSSubviews">
 									<bool key="EncodedWithXMLCoder">YES</bool>
 									<object class="IBUIView" id="561967412">
-										<reference key="NSNextResponder" ref="794163489"/>
+										<reference key="NSNextResponder" ref="930962427"/>
 										<int key="NSvFlags">290</int>
 										<object class="NSMutableArray" key="NSSubviews">
 											<bool key="EncodedWithXMLCoder">YES</bool>
@@ -134,7 +134,7 @@
 												<string key="NSFrame">{{275, 18}, {45, 39}}</string>
 												<reference key="NSSuperview" ref="561967412"/>
 												<reference key="NSWindow"/>
-												<reference key="NSNextKeyView" ref="212520255"/>
+												<reference key="NSNextKeyView" ref="497272910"/>
 												<bool key="IBUIOpaque">NO</bool>
 												<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 												<int key="IBUIContentHorizontalAlignment">0</int>
@@ -144,7 +144,7 @@
 													<double key="NSSize">15</double>
 													<int key="NSfFlags">16</int>
 												</object>
-												<object class="NSColor" key="IBUIHighlightedTitleColor" id="436717574">
+												<object class="NSColor" key="IBUIHighlightedTitleColor" id="567745892">
 													<int key="NSColorSpace">3</int>
 													<bytes key="NSWhite">MQA</bytes>
 												</object>
@@ -157,7 +157,7 @@
 													<bytes key="NSWhite">MC41AA</bytes>
 												</object>
 											</object>
-											<object class="IBUIWebView" id="212520255">
+											<object class="IBUIWebView" id="497272910">
 												<reference key="NSNextResponder" ref="561967412"/>
 												<int key="NSvFlags">292</int>
 												<string key="NSFrame">{{0, 59}, {300, 169}}</string>
@@ -193,7 +193,7 @@
 											</object>
 										</object>
 										<string key="NSFrame">{{10, 8}, {320, 300}}</string>
-										<reference key="NSSuperview" ref="794163489"/>
+										<reference key="NSSuperview" ref="930962427"/>
 										<reference key="NSWindow"/>
 										<reference key="NSNextKeyView" ref="270664759"/>
 										<object class="NSColor" key="IBUIBackgroundColor">
@@ -206,8 +206,8 @@
 										<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 									</object>
 								</object>
-								<string key="NSFrameSize">{320, 264}</string>
-								<reference key="NSSuperview" ref="124367709"/>
+								<string key="NSFrameSize">{320, 267}</string>
+								<reference key="NSSuperview" ref="572867588"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="561967412"/>
 								<object class="NSColor" key="IBUIBackgroundColor">
@@ -221,8 +221,8 @@
 						<string key="NSFrameSize">{320, 460}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="794163489"/>
-						<reference key="IBUIBackgroundColor" ref="436717574"/>
+						<reference key="NSNextKeyView" ref="930962427"/>
+						<reference key="IBUIBackgroundColor" ref="567745892"/>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<bool key="IBUIAlwaysBounceVertical">YES</bool>
@@ -233,13 +233,13 @@
 						<float key="IBUIRowHeight">44</float>
 						<float key="IBUISectionHeaderHeight">10</float>
 						<float key="IBUISectionFooterHeight">10</float>
-						<reference key="IBUITableHeaderView" ref="794163489"/>
+						<reference key="IBUITableHeaderView" ref="930962427"/>
 					</object>
 				</object>
 				<string key="NSFrame">{{0, 20}, {320, 460}}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
-				<reference key="NSNextKeyView" ref="124367709"/>
+				<reference key="NSNextKeyView" ref="572867588"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
 					<bytes key="NSWhite">MQA</bytes>
@@ -296,7 +296,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">playerWebview</string>
 						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="212520255"/>
+						<reference key="destination" ref="497272910"/>
 					</object>
 					<int key="connectionID">21</int>
 				</object>
@@ -304,14 +304,14 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">relatedNewsTableView</string>
 						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="124367709"/>
+						<reference key="destination" ref="572867588"/>
 					</object>
 					<int key="connectionID">24</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">dataSource</string>
-						<reference key="source" ref="124367709"/>
+						<reference key="source" ref="572867588"/>
 						<reference key="destination" ref="372490531"/>
 					</object>
 					<int key="connectionID">25</int>
@@ -319,7 +319,7 @@
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">delegate</string>
-						<reference key="source" ref="124367709"/>
+						<reference key="source" ref="572867588"/>
 						<reference key="destination" ref="372490531"/>
 					</object>
 					<int key="connectionID">26</int>
@@ -339,7 +339,7 @@
 						<reference key="object" ref="191373211"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="124367709"/>
+							<reference ref="572867588"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -356,21 +356,21 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">22</int>
-						<reference key="object" ref="124367709"/>
+						<reference key="object" ref="572867588"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="794163489"/>
+							<reference ref="930962427"/>
 						</object>
 						<reference key="parent" ref="191373211"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">23</int>
-						<reference key="object" ref="794163489"/>
+						<reference key="object" ref="930962427"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="561967412"/>
 						</object>
-						<reference key="parent" ref="124367709"/>
+						<reference key="parent" ref="572867588"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">5</int>
@@ -382,9 +382,9 @@
 							<reference ref="147401682"/>
 							<reference ref="86052473"/>
 							<reference ref="27840859"/>
-							<reference ref="212520255"/>
+							<reference ref="497272910"/>
 						</object>
-						<reference key="parent" ref="794163489"/>
+						<reference key="parent" ref="930962427"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">6</int>
@@ -413,7 +413,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">20</int>
-						<reference key="object" ref="212520255"/>
+						<reference key="object" ref="497272910"/>
 						<reference key="parent" ref="561967412"/>
 					</object>
 				</object>
