@@ -93,7 +93,7 @@
 - (void)rootView:(RootView *)view willRemoveSubview:(UIView *)subview {
     UIWindow *window = [[UIApplication sharedApplication] keyWindow];
     [window sendSubviewToBack:view];
-    [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationPortrait animated:YES];
+    [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationPortrait animated:NO];
 }
 
 @end
