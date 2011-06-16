@@ -83,6 +83,7 @@
 		4B6E1A5713A03D9600A4921A /* VideoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B6E1A5613A03D9600A4921A /* VideoTableViewCell.m */; };
 		4B6E1A5B13A1204600A4921A /* VideoDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B6E1A5913A1204500A4921A /* VideoDetailViewController.m */; };
 		4B6E1A5C13A1204600A4921A /* VideoDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B6E1A5A13A1204600A4921A /* VideoDetailViewController.xib */; };
+		4B7DDDB613A969B100E41A4E /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7DDDB513A969B100E41A4E /* RootViewController.m */; };
 		5623DEC212B15AB600212D5C /* RequestWebViewModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5623DEC012B15AB600212D5C /* RequestWebViewModalViewController.m */; };
 		5623E7A412B7F81100212D5C /* UnderlinedUILabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5623E7A212B7F81000212D5C /* UnderlinedUILabel.m */; };
 		5623EBC812B9ED6C00212D5C /* LibraryAdvancedSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = 5623EBC512B9ED6C00212D5C /* LibraryAdvancedSearch.m */; };
@@ -595,6 +596,8 @@
 		4B6E1A5813A1204500A4921A /* VideoDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoDetailViewController.h; sourceTree = "<group>"; };
 		4B6E1A5913A1204500A4921A /* VideoDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoDetailViewController.m; sourceTree = "<group>"; };
 		4B6E1A5A13A1204600A4921A /* VideoDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoDetailViewController.xib; sourceTree = "<group>"; };
+		4B7DDDB413A969B100E41A4E /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
+		4B7DDDB513A969B100E41A4E /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		5623DEBF12B15AB600212D5C /* RequestWebViewModalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestWebViewModalViewController.h; sourceTree = "<group>"; };
 		5623DEC012B15AB600212D5C /* RequestWebViewModalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestWebViewModalViewController.m; sourceTree = "<group>"; };
 		5623E7A112B7F81000212D5C /* UnderlinedUILabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnderlinedUILabel.h; sourceTree = "<group>"; };
@@ -2000,6 +2003,8 @@
 				1D3623250D0F684500981E51 /* MIT_MobileAppDelegate.m */,
 				DE71537A102FD66A005E6111 /* MITModuleList.h */,
 				DE71537B102FD66A005E6111 /* MITModuleList.m */,
+				4B7DDDB413A969B100E41A4E /* RootViewController.h */,
+				4B7DDDB513A969B100E41A4E /* RootViewController.m */,
 			);
 			name = "App Delegate";
 			sourceTree = "<group>";
@@ -2573,6 +2578,7 @@
 				4B2D28A2139FCC3A0004F7CC /* MITThumbnailView.m in Sources */,
 				4B6E1A5713A03D9600A4921A /* VideoTableViewCell.m in Sources */,
 				4B6E1A5B13A1204600A4921A /* VideoDetailViewController.m in Sources */,
+				4B7DDDB613A969B100E41A4E /* RootViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
