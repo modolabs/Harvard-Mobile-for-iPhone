@@ -190,7 +190,7 @@
 		
 		UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 		if (cell == nil) {
-			cell = [[[MultiLineTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+			cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
 		}
 		
 		[cell applyStandardFonts];
@@ -247,16 +247,7 @@
 	}
 	
 	else {
-		return [MultiLineTableViewCell heightForCellWithStyle:UITableViewCellStyleSubtitle
-													tableView:tableView 
-														 text:@"No announcements at this time"
-												 maxTextLines:0
-												   detailText:nil
-											   maxDetailLines:0
-														 font:cellFont 
-												   detailFont:nil 
-												accessoryType:UITableViewCellAccessoryNone
-													cellImage:NO];
+        return tableView.rowHeight;
 	}
 
 }
