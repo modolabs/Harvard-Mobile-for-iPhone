@@ -423,7 +423,7 @@
 -(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
 	// if the alert view was "no search results", give focus back to the search bar
-	if (alertView.tag = kNoSearchResultsTag) {
+	if (alertView.tag == kNoSearchResultsTag) {
         [_searchController setActive:YES animated:YES];
 	}
 }
@@ -668,7 +668,7 @@
     _selectionVC.mapVC = self;
     UINavigationController *dummyNavC = [[UINavigationController alloc] initWithRootViewController:_selectionVC];
     
-    _selectionVC.view;
+    (void)[_selectionVC view];
     [_selectionVC switchToSegmentIndex:MapSelectionControllerSegmentBookmarks];
 
 	MIT_MobileAppDelegate *appDelegate = (MIT_MobileAppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -723,23 +723,24 @@
 }
 
 - (void)mapView:(MKMapView *)mapView didAddAnnotationViews:(NSArray *)views {
-    // if this is the user location, don't do anything
+    [self performSelector:@selector(selectSingleAnnotation) withObject:nil afterDelay:0.5];
+}
+
+- (void)selectSingleAnnotation
+{
     NSInteger count = 0;
     id<MKAnnotation> selectAnnotation = nil;
-    for (MKAnnotationView *aView in views) {
-        if ([aView.annotation isKindOfClass:[ArcGISMapAnnotation class]] && aView.annotation.coordinate.latitude != 0) {
-            selectAnnotation = aView.annotation;
-            count++;
-            if (count > 1)
-                return;
-        }
-    }
-    
     for (id<MKAnnotation> annotation in _mapView.annotations) {
         if ([annotation isKindOfClass:[ArcGISMapAnnotation class]] && annotation.coordinate.latitude != 0) {
+            selectAnnotation = annotation;
             count++;
-            if (count > 1)
+            if (count > 1) {
+                id <MKAnnotation> selectedAnnotation = [[_mapView selectedAnnotations] lastObject];
+                if (selectedAnnotation) {
+                    [_mapView deselectAnnotation:selectedAnnotation animated:NO];
+                }
                 return;
+            }
         }
     }
     

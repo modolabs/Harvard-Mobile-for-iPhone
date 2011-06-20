@@ -71,4 +71,6 @@
 - (void)showListView:(BOOL)showList;                                      // if showList is true, show list view; otherwise show map view
 - (void)pushAnnotationDetails:(id <MKAnnotation>) annotation animated:(BOOL)animated;
 
+- (void)selectSingleAnnotation;
+
 @end

@@ -40,6 +40,8 @@
                     case UITableViewCellAccessoryDisclosureIndicator:
                         width -= 15.0;
                         break;
+                    default:
+                        break;
                 }
             }
             break;
@@ -56,6 +58,8 @@
                         break;
                     case UITableViewCellAccessoryDisclosureIndicator:
                         width -= 15.0;
+                        break;
+                    default:
                         break;
                 }
             } else {
@@ -74,6 +78,8 @@
                     break;
                 case UITableViewCellAccessoryDisclosureIndicator:
                     width -= 33.0;
+                    break;
+                default:
                     break;
             }
             
@@ -281,7 +287,8 @@
 }
 
 - (id) initWithStyle: (UITableViewCellStyle)cellStyle reuseIdentifier: (NSString *)reuseIdentifier {
-    if(self = [super initWithStyle:cellStyle reuseIdentifier:reuseIdentifier]) {		
+    self = [super initWithStyle:cellStyle reuseIdentifier:reuseIdentifier];
+    if (self) {
         _style = cellStyle;
         textLabelNumberOfLines = 0;
         detailTextLabelNumberOfLines = 0;
