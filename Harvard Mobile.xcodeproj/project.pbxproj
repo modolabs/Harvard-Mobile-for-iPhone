@@ -85,6 +85,7 @@
 		4B7DDDB613A969B100E41A4E /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7DDDB513A969B100E41A4E /* RootViewController.m */; };
 		4B7DDDF413AAC46100E41A4E /* VideoRelatedPost.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7DDDF313AAC46100E41A4E /* VideoRelatedPost.m */; };
 		4B7DDDF713AAC76200E41A4E /* Video.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B7DDDF613AAC76200E41A4E /* Video.m */; };
+		4BFF351913AF95200001D63C /* VideoRelatedPostCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BFF351813AF95200001D63C /* VideoRelatedPostCategory.m */; };
 		5623DEC212B15AB600212D5C /* RequestWebViewModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5623DEC012B15AB600212D5C /* RequestWebViewModalViewController.m */; };
 		5623E7A412B7F81100212D5C /* UnderlinedUILabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5623E7A212B7F81000212D5C /* UnderlinedUILabel.m */; };
 		5623EBC812B9ED6C00212D5C /* LibraryAdvancedSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = 5623EBC512B9ED6C00212D5C /* LibraryAdvancedSearch.m */; };
@@ -601,6 +602,8 @@
 		4B7DDDF313AAC46100E41A4E /* VideoRelatedPost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoRelatedPost.m; sourceTree = "<group>"; };
 		4B7DDDF513AAC76200E41A4E /* Video.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Video.h; sourceTree = "<group>"; };
 		4B7DDDF613AAC76200E41A4E /* Video.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Video.m; sourceTree = "<group>"; };
+		4BFF351713AF95200001D63C /* VideoRelatedPostCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoRelatedPostCategory.h; sourceTree = "<group>"; };
+		4BFF351813AF95200001D63C /* VideoRelatedPostCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoRelatedPostCategory.m; sourceTree = "<group>"; };
 		5623DEBF12B15AB600212D5C /* RequestWebViewModalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestWebViewModalViewController.h; sourceTree = "<group>"; };
 		5623DEC012B15AB600212D5C /* RequestWebViewModalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestWebViewModalViewController.m; sourceTree = "<group>"; };
 		5623E7A112B7F81000212D5C /* UnderlinedUILabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnderlinedUILabel.h; sourceTree = "<group>"; };
@@ -1474,6 +1477,8 @@
 		4B5D178B139D9E2000B3541C /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				4BFF351713AF95200001D63C /* VideoRelatedPostCategory.h */,
+				4BFF351813AF95200001D63C /* VideoRelatedPostCategory.m */,
 				4B7DDDF513AAC76200E41A4E /* Video.h */,
 				4B7DDDF613AAC76200E41A4E /* Video.m */,
 				4B5D178C139D9E3100B3541C /* Video.xcdatamodeld */,
@@ -2585,6 +2590,7 @@
 				4B7DDDB613A969B100E41A4E /* RootViewController.m in Sources */,
 				4B7DDDF413AAC46100E41A4E /* VideoRelatedPost.m in Sources */,
 				4B7DDDF713AAC76200E41A4E /* Video.m in Sources */,
+				4BFF351913AF95200001D63C /* VideoRelatedPostCategory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

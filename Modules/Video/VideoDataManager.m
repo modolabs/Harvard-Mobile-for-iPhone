@@ -1,5 +1,6 @@
 #import "Video.h"
 #import "VideoRelatedPost.h"
+#import "VideoRelatedPostCategory.h"
 #import "VideoDataManager.h"
 #import "CoreDataManager.h"
 #import "Constants.h"
@@ -86,6 +87,15 @@
             NSString *wpidString = [relatedPostDict objectForKey:@"wpid"];
             post.wpid = [NSNumber numberWithInteger:[wpidString integerValue]];
             [relatedPostDict objectForKey:@"wpid"];
+            
+            NSMutableSet *categories = [NSMutableSet set];
+            for(NSString *categoryTitle in [relatedPostDict objectForKey:@"category"]) {
+                VideoRelatedPostCategory *category = [[CoreDataManager coreDataManager] insertNewObjectForEntityForName:VideoRelatedPostCategoryEntityName];
+                category.title = categoryTitle;
+                [categories addObject:category];
+            }
+            post.categories = categories;
+            
             [posts addObject:post];
         }
         video.relatedPosts = posts;        

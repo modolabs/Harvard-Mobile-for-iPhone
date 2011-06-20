@@ -1,6 +1,7 @@
 #import "VideoDetailViewController.h"
 #import "VideoRelatedPost.h"
 #import "Foundation+MITAdditions.h"
+#import "StoryDetailViewController.h"
 
 @interface VideoDetailViewController (Private)
 
@@ -169,6 +170,15 @@
     VideoRelatedPost *post = [self.relatedPosts objectAtIndex:indexPath.row];
     cell.textLabel.text = post.title;
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    VideoRelatedPost *post = [self.relatedPosts objectAtIndex:indexPath.row]; 
+    StoryDetailViewController *storyVC = [[[StoryDetailViewController alloc] init] autorelease];
+    storyVC.storyGUID = post.guid;
+    storyVC.storyCategories = [post categoryTitles];
+    [self.navigationController pushViewController:storyVC animated:YES];
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 
 @end

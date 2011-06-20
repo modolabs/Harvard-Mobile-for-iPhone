@@ -81,6 +81,7 @@ NSString * const NewsImageEntityName = @"NewsImage";
 NSString * const NewsImageRepEntityName = @"NewsImageRep";
 NSString * const VideoEntityName = @"Video";
 NSString * const VideoRelatedPostEntityName = @"VideoRelatedPost";
+NSString * const VideoRelatedPostCategoryEntityName = @"VideoRelatedPostCategory";
 NSString * const PersonDetailsEntityName = @"PersonDetails";
 NSString * const PersonDetailEntityName = @"PersonDetail";
 NSString * const StellarCourseEntityName = @"StellarCourse";
