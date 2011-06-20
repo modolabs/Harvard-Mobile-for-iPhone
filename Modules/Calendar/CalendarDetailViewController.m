@@ -598,7 +598,7 @@ enum CalendarDetailRowTypes {
 #pragma mark -
 #pragma mark UIWebView delegation
 
--(void)webViewDidStartLoad:(UIWebView *)webView {
+-(void)webViewDidFinishLoad:(UIWebView *)webView {
 	CGSize size = [webView sizeThatFits:CGSizeZero];
     
     if (webView.tag == kDescriptionWebViewTag) {
