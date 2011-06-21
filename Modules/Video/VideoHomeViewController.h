@@ -6,7 +6,8 @@
 @interface VideoHomeViewController : UIViewController <UISearchBarDelegate,
                                                         UISearchDisplayDelegate, 
                                                         UITableViewDataSource, 
-                                                        UITableViewDelegate> {
+                                                        UITableViewDelegate,
+                                                        UIWebViewDelegate> {
     
 }
 
@@ -17,10 +18,13 @@
 @property (nonatomic, retain) IBOutlet UITableViewCell *videoCell;
 @property (nonatomic, retain) IBOutlet UIView *thumbnailsContainer;
 @property (nonatomic, retain) IBOutlet VideoButton *selectedButton;
+@property (nonatomic, retain) IBOutlet UIButton *bookmarksButton;
 
 @property (nonatomic, retain) Video *selectedVideo;
 @property (nonatomic, retain) NSArray *videos;
 @property (nonatomic, retain) NSArray *searchResults;
 @property (nonatomic, retain) UIView *loadingView;
+
+- (IBAction)showBookmarks:(id)sender;
 
 @end

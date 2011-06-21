@@ -7,6 +7,7 @@
 #import "Video.h"
 #import "VideoButton.h"
 #import "VideoTableViewCell.h"
+#import "VideoBookmarksViewController.h"
 
 #define FEATURED_VIDEO_COUNT 5
 
@@ -31,6 +32,7 @@
 @synthesize selectedVideo;
 @synthesize selectedButton;
 @synthesize videos;
+@synthesize bookmarksButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -43,12 +45,14 @@
 
 - (void)deallocViews 
 {
+    self.featuredVideoWebview.delegate = nil;
     self.featuredVideoWebview = nil;
     self.loadingView = nil;
     self.selectedButton = nil;
     self.searchBar = nil;
     self.searchController = nil;
     self.searchDisplayContent = nil;
+    self.bookmarksButton = nil;
 }
 
 - (void)dealloc
@@ -75,6 +79,8 @@
     self.loadingView = [[[MITLoadingActivityView alloc] initWithFrame:self.view.frame xDimensionScaling:2 yDimensionScaling:2] autorelease];
     [self.view addSubview:self.loadingView];
     VideoDataManager *dataManager = [VideoDataManager sharedManager];
+    
+    self.featuredVideoWebview.delegate = self;
     
     self.searchBar.delegate = self;
     
@@ -123,7 +129,6 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
-    return YES;
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
@@ -145,7 +150,7 @@
             return;
         }
         
-        //NSString *isBookmarked = ([self.story.bookmarked boolValue]) ? @"on" : @"";
+        NSString *isBookmarked = ([video.bookmarked boolValue]) ? @"on" : @"";
         
         CGFloat width = self.featuredVideoWebview.frame.size.width;
         NSString *widthString = [NSString stringWithFormat:@"%i", (int)roundf(width)];
@@ -156,11 +161,23 @@
 
         NSArray *keys = [NSArray arrayWithObjects:@"__BOOKMARKED__", @"__VIDEO_PLAYER__", 
                          @"__TITLE__", @"__TIME__", @"__DATE__", @"__SUMMARY__", nil];
-        NSArray *values = [NSArray arrayWithObjects:@"", playerHTMLString, video.title, [video durationString], [video dateString], video.summary, nil];
+        NSArray *values = [NSArray arrayWithObjects:isBookmarked, playerHTMLString, video.title, [video durationString], [video dateString], video.summary, nil];
         [featuredHTMLString replaceOccurrencesOfStrings:keys withStrings:values options:NSLiteralSearch];
         
         [self.featuredVideoWebview loadHTMLString:featuredHTMLString baseURL:baseURL];
 }
+#pragma mark - UIWebView delegate
+
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
+    
+    if([[[request URL] scheme] isEqualToString:@"bookmarkState"]) {
+        BOOL isBookmarked = [[[request URL] host] isEqualToString:@"on"];
+        [[VideoDataManager sharedManager] bookmarkVideo:self.selectedVideo bookmarked:isBookmarked];
+        return NO;
+    }
+    return YES;
+}
+
 
 - (void)videoButtonTapped:(id)sender {
     VideoButton *button = sender;
@@ -207,6 +224,24 @@
     Video *video = [self.searchResults objectAtIndex:indexPath.row];
     VideoDetailViewController *vc = [[[VideoDetailViewController alloc] initWithNibName:@"VideoDetailViewController" bundle:nil] autorelease];
     vc.currentVideo = video;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+#pragma mark - UISearchBarDelegate
+
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
+{
+    self.bookmarksButton.alpha = 0;
+}
+
+- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
+    self.bookmarksButton.alpha = 1;
+}
+
+#pragma mark - IBActions
+
+- (IBAction)showBookmarks:(id)sender {
+    VideoBookmarksViewController *vc = [[[VideoBookmarksViewController alloc] init] autorelease];
     [self.navigationController pushViewController:vc animated:YES];
 }
 

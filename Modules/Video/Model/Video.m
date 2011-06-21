@@ -3,6 +3,7 @@
 
 
 @implementation Video
+@dynamic bookmarked;
 @dynamic largeImageURL;
 @dynamic thumbnailURL;
 @dynamic published;

@@ -51,7 +51,7 @@
         
         <div id="overview">
             <span class="inlineControls">
-                <a href="bookmark"><span width="44" height="38" alt="Bookmark" id="bookmarkButton" class="__BOOKMARKED__"></span></a>
+                <a id="bookmarkLink" href="bookmark"><span width="44" height="38" alt="Bookmark" id="bookmarkButton" class="__BOOKMARKED__"></span></a>
             </span>
             <h1 class="title">__TITLE__</h1>
             <p class="byline">
@@ -88,12 +88,17 @@
         }
         
         var bookmarkButton = document.getElementById("bookmarkButton");
+        var bookmarkState = ("__BOOKMARKED__" == "on");
         bookmarkButton.addEventListener("touchstart", function() {
             addClass(bookmarkButton, "pressed");
         });
         bookmarkButton.addEventListener("touchend", function() {
             removeClass(bookmarkButton, "pressed");
             toggleClass(bookmarkButton, "on");
+            bookmarkState = !bookmarkState;
+            setTimeout(function () {
+                document.location = "bookmarkState://" + (bookmarkState ? "on" : "off");
+            }, 50);
         });
         var shareButton = document.getElementById("shareButton");
         shareButton.addEventListener("touchstart", function() {

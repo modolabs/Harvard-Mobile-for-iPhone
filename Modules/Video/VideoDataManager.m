@@ -21,7 +21,8 @@
 }
 
 - (void)purgeOldVideos {
-    NSArray *oldVideos = [CoreDataManager objectsForEntity:VideoEntityName matchingPredicate:nil];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"bookmarked == %d", NO];
+    NSArray *oldVideos = [CoreDataManager objectsForEntity:VideoEntityName matchingPredicate:predicate];
     [CoreDataManager deleteObjects:oldVideos];
 }
 
@@ -55,18 +56,24 @@
     NSArray *videoDicts = [responseDict objectForKey:@"response"];
     NSMutableArray *videos = [NSMutableArray arrayWithCapacity:[videoDicts count]];
     for(NSDictionary *videoDict in videoDicts) {
-        Video *video = [[CoreDataManager coreDataManager] insertNewObjectForEntityForName:VideoEntityName];
-        video.mediaSource = [videoDict objectForKey:@"mediaSource"];
-        
-        if ([video.mediaSource length] == 0) {
+        NSString *mediaSource = [videoDict objectForKey:@"mediaSource"];
+        if ([mediaSource length] == 0) {
             // default to brightCove
-            video.mediaSource = @"Brightcove";
+            mediaSource = @"Brightcove";
+        }        
+        NSString *videoID;
+        if ([mediaSource isEqualToString:@"Brightcove"]) {
+            videoID = [videoDict objectForKey:@"brightCoveId"];
+        } else if ([mediaSource isEqualToString:@"Youtube"]) {
+            videoID = [videoDict objectForKey:@"youtubeId"];
         }
-        
-        if ([video.mediaSource isEqualToString:@"Brightcove"]) {
-            video.videoID = [videoDict objectForKey:@"brightCoveId"];
-        } else if ([video.mediaSource isEqualToString:@"Youtube"]) {
-            video.videoID = [videoDict objectForKey:@"youtubeId"];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"mediaSource == %@ AND videoID == %@", mediaSource, videoID];
+        NSArray *videoArray = [CoreDataManager objectsForEntity:VideoEntityName matchingPredicate:predicate];
+        Video *video = [videoArray lastObject];
+        if(!video) {
+            video = [[CoreDataManager coreDataManager] insertNewObjectForEntityForName:VideoEntityName];
+            video.mediaSource = mediaSource;
+            video.videoID = videoID;
         }
         
         video.title = [videoDict objectForKey:@"title"];
@@ -109,4 +116,28 @@
     [handler release];
     request.userData = nil;                                                     
 }
+
+- (void)bookmarkVideo:(Video *)video bookmarked:(BOOL)bookmarked {
+    video.bookmarked = [NSNumber numberWithBool:bookmarked];
+    [CoreDataManager saveData];
+}
+
+- (BOOL)bookmarksExist {
+    NSManagedObjectContext *context = [CoreDataManager managedObjectContext];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"bookmarked == %d", YES]];
+    [request setEntity:[NSEntityDescription entityForName:VideoEntityName
+                                   inManagedObjectContext:context]];
+    [request setIncludesSubentities:NO];
+    NSError *error = nil;
+    NSInteger count = [context countForFetchRequest:request error:&error];
+    [request release];
+    return (count > 0);
+}
+
+- (NSArray *)bookmarkedVideos {
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"bookmarked == %d", YES];
+    return [CoreDataManager objectsForEntity:VideoEntityName matchingPredicate:predicate];    
+}
+
 @end

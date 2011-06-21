@@ -6,6 +6,7 @@
 @interface Video : NSManagedObject {
 @private
 }
+@property (nonatomic, retain) NSNumber *bookmarked;
 @property (nonatomic, retain) NSString * largeImageURL;
 @property (nonatomic, retain) NSString * thumbnailURL;
 @property (nonatomic, retain) NSDate * published;
