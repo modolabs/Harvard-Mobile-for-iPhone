@@ -170,6 +170,9 @@
         if (isBadField) continue;
 
         NSString *value = [self.annotation.attributes objectForKey:field];
+        if (![value isKindOfClass:[NSString class]]) {
+            value = [value description];
+        }
         // hack to prevent urls from making the webview too wide
         if ([value length] > 40 && [[value substringToIndex:7] isEqualToString:@"http://"]) {
             value = [NSString stringWithFormat:@"<a href=\"%@\">Visit Website</a>", value];
