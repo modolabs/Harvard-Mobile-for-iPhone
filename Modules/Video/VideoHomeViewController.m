@@ -235,7 +235,9 @@
 }
 
 - (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
-    self.bookmarksButton.alpha = 1;
+    [UIView animateWithDuration:0.5 animations:^(void) {
+        self.bookmarksButton.alpha = 1;
+    }];
 }
 
 #pragma mark - IBActions
