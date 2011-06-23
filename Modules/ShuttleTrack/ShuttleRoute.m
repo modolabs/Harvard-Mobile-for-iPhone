@@ -157,10 +157,13 @@
         for (NSDictionary *aDict in array) {
             NSString *stopID = [aDict objectForKey:@"id"];
             if (stopID) {
-                // assume stop list won't change over this route's in-memory lifetime
                 ShuttleStop *aStop = [_stopsById objectForKey:stopID];
                 if (aStop) {
                     [aStop updateInfo:aDict referenceDate:now];
+                } else {
+                    NSError *error = nil;
+                    aStop = [ShuttleDataManager stopWithRoute:self.routeID stopID:stopID error:&error];
+                    [_stopsById setObject:aStop forKey:stopID];
                 }
                 if ([aDict objectForKey:@"upcoming"]) {
                     self.nextStopId = stopID;
