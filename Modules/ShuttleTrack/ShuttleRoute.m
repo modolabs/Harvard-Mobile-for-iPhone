@@ -164,6 +164,7 @@
                     NSError *error = nil;
                     aStop = [ShuttleDataManager stopWithRoute:self.routeID stopID:stopID error:&error];
                     [_stopsById setObject:aStop forKey:stopID];
+                    [self.stops addObject:aStop];
                 }
                 if ([aDict objectForKey:@"upcoming"]) {
                     self.nextStopId = stopID;
