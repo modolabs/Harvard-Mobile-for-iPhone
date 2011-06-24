@@ -205,6 +205,8 @@
         }
         if (moreTimes.count) {
             self.predictions = moreTimes;
+        } else {
+            self.predictions = nil;
         }
     }
 }

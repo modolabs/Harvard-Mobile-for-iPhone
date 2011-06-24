@@ -409,6 +409,8 @@ static ShuttleDataManager* s_dataManager = nil;
                     }
                     if (moreTimes.count) {
                         stop.predictions = moreTimes;
+                    } else {
+                        stop.predictions = nil;
                     }
                 }
                 [schedules addObject:stop];
