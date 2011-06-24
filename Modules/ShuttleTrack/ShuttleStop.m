@@ -201,7 +201,7 @@
         }
         NSMutableArray *moreTimes = [NSMutableArray arrayWithCapacity:array.count];
         for (NSNumber *anArrival in array) {
-            [moreTimes addObject:[refDate dateByAddingTimeInterval:[anArrival doubleValue]]];
+            [moreTimes addObject:[self.nextScheduledDate dateByAddingTimeInterval:[anArrival doubleValue]]];
         }
         if (moreTimes.count) {
             self.predictions = moreTimes;

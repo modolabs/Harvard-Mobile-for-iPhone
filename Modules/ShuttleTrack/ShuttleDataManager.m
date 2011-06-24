@@ -395,17 +395,21 @@ static ShuttleDataManager* s_dataManager = nil;
             }
 
             if (stop != nil) {
-                NSArray *predictionNumbers = [routeAtStop objectForKey:@"predictions"];
-                if (predictionNumbers.count) {
-                    NSNumber *firstArrival = [predictionNumbers objectAtIndex:0];
-                    stop.nextScheduledDate = [now dateByAddingTimeInterval:[firstArrival doubleValue]];
-                    NSMutableArray *predictions = [NSMutableArray array];
-                    for (int i = 1; i < predictionNumbers.count; i++) {
-                        NSNumber *anArrival = [predictionNumbers objectAtIndex:i];
-                        NSDate *aPrediction = [now dateByAddingTimeInterval:[anArrival doubleValue]];
-                        [predictions addObject:aPrediction];
+                NSNumber *firstArrival = [routeAtStop objectForKey:@"next"];
+                if (firstArrival) {
+                    stop.nextScheduledDate = [NSDate dateWithTimeIntervalSince1970:[firstArrival doubleValue]];
+                    // sometimes the predictions show up like "predictions: {1: 1398}"
+                    NSArray *array = [routeAtStop objectForKey:@"predictions"];
+                    if ([array isKindOfClass:[NSDictionary class]]) {
+                        array = [(NSDictionary *)array allValues];
                     }
-                    stop.predictions = predictions;
+                    NSMutableArray *moreTimes = [NSMutableArray arrayWithCapacity:array.count];
+                    for (NSNumber *anArrival in array) {
+                        [moreTimes addObject:[stop.nextScheduledDate dateByAddingTimeInterval:[anArrival doubleValue]]];
+                    }
+                    if (moreTimes.count) {
+                        stop.predictions = moreTimes;
+                    }
                 }
                 [schedules addObject:stop];
             }
