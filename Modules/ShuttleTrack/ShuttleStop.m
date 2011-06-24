@@ -191,22 +191,22 @@
 		self.latitude = [num doubleValue];
 	self.upcoming = ([stopInfo objectForKey:@"upcoming"] != nil); // upcoming only appears if it's true
 
-	// sometimes the predictions show up like "predictions: {1: 1398}"
- 	NSArray *array = [stopInfo objectForKey:@"predictions"];
-    if ([array isKindOfClass:[NSDictionary class]]) {
-        array = [(NSDictionary *)array allValues];
-    }
-    if (array.count) {
-        NSNumber *firstArrival = [array objectAtIndex:0];
-        self.nextScheduledDate = [refDate dateByAddingTimeInterval:[firstArrival doubleValue]];
-        NSMutableArray *moreTimes = [NSMutableArray array];
-        for (int i = 1; i < array.count; i++) {
-            NSNumber *anArrival = [array objectAtIndex:i];
+    NSNumber *firstArrival = [stopInfo objectForKey:@"next"];
+    if (firstArrival) {
+        self.nextScheduledDate = [NSDate dateWithTimeIntervalSince1970:[firstArrival doubleValue]];
+        // sometimes the predictions show up like "predictions: {1: 1398}"
+        NSArray *array = [stopInfo objectForKey:@"predictions"];
+        if ([array isKindOfClass:[NSDictionary class]]) {
+            array = [(NSDictionary *)array allValues];
+        }
+        NSMutableArray *moreTimes = [NSMutableArray arrayWithCapacity:array.count];
+        for (NSNumber *anArrival in array) {
             [moreTimes addObject:[refDate dateByAddingTimeInterval:[anArrival doubleValue]]];
         }
-        self.predictions = moreTimes;
+        if (moreTimes.count) {
+            self.predictions = moreTimes;
+        }
     }
-	
 }
 
 #pragma mark -
