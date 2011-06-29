@@ -9,7 +9,7 @@
         self.tag = VideoTag;
         self.shortName = @"Multimedia";
         self.longName = @"Multimedia";
-        self.iconName = @"news";
+        self.iconName = @"multimedia";
         self.supportsFederatedSearch = NO;
         mainViewController = [[VideoHomeViewController alloc] initWithNibName:@"VideoHomeViewController" bundle:nil];
         self.viewControllers = [NSArray arrayWithObject:mainViewController];
