@@ -240,6 +240,10 @@
     }];
 }
 
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    [self.searchController.searchResultsTableView removeFromSuperview];
+}
+
 #pragma mark - IBActions
 
 - (IBAction)showBookmarks:(id)sender {
