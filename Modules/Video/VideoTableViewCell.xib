@@ -65,7 +65,7 @@
 							<object class="IBUILabel" id="118072881">
 								<reference key="NSNextResponder" ref="98860154"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{70, 3}, {142, 15}}</string>
+								<string key="NSFrame">{{70, 3}, {224, 15}}</string>
 								<reference key="NSSuperview" ref="98860154"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="893532107"/>
@@ -76,12 +76,18 @@
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<string key="IBUIText">Title</string>
-								<object class="NSColor" key="IBUITextColor" id="313942505">
+								<object class="NSFont" key="IBUIFont">
+									<string key="NSName">HelveticaNeue</string>
+									<double key="NSSize">17</double>
+									<int key="NSfFlags">16</int>
+								</object>
+								<object class="NSColor" key="IBUITextColor">
 									<int key="NSColorSpace">1</int>
 									<bytes key="NSRGB">MCAwIDAAA</bytes>
 								</object>
 								<nil key="IBUIHighlightedColor"/>
 								<int key="IBUIBaselineAdjustment">1</int>
+								<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
 								<float key="IBUIMinimumFontSize">10</float>
 							</object>
 							<object class="IBUILabel" id="893532107">
@@ -99,11 +105,14 @@
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<string key="IBUIText">XX:YY | Uploaded Date</string>
 								<object class="NSFont" key="IBUIFont">
-									<string key="NSName">Helvetica</string>
-									<double key="NSSize">14</double>
+									<string key="NSName">HelveticaNeue</string>
+									<double key="NSSize">13</double>
 									<int key="NSfFlags">16</int>
 								</object>
-								<reference key="IBUITextColor" ref="313942505"/>
+								<object class="NSColor" key="IBUITextColor">
+									<int key="NSColorSpace">1</int>
+									<bytes key="NSRGB">MC4yNzQ1MDk4MDM5IDAuMjY2NjY2NjY2NyAwLjI0NzA1ODgyMzUAA</bytes>
+								</object>
 								<nil key="IBUIHighlightedColor"/>
 								<int key="IBUIBaselineAdjustment">1</int>
 								<float key="IBUIMinimumFontSize">10</float>
@@ -256,10 +265,22 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">VideoHomeViewController</string>
 					<string key="superclassName">UIViewController</string>
+					<object class="NSMutableDictionary" key="actions">
+						<string key="NS.key.0">showBookmarks:</string>
+						<string key="NS.object.0">id</string>
+					</object>
+					<object class="NSMutableDictionary" key="actionInfosByName">
+						<string key="NS.key.0">showBookmarks:</string>
+						<object class="IBActionInfo" key="NS.object.0">
+							<string key="name">showBookmarks:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</object>
 					<object class="NSMutableDictionary" key="outlets">
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>bookmarksButton</string>
 							<string>featuredVideoWebview</string>
 							<string>searchBar</string>
 							<string>searchDisplayContent</string>
@@ -269,6 +290,7 @@
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>UIButton</string>
 							<string>UIWebView</string>
 							<string>UISearchBar</string>
 							<string>UIView</string>
@@ -281,6 +303,7 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>bookmarksButton</string>
 							<string>featuredVideoWebview</string>
 							<string>searchBar</string>
 							<string>searchDisplayContent</string>
@@ -290,6 +313,10 @@
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<object class="IBToOneOutletInfo">
+								<string key="name">bookmarksButton</string>
+								<string key="candidateClassName">UIButton</string>
+							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">featuredVideoWebview</string>
 								<string key="candidateClassName">UIWebView</string>
