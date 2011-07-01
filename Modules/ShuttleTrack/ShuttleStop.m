@@ -162,6 +162,26 @@
 	return self;
 }
 
+- (NSArray *)arrivalTimes
+{
+    NSMutableArray *arrivalTimes = [NSMutableArray array];
+    if (self.nextScheduledDate) {
+        NSTimeInterval seconds = [self.nextScheduledDate timeIntervalSinceNow];
+        NSTimeInterval minutes = floor(seconds / 60);
+        if (minutes > 0) {
+            [arrivalTimes addObject:(minutes < 1) ? @"<1" : [NSString stringWithFormat:@"%.0f", minutes]];
+        }
+    }
+    for (NSDate *prediction in self.predictions) {
+        NSTimeInterval predictionSeconds = [prediction timeIntervalSinceNow];
+        NSTimeInterval minutes = floor(predictionSeconds / 60);
+        if (minutes > 0) {
+            [arrivalTimes addObject:[NSString stringWithFormat:@"%.0f", minutes]];
+        }
+    }
+    return arrivalTimes;
+}
+
 - (NSString *)description {
     return self.title;
 }
@@ -192,7 +212,7 @@
 	self.upcoming = ([stopInfo objectForKey:@"upcoming"] != nil); // upcoming only appears if it's true
 
     NSNumber *firstArrival = [stopInfo objectForKey:@"next"];
-    if (firstArrival) {
+    if (firstArrival && [firstArrival isKindOfClass:[NSNumber class]]) {
         self.nextScheduledDate = [NSDate dateWithTimeIntervalSince1970:[firstArrival doubleValue]];
         // sometimes the predictions show up like "predictions: {1: 1398}"
         NSArray *array = [stopInfo objectForKey:@"predictions"];
@@ -208,6 +228,10 @@
         } else {
             self.predictions = nil;
         }
+        
+    } else {
+        // if "next" is missing, don't attempt to get predictions
+        self.predictions = nil;
     }
 }
 

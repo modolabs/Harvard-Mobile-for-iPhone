@@ -311,17 +311,12 @@
         
         for (ShuttleStop *aStop in self.shuttleStopSchedules) {
             if ([aStop.routeID isEqualToString:aRoute.routeID]) {
-                NSMutableString *arrivalTimes = nil;
-                NSTimeInterval seconds = [aStop.nextScheduledDate timeIntervalSinceNow];
-                NSTimeInterval minutes = floor(seconds / 60);
-                arrivalTimes = (minutes < 1) ? [NSMutableString stringWithString:@"<1"] : [NSMutableString stringWithFormat:@"%.0f", minutes];
-                for (NSDate *prediction in aStop.predictions) {
-                    NSTimeInterval predictionSeconds = [prediction timeIntervalSinceNow];
-                    minutes = floor(predictionSeconds / 60);
-                    [arrivalTimes appendFormat:@", %.0f", minutes];
+                NSArray *arrivalTimes = [aStop arrivalTimes];
+                if (arrivalTimes.count) {
+                    cell.detailTextLabel.text = [NSString stringWithFormat:@"Arriving in %@ mins", [arrivalTimes componentsJoinedByString:@", "]];
+                } else {
+                    cell.detailTextLabel.text = nil;
                 }
-                cell.detailTextLabel.text = [NSString stringWithFormat:@"Arriving in %@ mins", arrivalTimes];
-                
                 break;
             }
         }

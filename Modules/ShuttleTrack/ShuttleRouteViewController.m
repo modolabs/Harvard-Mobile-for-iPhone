@@ -204,17 +204,11 @@
             cell.imageView.image = [UIImage blankImageOfSize:CGSizeMake(18, 18)];
         }
         
-        if (aStop.nextScheduledDate) {
-            NSMutableString *arrivalTimes = nil;
-            NSTimeInterval seconds = [aStop.nextScheduledDate timeIntervalSinceNow];
-            NSTimeInterval minutes = floor(seconds / 60);
-            arrivalTimes = (minutes < 1) ? [NSMutableString stringWithString:@"<1"] : [NSMutableString stringWithFormat:@"%.0f", minutes];
-            for (NSDate *prediction in aStop.predictions) {
-                NSTimeInterval predictionSeconds = [prediction timeIntervalSinceNow];
-                minutes = floor(predictionSeconds / 60);
-                [arrivalTimes appendFormat:@", %.0f", minutes];
-            }
-            cell.detailTextLabel.text = [NSString stringWithFormat:@"Arriving in %@ mins", arrivalTimes];
+        NSArray *arrivalTimes = [aStop arrivalTimes];
+        if (arrivalTimes.count) {
+            cell.detailTextLabel.text = [NSString stringWithFormat:@"Arriving in %@ mins", [arrivalTimes componentsJoinedByString:@", "]];
+        } else {
+            cell.detailTextLabel.text = nil;
         }
     }
     

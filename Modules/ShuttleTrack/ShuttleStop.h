@@ -23,6 +23,8 @@
 - (id)initWithRouteStop:(ShuttleRouteStop *)routeStop;
 - (id)initWithStopLocation:(ShuttleStopLocation *)stopLocation routeID:(NSString *)routeID;
 
+- (NSArray *)arrivalTimes;
+
 @property (nonatomic, retain) NSString *title;
 @property (nonatomic, retain) NSString *stopID;
 @property double latitude;
