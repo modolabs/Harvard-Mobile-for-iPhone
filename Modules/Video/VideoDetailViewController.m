@@ -167,6 +167,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     if(!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+        cell.accessoryView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"global/action-news"]] autorelease];
     }
     VideoRelatedPost *post = [self.relatedPosts objectAtIndex:indexPath.row];
     cell.textLabel.text = post.title;
