@@ -37,6 +37,7 @@
 {
     [super viewDidLoad];
     self.tableView.rowHeight = 50;
+    self.title = @"Bookmarks";
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
