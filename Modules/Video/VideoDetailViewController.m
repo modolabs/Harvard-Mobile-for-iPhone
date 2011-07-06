@@ -2,10 +2,12 @@
 #import "VideoRelatedPost.h"
 #import "Foundation+MITAdditions.h"
 #import "StoryDetailViewController.h"
+#import "VideoDataManager.h"
 
 @interface VideoDetailViewController (Private)
 
 - (void)showVideo;
+- (void)updateBookmarkButton;
 
 @end
 
@@ -14,6 +16,7 @@
 @synthesize durationLabel;
 @synthesize uploadedLabel;
 @synthesize summaryLabel;
+@synthesize bookmarkButton;
 @synthesize playerWebview;
 @synthesize relatedNewsTableView;
 
@@ -35,6 +38,7 @@
     self.titleLabel = nil;
     self.durationLabel = nil;
     self.uploadedLabel = nil;
+    self.bookmarkButton = nil;
     self.playerWebview = nil;
     self.relatedNewsTableView.delegate = nil;
     self.relatedNewsTableView.dataSource = nil;
@@ -144,6 +148,24 @@
     self.relatedPosts = [self.currentVideo.relatedPosts sortedArrayUsingDescriptors:
                          [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"sortOrder" ascending:YES]]];
     [self.relatedNewsTableView reloadData];
+    [self updateBookmarkButton];
+}
+
+- (void)updateBookmarkButton {
+    if([self.currentVideo.bookmarked boolValue]) {
+        [self.bookmarkButton setImage:[UIImage imageNamed:@"global/bookmark_on"] forState:UIControlStateNormal];
+        [self.bookmarkButton setImage:[UIImage imageNamed:@"global/bookmark_on_pressed"] forState:UIControlStateHighlighted];
+        bookmarkButtonState = YES;
+    } else {
+        [self.bookmarkButton setImage:[UIImage imageNamed:@"global/bookmark_off"] forState:UIControlStateNormal];
+        [self.bookmarkButton setImage:[UIImage imageNamed:@"global/bookmark_off_pressed"] forState:UIControlStateHighlighted]; 
+        bookmarkButtonState = NO;
+    }
+}
+
+- (IBAction)bookmarkButtonTapped:(id)sender {
+    [[VideoDataManager sharedManager] bookmarkVideo:self.currentVideo bookmarked:!bookmarkButtonState];
+    [self updateBookmarkButton];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
