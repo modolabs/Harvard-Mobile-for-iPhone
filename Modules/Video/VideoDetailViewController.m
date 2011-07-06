@@ -62,6 +62,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.title = @"Video";
     
     // sad hack to prevent player from bouncing
     // http://stackoverflow.com/questions/500761/stop-uiwebview-from-bouncing-vertically
