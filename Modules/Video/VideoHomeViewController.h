@@ -1,12 +1,14 @@
 #import <UIKit/UIKit.h>
 #import "Video.h"
 #import "VideoButton.h"
+#import "VideoDataManager.h"
 
 
 @interface VideoHomeViewController : UIViewController <UISearchBarDelegate,
                                                         UISearchDisplayDelegate, 
                                                         UITableViewDataSource, 
                                                         UITableViewDelegate,
+                                                        VideosReceivedDelegate,
                                                         UIWebViewDelegate> {
     
 }

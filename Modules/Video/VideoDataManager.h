@@ -2,8 +2,17 @@
 #import "JSONAPIRequest.h"
 #import "Video.h"
 
-typedef void (^VideosHandler)(NSArray *videos);
+typedef enum {
+    VideoRequestTypeFeatured,
+    VideoRequestTypeSearch
+} VideoRequestType;
 
+@protocol VideosReceivedDelegate <NSObject>
+
+- (void)videosReceived:(NSArray *)videos forRequestType:(VideoRequestType)requestType;
+- (void)errorLoadingVideosForRequestType:(VideoRequestType)requestType;
+
+@end
 
 @interface VideoDataManager : NSObject <JSONAPIDelegate> {
     
@@ -11,8 +20,8 @@ typedef void (^VideosHandler)(NSArray *videos);
 
 + (VideoDataManager *)sharedManager;
 
-- (void)requestVideosWithHandler:(VideosHandler)handler;
-- (void)searchWithQuery:(NSString *)query withHandler:(VideosHandler)handler;
+- (void)requestVideosWithDelegate:(id<VideosReceivedDelegate>)delegate;
+- (void)searchWithQuery:(NSString *)query withDelegate:(id<VideosReceivedDelegate>)delegate;
 - (void)bookmarkVideo:(Video *)video bookmarked:(BOOL)bookmarked;
 - (NSArray *)bookmarkedVideos;
 - (BOOL)bookmarksExist;

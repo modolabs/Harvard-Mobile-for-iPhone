@@ -76,9 +76,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.loadingView = [[[MITLoadingActivityView alloc] initWithFrame:self.view.frame xDimensionScaling:2 yDimensionScaling:2] autorelease];
-    [self.view addSubview:self.loadingView];
-    VideoDataManager *dataManager = [VideoDataManager sharedManager];
     
     self.featuredVideoWebview.delegate = self;
     
@@ -88,10 +85,35 @@
     self.searchController.delegate = self;
     self.searchController.searchResultsDataSource = self;
     self.searchController.searchResultsDelegate = self;
-    
-    [dataManager requestVideosWithHandler:^(NSArray *featuredVideos) {
-        self.videos = featuredVideos;
-        self.selectedVideo = [featuredVideos objectAtIndex:0];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    if(!self.videos) {
+        self.loadingView = [[[MITLoadingActivityView alloc] initWithFrame:self.view.frame xDimensionScaling:2 yDimensionScaling:2] autorelease];
+        [self.view addSubview:self.loadingView];
+        VideoDataManager *dataManager = [VideoDataManager sharedManager];
+        [dataManager requestVideosWithDelegate:self];
+    }
+}
+
+- (void)viewDidUnload
+{
+    [super viewDidUnload];
+    [self deallocViews];
+    // Release any retained subviews of the main view.
+    // e.g. self.myOutlet = nil;
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    // Return YES for supported orientations
+    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+- (void)videosReceived:(NSArray *)theVideos forRequestType:(VideoRequestType)requestType {
+    if(requestType == VideoRequestTypeFeatured) {
+        self.videos = theVideos;
+        self.selectedVideo = [theVideos objectAtIndex:0];
         [self showVideo:self.selectedVideo];
         [self.loadingView removeFromSuperview];
         self.loadingView = nil;
@@ -114,22 +136,19 @@
             [button addTarget:self action:@selector(videoButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
             [self.thumbnailsContainer addSubview:button];
             [button setImageURL:aVideo.thumbnailURL]; 
-        }
-    }];
+        } 
+    } else if(requestType == VideoRequestTypeSearch) {
+        self.searchResults = theVideos;
+        self.searchController.searchResultsTableView.rowHeight = 50;
+        [self.searchController.searchResultsTableView reloadData];
+        [self.view addSubview:self.searchController.searchResultsTableView];    
+    }
 }
 
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    [self deallocViews];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+- (void)errorLoadingVideosForRequestType:(VideoRequestType)requestType {
+    if(requestType == VideoRequestTypeFeatured) {
+        [self.loadingView removeFromSuperview];
+    }
 }
 
 - (void)showVideo:(Video *)video {        
@@ -193,12 +212,7 @@
 #pragma mark - UISearchBarDelegate
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)aSearchBar {
-    [[VideoDataManager sharedManager] searchWithQuery:aSearchBar.text withHandler:^(NSArray *theVideos) {
-        self.searchResults = theVideos;
-        self.searchController.searchResultsTableView.rowHeight = 50;
-        [self.searchController.searchResultsTableView reloadData];
-        [self.view addSubview:self.searchController.searchResultsTableView];
-    }];
+    [[VideoDataManager sharedManager] searchWithQuery:aSearchBar.text withDelegate:self];
 }
 
 #pragma mark - UITableView delegate methods for search results

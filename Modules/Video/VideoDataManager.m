@@ -26,17 +26,17 @@
     [CoreDataManager deleteObjects:oldVideos];
 }
 
-- (void)requestVideosWithHandler:(VideosHandler)handler {
+- (void)requestVideosWithDelegate:(id<VideosReceivedDelegate>)delegate {
     JSONAPIRequest *api = [JSONAPIRequest requestWithJSONAPIDelegate:self];
-    api.userData = [handler copy];
+    api.userData = delegate;
     api.useKurogoApi = YES;
     NSDictionary *params = [NSDictionary dictionaryWithObject:@"0" forKey:@"section"];
     [api requestObject:params pathExtension:@"video/videos"];    
 }
 
-- (void)searchWithQuery:(NSString *)query withHandler:(VideosHandler)handler {
+- (void)searchWithQuery:(NSString *)query withDelegate:(id<VideosReceivedDelegate>)delegate {
     JSONAPIRequest *api = [JSONAPIRequest requestWithJSONAPIDelegate:self];
-    api.userData = [handler copy];
+    api.userData = delegate;
     api.useKurogoApi = YES;
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:2];
     [params setObject:@"0" forKey:@"section"];
@@ -46,10 +46,14 @@
 
 - (void)request:(JSONAPIRequest *)request jsonLoaded:(id)JSONObject {
     
+    VideoRequestType requestType;
     if (![request.params objectForKey:@"q"]) {
         // we purge old videos after requesting the featured videos
         // (do not purge for "video/search" request just purge "video/videos" request
         [self purgeOldVideos];
+        requestType = VideoRequestTypeFeatured;
+    } else {
+        requestType = VideoRequestTypeSearch;
     }
     
     NSDictionary *responseDict = JSONObject;
@@ -111,10 +115,20 @@
     }
     [CoreDataManager saveData];
                            
-    VideosHandler handler = request.userData;
-    handler(videos);
-    [handler release];
+    id<VideosReceivedDelegate>delegate = request.userData;
+    [delegate videosReceived:videos forRequestType:requestType];
     request.userData = nil;                                                     
+}
+
+- (void)request:(JSONAPIRequest *)request handleConnectionError:(NSError *)error {
+    id<VideosReceivedDelegate>delegate = request.userData;
+    VideoRequestType requestType = ([request.params objectForKey:@"q"] == nil) ? VideoRequestTypeFeatured : VideoRequestTypeSearch;
+    [delegate errorLoadingVideosForRequestType:requestType];
+    request.userData = nil;
+}
+
+- (BOOL)request:(JSONAPIRequest *)request shouldDisplayAlertForError:(NSError *)error {
+    return YES;
 }
 
 - (void)bookmarkVideo:(Video *)video bookmarked:(BOOL)bookmarked {
