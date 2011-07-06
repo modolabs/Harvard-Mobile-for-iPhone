@@ -1,7 +1,8 @@
 #import <Foundation/Foundation.h>
 #import "MITModule.h"
+#import "VideoDataManager.h"
 
-@interface VideoModule : MITModule {
+@interface VideoModule : MITModule <VideosReceivedDelegate> {
     UIViewController *mainViewController;
     
 }

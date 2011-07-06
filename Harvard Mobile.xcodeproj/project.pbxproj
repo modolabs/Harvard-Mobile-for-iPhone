@@ -73,6 +73,7 @@
 		4B2D289F139FBDB70004F7CC /* VideoButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B2D289E139FBDB70004F7CC /* VideoButton.m */; };
 		4B2D28A2139FCC3A0004F7CC /* MITThumbnailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B2D28A1139FCC3A0004F7CC /* MITThumbnailView.m */; };
 		4B52989613B01B8000A0CCA8 /* VideoBookmarksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B52989513B01B8000A0CCA8 /* VideoBookmarksViewController.m */; };
+		4B55D77413C4EA6000931E7F /* VideoListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B55D77313C4EA6000931E7F /* VideoListViewController.m */; };
 		4B5D1789139D9D1200B3541C /* VideoModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B5D1787139D9D1200B3541C /* VideoModule.m */; };
 		4B5D178E139D9E3100B3541C /* Video.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4B5D178C139D9E3100B3541C /* Video.xcdatamodeld */; };
 		4B5D1791139DA3EA00B3541C /* VideoDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B5D1790139DA3EA00B3541C /* VideoDataManager.m */; };
@@ -582,8 +583,10 @@
 		4B2D28A0139FCC3A0004F7CC /* MITThumbnailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MITThumbnailView.h; sourceTree = "<group>"; };
 		4B2D28A1139FCC3A0004F7CC /* MITThumbnailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MITThumbnailView.m; sourceTree = "<group>"; };
 		4B2D28A3139FCD230004F7CC /* ThumbnailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThumbnailView.h; sourceTree = "<group>"; };
-		4B52989413B01B8000A0CCA8 /* VideoBookmarksViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; path = VideoBookmarksViewController.h; sourceTree = "<group>"; };
+		4B52989413B01B8000A0CCA8 /* VideoBookmarksViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoBookmarksViewController.h; sourceTree = "<group>"; };
 		4B52989513B01B8000A0CCA8 /* VideoBookmarksViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoBookmarksViewController.m; sourceTree = "<group>"; };
+		4B55D77113C4EA5600931E7F /* VideoListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoListViewController.h; sourceTree = "<group>"; };
+		4B55D77313C4EA6000931E7F /* VideoListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoListViewController.m; sourceTree = "<group>"; };
 		4B5D1786139D9D1200B3541C /* VideoModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoModule.h; sourceTree = "<group>"; };
 		4B5D1787139D9D1200B3541C /* VideoModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoModule.m; sourceTree = "<group>"; };
 		4B5D178D139D9E3100B3541C /* Video.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Video.xcdatamodel; sourceTree = "<group>"; };
@@ -1475,6 +1478,8 @@
 				4B6E1A5A13A1204600A4921A /* VideoDetailViewController.xib */,
 				4B52989413B01B8000A0CCA8 /* VideoBookmarksViewController.h */,
 				4B52989513B01B8000A0CCA8 /* VideoBookmarksViewController.m */,
+				4B55D77313C4EA6000931E7F /* VideoListViewController.m */,
+				4B55D77113C4EA5600931E7F /* VideoListViewController.h */,
 			);
 			path = Video;
 			sourceTree = "<group>";
@@ -2597,6 +2602,7 @@
 				4B7DDDF713AAC76200E41A4E /* Video.m in Sources */,
 				4BFF351913AF95200001D63C /* VideoRelatedPostCategory.m in Sources */,
 				4B52989613B01B8000A0CCA8 /* VideoBookmarksViewController.m in Sources */,
+				4B55D77413C4EA6000931E7F /* VideoListViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

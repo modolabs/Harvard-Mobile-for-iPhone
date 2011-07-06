@@ -10,7 +10,10 @@ typedef enum {
 @protocol VideosReceivedDelegate <NSObject>
 
 - (void)videosReceived:(NSArray *)videos forRequestType:(VideoRequestType)requestType;
+
+@optional
 - (void)errorLoadingVideosForRequestType:(VideoRequestType)requestType;
+- (BOOL)showErrorDialog;
 
 @end
 

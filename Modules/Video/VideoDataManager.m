@@ -123,11 +123,17 @@
 - (void)request:(JSONAPIRequest *)request handleConnectionError:(NSError *)error {
     id<VideosReceivedDelegate>delegate = request.userData;
     VideoRequestType requestType = ([request.params objectForKey:@"q"] == nil) ? VideoRequestTypeFeatured : VideoRequestTypeSearch;
-    [delegate errorLoadingVideosForRequestType:requestType];
+    if([delegate respondsToSelector:@selector(errorLoadingVideosForRequestType:)]) {
+        [delegate errorLoadingVideosForRequestType:requestType];
+    }
     request.userData = nil;
 }
 
 - (BOOL)request:(JSONAPIRequest *)request shouldDisplayAlertForError:(NSError *)error {
+    id<VideosReceivedDelegate>delegate = request.userData;
+    if([delegate respondsToSelector:@selector(showErrorDialog)]) {
+        return [delegate showErrorDialog];
+    }
     return YES;
 }
 
