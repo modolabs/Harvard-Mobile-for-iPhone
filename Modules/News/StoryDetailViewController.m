@@ -1,5 +1,6 @@
 #import "StoryDetailViewController.h"
 #import "MIT_MobileAppDelegate.h"
+#import "MITLoadingActivityView.h"
 #import <QuartzCore/QuartzCore.h>
 #import "NewsStory.h"
 #import "CoreDataManager.h"
@@ -8,11 +9,21 @@
 #import "StoryGalleryViewController.h"
 #import "ConnectionDetector.h"
 #import "NewsImage.h"
+#import "NewsCategory.h"
 #import "AnalyticsWrapper.h"
+#import "JSONAPIRequest.h"
+
+@interface StoryDetailViewController (Private)
+- (void)loadSingleStoryFromServer;
+- (void)showStoryLoadingErrorWithMessage:(NSString *)message;
+@end
 
 @implementation StoryDetailViewController
 
 @synthesize newsController, story, storyView;
+@synthesize loadingView;
+@synthesize storyGUID;
+@synthesize storyCategories;
 
 - (void)loadView {
     [super loadView]; // surprisingly necessary empty call to super due to the way memory warnings work
@@ -54,6 +65,16 @@
 	if (self.story) {
 		[self displayStory:self.story];
 	}
+    
+    // this is a bit of hack to load
+    // an individual story if called
+    // from another module
+    if(self.storyGUID && self.storyCategories) {
+        self.loadingView = [[[MITLoadingActivityView alloc] initWithFrame:self.view.bounds xDimensionScaling:2 yDimensionScaling:2] autorelease];
+        self.loadingView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        [self.view addSubview:self.loadingView];
+        [self loadSingleStoryFromServer];
+    }
 }
 
 - (void)displayStory:(NewsStory *)aStory {
@@ -196,9 +217,84 @@
 }
 
 - (void)dealloc {
+    self.storyGUID = nil;
+    self.storyCategories = nil;
+    
 	[storyView release];
     [story release];
     [super dealloc];
+}
+
+- (void)loadSingleStoryFromServer {
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:2];
+    [params setObject:self.storyGUID forKey:@"storyId"];
+    [params setObject:[self.storyCategories componentsJoinedByString:@","] forKey:@"channelNames"];
+    JSONAPIRequest *apiRequest = [JSONAPIRequest requestWithJSONAPIDelegate:self];
+    [apiRequest requestObjectFromModule:@"news" command:@"story" parameters:params];
+}
+
+- (void)request:(JSONAPIRequest *)request jsonLoaded:(id)JSONObject {
+    NSDictionary *dict = JSONObject;
+    BOOL success = [(NSNumber *)[dict objectForKey:@"success"] boolValue];
+    if(success) {
+        // get the category for story
+        NSInteger categoryID = [(NSNumber *)[dict objectForKey:@"channelIndex"] integerValue];
+        NSString *categoryName = [dict objectForKey:@"channelName"];
+        NSPredicate *categoryIDPredicate = [NSPredicate predicateWithFormat:@"category_id == %d", categoryID];        
+        NSArray *categories = [CoreDataManager objectsForEntity:NewsCategoryEntityName matchingPredicate:categoryIDPredicate];
+        NewsCategory *category = [categories lastObject];
+        if(!category) {
+            category = [CoreDataManager insertNewObjectForEntityForName:NewsCategoryEntityName];
+            category.title = categoryName;
+            category.category_id = [NSNumber numberWithInt:categoryID];
+            category.isMainCategory = [NSNumber numberWithBool:YES];
+        }
+        
+        NSDictionary *storyDict = [dict objectForKey:@"story"];
+        NewsStory *aStory = [CoreDataManager insertNewObjectForEntityForName:NewsStoryEntityName];
+        aStory.title = [storyDict objectForKey:@"title"];
+        aStory.summary = [storyDict objectForKey:@"description"];
+        aStory.postDate = [NSDate dateWithTimeIntervalSince1970:[(NSNumber *)[storyDict objectForKey:@"pubDate"] doubleValue]];
+        aStory.body = [storyDict objectForKey:@"body"];
+        aStory.link = [storyDict objectForKey:@"link"];
+        aStory.author = [storyDict objectForKey:@"author"];
+        
+        NSDictionary *imageDict = [storyDict objectForKey:@"image"];
+        NewsImage *image = [CoreDataManager insertNewObjectForEntityForName:NewsImageEntityName];
+        image.url= [imageDict objectForKey:@"src"];
+        image.width = [imageDict objectForKey:@"width"];
+        image.height = [imageDict objectForKey:@"height"];
+        aStory.featuredImage = image;
+        aStory.categories = [NSSet setWithObject:category];
+        
+        
+        [CoreDataManager saveData];
+        self.story = aStory;
+        
+        [self.loadingView removeFromSuperview];
+        [self displayStory:self.story];
+    } else {
+        [self showStoryLoadingErrorWithMessage:[dict objectForKey:@"error"]];
+    }
+}
+
+- (BOOL)request:(JSONAPIRequest *)request shouldDisplayAlertForError:(NSError *)error {
+    return YES;
+}
+
+- (void)showStoryLoadingErrorWithMessage:(NSString *)message {
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Loading Failure" message:message delegate:self cancelButtonTitle:@"okay" otherButtonTitles: nil];
+    [alertView show];
+    [alertView release];
+    
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)alertViewCancel:(UIAlertView *)alertView {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 @end

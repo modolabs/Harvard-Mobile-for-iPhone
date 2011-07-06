@@ -4,6 +4,7 @@
 #import "MITDeviceRegistration.h"
 #import "MITUnreadNotifications.h"
 #import "AudioToolbox/AudioToolbox.h"
+#import "RootViewController.h"
 #import "SpringboardViewController.h"
 #import "AnalyticsWrapper.h"
 
@@ -44,6 +45,10 @@
 	}
     
     // Set up window
+    self.window.rootViewController = [[[RootViewController alloc] initWithNibName:nil bundle:nil] autorelease];
+    self.window.rootViewController.view.frame = self.window.bounds;
+    self.window.rootViewController.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    
     self.springboard = [[SpringboardViewController alloc] initWithNibName:nil bundle:nil];
     theNavController = [[ModoNavigationController alloc] initWithRootViewController:self.springboard];
     theNavController.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:MITImageNameBackground]];

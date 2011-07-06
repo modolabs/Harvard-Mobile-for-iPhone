@@ -3,7 +3,7 @@
 
 @class NewsImage;
 
-@interface StoryThumbnailView : UIView <ConnectionWrapperDelegate> {
+@interface ThumbnailView : UIView <ConnectionWrapperDelegate> {
     //NewsImageRep *imageRep;
     NewsImage *image;
 	ConnectionWrapper *connection;

@@ -11,6 +11,7 @@
 #import "SchoolsModule.h"
 #import "ShuttleModule.h"
 #import "LibrariesModule.h"
+#import "VideoModule.h"
 
 // #import your module's header here
 
@@ -38,6 +39,7 @@
 	[result addObject:[[[ShuttleModule alloc] init] autorelease]];
 	
 	[result addObject:[[[LibrariesModule alloc] init] autorelease]];
+    [result addObject:[[[VideoModule alloc] init] autorelease]];
 	
     [result addObject:[[[SchoolsModule alloc] init] autorelease]];
     [result addObject:[[[MobileWebModule alloc] init] autorelease]];

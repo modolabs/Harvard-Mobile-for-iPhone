@@ -1,16 +1,16 @@
-#import "StoryThumbnailView.h"
+#import "ThumbnailView.h"
 #import "MIT_MobileAppDelegate.h"
 #import "CoreDataManager.h"
 #import "NewsImage.h"
 
-@interface StoryThumbnailView (Private)
+@interface ThumbnailView (Private)
 
 - (UIImage *)placeholderImage;
 
 @end
 
 
-@implementation StoryThumbnailView
+@implementation ThumbnailView
 
 @synthesize image, connection, imageData, loadingView, imageView, placeholderImageName;
 

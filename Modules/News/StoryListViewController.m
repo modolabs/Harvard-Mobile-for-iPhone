@@ -1,7 +1,7 @@
 #import "MIT_MobileAppDelegate.h"
 #import "StoryListViewController.h"
 #import "StoryDetailViewController.h"
-#import "StoryThumbnailView.h"
+#import "ThumbnailView.h"
 #import "StoryXMLParser.h"
 #import "NewsStory.h"
 #import "CoreDataManager.h"
@@ -865,14 +865,14 @@ static NSInteger numTries = 0;
                 UILabel *titleLabel = nil;
                 UILabel *dekLabel = nil;
                 UIView *textHolder = nil;
-                StoryThumbnailView *thumbnailView = nil;
+                ThumbnailView *thumbnailView = nil;
                 
                 if (cell == nil) {
                     // Set up the cell
                     cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:StoryCellIdentifier] autorelease];
                     
                     // image goes first
-                    thumbnailView = [[StoryThumbnailView alloc] initWithFrame:CGRectMake(0, 0, 320.0, FEATURE_IMAGE_HEIGHT)];
+                    thumbnailView = [[ThumbnailView alloc] initWithFrame:CGRectMake(0, 0, 320.0, FEATURE_IMAGE_HEIGHT)];
                     thumbnailView.tag = 3;
                     [cell.contentView addSubview:thumbnailView];
                     [thumbnailView release];
@@ -913,7 +913,7 @@ static NSInteger numTries = 0;
                 textHolder = (UIView *)[cell viewWithTag:4];
                 titleLabel = (UILabel *)[textHolder viewWithTag:1];
                 dekLabel = (UILabel *)[textHolder viewWithTag:2];
-                thumbnailView = (StoryThumbnailView *)[cell viewWithTag:3];
+                thumbnailView = (ThumbnailView *)[cell viewWithTag:3];
                 
                 titleLabel.text = story.title;
                 dekLabel.text = story.summary;
@@ -955,7 +955,7 @@ static NSInteger numTries = 0;
                 
                 UILabel *titleLabel = nil;
                 UILabel *dekLabel = nil;
-                StoryThumbnailView *thumbnailView = nil;
+                ThumbnailView *thumbnailView = nil;
                 
                 if (cell == nil) {
                     // Set up the cell
@@ -981,7 +981,7 @@ static NSInteger numTries = 0;
                     [cell.contentView addSubview:dekLabel];
                     [dekLabel release];
                     
-                    thumbnailView = [[StoryThumbnailView alloc] initWithFrame:CGRectMake(0, 0, THUMBNAIL_WIDTH, THUMBNAIL_WIDTH)];
+                    thumbnailView = [[ThumbnailView alloc] initWithFrame:CGRectMake(0, 0, THUMBNAIL_WIDTH, THUMBNAIL_WIDTH)];
                     thumbnailView.tag = 3;
                     [cell.contentView addSubview:thumbnailView];
                     [thumbnailView release];
@@ -992,7 +992,7 @@ static NSInteger numTries = 0;
                 
                 titleLabel = (UILabel *)[cell viewWithTag:1];
                 dekLabel = (UILabel *)[cell viewWithTag:2];
-                thumbnailView = (StoryThumbnailView *)[cell viewWithTag:3];
+                thumbnailView = (ThumbnailView *)[cell viewWithTag:3];
                 
                 titleLabel.text = story.title;
                 dekLabel.text = story.summary;
