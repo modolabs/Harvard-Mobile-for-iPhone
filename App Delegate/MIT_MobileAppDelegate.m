@@ -146,6 +146,16 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
+- (void)applicationDidEnterBackground:(UIApplication *)application
+{
+    [[AnalyticsWrapper sharedWrapper] shutdown];
+}
+
+- (void)applicationWillEnterForeground:(UIApplication *)application
+{
+    [[AnalyticsWrapper sharedWrapper] setupWithProvider:ModoAnalyticsProviderGoogle];
+}
+
 #pragma mark -
 #pragma mark Memory management
 
