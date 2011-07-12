@@ -92,6 +92,7 @@
         cell = self.videoCell;
         self.videoCell = nil;
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        cell.selectionStyle = UITableViewCellSelectionStyleGray;
     }
     
     populateCell(cell, [self.videos objectAtIndex:indexPath.row]);

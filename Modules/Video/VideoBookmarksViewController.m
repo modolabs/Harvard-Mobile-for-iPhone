@@ -94,6 +94,7 @@
         cell = self.videoCell;
         self.videoCell = nil;
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        cell.selectionStyle = UITableViewCellSelectionStyleGray;
     }
     
     populateCell(cell, [self.bookmarkedVideos objectAtIndex:indexPath.row]);

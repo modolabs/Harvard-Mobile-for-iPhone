@@ -234,6 +234,7 @@
         cell = self.videoCell;
         self.videoCell = nil;
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        cell.selectionStyle = UITableViewCellSelectionStyleGray;
     }
 
     populateCell(cell, [self.searchResults objectAtIndex:indexPath.row]);
@@ -244,6 +245,7 @@
     Video *video = [self.searchResults objectAtIndex:indexPath.row];
     VideoDetailViewController *vc = [[[VideoDetailViewController alloc] initWithNibName:@"VideoDetailViewController" bundle:nil] autorelease];
     vc.currentVideo = video;
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
