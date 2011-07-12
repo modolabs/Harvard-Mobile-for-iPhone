@@ -44,7 +44,12 @@
             .inline-separator {margin: 0 3px;}
             #content {}
             .credential {font-size:8pt;}
-            .wp-caption {max-width:300px;font-size:8pt;color:#808080;}
+            .wp-caption {
+                width: auto !important;
+                font-size:8pt;
+                line-height: 1.2em;
+                color:#808080;
+            }
             #image {float:right;margin: 3px 0 -1px 8px;}
             #image img.thumbnail {float:right; margin-bottom: 6px; border: 1px solid #666; /* scale to width respecting aspect */}
             #image img.enlarge { float:right; margin-left: 4px; }
@@ -53,6 +58,11 @@
             #image a div { margin-top: -4px; }
             #image a+a div { margin-top: 2px; }
             #body {line-height: 20px;color: #333; margin-top: 14px;}
+            #body div img {
+                width: auto !important;
+                height: auto !important;
+                max-width: 100% !important;
+            }
         </style>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
         <title>__TITLE__</title>
