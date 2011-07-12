@@ -3,6 +3,7 @@
 #import "StoryDetailViewController.h"
 #import "ThumbnailView.h"
 #import "StoryXMLParser.h"
+#import "NewsImage.h"
 #import "NewsStory.h"
 #import "CoreDataManager.h"
 #import "UIKit+MITAdditions.h"
@@ -1003,7 +1004,7 @@ static NSInteger numTries = 0;
                 CGFloat x = THUMBNAIL_WIDTH;
                 CGFloat width = STORY_TEXT_WIDTH;
                 
-                if (story.thumbImage) {
+                if (story.thumbImage && story.thumbImage.url && [story.thumbImage.url length] > 0) {
                     thumbnailView.hidden = NO;
                     thumbnailView.image = story.thumbImage;
                     [thumbnailView loadImage];
