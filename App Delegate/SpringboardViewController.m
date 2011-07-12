@@ -17,28 +17,28 @@
 #import "AnalyticsWrapper.h"
 
 // extra vertical padding above top row of main icons
-#define GRID_TOP_MARGIN 4.0f
+#define GRID_TOP_MARGIN 7.0f
 
 // horizontal spacing between main icons
 // 0.0 for four icons per row
-// 20.0 for three icons per row
-#define MAIN_GRID_HPADDING 0.0f
+// Between 20 and 30 for three icons per row; higher values shrink icons
+#define MAIN_GRID_HPADDING 24.0f
 
 // horizontal spacing between secondary icons
 // 20.0 for four icons per row
 #define SECONDARY_GRID_HPADDING 20.0f
 
 // vertical spacing between icons
-#define GRID_VPADDING 20.0f
+#define GRID_VPADDING 9.0f
 
 // height to allocate to icon text label
-#define ICON_LABEL_HEIGHT 23.0f
+#define ICON_LABEL_HEIGHT 20.0f
 
 // internal padding within each icon (allows longer text labels)
 #define ICON_PADDING 5.0f
 
 // vertical padding above secondary (utility) icons
-#define SECONDARY_GRID_TOP_PADDING 39.0f
+#define SECONDARY_GRID_TOP_PADDING 14.0f
 
 @interface SpringboardViewController (Private)
 
@@ -140,7 +140,7 @@
             
             anIcon.titleLabel.numberOfLines = 0;
             anIcon.titleLabel.font = font;
-            anIcon.titleLabel.textColor = [UIColor colorWithHexString:@"#403F3E"];
+            anIcon.titleLabel.textColor = [UIColor colorWithHexString:@"#555250"];
             anIcon.titleLabel.lineBreakMode = UILineBreakModeWordWrap;
             anIcon.titleLabel.textAlignment = UITextAlignmentCenter;
             
