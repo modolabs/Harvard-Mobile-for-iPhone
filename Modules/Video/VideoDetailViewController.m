@@ -19,6 +19,7 @@
 @synthesize bookmarkButton;
 @synthesize playerWebview;
 @synthesize relatedNewsTableView;
+@synthesize middleContentContainer;
 
 @synthesize videos;
 @synthesize currentVideo;
@@ -43,6 +44,7 @@
     self.relatedNewsTableView.delegate = nil;
     self.relatedNewsTableView.dataSource = nil;
     self.relatedNewsTableView = nil;
+    self.middleContentContainer = nil;
 }
 
 - (void)dealloc
@@ -95,7 +97,6 @@
 }
 
 - (void)showVideo {
-    self.titleLabel.text = self.currentVideo.title;
     self.durationLabel.text = [self.currentVideo durationString];
     self.uploadedLabel.text = [self.currentVideo uploadedString];
     
@@ -128,20 +129,29 @@
     
     [self.playerWebview loadHTMLString:playerFrameHTMLString baseURL:baseURL];
 
+    CGSize titleSize = [self.currentVideo.title sizeWithFont:self.titleLabel.font constrainedToSize:CGSizeMake(self.titleLabel.frame.size.width, 1000) lineBreakMode:self.titleLabel.lineBreakMode];
+    CGRect titleFrame = self.titleLabel.frame;
+    CGFloat titleDelta = titleSize.height - titleFrame.size.height;
+    titleFrame.size.height = titleSize.height;
+    self.titleLabel.frame = titleFrame;
+    self.titleLabel.text = self.currentVideo.title;
+    
+    CGRect middleContentFrame = self.middleContentContainer.frame;
+    middleContentFrame.origin.y += titleDelta;
+    self.middleContentContainer.frame = middleContentFrame;
     
     CGSize summarySize =[self.currentVideo.summary sizeWithFont:self.summaryLabel.font constrainedToSize:CGSizeMake(self.summaryLabel.frame.size.width, 1000) lineBreakMode:self.summaryLabel.lineBreakMode];
     CGRect summaryFrame = self.summaryLabel.frame;
-    CGFloat initialHeight = summaryFrame.size.height;
+    CGFloat summaryDelta = summarySize.height - summaryFrame.size.height;
     summaryFrame.size = summarySize;
-    CGFloat finalHeight = summaryFrame.size.height;
+    summaryFrame.origin.y += titleDelta;
     self.summaryLabel.frame = summaryFrame;
     self.summaryLabel.text = self.currentVideo.summary;
     
-    CGFloat deltaHeight = finalHeight - initialHeight;
-    
     CGRect tableViewFrame = self.relatedNewsTableView.tableHeaderView.frame;
-    tableViewFrame.size.height = tableViewFrame.size.height + deltaHeight;
+    tableViewFrame.size.height = tableViewFrame.size.height + summaryDelta + titleDelta;
     self.relatedNewsTableView.tableHeaderView.frame = tableViewFrame;
+    
     // the lovely tableHeaderView hack
     self.relatedNewsTableView.tableHeaderView = self.relatedNewsTableView.tableHeaderView;
     

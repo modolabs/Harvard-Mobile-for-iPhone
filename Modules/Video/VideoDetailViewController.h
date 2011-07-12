@@ -11,6 +11,7 @@
 @property (nonatomic, retain) IBOutlet UILabel *durationLabel;
 @property (nonatomic, retain) IBOutlet UILabel *uploadedLabel;
 @property (nonatomic, retain) IBOutlet UILabel *summaryLabel;
+@property (nonatomic, retain) IBOutlet UIView *middleContentContainer;
 @property (nonatomic, retain) IBOutlet UIButton *bookmarkButton;
 @property (nonatomic, retain) IBOutlet UIWebView *playerWebview;
 @property (nonatomic, retain) IBOutlet UITableView *relatedNewsTableView;
