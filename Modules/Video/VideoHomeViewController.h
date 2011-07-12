@@ -10,6 +10,8 @@
                                                         UITableViewDelegate,
                                                         VideosReceivedDelegate,
                                                         UIWebViewDelegate> {
+                                                            
+    BOOL videosLoaded;
     
 }
 

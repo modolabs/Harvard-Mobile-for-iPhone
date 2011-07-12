@@ -93,6 +93,8 @@
         [self.view addSubview:self.loadingView];
         VideoDataManager *dataManager = [VideoDataManager sharedManager];
         [dataManager requestVideosWithDelegate:self];
+    } else if(!videosLoaded) {
+        [self videosReceived:self.videos forRequestType:VideoRequestTypeFeatured];
     }
 }
 
@@ -100,6 +102,7 @@
 {
     [super viewDidUnload];
     [self deallocViews];
+    videosLoaded = NO;
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
@@ -135,7 +138,8 @@
             button.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin);
             [button addTarget:self action:@selector(videoButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
             [self.thumbnailsContainer addSubview:button];
-            [button setImageURL:aVideo.thumbnailURL]; 
+            [button setImageURL:aVideo.thumbnailURL];
+            videosLoaded = YES;
         } 
     } else if(requestType == VideoRequestTypeSearch) {
         if(theVideos.count > 0) {
