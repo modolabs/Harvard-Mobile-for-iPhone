@@ -185,6 +185,8 @@
 
 - (void)viewDidLoad
 {
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:ImageNameHomeScreenBackground]];
+    
 	UIBarButtonItem *newBackButton = [[UIBarButtonItem alloc] initWithTitle:@"Home" style:UIBarButtonItemStyleBordered target:nil action:nil];	
 	[[self navigationItem] setBackBarButtonItem: newBackButton];
 	[newBackButton release];
@@ -193,7 +195,6 @@
     self.navigationItem.titleView = [[[UIImageView alloc] initWithImage:masthead] autorelease];
     
     containingView = [[UIScrollView alloc] initWithFrame:self.view.bounds];
-    containingView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:ImageNameHomeScreenBackground]];
     containingView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     [self.view addSubview:containingView];
 
