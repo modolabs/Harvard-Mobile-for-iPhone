@@ -251,7 +251,15 @@
         }
         
         NSDictionary *storyDict = [dict objectForKey:@"story"];
-        NewsStory *aStory = [CoreDataManager insertNewObjectForEntityForName:NewsStoryEntityName];
+        // use existing story if it's already in the db
+        NSInteger storyID = [[storyDict objectForKey:@"WPID"] integerValue];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"story_id == %d", storyID];
+        NewsStory *aStory = [[CoreDataManager objectsForEntity:NewsStoryEntityName matchingPredicate:predicate] lastObject];
+        // otherwise create new
+        if (!aStory) {
+            aStory = (NewsStory *)[CoreDataManager insertNewObjectForEntityForName:NewsStoryEntityName];
+            aStory.story_id = [NSNumber numberWithInt:storyID];
+        }
         aStory.title = [storyDict objectForKey:@"title"];
         aStory.summary = [storyDict objectForKey:@"description"];
         aStory.postDate = [NSDate dateWithTimeIntervalSince1970:[(NSNumber *)[storyDict objectForKey:@"pubDate"] doubleValue]];
