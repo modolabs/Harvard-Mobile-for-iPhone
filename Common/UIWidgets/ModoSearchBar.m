@@ -17,6 +17,13 @@
     return self;
 }
 
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    if ((self = [super initWithCoder:aDecoder])) {
+        self.tintColor = SEARCH_BAR_TINT_COLOR;
+    }
+    return self;
+}
+        
 - (void)drawRect:(CGRect)rect {
     [super drawRect:rect];
     
