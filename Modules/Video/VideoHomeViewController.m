@@ -138,10 +138,16 @@
             [button setImageURL:aVideo.thumbnailURL]; 
         } 
     } else if(requestType == VideoRequestTypeSearch) {
-        self.searchResults = theVideos;
-        self.searchController.searchResultsTableView.rowHeight = 50;
-        [self.searchController.searchResultsTableView reloadData];
-        [self.view addSubview:self.searchController.searchResultsTableView];    
+        if(theVideos.count > 0) {
+            self.searchResults = theVideos;
+            self.searchController.searchResultsTableView.rowHeight = 50;
+            [self.searchController.searchResultsTableView reloadData];
+            [self.view addSubview:self.searchController.searchResultsTableView];    
+        } else {
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"No matching videos found." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            [alertView show];
+            [alertView release];
+        }
     }
 }
 
