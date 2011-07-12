@@ -200,6 +200,7 @@
     if(!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
         cell.accessoryView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"global/action-news"]] autorelease];
+        cell.selectionStyle = UITableViewCellSelectionStyleGray;
     }
     VideoRelatedPost *post = [self.relatedPosts objectAtIndex:indexPath.row];
     cell.textLabel.text = post.title;
