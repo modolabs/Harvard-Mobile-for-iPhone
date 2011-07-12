@@ -6,9 +6,9 @@ NSString * const MITMobileWebAPIURLString = @"http://local.harvard.edu/harvard-k
 NSString * const KurogoAPIURLString       = @"http://local.harvard.edu/harvard-kurogo/rest/";
 #else
     #ifdef USE_MOBILE_TEST
-    NSString * const MITMobileWebDomainString = @"harvard-dev.modolabs.com";
-    NSString * const MITMobileWebAPIURLString = @"http://harvard-dev.modolabs.com/api/";
-    NSString * const KurogoAPIURLString = @"http://harvard-dev.modolabs.com/rest/";
+    NSString * const MITMobileWebDomainString = @"mobile-dev.harvard.edu";
+    NSString * const MITMobileWebAPIURLString = @"http://mobile-dev.harvard.edu/api/";
+    NSString * const KurogoAPIURLString = @"http://mobile-dev.harvard.edu/rest/";
     #else
         #ifdef USE_MOBILE_STAGE
         NSString * const MITMobileWebDomainString = @"mobile-staging.harvard.edu";
