@@ -145,6 +145,10 @@
     } else if(requestType == VideoRequestTypeSearch) {
         if(theVideos.count > 0) {
             self.searchResults = theVideos;
+            CGRect resultsFrame = self.searchController.searchResultsTableView.frame;
+            CGFloat resultsHeight = self.view.frame.size.height - resultsFrame.origin.y;
+            resultsFrame.size.height = resultsHeight;
+            self.searchController.searchResultsTableView.frame = resultsFrame;
             self.searchController.searchResultsTableView.rowHeight = 50;
             [self.searchController.searchResultsTableView reloadData];
             [self.view addSubview:self.searchController.searchResultsTableView];    
