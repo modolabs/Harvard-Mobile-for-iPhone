@@ -222,6 +222,11 @@
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 	
 	ShuttleStop *stop = (ShuttleStop *)[self.route.stops objectAtIndex:indexPath.row]; 
+    if(![stop title]) {
+        // stop has not fully loaded so just skip
+        return;
+    }
+    
 	ShuttleStopMapAnnotation *annoToPass = nil;
     
     for (ShuttleStopMapAnnotation *anAnnotation in self.route.annotations) {
