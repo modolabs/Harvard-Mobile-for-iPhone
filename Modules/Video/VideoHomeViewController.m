@@ -1,3 +1,4 @@
+#import "AnalyticsWrapper.h"
 #import "Foundation+MITAdditions.h"
 #import "MITLoadingActivityView.h"
 #import "MITSearchDisplayController.h"
@@ -211,11 +212,14 @@
 - (void)videoButtonTapped:(id)sender {
     VideoButton *button = sender;
     if (![self.selectedVideo isEqual:button.userData]) {
+        NSInteger videoIndex = [self.videos indexOfObject:button.userData];
         self.selectedButton.selected = NO;
         self.selectedButton = button;
         self.selectedButton.selected = YES;
         self.selectedVideo = button.userData;
         [self showVideo:self.selectedVideo];
+        
+        [[AnalyticsWrapper sharedWrapper] trackEvent:@"Video Home" action:@"Featured Video Tapped" label:[NSString stringWithFormat:@"Video %d", videoIndex+1]];
     }
 }
 
@@ -223,6 +227,7 @@
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)aSearchBar {
     [[VideoDataManager sharedManager] searchWithQuery:aSearchBar.text withDelegate:self];
+    [[AnalyticsWrapper sharedWrapper] trackPageview:[NSString stringWithFormat:@"/video/search/?filter=%@", aSearchBar.text]];
 }
 
 #pragma mark - UITableView delegate methods for search results

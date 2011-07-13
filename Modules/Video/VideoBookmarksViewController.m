@@ -1,3 +1,4 @@
+#import "AnalyticsWrapper.h"
 #import "VideoBookmarksViewController.h"
 #import "VideoDataManager.h"
 #import "VideoDetailViewController.h"
@@ -38,7 +39,8 @@
     [super viewDidLoad];
     self.tableView.rowHeight = 50;
     self.title = @"Bookmarks";
-
+    [[AnalyticsWrapper sharedWrapper] trackPageview:@"/video/bookmarks"];
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  

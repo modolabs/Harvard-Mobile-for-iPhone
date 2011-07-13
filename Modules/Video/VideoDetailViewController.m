@@ -1,3 +1,4 @@
+#import "AnalyticsWrapper.h"
 #import "VideoDetailViewController.h"
 #import "VideoRelatedPost.h"
 #import "Foundation+MITAdditions.h"
@@ -79,6 +80,7 @@
     }
     
     [self showVideo];
+    [[AnalyticsWrapper sharedWrapper] trackPageview:[NSString stringWithFormat:@"/video/detail?section=0&videoid=%@", self.currentVideo.videoID]];
     // Do any additional setup after loading the view from its nib.
 }
 
