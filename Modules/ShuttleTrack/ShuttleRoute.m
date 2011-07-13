@@ -165,6 +165,11 @@
                     aStop = [ShuttleDataManager stopWithRoute:self.routeID stopID:stopID error:&error];
                     [_stopsById setObject:aStop forKey:stopID];
                     [self.stops addObject:aStop];
+                    ShuttleStopMapAnnotation* annotation = [[[ShuttleStopMapAnnotation alloc] initWithShuttleStop:aStop] autorelease];
+                    if(!_stopAnnotations) {
+                        _stopAnnotations = [[NSMutableSet alloc] init];
+                    }
+                    [_stopAnnotations addObject:annotation];
                 }
                 if ([aDict objectForKey:@"upcoming"]) {
                     self.nextStopId = stopID;
