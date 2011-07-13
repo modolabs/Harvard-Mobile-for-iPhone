@@ -24,6 +24,7 @@
 @synthesize loadingView;
 @synthesize storyGUID;
 @synthesize storyCategories;
+@synthesize storySearchTitle;
 
 - (void)loadView {
     [super loadView]; // surprisingly necessary empty call to super due to the way memory warnings work
@@ -219,6 +220,7 @@
 - (void)dealloc {
     self.storyGUID = nil;
     self.storyCategories = nil;
+    self.storySearchTitle = nil;
     
 	[storyView release];
     [story release];
@@ -228,6 +230,7 @@
 - (void)loadSingleStoryFromServer {
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:2];
     [params setObject:self.storyGUID forKey:@"storyId"];
+    [params setObject:self.storySearchTitle forKey:@"filter"];
     [params setObject:[self.storyCategories componentsJoinedByString:@","] forKey:@"channelNames"];
     JSONAPIRequest *apiRequest = [JSONAPIRequest requestWithJSONAPIDelegate:self];
     [apiRequest requestObjectFromModule:@"news" command:@"story" parameters:params];

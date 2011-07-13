@@ -32,6 +32,7 @@
 // these properties are only used if called from another
 // module, and story details not yet available
 @property (nonatomic, retain) NSString *storyGUID;
+@property (nonatomic, retain) NSString *storySearchTitle;
 @property (nonatomic, retain) NSArray *storyCategories; // an array category titles (NSString's)
 @property (nonatomic, retain) UIView *loadingView; //loading story from server
 

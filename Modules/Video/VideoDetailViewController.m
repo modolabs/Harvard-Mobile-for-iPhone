@@ -212,6 +212,7 @@
     StoryDetailViewController *storyVC = [[[StoryDetailViewController alloc] init] autorelease];
     storyVC.storyGUID = post.guid;
     storyVC.storyCategories = [post categoryTitles];
+    storyVC.storySearchTitle = post.title;
     [self.navigationController pushViewController:storyVC animated:YES];
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
