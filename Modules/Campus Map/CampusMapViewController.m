@@ -334,9 +334,11 @@
 - (void)didSetSearchResults {
     if (_searchResults.count == 1) {
         id<MKAnnotation> annotation = [_mapView.annotations lastObject];
-        [_mapView selectAnnotation:annotation animated:YES];
+        if (annotation) {
+            [_mapView selectAnnotation:annotation animated:YES];
+        }
         
-    } else {
+    } else if (_searchResults.count > 1) {
         _mapView.region = [self regionForAnnotations:_searchResults];
     }
 }
