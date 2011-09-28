@@ -10,10 +10,22 @@
                     margin: 0;
                     padding: 0;
                     font: 11pt/1.33em "Helvetica Neue", Helvetica, sans-serif;
+                    background-color: transparent;
                 }
                 .feedlinks {
                     font-size: 75%;
                     line-height: 24px;
+                }
+                .feedlinks a {
+                    background-position: 0 0;
+                    background-repeat: no-repeat;
+                    background-size: 24px 24px;
+                    color: #222222;
+                    display: inline-block;
+                    height: 24px;
+                    margin-right: 1.5em;
+                    padding-left: 28px;
+                    text-decoration: none;
                 }
                 span {
                     display: block;
@@ -34,6 +46,15 @@
                     font-size: 100%;
                     font-weight: bold;
                 }
+                .twitter {
+                    background-image: url("global/button-twitter.png");
+                }
+                .facebook {
+                    background-image: url("global/button-facebook.png");
+                }
+                .youtube {
+                    background-image: url("global/button-youtube.png");
+                }
                 .post {
                     padding-left: 54px;
                     position: relative;
@@ -44,9 +65,6 @@
                     position: absolute;
                     top: 0;
                     width: 48px;
-                }
-                .post .twitter {
-                    background-image: url("global/button-twitter.png");
                 }
                 .post .smallprint {
                     background-position: 0 0;
@@ -105,7 +123,7 @@
                     __POSTS__
                 </div>
                 <div class="listitem">
-                    <a class="pagerlink" href="loadMore">Load more</a>
+                    <a class="pagerlink" href="loadMore://20">Load more</a>
                 </div>
         </div>
         

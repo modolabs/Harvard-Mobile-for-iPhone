@@ -24,9 +24,14 @@ dateFormatter = _dateFormatter;
     [super viewDidLoad];
     
     _currentStart = 0;
+    _scrollPosition = 0;
+
+	self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:MITImageNameBackground]];
     
     self.webView = [[[UIWebView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)] autorelease];
     self.webView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    self.webView.backgroundColor = [UIColor clearColor];
+    self.webView.opaque = NO;
     self.webView.delegate = self;
     
     NSURL *baseURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] resourcePath] isDirectory:YES];
@@ -41,7 +46,7 @@ dateFormatter = _dateFormatter;
     self.templateValues = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                            @"", @"__LINKS__",
                            @"", @"__FEATURED_POST__",
-                           @"", @"__POSTS__",
+                           [NSMutableString string], @"__POSTS__",
                            nil];
     
     
@@ -73,8 +78,8 @@ dateFormatter = _dateFormatter;
                                      @"", @"__AUTHOR_URL__",
                                      @"", @"__TIME__",
                                      @"", @"__AUTHOR__",
-                                     @"", @"__RETWEET_LINK__",
 #endif
+                                     @"", @"__RETWEET_LINK__",
                                      nil];
 
     if (post.message) {
@@ -114,6 +119,8 @@ dateFormatter = _dateFormatter;
     return htmlString;
 }
 
+#pragma mark - webview delegate
+
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
     NSURL *url = request.URL;
@@ -136,10 +143,25 @@ dateFormatter = _dateFormatter;
 
             return NO;
         }
+        
+        if ([urlString rangeOfString:@"loadMore"].location == 0) {
+            [self requestItems];
+            
+            return NO;
+        }
     }
     return YES;
 }
 
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    if (_scrollPosition) {
+        [self.webView stringByEvaluatingJavaScriptFromString:
+         [NSString stringWithFormat:@"scrollTo(0, %d)", _scrollPosition]];
+    }
+}
+
+#pragma mark -
 
 - (void)updateWebView
 {
@@ -147,6 +169,8 @@ dateFormatter = _dateFormatter;
     [self.templateValues enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
         [htmlString replaceOccurrencesOfString:key withString:obj options:NSLiteralSearch range:NSMakeRange(0, htmlString.length)];
     }];
+
+    _scrollPosition = [[self.webView stringByEvaluatingJavaScriptFromString:@"window.pageYOffset"] integerValue];
     
     NSURL *baseURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] resourcePath] isDirectory:YES];
     [self.webView loadHTMLString:htmlString baseURL:baseURL];
@@ -245,7 +269,7 @@ dateFormatter = _dateFormatter;
                 _currentStart = [start integerValue];
             }
 
-            NSMutableString *postHTML = [NSMutableString string];
+            NSMutableString *postHTML = [self.templateValues objectForKey:@"__POSTS__"];
             
             NSArray *posts = [jsonDict objectForKey:@"posts"];
             for (NSDictionary *postDict in posts) {
@@ -262,6 +286,7 @@ dateFormatter = _dateFormatter;
                     aPost.date = [NSDate dateWithTimeIntervalSince1970:interval];
                 }
                 [self.posts addObject:aPost];
+                _currentStart++;
 
                 [postHTML appendString:[self htmlForPost:aPost featured:NO]];
             }

@@ -20,11 +20,16 @@
     NSString *_parentTemplate;
     NSString *_postTemplate;
     NSDateFormatter *_dateFormatter;
+    
+    NSInteger _scrollPosition;
 }
 
 @property (nonatomic, retain) UIWebView *webView;
+
+// TODO: the following two properties may not be necessary
 @property (nonatomic, retain) NSMutableArray *posts;
 @property (nonatomic, retain) SocialPost *featuredPost;
+
 @property (nonatomic, retain) NSString *parentTemplate;
 @property (nonatomic, retain) NSString *postTemplate;
 @property (nonatomic, retain) NSDateFormatter *dateFormatter;
