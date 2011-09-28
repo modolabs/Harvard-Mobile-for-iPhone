@@ -130,7 +130,7 @@
 
 - (void)loadAnnotationContent
 {
-    NSArray *fieldBlackList = [NSArray arrayWithObjects:@"Root", @"Shape", @"PHOTO_FILE", @"Photo", @"OBJECTID", @"FID", @"BL_ID", nil];
+    NSArray *fieldBlackList = [NSArray arrayWithObjects:@"Root", @"Shape", @"PHOTO_FILE", @"Photo", @"OBJECTID", @"FID", @"BL_ID", @"Building_HU.Building_Label", nil];
     
 	[_loadingResultView removeFromSuperview];
 	_nameLabel.hidden = NO;
