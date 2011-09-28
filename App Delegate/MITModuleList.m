@@ -12,6 +12,7 @@
 #import "ShuttleModule.h"
 #import "LibrariesModule.h"
 #import "VideoModule.h"
+#import "SocialModule.h"
 
 // #import your module's header here
 
@@ -39,6 +40,7 @@
     [result addObject:[[[NewsModule alloc] init] autorelease]];
     [result addObject:[[[VideoModule alloc] init] autorelease]];
 	[result addObject:[[[CalendarModule alloc] init] autorelease]];
+	[result addObject:[[[SocialModule alloc] init] autorelease]];
 
     [result addObject:[[[SchoolsModule alloc] init] autorelease]];
     [result addObject:[[[MobileWebModule alloc] init] autorelease]];

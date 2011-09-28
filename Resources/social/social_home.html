@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <meta name = "viewport" content = "width = 320, initial-scale = 1.0, user-scalable = no">
+            <title>Social</title>
+            <style type="text/css">
+                html, body {
+                    margin: 0;
+                    padding: 0;
+                    font: 11pt/1.33em "Helvetica Neue", Helvetica, sans-serif;
+                }
+                .feedlinks {
+                    font-size: 75%;
+                    line-height: 24px;
+                }
+                span {
+                    display: block;
+                }
+                .focal {
+                    background-color: #FFFFFF;
+                    color: #222222;
+                    border: 1px solid #CCCCCC;
+                    border-radius: 9px 9px 9px 9px;
+                    font-weight: normal;
+                    line-height: 1.33em;
+                    margin: 10px;
+                    padding: 12px;
+                    position: relative;
+                }
+                h3 {
+                    color: #554C41;
+                    font-size: 100%;
+                    font-weight: bold;
+                }
+                .post {
+                    padding-left: 54px;
+                    position: relative;
+                }
+                .post .posticon {
+                    height: 48px;
+                    left: 0;
+                    position: absolute;
+                    top: 0;
+                    width: 48px;
+                }
+                .post .twitter {
+                    background-image: url("global/button-twitter.png");
+                }
+                .post .smallprint {
+                    background-position: 0 0;
+                    background-repeat: no-repeat;
+                    background-size: 24px 24px;
+                    line-height: 24px;
+                    margin-top: 10px;
+                    padding-left: 30px;
+                }
+                .post a {
+                    text-decoration: none;
+                }
+                g=css-...debug=1 (line 1768)
+                a, a:visited {
+                    color: #993333;
+                }
+                .posts {
+                    background: none repeat scroll 0 0 white;
+                    border-bottom: 1px solid #CCCCCC;
+                    border-top: 1px solid #CCCCCC;
+                    margin: 10px 0;
+                    padding: 0;
+                }
+                .posts .listitem:first-child {
+                    border-top: 0 none;
+                }
+                .posts .listitem {
+                    border-top: 1px solid #CCCCCC;
+                    padding: 10px;
+                }
+                .posts .pagerlink {
+                    background-image: url("global/action-arrow.png");
+                    background-position: right center;
+                    background-repeat: no-repeat;
+                    color: #222222;
+                    display: block;
+                    font-weight: bold;
+                    margin: -10px;
+                    padding: 10px 25px 10px 10px;
+                    text-decoration: none;
+                }
+                </style>
+    </head>
+    <body>
+        <div id="container">
+            <div class="nonfocal feedlinks">
+                <span>Find Harvard on:</span>
+                __LINKS__
+            </div>
+            <div class="focal featured">
+                <h3>Featured Update</h3>
+                __FEATURED_POST__
+            </div>
+            <div class="posts">
+                <div class="listitem">
+                    __POSTS__
+                </div>
+                <div class="listitem">
+                    <a class="pagerlink" href="loadMore">Load more</a>
+                </div>
+        </div>
+        
+    </body>
+</html>
+

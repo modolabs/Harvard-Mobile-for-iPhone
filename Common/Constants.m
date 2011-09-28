@@ -50,6 +50,7 @@ NSString * const EmergencyTag  = @"emergencyinfo";
 NSString * const CampusMapTag  = @"map";
 NSString * const NewsOfficeTag = @"news";
 NSString * const VideoTag      = @"video";
+NSString * const SocialTag     = @"social";
 NSString * const DirectoryTag  = @"people";
 NSString * const StellarTag    = @"courses";
 NSString * const ShuttleTag    = @"shuttleschedule";

@@ -1,0 +1,11 @@
+#import "SocialHomeViewController.h"
+
+@implementation SocialHomeViewController
+
+@synthesize webView = _webView;
+
+
+
+
+
+@end

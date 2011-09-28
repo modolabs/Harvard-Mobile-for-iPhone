@@ -391,6 +391,10 @@
 		EB6F2B6610E901E000A29A2A /* UITableView+MITUIAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = EB6F2B6210E901E000A29A2A /* UITableView+MITUIAdditions.m */; };
 		EB6F2B6710E901E000A29A2A /* UITableViewCell+MITUIAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = EB6F2B6410E901E000A29A2A /* UITableViewCell+MITUIAdditions.m */; };
 		EB6FD1F910E19D7900D56BE1 /* SecondaryGroupedTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EB6FD1F810E19D7900D56BE1 /* SecondaryGroupedTableViewCell.m */; };
+		EB70DC6E14339F6200E60476 /* SocialHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EB70DC6B14339F6200E60476 /* SocialHomeViewController.m */; };
+		EB70DC6F14339F6200E60476 /* SocialModule.m in Sources */ = {isa = PBXBuildFile; fileRef = EB70DC6D14339F6200E60476 /* SocialModule.m */; };
+		EB70DC711433A33000E60476 /* social in Resources */ = {isa = PBXBuildFile; fileRef = EB70DC701433A33000E60476 /* social */; };
+		EB70DC741433C68A00E60476 /* SocialPost.m in Sources */ = {isa = PBXBuildFile; fileRef = EB70DC731433C68A00E60476 /* SocialPost.m */; };
 		EB74ED2F11924E7C006673F9 /* ShareDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EB74ED2D11924E7C006673F9 /* ShareDetailViewController.m */; };
 		EB7BA33F11F7677F00B3DDA6 /* PolygonOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = EB7BA33D11F7677F00B3DDA6 /* PolygonOverlay.m */; };
 		EB7F327F10CD6C5B00188BCD /* PeopleDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EB7F326A10CD6C5B00188BCD /* PeopleDataModel.xcdatamodeld */; };
@@ -1066,6 +1070,13 @@
 		EB6F2B6910E9023300A29A2A /* MITUIConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MITUIConstants.h; sourceTree = "<group>"; };
 		EB6FD1F710E19D7900D56BE1 /* SecondaryGroupedTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecondaryGroupedTableViewCell.h; sourceTree = "<group>"; };
 		EB6FD1F810E19D7900D56BE1 /* SecondaryGroupedTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecondaryGroupedTableViewCell.m; sourceTree = "<group>"; };
+		EB70DC6A14339F6200E60476 /* SocialHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocialHomeViewController.h; sourceTree = "<group>"; };
+		EB70DC6B14339F6200E60476 /* SocialHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocialHomeViewController.m; sourceTree = "<group>"; };
+		EB70DC6C14339F6200E60476 /* SocialModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocialModule.h; sourceTree = "<group>"; };
+		EB70DC6D14339F6200E60476 /* SocialModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocialModule.m; sourceTree = "<group>"; };
+		EB70DC701433A33000E60476 /* social */ = {isa = PBXFileReference; lastKnownFileType = folder; name = social; path = Resources/social; sourceTree = "<group>"; };
+		EB70DC721433C68A00E60476 /* SocialPost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocialPost.h; sourceTree = "<group>"; };
+		EB70DC731433C68A00E60476 /* SocialPost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocialPost.m; sourceTree = "<group>"; };
 		EB74ED2C11924E7C006673F9 /* ShareDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareDetailViewController.h; sourceTree = "<group>"; };
 		EB74ED2D11924E7C006673F9 /* ShareDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareDetailViewController.m; sourceTree = "<group>"; };
 		EB7BA33C11F7677F00B3DDA6 /* PolygonOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PolygonOverlay.h; sourceTree = "<group>"; };
@@ -1252,6 +1263,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				EB70DC701433A33000E60476 /* social */,
 				4B5D17A2139ED3CC00B3541C /* video */,
 				EB137B4B12DFE4EE004DBB7C /* libraries */,
 				EB67B0FA12CA6BC30080C0AA /* en.lproj */,
@@ -1925,6 +1937,7 @@
 		DE715445102FE468005E6111 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				EB70DC6914339E5C00E60476 /* Social */,
 				4B5D1783139D9D1200B3541C /* Video */,
 				56B6DA3F12914C5C00818071 /* Libraries */,
 				C76FBB551230019400968920 /* ShuttleTrack */,
@@ -2140,6 +2153,19 @@
 				EB6D10D911EE13F100B65CE3 /* MapZoomLevel.m */,
 			);
 			name = ArcGISServer;
+			sourceTree = "<group>";
+		};
+		EB70DC6914339E5C00E60476 /* Social */ = {
+			isa = PBXGroup;
+			children = (
+				EB70DC721433C68A00E60476 /* SocialPost.h */,
+				EB70DC731433C68A00E60476 /* SocialPost.m */,
+				EB70DC6A14339F6200E60476 /* SocialHomeViewController.h */,
+				EB70DC6B14339F6200E60476 /* SocialHomeViewController.m */,
+				EB70DC6C14339F6200E60476 /* SocialModule.h */,
+				EB70DC6D14339F6200E60476 /* SocialModule.m */,
+			);
+			path = Social;
 			sourceTree = "<group>";
 		};
 		EB7F326610CD6C5B00188BCD /* People */ = {
@@ -2359,6 +2385,7 @@
 				4B5D17A3139ED3CC00B3541C /* video in Resources */,
 				4B6E1A5413A0353100A4921A /* VideoTableViewCell.xib in Resources */,
 				4B6E1A5C13A1204600A4921A /* VideoDetailViewController.xib in Resources */,
+				EB70DC711433A33000E60476 /* social in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2603,6 +2630,9 @@
 				4BFF351913AF95200001D63C /* VideoRelatedPostCategory.m in Sources */,
 				4B52989613B01B8000A0CCA8 /* VideoBookmarksViewController.m in Sources */,
 				4B55D77413C4EA6000931E7F /* VideoListViewController.m in Sources */,
+				EB70DC6E14339F6200E60476 /* SocialHomeViewController.m in Sources */,
+				EB70DC6F14339F6200E60476 /* SocialModule.m in Sources */,
+				EB70DC741433C68A00E60476 /* SocialPost.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

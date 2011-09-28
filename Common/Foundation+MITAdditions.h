@@ -12,3 +12,9 @@
 - (void)replaceOccurrencesOfStrings:(NSArray *)targets withStrings:(NSArray *)replacements options:(NSStringCompareOptions)options;
 
 @end
+
+@interface NSDate (AgoString)
+
+- (NSString *)agoString;
+
+@end

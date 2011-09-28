@@ -31,3 +31,46 @@
 }
 
 @end
+
+@implementation NSDate (AgoString)
+
+- (NSString *)agoString {
+    NSString *result = nil;
+    int seconds = -(int)[self timeIntervalSinceNow];
+    int minutes = seconds / 60;
+    if (minutes < 60) {
+        if (minutes == 1) {
+            result = [NSString stringWithFormat:@"%d %@", minutes, NSLocalizedString(@"minute ago", nil)];
+        } else {
+            result = [NSString stringWithFormat:@"%d %@", minutes, NSLocalizedString(@"minutes ago", nil)];
+        }
+    } else {
+        int hours = minutes / 60;
+        if (hours < 24) {
+            if (hours == 1) {
+                result = [NSString stringWithFormat:@"%d %@", hours, NSLocalizedString(@"hour ago", nil)];
+            } else {
+                result = [NSString stringWithFormat:@"%d %@", hours, NSLocalizedString(@"hours ago", nil)];
+            }
+        } else {
+            int days = hours / 24;
+            if (days < 7) {
+                if (days == 1) {
+                    result = [NSString stringWithFormat:@"%d %@", days, NSLocalizedString(@"day ago", nil)];
+                } else {
+                    result = [NSString stringWithFormat:@"%d %@", days, NSLocalizedString(@"days ago", nil)];
+                }
+            } else {
+                static NSDateFormatter *shortFormatter = nil;
+                if (shortFormatter == nil) {
+                    shortFormatter = [[NSDateFormatter alloc] init];
+                    [shortFormatter setDateStyle:NSDateFormatterShortStyle];
+                }
+                result = [shortFormatter stringFromDate:self];
+            }
+        }
+    }
+    return result;
+}
+
+@end

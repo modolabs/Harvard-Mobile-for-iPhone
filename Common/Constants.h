@@ -36,6 +36,7 @@ extern NSString * const EmergencyTag;
 extern NSString * const CampusMapTag;
 extern NSString * const NewsOfficeTag;
 extern NSString * const VideoTag;
+extern NSString * const SocialTag;
 extern NSString * const DirectoryTag;
 extern NSString * const StellarTag;
 extern NSString * const ShuttleTag;
