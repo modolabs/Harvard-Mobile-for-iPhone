@@ -115,6 +115,10 @@ dateFormatter = _dateFormatter;
     [postVars enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
         [htmlString replaceOccurrencesOfString:key withString:obj options:NSLiteralSearch range:NSMakeRange(0, htmlString.length)];
     }];
+    
+    if (!isFeatured) {
+        htmlString = [NSString stringWithFormat:@"<div class=\"listitem\">%@</div>", htmlString];
+    }
 
     return htmlString;
 }
