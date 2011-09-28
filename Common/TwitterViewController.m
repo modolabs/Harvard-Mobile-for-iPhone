@@ -134,7 +134,7 @@ static NSString * const TwitterServiceName = @"Twitter";
 	if([[NSUserDefaults standardUserDefaults] objectForKey:TwitterShareUsernameKey]) {
 		// user has logged in
 		navigationItem.title = @"Post to Twitter";
-        if (!shortURL) {
+        if (longURL && !shortURL) {
             self.connection = [[[ConnectionWrapper alloc] initWithDelegate:self] autorelease];
             NSString *bitlyURLString = [NSString stringWithFormat:@"http://api.bit.ly/v3/shorten?login=%@&apiKey=%@&longURL=%@&format=json",
                                         BitlyUsername, BitlyAPIKey, longURL];
@@ -206,7 +206,11 @@ static NSString * const TwitterServiceName = @"Twitter";
     [messageInputView addSubview:fakeMessageField];
     
     messageField = [[UITextView alloc] initWithFrame:CGRectInset(messageFrame, MESSAGE_MARGIN, MESSAGE_MARGIN)];
-    messageField.text = [NSString stringWithFormat:@"%@:\n%@", message, shortURL];
+    if (shortURL) {
+        messageField.text = [NSString stringWithFormat:@"%@:\n%@", message, shortURL];
+    } else {
+        messageField.text = message;
+    }
     messageField.delegate = self;
     //messageField.delegate = [[MessageFieldDelegate alloc] initWithMessage:messageField.text counter:counterLabel];
     messageField.backgroundColor = [UIColor clearColor];

@@ -1,6 +1,8 @@
 #import "SocialHomeViewController.h"
 #import "SocialPost.h"
 #import "Foundation+MITAdditions.h"
+#import "MIT_MobileAppDelegate.h"
+#import "TwitterViewController.h"
 
 @interface SocialHomeViewController (Private)
 
@@ -88,7 +90,7 @@ dateFormatter = _dateFormatter;
             NSString *message = post.message ? post.message : @"";
             NSString *author = post.author ? post.author : @"";
             NSString *retweetLink = [NSString stringWithFormat:@"<a class=\"retweet %@\""
-                                     "href=\"http://twitter.com/?status=RT+%%40%@+%@\">Retweet</a>",
+                                     "href=\"retweet://RT+%@+%@\">Retweet</a>",
                                      featuredClass, author, message];
             
             [postVars setObject:retweetLink forKey:@"__RETWEET_LINK__"];
@@ -111,6 +113,33 @@ dateFormatter = _dateFormatter;
 
     return htmlString;
 }
+
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+{
+    NSURL *url = request.URL;
+    
+    if (navigationType == UIWebViewNavigationTypeLinkClicked) {
+        NSString *urlString = [url absoluteString];
+        if ([urlString rangeOfString:@"http"].location == 0) {
+            if ([[UIApplication sharedApplication] canOpenURL:url]) {
+                [[UIApplication sharedApplication] openURL:url];
+            }
+            return NO;
+        }
+        
+        if ([urlString rangeOfString:@"retweet"].location == 0 && [urlString length] > [@"retweet" length] + 3) {
+            NSString *message = [urlString substringFromIndex:[@"retweet" length] + 3];
+            message = [message stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            UIViewController *twitterVC = [[[TwitterViewController alloc] initWithMessage:message url:nil] autorelease];
+            MIT_MobileAppDelegate *appDelegate = (MIT_MobileAppDelegate *)[[UIApplication sharedApplication] delegate];
+            [appDelegate presentAppModalViewController:twitterVC animated:YES];
+
+            return NO;
+        }
+    }
+    return YES;
+}
+
 
 - (void)updateWebView
 {
