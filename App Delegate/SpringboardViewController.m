@@ -29,7 +29,7 @@
 #define SECONDARY_GRID_HPADDING 20.0f
 
 // vertical spacing between icons
-#define GRID_VPADDING 8.0f
+#define GRID_VPADDING 9.0f
 
 // height to allocate to icon text label
 #define ICON_LABEL_HEIGHT 20.0f
@@ -38,7 +38,7 @@
 #define ICON_PADDING 5.0f
 
 // vertical padding above secondary (utility) icons
-#define SECONDARY_GRID_TOP_PADDING 14.0f
+#define SECONDARY_GRID_TOP_PADDING 5.0f
 
 @interface SpringboardViewController (Private)
 
