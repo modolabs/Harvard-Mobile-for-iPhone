@@ -22,7 +22,7 @@
 // horizontal spacing between main icons
 // 0.0 for four icons per row
 // Between 20 and 30 for three icons per row; higher values shrink icons
-#define MAIN_GRID_HPADDING 24.0f
+#define MAIN_GRID_HPADDING 0.0f
 
 // horizontal spacing between secondary icons
 // 20.0 for four icons per row
