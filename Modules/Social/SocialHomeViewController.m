@@ -95,7 +95,7 @@ dateFormatter = _dateFormatter;
             NSString *message = post.message ? post.message : @"";
             NSString *author = post.author ? post.author : @"";
             NSString *retweetLink = [NSString stringWithFormat:@"<a class=\"retweet %@\""
-                                     "href=\"retweet://RT %@ %@\">Retweet</a>",
+                                     "href=\"retweet://RT %@ %@\"><span>Retweet</span></a>",
                                      featuredClass, author, message];
             
             [postVars setObject:retweetLink forKey:@"__RETWEET_LINK__"];

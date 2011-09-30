@@ -84,7 +84,7 @@
                     word-wrap: break-word;
                 }
                 .post .smallprint {
-                    font-size: 9pt;
+                    font-size: 8pt;
                     line-height: normal;
                     padding-left: 26px;
                     padding-top: 3px;
@@ -101,8 +101,23 @@
                     white-space: nowrap;
                 }
                 .post .retweet {
+                    margin-top: -8px;
                     display: block;
                     float: right;
+                    width: 36px;
+                    height: 33px;
+                    background-repeat: no-repeat;
+                    background-position: 0px 0px;
+                    background-size: 36px 33px;
+                    background-image: url("global/retweet-button@2x.png");
+                }
+                .featured .post .retweet {
+                    width: 90px;                    
+                    background-size: 90px 33px;
+                    background-image: url("global/retweet-button-featured@2x.png");
+                }
+                .post .retweet span {
+                    visibility: hidden;
                 }
                 .pipe {
                     color:#bbb;
