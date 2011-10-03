@@ -362,7 +362,7 @@ static NSString * const TwitterServiceName = @"Twitter";
 	NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:TwitterShareUsernameKey];
 	[twitterEngine setUsername:username password:nil];
     
-	[twitterEngine sendRetweet:strtoull([self.retweetId UTF8String], NULL, 0)];
+	[twitterEngine sendRetweet:self.retweetId];
 	
     [self showNetworkActivity];
 }

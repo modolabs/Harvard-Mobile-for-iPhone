@@ -1040,13 +1040,13 @@
                            responseType:MGTwitterStatus];
 }
 
-- (NSString *)sendRetweet:(unsigned long)updateID
+- (NSString *)sendRetweet:(NSString *)updateID
 {
-	if (updateID == 0){
+	if (updateID == nil){
 		return nil;
 	}
     
-	NSString *path = [NSString stringWithFormat:@"statuses/retweet/%u.%@", updateID, API_FORMAT];
+	NSString *path = [NSString stringWithFormat:@"statuses/retweet/%@.%@", updateID, API_FORMAT];
     
 	return [self _sendRequestWithMethod:HTTP_POST_METHOD path:path 
                         queryParameters:nil body:nil 
@@ -1056,18 +1056,18 @@
 
 #pragma mark -
 
-- (NSString *)getRetweets:(unsigned long)updateID
+- (NSString *)getRetweets:(NSString *)updateID
 {
 	return [self getRetweets:updateID count:0];
 }
 
-- (NSString *)getRetweets:(unsigned long)updateID count:(int)count
+- (NSString *)getRetweets:(NSString *)updateID count:(int)count
 {
-	if (updateID == 0) {
+	if (updateID == nil) {
 		return nil;
 	}
     
-	NSString *path = [NSString stringWithFormat:@"statuses/retweets/%u.%@", updateID, API_FORMAT];
+	NSString *path = [NSString stringWithFormat:@"statuses/retweets/%@.%@", updateID, API_FORMAT];
     
 	NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:0];
 	if (count > 0) {
