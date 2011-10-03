@@ -3,7 +3,7 @@
 
 @class SocialPost;
 
-@interface SocialHomeViewController : UIViewController <JSONAPIDelegate, UIWebViewDelegate> {
+@interface SocialHomeViewController : UIViewController <JSONAPIDelegate, UIWebViewDelegate, UIActionSheetDelegate> {
 
     UIWebView *_webView;
     NSInteger _currentStart;
@@ -15,6 +15,7 @@
 
     SocialPost *_featuredPost;
     NSMutableArray *_posts;
+    NSString *_retweetId;
     
     NSMutableDictionary *_templateValues;
     NSString *_parentTemplate;
@@ -29,6 +30,7 @@
 // TODO: the following two properties may not be necessary
 @property (nonatomic, retain) NSMutableArray *posts;
 @property (nonatomic, retain) SocialPost *featuredPost;
+@property (nonatomic, retain) NSString *retweetId;
 
 @property (nonatomic, retain) NSString *parentTemplate;
 @property (nonatomic, retain) NSString *postTemplate;
@@ -37,6 +39,7 @@
 
 - (void)updateWebView;
 - (NSString *)htmlForPost:(SocialPost *)post featured:(BOOL)isFeatured;
+- (SocialPost *)socialPostForType:(NSString *)type id:(NSString *)typeId;
 
 @end
 

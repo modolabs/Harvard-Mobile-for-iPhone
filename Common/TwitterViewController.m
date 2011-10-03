@@ -40,6 +40,7 @@ static NSString * const TwitterServiceName = @"Twitter";
 - (void) logoutTwitter;
 - (void) loginTwitter;
 - (void) sendTweet;
+- (void) sendRetweet;
 
 - (void)updateCounter:(NSString *)message delta:(NSInteger)deltaChars;
 - (void)hideNetworkActivity;
@@ -49,7 +50,7 @@ static NSString * const TwitterServiceName = @"Twitter";
 
 @implementation TwitterViewController
 
-@synthesize connection, contentView;
+@synthesize connection, contentView, retweetId;
 
 - (id) initWithMessage: (NSString *)aMessage url:(NSString *)aLongUrl {
 	if(self = [super init]) {
@@ -73,6 +74,29 @@ static NSString * const TwitterServiceName = @"Twitter";
 	return self;
 }
 
+- (id) initWithRetweetId:(NSString *)tweetId {
+	if(self = [super init]) {
+		passwordField = nil;
+		usernameField = nil;
+		
+		messageField = nil;
+		usernameLabel = nil;
+		signOutButton = nil;
+		
+		self.contentView = nil;
+		navigationItem = nil;
+		
+		message = nil;
+		longURL = nil;
+		self.retweetId = tweetId;
+		
+		twitterEngine = nil;
+		
+		authenticationRequestInProcess = NO;
+	}
+	return self;
+}
+
 - (void) dealloc {
 	usernameField.delegate = nil;
 	passwordField.delegate = nil;
@@ -82,6 +106,8 @@ static NSString * const TwitterServiceName = @"Twitter";
 	[usernameLabel release];
 	[signOutButton release];
 
+    self.retweetId = nil;
+    
     self.contentView = nil;
 	[usernameField release];
 	[passwordField release];
@@ -132,25 +158,30 @@ static NSString * const TwitterServiceName = @"Twitter";
     self.contentView = nil;
 	
 	if([[NSUserDefaults standardUserDefaults] objectForKey:TwitterShareUsernameKey]) {
-		// user has logged in
-		navigationItem.title = @"Post to Twitter";
-        if (longURL && !shortURL) {
-            self.connection = [[[ConnectionWrapper alloc] initWithDelegate:self] autorelease];
-            NSString *bitlyURLString = [NSString stringWithFormat:@"http://api.bit.ly/v3/shorten?login=%@&apiKey=%@&longURL=%@&format=json",
-                                        BitlyUsername, BitlyAPIKey, longURL];
-            NSURL *url = [NSURL URLWithString:bitlyURLString];
-            [self.connection requestDataFromURL:url];
-            [self showNetworkActivity];
-            
-            self.contentView = [[[MITLoadingActivityView alloc] initWithFrame:CGRectMake(0, 44.0, self.view.frame.size.width, self.view.frame.size.height)] autorelease];
+        if (self.retweetId) {
+            [self sendRetweet];
             
         } else {
-            [self loadMessageInputView];
-            [messageField becomeFirstResponder];
-            navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"Tweet" style:UIBarButtonItemStyleDone target:self action:@selector(sendTweet)] autorelease];
-            [self updateMessageInputView];
+            // user has logged in
+            navigationItem.title = @"Post to Twitter";
+            if (longURL && !shortURL) {
+                self.connection = [[[ConnectionWrapper alloc] initWithDelegate:self] autorelease];
+                NSString *bitlyURLString = [NSString stringWithFormat:@"http://api.bit.ly/v3/shorten?login=%@&apiKey=%@&longURL=%@&format=json",
+                                            BitlyUsername, BitlyAPIKey, longURL];
+                NSURL *url = [NSURL URLWithString:bitlyURLString];
+                [self.connection requestDataFromURL:url];
+                [self showNetworkActivity];
+                
+                self.contentView = [[[MITLoadingActivityView alloc] initWithFrame:CGRectMake(0, 44.0, self.view.frame.size.width, self.view.frame.size.height)] autorelease];
+                
+            } else {
+                [self loadMessageInputView];
+                [messageField becomeFirstResponder];
+                navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"Tweet" style:UIBarButtonItemStyleDone target:self action:@selector(sendTweet)] autorelease];
+                [self updateMessageInputView];
+                [self updateCounter:messageField.text delta:0];
+            }
         }
-		
 	} else {
 		// user has not yet logged in, so show them the login view
 		[self loadLoginView];
@@ -321,12 +352,21 @@ static NSString * const TwitterServiceName = @"Twitter";
 - (void) sendTweet {
 	NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:TwitterShareUsernameKey];
 	[twitterEngine setUsername:username password:nil];
-
+    
 	[twitterEngine sendUpdate:messageField.text];
 	
     [self showNetworkActivity];
 }
+
+- (void) sendRetweet {
+	NSString *username = [[NSUserDefaults standardUserDefaults] objectForKey:TwitterShareUsernameKey];
+	[twitterEngine setUsername:username password:nil];
+    
+	[twitterEngine sendRetweet:strtoull([self.retweetId UTF8String], NULL, 0)];
 	
+    [self showNetworkActivity];
+}
+
 - (NSString *) cachedTwitterXAuthAccessTokenStringForUsername: (NSString *)username {
 	NSError *error = nil;
 	NSString *accessToken = [SFHFKeychainUtils getPasswordForUsername:username andServiceName:TwitterServiceName error:&error];
@@ -450,16 +490,25 @@ static NSString * const TwitterServiceName = @"Twitter";
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
-	if(textView.text.length - range.length + text.length <= 140) {
-		[self updateCounter:textView.text delta:text.length-range.length];
-		return YES;
-	} else {
-		return NO;
-	}
+	[self updateCounter:textView.text delta:text.length-range.length];
+	return YES;
 }
 
 - (void)updateCounter:(NSString *)aMessage delta:(NSInteger)deltaChars{
-	counterLabel.text = [NSString stringWithFormat:@"%i", 140-[aMessage length]-deltaChars];
+    NSInteger count = [aMessage length]+deltaChars;
+	counterLabel.text = [NSString stringWithFormat:@"%i", 140-count];
+    
+    if (count <= 140) {
+        counterLabel.textColor = CELL_STANDARD_FONT_COLOR;
+    } else {
+        counterLabel.textColor = [UIColor colorWithHexString:@"#993333"];
+    }
+    
+    if (count <= 140 && count > 0) {
+        navigationItem.rightBarButtonItem.enabled = YES;
+    } else {
+        navigationItem.rightBarButtonItem.enabled = NO;
+    }
 }
 
 

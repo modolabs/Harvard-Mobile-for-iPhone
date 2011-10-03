@@ -6,6 +6,8 @@
 	NSString *message;
 	NSString *longURL;
     NSString *shortURL;
+    
+    NSString *_retweetId;
 	
 	UILabel *usernameLabel;
     UILabel *counterLabel;
@@ -25,8 +27,10 @@
 }
 
 - (id) initWithMessage:(NSString *)aMessage url:(NSString *)longURL;
+- (id) initWithRetweetId:(NSString *)tweetId;
 
 @property (nonatomic, retain) ConnectionWrapper *connection;
 @property (nonatomic, retain) UIView *contentView;
+@property (nonatomic, retain) NSString *retweetId;
 
 @end

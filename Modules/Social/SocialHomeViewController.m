@@ -17,7 +17,7 @@
 
 @synthesize webView = _webView, featuredPost = _featuredPost, posts = _posts,
 parentTemplate = _parentTemplate, templateValues = _templateValues, postTemplate = _postTemplate,
-dateFormatter = _dateFormatter;
+dateFormatter = _dateFormatter, retweetId = _retweetId;
 
 - (void)viewDidLoad
 {
@@ -90,13 +90,11 @@ dateFormatter = _dateFormatter;
     }
     if (post.type) {
         [postVars setObject:post.type forKey:@"__TYPE__"];
-        if ([post.type isEqualToString:@"twitter"]) {
+        if ([post.type isEqualToString:@"twitter"] && post.typeId) {
             NSString *featuredClass = isFeatured ? @"featured" : @"";
-            NSString *message = post.message ? post.message : @"";
-            NSString *author = post.author ? post.author : @"";
             NSString *retweetLink = [NSString stringWithFormat:@"<a class=\"retweet %@\""
-                                     "href=\"retweet://RT %@ %@\"><span>Retweet</span></a>",
-                                     featuredClass, author, message];
+                                     "href=\"retweet://%@\"><span>Retweet</span></a>",
+                                     featuredClass, post.typeId];
             
             [postVars setObject:retweetLink forKey:@"__RETWEET_LINK__"];
         }
@@ -139,12 +137,21 @@ dateFormatter = _dateFormatter;
         }
         
         if ([urlString rangeOfString:@"retweet"].location == 0 && [urlString length] > [@"retweet" length] + 3) {
-            NSString *message = [urlString substringFromIndex:[@"retweet" length] + 3];
-            message = [message stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-            UIViewController *twitterVC = [[[TwitterViewController alloc] initWithMessage:message url:nil] autorelease];
-            MIT_MobileAppDelegate *appDelegate = (MIT_MobileAppDelegate *)[[UIApplication sharedApplication] delegate];
-            [appDelegate presentAppModalViewController:twitterVC animated:YES];
-
+            NSString *tweetId = [urlString substringFromIndex:[@"retweet" length] + 3];
+            tweetId = [tweetId stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            
+            SocialPost *aPost = [self socialPostForType:@"twitter" id:tweetId];
+            if (aPost) {
+                NSString *message = [NSString stringWithFormat:@"Retweet to your followers?\n%@\n“%@”", aPost.author, aPost.messagePlainText, nil];
+                UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:message 
+                                                                         delegate:self 
+                                                                cancelButtonTitle:@"Cancel" 
+                                                           destructiveButtonTitle:nil 
+                                                                otherButtonTitles:@"Retweet", nil];
+                self.retweetId = aPost.typeId;
+                [actionSheet showInView:self.view];
+                [actionSheet release];
+            }
             return NO;
         }
         
@@ -157,6 +164,17 @@ dateFormatter = _dateFormatter;
     return YES;
 }
 
+#pragma mark UIActionSheet delegate
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex != actionSheet.cancelButtonIndex) {
+        UIViewController *twitterVC = [[[TwitterViewController alloc] initWithRetweetId:self.retweetId] autorelease];
+        MIT_MobileAppDelegate *appDelegate = (MIT_MobileAppDelegate *)[[UIApplication sharedApplication] delegate];
+        [appDelegate presentAppModalViewController:twitterVC animated:YES];
+    }
+    [self dismissModalViewControllerAnimated:YES];
+}
+
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
     if (_scrollPosition) {
@@ -166,6 +184,19 @@ dateFormatter = _dateFormatter;
 }
 
 #pragma mark -
+
+- (SocialPost *)socialPostForType:(NSString *)type id:(NSString *)typeId
+{
+    if ([type isEqualToString: self.featuredPost.type] && [typeId isEqualToString: self.featuredPost.typeId]) {
+        return self.featuredPost;
+    }
+    for (SocialPost *aPost in self.posts) {
+        if ([type isEqualToString: aPost.type] && [typeId isEqualToString: aPost.typeId]) {
+            return aPost;
+        }
+    }
+    return nil;
+}
 
 - (void)updateWebView
 {
@@ -222,8 +253,8 @@ dateFormatter = _dateFormatter;
         if ([response isKindOfClass:[NSArray class]]) {
             
             NSArray *stringProperties = [NSArray arrayWithObjects:
-                                         @"uid", @"type", @"icon",
-                                         @"message", @"author", @"authorURL",
+                                         @"uid", @"type", @"typeId", @"icon",
+                                         @"message", @"messagePlainText", @"author", @"authorURL",
                                          nil];
 
             NSArray *postArray = (NSArray *)response;
@@ -257,8 +288,8 @@ dateFormatter = _dateFormatter;
         if ([response isKindOfClass:[NSDictionary class]]) {
             
             NSArray *stringProperties = [NSArray arrayWithObjects:
-                                         @"uid", @"type", @"icon",
-                                         @"message", @"author", @"authorURL",
+                                         @"uid", @"type", @"typeId", @"icon",
+                                         @"message", @"messagePlainText", @"author", @"authorURL",
                                          nil];
                                          
             NSDictionary *jsonDict = (NSDictionary *)response;
@@ -275,6 +306,7 @@ dateFormatter = _dateFormatter;
 
             NSMutableString *postHTML = [self.templateValues objectForKey:@"__POSTS__"];
             
+            self.posts = [NSMutableArray array];
             NSArray *posts = [jsonDict objectForKey:@"posts"];
             for (NSDictionary *postDict in posts) {
                 SocialPost *aPost = [[[SocialPost alloc] init] autorelease];
@@ -358,6 +390,7 @@ dateFormatter = _dateFormatter;
     }
     [_featuredPost release];
     [_posts release];
+    [_retweetId release];
     [_webView release];
     [super dealloc];
 }
