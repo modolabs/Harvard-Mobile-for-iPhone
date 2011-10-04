@@ -111,7 +111,7 @@ connectionIdentifier:(NSString *)theIdentifier requestType:(MGTwitterRequestType
 		nodeType = xmlTextReaderNodeType(_reader);
 	}
 
-	DLog(@"node: %25s = %s", xmlTextReaderConstName(_reader), result);
+	//DLog(@"node: %25s = %s", xmlTextReaderConstName(_reader), result);
 	
 	return result;
 }

@@ -455,23 +455,38 @@ static NSString * const TwitterServiceName = @"Twitter";
 - (void)requestFailed:(NSString *)connectionIdentifier withError:(NSError *)error {
 	[self hideNetworkActivity];
 	
-	NSString *errorTitle;
-	NSString *errorMessage;
+	NSString *errorTitle = nil;
+	NSString *errorMessage = nil;
 	
 	if (error.code == 401) {
 		errorTitle = @"Login failed";
 		errorMessage = @"Twitter username and password is not recognized";
 		[self logoutTwitter];
 	} else {
-		errorTitle = @"Network failed";
-		errorMessage = @"Failure connecting to Twitter";
+        NSDictionary *userInfo = [error userInfo];
+        errorTitle = [userInfo objectForKey:@"title"];
+        if (!errorTitle) {
+            errorTitle = @"Network failed";
+        }
+
+        errorMessage = [userInfo objectForKey:@"message"];
+        if (errorMessage) {
+            NSString *url = [userInfo objectForKey:@"url"];
+            if (url && [url rangeOfString: @"statuses/retweet"].location != NSNotFound &&
+                [errorMessage rangeOfString: @"sharing is not permissable for this status"].location == 0) {
+                errorTitle = @"Unable to retweet";
+                errorMessage = @"You may have already shared this tweet";
+            }
+        } else {
+            errorMessage = @"Failure connecting to Twitter";
+        }
 	}
 	
 	UIAlertView *alertView = [[UIAlertView alloc] 
 							  initWithTitle:errorTitle 
 							  message:errorMessage
 							  delegate:nil 
-							  cancelButtonTitle:@"Cancel" 
+							  cancelButtonTitle:@"OK" 
 							  otherButtonTitles:nil];
 	[alertView show];
 	[alertView release];

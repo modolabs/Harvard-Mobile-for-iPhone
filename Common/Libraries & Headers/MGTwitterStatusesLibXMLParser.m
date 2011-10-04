@@ -27,6 +27,10 @@
 			{
 				[parsedObjects addObject:[self _statusDictionaryForNodeWithName:name]];
 			}
+            else if (xmlStrEqual(name, BAD_CAST "errors"))
+            {
+				[parsedObjects addObject:[self _statusDictionaryForNodeWithName:name]];
+            }
 		}
 
 		// advance reader

@@ -11,6 +11,9 @@
 #import "MGTwitterEngineDelegate.h"
 #import "MGTwitterParserDelegate.h"
 
+extern NSInteger const MGTwitterEnginePostParseErrorCode;
+extern NSString * const MGTwitterEngineErrorDomain;
+
 @interface MGTwitterEngine : NSObject <MGTwitterParserDelegate> {
     __weak NSObject <MGTwitterEngineDelegate> *_delegate;
     NSString *_username;

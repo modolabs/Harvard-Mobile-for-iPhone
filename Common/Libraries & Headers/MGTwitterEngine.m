@@ -56,6 +56,9 @@
 
 #define URL_REQUEST_TIMEOUT     25.0 // Twitter usually fails quickly if it's going to fail at all.
 
+NSString * const MGTwitterEngineErrorDomain = @"MGTwitterEngineErrorDomain";
+NSInteger const MGTwitterEnginePostParseErrorCode = 5235;
+
 
 @interface MGTwitterEngine (PrivateMethods)
 
@@ -720,6 +723,29 @@
                     ofResponseType:(MGTwitterResponseType)responseType 
                  withParsedObjects:(NSArray *)parsedObjects
 {
+    for (id parsedObject in parsedObjects) {
+        if ([parsedObject isKindOfClass:[NSDictionary class]]) {
+            id errorMessage = [(NSDictionary *)parsedObject objectForKey:@"error"];
+            if (errorMessage && [errorMessage isKindOfClass:[NSString class]]) {
+                MGTwitterHTTPURLConnection *connection = [_connections objectForKey:identifier];
+                NSString *url = [connection.URL absoluteString];
+                
+                NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:
+                                          @"Twitter Error", @"title",
+                                          errorMessage, @"message",
+                                          url, @"url",
+                                          nil];
+                NSError *error = [NSError errorWithDomain:MGTwitterEngineErrorDomain
+                                                     code:MGTwitterEnginePostParseErrorCode
+                                                 userInfo:userInfo];
+                if ([self _isValidDelegateForSelector:@selector(requestFailed:withError:)]) {
+                    [_delegate requestFailed:identifier withError:error];
+                    return;
+                }
+            }
+        }
+    }
+    
     // Forward appropriate message to _delegate, depending on responseType.
     switch (responseType) {
         case MGTwitterStatuses:
@@ -797,6 +823,8 @@
     int statusCode = [resp statusCode];
     
     if (statusCode >= 400) {
+        NSLog(@"connection received %d response", statusCode);
+        /*
         // Assume failure, and report to delegate.
         NSError *error = [NSError errorWithDomain:@"HTTP" code:statusCode userInfo:nil];
 		if ([self _isValidDelegateForSelector:@selector(requestFailed:withError:)])
@@ -808,6 +836,7 @@
 		[_connections removeObjectForKey:connectionIdentifier];
 		if ([self _isValidDelegateForSelector:@selector(connectionFinished:)])
 			[_delegate connectionFinished:connectionIdentifier];
+        */
 			        
     } else if (statusCode == 304 || [connection responseType] == MGTwitterGeneric) {
         // Not modified, or generic success.
@@ -868,6 +897,9 @@
 		[_delegate requestSucceeded:[connection identifier]];
     
     NSData *receivedData = [connection data];
+    NSString *dataString = [NSString stringWithUTF8String:[receivedData bytes]];
+    NSLog(@"%@", dataString);
+    
     if (receivedData) {
 #if DEBUG
         if (NO) {
