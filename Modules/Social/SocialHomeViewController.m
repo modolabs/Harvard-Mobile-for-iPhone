@@ -92,8 +92,11 @@ dateFormatter = _dateFormatter, retweetId = _retweetId;
         [postVars setObject:post.type forKey:@"__TYPE__"];
         if ([post.type isEqualToString:@"twitter"] && post.typeId) {
             NSString *featuredClass = isFeatured ? @"featured" : @"";
-            NSString *retweetLink = [NSString stringWithFormat:@"<a class=\"retweet %@\""
-                                     "href=\"retweet://%@\"><span>Retweet</span></a>",
+            NSString *retweetLink = [NSString stringWithFormat:@"<a class=\"retweet %@\" "
+                                     "href=\"retweet://%@\" "
+                                     "ontouchstart=\"this.setAttribute('class', 'retweet pressed');\" "
+                                     "ontouchend=\"this.setAttribute('class', 'retweet');\""
+                                     "><span>Retweet</span></a>",
                                      featuredClass, post.typeId];
             
             [postVars setObject:retweetLink forKey:@"__RETWEET_LINK__"];

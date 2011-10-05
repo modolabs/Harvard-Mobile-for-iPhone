@@ -11,6 +11,10 @@
                     padding: 0;
                     font: 11pt/1.33em "Helvetica Neue", Helvetica, sans-serif;
                     background-color: transparent;
+                    
+                    /* make sure there is no horizontal scrolling: */
+                    width: 100%;
+                    overflow-x: hidden;
                 }
                 .feedlinks {
                     font-size: 9pt;
@@ -113,12 +117,19 @@
                     background-position: 0px 0px;
                     background-size: 36px 33px;
                     background-image: url("global/retweet-button@2x.png");
+                    -webkit-tap-highlight-color: rgba(0,0,0,0);
+                }
+                .post .retweet.pressed {
+                    background-image: url("global/retweet-button-pressed@2x.png");
                 }
                 .featured .post .retweet {
                     margin-right: -8px;
                     width: 90px;                    
                     background-size: 85px 33px;
                     background-image: url("global/retweet-button-featured@2x.png");
+                }
+                .featured .retweet.pressed {
+                    background-image: url("global/retweet-button-featured-pressed@2x.png");
                 }
                 .post .retweet span {
                     visibility: hidden;
@@ -159,9 +170,6 @@
                 	background-color: #aaa;
                 	color: #fff;
                 }
-                .posts .pagerlink:after {
-                    content:"...";
-                }
                 </style>
     </head>
     <body>
@@ -177,7 +185,7 @@
             <div class="posts">
                  __POSTS__
                 <div class="listitem">
-                    <a class="pagerlink" href="loadMore://20">Load more</a>
+                    <a class="pagerlink" href="loadMore://20">Load more&hellip;</a>
                 </div>
         </div>
         
