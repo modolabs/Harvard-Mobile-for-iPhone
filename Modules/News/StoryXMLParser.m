@@ -408,6 +408,21 @@ NSString * const NewsTagFullURL         = @"url";
         // otherwise create new
         if (!story) {
             story = (NewsStory *)[CoreDataManager insertNewObjectForEntityForName:NewsStoryEntityName];
+        } else {
+            // Hack: ignore these exceptions; means old image got deleted but we overwrite it below.
+            // Yes, these images being missing means core data got corrupted but we're not sure how 
+            // (probably some thread thing) so this will keep the news module from getting stuck in 
+            // an endless crash loop while we figure it out.
+            @try {
+                story.featuredImage = nil;
+            } @catch (NSException *e) {
+                DLog(@"Caught %@: %@ (corrupted featured image in story)", [e name], [e reason]);
+            }
+            @try {
+                story.thumbImage = nil;
+            } @catch (NSException *e) {
+                DLog(@"Caught %@: %@ (corrupted thumbnail image in story)", [e name], [e reason]);
+            }
         }
         
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
