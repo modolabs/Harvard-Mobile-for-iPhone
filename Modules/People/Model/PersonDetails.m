@@ -53,7 +53,7 @@ NSString * const kPersonDetailsValueSeparatorToken = @"%/%";
     NSDictionary *lookup = nil;
     NSString *result = nil;
     
-    if (lookup = [[PeopleRecentsData sharedData] displayFields]) {
+    if ((lookup = [[PeopleRecentsData sharedData] displayFields])) {
         result = [lookup objectForKey:key];
     }
     

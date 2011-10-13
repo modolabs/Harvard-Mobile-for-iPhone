@@ -8,7 +8,7 @@
 - (void)prepareForReuse {
 	// clean up extra views we added before
 	UIView *view;
-	while (view = [self viewWithTag:REPLACED_TEXTLABEL_TAG]) {
+	while ((view = [self viewWithTag:REPLACED_TEXTLABEL_TAG])) {
 		[view removeFromSuperview];
 	}
 	

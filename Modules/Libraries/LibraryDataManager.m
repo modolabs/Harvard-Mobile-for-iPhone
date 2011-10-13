@@ -548,9 +548,9 @@ static LibraryDataManager *s_sharedManager = nil;
             id value = [libraryDictionary objectForKey:@"weeklyHours"];
             if (value)
                 [schedule setObject:value forKey:@"weeklyHours"];
-            if (value = [libraryDictionary objectForKey:@"hoursOfOperationString"])
+            if ((value = [libraryDictionary objectForKey:@"hoursOfOperationString"]))
                 [schedule setObject:value forKey:@"hoursOfOperationString"];
-            if (value = [libraryDictionary objectForKey:@"hrsOpenToday"])
+            if ((value = [libraryDictionary objectForKey:@"hrsOpenToday"]))
                 [schedule setObject:value forKey:@"hrsOpenToday"];
 
             [_schedulesByLibID setObject:schedule forKey:identityTag];

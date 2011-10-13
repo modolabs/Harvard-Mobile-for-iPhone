@@ -492,16 +492,16 @@
         self.searchParams = [NSMutableDictionary dictionaryWithDictionary:request.params];
         
         NSNumber *number = nil;
-        if (number = [(NSDictionary *)result objectForKey:@"total"]) {
+        if ((number = [(NSDictionary *)result objectForKey:@"total"])) {
             actualCount = [number integerValue];
         }
-        if (number = [(NSDictionary *)result objectForKey:@"start"]) {
+        if ((number = [(NSDictionary *)result objectForKey:@"start"])) {
             startIndex = [number integerValue];
         }
-        if (number = [(NSDictionary *)result objectForKey:@"end"]) {
+        if ((number = [(NSDictionary *)result objectForKey:@"end"])) {
             endIndex = [number integerValue];
         }
-        if (number = [(NSDictionary *)result objectForKey:@"pagesize"]) {
+        if ((number = [(NSDictionary *)result objectForKey:@"pagesize"])) {
             pageSize = [number integerValue];
         }
         

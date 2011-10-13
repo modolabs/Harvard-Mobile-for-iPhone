@@ -331,7 +331,7 @@ NSInteger strLenSort(NSString *str1, NSString *str2, void *context)
 			NSArray *displayPriority = [NSArray arrayWithObjects:@"title", @"ou", nil];
 			NSString *displayText;
 			for (NSString *tag in displayPriority) {
-				if (displayText = [recent formattedValueForKey:tag]) {
+				if ((displayText = [recent formattedValueForKey:tag])) {
 					cell.detailTextLabel.text = displayText;
 					break;
 				}

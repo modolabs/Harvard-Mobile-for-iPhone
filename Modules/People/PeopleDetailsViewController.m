@@ -39,7 +39,7 @@ NSString * const RequestLookupAddress = @"address";
 	
 	NSArray *existingValues = (NSArray *)ABMultiValueCopyArrayOfAllValues(multiValue);
 	NSArray *ldapValue = nil;
-	if (ldapValue = [self.personDetails separatedValuesForKey:ldapKey]) {
+	if ((ldapValue = [self.personDetails separatedValuesForKey:ldapKey])) {
         DLog(@"%@", [ldapValue description]);
 		for (NSString *value in ldapValue) {
 			if (![existingValues containsObject:value]) {
@@ -58,9 +58,9 @@ NSString * const RequestLookupAddress = @"address";
 	// get fullname for header
 	NSMutableArray *multiPartAttribute = [[NSMutableArray alloc] initWithCapacity:2];	
 	NSString *value;
-	if (value = [self.personDetails formattedValueForKey:@"givenname"])
+	if ((value = [self.personDetails formattedValueForKey:@"givenname"]))
 		[multiPartAttribute addObject:value];
-	if (value = [self.personDetails formattedValueForKey:@"sn"])
+	if ((value = [self.personDetails formattedValueForKey:@"sn"]))
 		[multiPartAttribute addObject:value];
 	self.fullname = [multiPartAttribute componentsJoinedByString:@" "];
 	[multiPartAttribute release];
@@ -436,13 +436,13 @@ NSString * const RequestLookupAddress = @"address";
 			NSString *value;
 		
 			// set single value properties
-			if (value = [self.personDetails formattedValueForKey:@"givenname"])
+			if ((value = [self.personDetails formattedValueForKey:@"givenname"]))
 				ABRecordSetValue(person, kABPersonFirstNameProperty, value, &error);
-			if (value = [self.personDetails formattedValueForKey:@"sn"])
+			if ((value = [self.personDetails formattedValueForKey:@"sn"]))
 				ABRecordSetValue(person, kABPersonLastNameProperty, value, &error);
-			if (value = [self.personDetails formattedValueForKey:@"title"])
+			if ((value = [self.personDetails formattedValueForKey:@"title"]))
 				ABRecordSetValue(person, kABPersonJobTitleProperty, value, &error);
-			if (value = [self.personDetails formattedValueForKey:@"ou"])
+			if ((value = [self.personDetails formattedValueForKey:@"ou"]))
 				ABRecordSetValue(person, kABPersonDepartmentProperty, value, &error);
 		
 			// set multivalue properties: email and phone numbers
@@ -554,7 +554,7 @@ NSString * const RequestLookupAddress = @"address";
 		ABRecordSetValue(newPerson, kABPersonFirstNameProperty, recordValue, &error);
         CFRelease(recordValue);
     }
-	else if (ldapValue = [self.personDetails formattedValueForKey:@"givenname"])
+	else if ((ldapValue = [self.personDetails formattedValueForKey:@"givenname"]))
 		ABRecordSetValue(newPerson, kABPersonFirstNameProperty, ldapValue, &error);
 	
     recordValue = ABRecordCopyValue(person, kABPersonLastNameProperty);
@@ -562,7 +562,7 @@ NSString * const RequestLookupAddress = @"address";
         ABRecordSetValue(newPerson, kABPersonLastNameProperty, recordValue, &error);
         CFRelease(recordValue);
     }
-	else if (ldapValue = [self.personDetails formattedValueForKey:@"sn"])
+	else if ((ldapValue = [self.personDetails formattedValueForKey:@"sn"]))
 		ABRecordSetValue(newPerson, kABPersonLastNameProperty, ldapValue, &error);
 	
     recordValue = ABRecordCopyValue(person, kABPersonJobTitleProperty);
@@ -570,7 +570,7 @@ NSString * const RequestLookupAddress = @"address";
         ABRecordSetValue(newPerson, kABPersonJobTitleProperty, recordValue, &error);
         CFRelease(recordValue);
     }
-	else if (ldapValue = [self.personDetails formattedValueForKey:@"title"])
+	else if ((ldapValue = [self.personDetails formattedValueForKey:@"title"]))
 		ABRecordSetValue(newPerson, kABPersonJobTitleProperty, ldapValue, &error);
 	
     recordValue = ABRecordCopyValue(person, kABPersonDepartmentProperty);
@@ -578,7 +578,7 @@ NSString * const RequestLookupAddress = @"address";
         ABRecordSetValue(newPerson, kABPersonDepartmentProperty, recordValue, &error);
         CFRelease(recordValue);
     }
-	else if (ldapValue = [self.personDetails formattedValueForKey:@"ou"])
+	else if ((ldapValue = [self.personDetails formattedValueForKey:@"ou"]))
 		ABRecordSetValue(newPerson, kABPersonDepartmentProperty, ldapValue, &error);
 		
 	// multi value phone property (including fax numbers)
