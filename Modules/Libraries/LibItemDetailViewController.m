@@ -616,7 +616,8 @@
         frame.origin.y += frame.size.height + 2;
         size = [libName sizeWithFont:detailTextFont]; // just want height of one line
         frame.size.width = cellWidth - accessoryAdjustment;
-        frame.size.height = (size.height + 2) * ([dictWithStatuses count] + (theLibrary && nil != currentLocation && [theLibrary.lat doubleValue]) ? 1 : 0);
+        NSInteger addedLocationLines = (theLibrary && nil != currentLocation && [theLibrary.lat doubleValue]) ? 1 : 0;
+        frame.size.height = (size.height + 2) * ([dictWithStatuses count] + addedLocationLines);
         
         UIView *otherLabels = [cell1.contentView viewWithTag:22];
         [otherLabels removeFromSuperview];
