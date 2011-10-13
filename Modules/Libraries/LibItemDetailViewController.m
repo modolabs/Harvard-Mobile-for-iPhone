@@ -215,10 +215,10 @@
 #pragma mark User Interaction
 
 -(void) authorLinkTapped:(id)sender{
-	NSArray *viewControllerArray = [self.navigationController viewControllers];
-	NSUInteger parentViewControllerIndex = [viewControllerArray count] - 2;
-	DLog(@"Parent view controller: %@", [viewControllerArray objectAtIndex:parentViewControllerIndex]);
-	DLog(@"Total vc: %d", [viewControllerArray count]);
+	//NSArray *viewControllerArray = [self.navigationController viewControllers];
+	//NSUInteger parentViewControllerIndex = [viewControllerArray count] - 2;
+	//DLog(@"Parent view controller: %@", [viewControllerArray objectAtIndex:parentViewControllerIndex]);
+	//DLog(@"Total vc: %d", [viewControllerArray count]);
 	
 	//if ([sender isKindOfClass:[UIButton class]]){
         
