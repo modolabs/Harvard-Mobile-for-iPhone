@@ -28,6 +28,7 @@
 	UIImage *genericShuttleMarker;
 }
 
+- (id)initWithDictionary:(NSDictionary *)dict;
 - (id)initWithCache:(ShuttleRouteCache *)cachedRoute;
 - (void)updateInfo:(NSDictionary *)routeInfo;
 - (NSString *)trackingStatus;
