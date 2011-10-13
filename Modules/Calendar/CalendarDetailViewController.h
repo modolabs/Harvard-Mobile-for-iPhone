@@ -6,22 +6,33 @@
 
 @class MITCalendarEvent;
 
+typedef enum {
+	CalendarDetailRowTypeTime,
+	CalendarDetailRowTypeLocation,
+	CalendarDetailRowTypePhone,
+	CalendarDetailRowTypeURL,
+	CalendarDetailRowTypeTicketURL,
+	CalendarDetailRowTypeEmail,
+	CalendarDetailRowTypeDescription,
+	CalendarDetailRowTypeCategories
+} CalendarDetailRowType;
+
 @interface CalendarDetailViewController : ShareDetailViewController <UITableViewDelegate, UITableViewDataSource, JSONAPIDelegate, ShareItemDelegate, UIWebViewDelegate> {
 	
     BOOL isRegularEvent;
     
 	MITCalendarEvent *event;
-	CalendarEventListType* rowTypes;
+	CalendarDetailRowType* rowTypes;
 	NSInteger numRows;
 	
 	UITableView *_tableView;
 	UIButton *shareButton;
 	
     NSInteger descriptionHeight;
-	NSMutableString *descriptionString;
+	NSString *descriptionString;
 	
     CGFloat categoriesHeight;
-	NSMutableString *categoriesString;
+	NSString *categoriesString;
 
 	// list of events to scroll through for previous/next buttons
 	NSArray *events;

@@ -34,7 +34,7 @@
 	
 	ContactsTableViewController * contactsTab;
 	
-	UIImageView * loadingIndicator;
+	UIView * loadingIndicator;
 	
 	BOOL haveNewAnnouncements;
 

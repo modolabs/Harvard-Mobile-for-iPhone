@@ -2,10 +2,9 @@
 #import "Video.h"
 #import "VideoButton.h"
 #import "VideoDataManager.h"
+#import "MITSearchDisplayController.h"
 
-
-@interface VideoHomeViewController : UIViewController <UISearchBarDelegate,
-                                                        UISearchDisplayDelegate, 
+@interface VideoHomeViewController : UIViewController <UISearchBarDelegate, 
                                                         UITableViewDataSource, 
                                                         UITableViewDelegate,
                                                         VideosReceivedDelegate,
@@ -17,7 +16,7 @@
 
 @property (nonatomic, retain) IBOutlet UIWebView *featuredVideoWebview;
 @property (nonatomic, retain) IBOutlet UIView *searchDisplayContent;
-@property (nonatomic, retain) UISearchDisplayController *searchController;
+@property (nonatomic, retain) MITSearchDisplayController *searchController;
 @property (nonatomic, retain) IBOutlet UISearchBar *searchBar;
 @property (nonatomic, retain) IBOutlet UITableViewCell *videoCell;
 @property (nonatomic, retain) IBOutlet UIView *thumbnailsContainer;

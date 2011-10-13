@@ -334,7 +334,7 @@ NSString * const NewsTagFullURL         = @"url";
             [currentContents setObject:[NSMutableString string] forKey:key];
         }
         [currentCategories release];
-        currentCategories = [[NSMutableArray alloc] initWithCapacity:5];
+        currentCategories = [[NSMutableSet alloc] initWithCapacity:5];
 	} else if ([elementName isEqualToString:NewsTagImage]) {
         // prep new image element
         self.currentImage = [NSMutableDictionary dictionary];

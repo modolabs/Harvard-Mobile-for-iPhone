@@ -167,7 +167,7 @@
                     [self.stops addObject:aStop];
                     ShuttleStopMapAnnotation* annotation = [[[ShuttleStopMapAnnotation alloc] initWithShuttleStop:aStop] autorelease];
                     if(!_stopAnnotations) {
-                        _stopAnnotations = [[NSMutableSet alloc] init];
+                        _stopAnnotations = [[NSMutableArray alloc] init];
                     }
                     [_stopAnnotations addObject:annotation];
                 }
@@ -198,7 +198,7 @@
     NSUInteger count = cachedStops.count;
     self.stops = [[[NSMutableArray alloc] initWithCapacity:count] autorelease];
     _stopsById = [[NSMutableDictionary alloc] initWithCapacity:count];
-	_stopAnnotations = [[NSMutableSet alloc] initWithCapacity:[cachedStops count]];
+	_stopAnnotations = [[NSMutableArray alloc] initWithCapacity:[cachedStops count]];
 	
 	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"order" ascending:YES];
 	NSArray *sortedStops = [[cachedStops allObjects] sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];		

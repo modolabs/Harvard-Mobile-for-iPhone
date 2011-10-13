@@ -14,17 +14,6 @@
 #define kCategoriesWebViewTag 521
 #define kDescriptionWebViewTag 516
 
-enum CalendarDetailRowTypes {
-	CalendarDetailRowTypeTime,
-	CalendarDetailRowTypeLocation,
-	CalendarDetailRowTypePhone,
-	CalendarDetailRowTypeURL,
-	CalendarDetailRowTypeTicketURL,
-	CalendarDetailRowTypeEmail,
-	CalendarDetailRowTypeDescription,
-	CalendarDetailRowTypeCategories
-};
-
 @implementation CalendarDetailViewController
 
 @synthesize event, events, tableView = _tableView;
@@ -118,7 +107,7 @@ enum CalendarDetailRowTypes {
 		free(rowTypes);
 	}
 	
-	rowTypes = malloc(sizeof(CalendarEventListType) * 6);
+	rowTypes = malloc(sizeof(CalendarDetailRowType) * 6);
 	numRows = 0;
 	if (self.event.start) {
 		rowTypes[numRows] = CalendarDetailRowTypeTime;

@@ -2,7 +2,8 @@
 #import "XAuthTwitterEngine.h"
 #import "ConnectionWrapper.h"
 
-@interface TwitterViewController : UIViewController <UITextFieldDelegate, MGTwitterEngineDelegate, XAuthTwitterEngineDelegate, ConnectionWrapperDelegate> {
+@interface TwitterViewController : UIViewController <UITextFieldDelegate, UITextViewDelegate,
+MGTwitterEngineDelegate, XAuthTwitterEngineDelegate, ConnectionWrapperDelegate> {
 	NSString *message;
 	NSString *longURL;
     NSString *shortURL;
@@ -18,7 +19,7 @@
 	UITextField *usernameField;
 	UITextField *passwordField;
 	
-	UITextField *messageField;
+	UITextView *messageField;
 	
 	XAuthTwitterEngine *twitterEngine;
 	BOOL authenticationRequestInProcess;

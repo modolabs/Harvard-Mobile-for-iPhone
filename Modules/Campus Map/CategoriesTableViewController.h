@@ -15,7 +15,7 @@
 @interface CategoriesTableViewController : UITableViewController <JSONAPIDelegate> {
 	MapSelectionController *_mapSelectionController;
 	
-	NSMutableArray *_itemsInTable;
+	NSArray *_itemsInTable;
 	NSString *_headerText;
     NSString *_category;
     UIView *_headerView;
@@ -24,7 +24,7 @@
 }
 
 @property (nonatomic, assign) MapSelectionController* mapSelectionController;
-@property (nonatomic, retain) NSMutableArray* itemsInTable;
+@property (nonatomic, retain) NSArray* itemsInTable;
 @property (nonatomic, retain) NSString* headerText;
 @property (nonatomic, retain) NSString *category;
 
