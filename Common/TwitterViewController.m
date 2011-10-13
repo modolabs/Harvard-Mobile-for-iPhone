@@ -384,7 +384,7 @@ static NSString * const TwitterServiceName = @"Twitter";
     id jsonObj = [JSONAPIRequest objectWithJSONData:data];
     if (jsonObj && [jsonObj isKindOfClass:[NSDictionary class]]) {
         NSDictionary *urlData = nil;
-        if (urlData = [(NSDictionary *)jsonObj objectForKey:@"data"]) {
+        if ((urlData = [(NSDictionary *)jsonObj objectForKey:@"data"])) {
             shortURL = [[urlData objectForKey:@"url"] retain];
         }
     }
