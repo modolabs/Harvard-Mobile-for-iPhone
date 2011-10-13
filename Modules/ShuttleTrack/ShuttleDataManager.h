@@ -14,9 +14,6 @@
 // message sent when routes were received. If request failed, this is called with a nil routes array
 -(void) routesReceived:(NSArray*) routes;
 
-// message sent when stops were received. If request failed, this is called with a nil stops array
--(void) stopsReceived:(NSArray*) routes;
-
 // message sent when a shuttle stop is received. If request fails, this is called with nil 
 -(void) stopInfoReceived:(NSArray*)shuttleStopSchedules forStopID:(NSString*)stopID;
 
@@ -72,9 +69,6 @@
 
 // request the routes from the server.
 -(void) requestRoutes;
-
-// request the stops
--(void) requestStops;
 
 // request full information about a particular stop
 -(void) requestStop:(NSString*)stopID;

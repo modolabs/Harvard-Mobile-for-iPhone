@@ -10,7 +10,6 @@ static ShuttleDataManager* s_dataManager = nil;
 @interface ShuttleDataManager(Private)
 
 -(void) sendRoutesToDelegates:(NSArray*)routes;
--(void) sendStopsToDelegates:(NSArray*)routes;
 -(void) sendStopToDelegates:(NSArray*)shuttleStopSchedules forStopID:(NSString*)stopID;
 -(void) sendRouteToDelegates:(ShuttleRoute *)route forRouteID:(NSString*)routeID;
 
@@ -210,15 +209,6 @@ static ShuttleDataManager* s_dataManager = nil;
 	}
 }
 
--(void) requestStops
-{
-	JSONAPIRequest *api = [JSONAPIRequest requestWithJSONAPIDelegate:self];
-	BOOL dispatched = [api requestObjectFromModule:@"shuttles" command:@"stops" parameters:nil];
-	if (!dispatched) {
-		NSLog(@"%@", @"problem making stops api request");
-	}
-}
-
 
 -(void) requestStop:(NSString*)stopID
 {
@@ -254,16 +244,6 @@ static ShuttleDataManager* s_dataManager = nil;
 	{
 		if ([delegate respondsToSelector:@selector(routesReceived:)]) {
 			[delegate routesReceived:routes];
-		}
-	}
-}
-
--(void) sendStopsToDelegates:(NSArray*)stops
-{
-	for (id<ShuttleDataManagerDelegate> delegate in _registeredDelegates)
-	{
-		if ([delegate respondsToSelector:@selector(stopsReceived:)]) {
-			[delegate stopsReceived:stops];
 		}
 	}
 }
@@ -360,18 +340,6 @@ static ShuttleDataManager* s_dataManager = nil;
 		
 		[self sendRoutesToDelegates:_shuttleRoutes];
 	}
-	else if ([[request.params valueForKey:@"command"] isEqualToString:@"stops"] && [result isKindOfClass:[NSArray class]]) {
-
-		NSMutableArray* array = [[NSMutableArray alloc] initWithCapacity:[result count]];
-		
-		for (NSDictionary* dictionary in result) {
-			ShuttleStop* shuttleStop = [[[ShuttleStop alloc] initWithDictionary:dictionary] autorelease];
-			[array addObject:shuttleStop];
-		}
-		
-		[self sendStopsToDelegates:array];
-		
-	}
 	else if ([[request.params valueForKey:@"command"] isEqualToString:@"stopInfo"] && [result isKindOfClass:[NSDictionary class]]) {
 
 		NSArray* routesAtStop = [result objectForKey:@"stops"]; // the api should've called this "routes", this is confusing
@@ -443,9 +411,6 @@ static ShuttleDataManager* s_dataManager = nil;
 {
 	if ([[request.params valueForKey:@"command"] isEqualToString:@"routes"]) {
 		[self sendRoutesToDelegates:nil];
-	}
-	else if ([[request.params valueForKey:@"command"] isEqualToString:@"stops"]) {
-		[self sendStopsToDelegates:nil];
 	}
 	else if ([[request.params valueForKey:@"command"] isEqualToString:@"stopInfo"]) {
 		[self sendStopToDelegates:nil forStopID:[request.params valueForKey:@"id"]];

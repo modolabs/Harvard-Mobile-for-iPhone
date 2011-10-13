@@ -476,17 +476,6 @@
 	//dataLoaded = YES;
 }
 
-/*
-// do we need this here?
--(void) stopsReceived:(NSArray *)stops
-{
-	if (nil != stops) {
-		[self.tableView reloadData];
-	}
-    
-}
-*/
-
 
 - (void)addLoadingIndicator:(UIView *) headerView
 {
