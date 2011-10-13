@@ -43,7 +43,7 @@
 		customNavBar = [[[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, NAV_BAR_HEIGHT_WEBVIEW)] retain];
 		customNavBar.tintColor = [UIColor blackColor];
 		UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithTitle:@"Done" 
-																		style:UIBarButtonSystemItemDone target:self action:@selector(doneButtonPressed:)];
+																		style:UIBarButtonItemStyleDone target:self action:@selector(doneButtonPressed:)];
 		
 		UINavigationItem *item = [[UINavigationItem alloc] initWithTitle:titleStr];
 		item.rightBarButtonItem = rightButton;
