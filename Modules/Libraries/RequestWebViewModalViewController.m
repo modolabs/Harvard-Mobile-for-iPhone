@@ -21,7 +21,7 @@
 	
 	self = [super init];
 	
-	if (super) {
+	if (self) {
 	
 		requestUrl = url;
 		titleStr = titleString;
