@@ -334,6 +334,8 @@
             case CalendarEventListTypeCategory:
                 pageName = @"/calendar/categories";
                 break;
+            default:
+                break;
         }
         if (pageName) {
             [[AnalyticsWrapper sharedWrapper] trackPageview:pageName];

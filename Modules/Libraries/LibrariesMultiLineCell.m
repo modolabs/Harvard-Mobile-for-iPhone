@@ -42,6 +42,8 @@
                     case UITableViewCellAccessoryDisclosureIndicator:
                         width -= 15.0;
                         break;
+                    default:
+                        break;
                 }
             }
             break;
@@ -58,6 +60,8 @@
                         break;
                     case UITableViewCellAccessoryDisclosureIndicator:
                         width -= 15.0;
+                        break;
+                    default:
                         break;
                 }
             } else {
@@ -76,6 +80,8 @@
                     break;
                 case UITableViewCellAccessoryDisclosureIndicator:
                     width -= 15.0;
+                    break;
+                default:
                     break;
              }
             
