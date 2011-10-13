@@ -45,7 +45,7 @@
     NSInteger searchIndex;
 	NSInteger totalAvailableResults;
     
-    NSMutableArray *newStories;
+    NSMutableArray *downloadedStories;
     
 	NSAutoreleasePool *downloadAndParsePool;
 }
@@ -61,7 +61,7 @@
 @property (nonatomic, retain) NSMutableArray *currentStack;
 @property (nonatomic, retain) NSMutableDictionary *currentContents;
 @property (nonatomic, retain) NSMutableDictionary *currentImage;
-@property (nonatomic, retain) NSMutableArray *newStories;
+@property (nonatomic, retain) NSMutableArray *downloadedStories;
 @property (nonatomic, assign) NSAutoreleasePool *downloadAndParsePool;
 @property (nonatomic, assign) NSInteger searchIndex;
 

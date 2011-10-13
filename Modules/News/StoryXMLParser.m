@@ -43,7 +43,7 @@
 @synthesize currentStack;
 @synthesize currentContents;
 @synthesize currentImage;
-@synthesize newStories;
+@synthesize downloadedStories;
 @synthesize downloadAndParsePool;
 @synthesize searchIndex;
 
@@ -115,7 +115,7 @@ NSString * const NewsTagFullURL         = @"url";
         currentStack = nil;
         currentContents = nil;
         currentImage = nil;
-        newStories = nil;
+        downloadedStories = nil;
         downloadAndParsePool = nil;
         done = NO;
 		isSearch = NO;
@@ -136,7 +136,7 @@ NSString * const NewsTagFullURL         = @"url";
     self.delegate = nil;
     self.connection = nil;
 	self.xmlParser = nil;
-    self.newStories = nil;
+    self.downloadedStories = nil;
     self.currentElement = nil;
     self.currentStack = nil;
     self.currentContents = nil;
@@ -219,7 +219,7 @@ NSString * const NewsTagFullURL         = @"url";
     parseSuccessful = NO;
     
     self.connection = [[[ConnectionWrapper alloc] initWithDelegate:self] autorelease];
-    self.newStories = [NSMutableArray array];
+    self.downloadedStories = [NSMutableArray array];
     
     BOOL requestStarted = [connection requestDataFromURL:url];
 	if (requestStarted) {
@@ -472,9 +472,9 @@ NSString * const NewsTagFullURL         = @"url";
         story.thumbImage = [self imageWithDictionary:[currentContents objectForKey:NewsTagImage]];
         story.thumbImage.thumbParent = story;
         
-        [self performSelectorOnMainThread:@selector(reportProgress:) withObject:[NSNumber numberWithFloat:[newStories count] / (0.01 * expectedStoryCount)] waitUntilDone:NO];
+        [self performSelectorOnMainThread:@selector(reportProgress:) withObject:[NSNumber numberWithFloat:[downloadedStories count] / (0.01 * expectedStoryCount)] waitUntilDone:NO];
         
-        [newStories addObject:story];
+        [downloadedStories addObject:story];
         
         // prepare for next item
         [currentContents removeAllObjects];

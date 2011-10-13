@@ -706,9 +706,9 @@ static NSInteger numTries = 0;
 			} else {
                 numTries = 0;
             }
-			length += [self.xmlParser.newStories count];
+			length += [self.xmlParser.downloadedStories count];
             
-            //DLog(@"%@", [self.xmlParser.newStories description]);
+            //DLog(@"%@", [self.xmlParser.downloadedStories description]);
             DLog(@"setting expectedCount = %d", length);            
 			[aCategory setValue:[NSNumber numberWithInteger:length] forKey:@"expectedCount"];
 			if (!parser.loadingMore && [self.stories count] > 0) {
