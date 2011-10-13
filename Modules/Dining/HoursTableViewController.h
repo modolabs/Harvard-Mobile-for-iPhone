@@ -8,7 +8,7 @@
 #import <UIKit/UIKit.h>
 #import "JSONAPIRequest.h"
 #import "HallDetailsTableViewController.h"
-#import "MIT_MobileAppDelegate.h";
+#import "MIT_MobileAppDelegate.h"
 #import "DiningFirstViewController.h"
 #import "DiningHallStatus.h"
 //#import "MultiLineTableViewCell.h"

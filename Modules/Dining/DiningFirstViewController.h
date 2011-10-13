@@ -12,7 +12,7 @@
 #import "MIT_MobileAppDelegate.h"
 #import "HoursTableViewController.h"
 #import "JSONAPIRequest.h"
-#import "Constants.h";
+#import "Constants.h"
 #import "DatePickerViewController.h"
 
 
