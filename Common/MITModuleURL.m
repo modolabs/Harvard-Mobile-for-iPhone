@@ -45,7 +45,7 @@
 }
 	
 - (void) setPathWithViewController:(UIViewController *)viewController extension:(NSString *)extension {
-	[MITModuleURL parentViewController:viewController].view; // make sure the parent view controller has loaded (so that the url is defined)
+	(void)[MITModuleURL parentViewController:viewController].view; // make sure the parent view controller has loaded (so that the url is defined)
 	MITModuleURL *parentURL = ((id<MITModuleURLContainer>)[MITModuleURL parentViewController:viewController]).url;
 	[self setPath:[NSString stringWithFormat:@"%@/%@", parentURL.path, extension] query:nil];
 }

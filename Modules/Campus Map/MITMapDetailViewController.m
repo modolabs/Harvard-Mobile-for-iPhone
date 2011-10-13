@@ -316,7 +316,7 @@
         CMModule *mapModule = (CMModule *)[appDelegate moduleForTag:CampusMapTag];
         
         [mapModule resetNavStack];
-        mapModule.campusMapVC.view;
+        (void)mapModule.campusMapVC.view;
         [mapModule.campusMapVC setSearchResults:[NSArray arrayWithObject:self.annotation]];
         [mapModule.campusMapVC showListView:NO];
         [appDelegate showModuleForTag:CampusMapTag];

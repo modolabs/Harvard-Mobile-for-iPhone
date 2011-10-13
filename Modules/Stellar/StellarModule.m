@@ -157,7 +157,7 @@
 
     if ([localPath isEqualToString:LocalPathFederatedSearch]) {
         self.selectedResult = nil;
-        mainController.view;
+        (void)mainController.view;
         [mainController presentSearchResults:self.searchResults query:query];
         [self resetNavStack];
         didHandle = YES;

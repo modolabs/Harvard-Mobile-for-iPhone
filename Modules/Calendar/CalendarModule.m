@@ -121,7 +121,7 @@
     // and merge all parts of handleLocalPath
     if ([localPath isEqualToString:LocalPathFederatedSearch]) {
         self.selectedResult = nil;
-        calendarVC.view;
+        (void)calendarVC.view;
         [calendarVC presentSearchResults:self.searchResults searchText:query searchSpan:self.searchSpan];
         [self resetNavStack];
         didHandle = YES;
@@ -211,7 +211,7 @@
 		calendarVC.events = [CalendarDataManager eventsWithStartDate:calendarVC.startDate listType:listType category:catID];
 		
 		if (listType != CalendarEventListTypeEvents) { // if everything is default we don't need to bother with setup
-			calendarVC.view;
+			(void)calendarVC.view;
 			[calendarVC selectScrollerButton:[CalendarConstants titleForEventType:listType]];
 		}
 		
@@ -226,7 +226,7 @@
 		
 		// set up parent
 		calendarVC.activeEventList = CalendarEventListTypeCategory;
-		calendarVC.view;
+		(void)calendarVC.view;
 		[calendarVC selectScrollerButton:[CalendarConstants titleForEventType:CalendarEventListTypeCategory]];
 		if (queryDict == nil) {
 			didHandle = YES;
@@ -251,7 +251,7 @@
 		// stack depth: 2 or 3
 		
 		calendarVC.activeEventList = CalendarEventListTypeCategory;
-		calendarVC.view;
+		(void)calendarVC.view;
 		//[calendarVC selectScrollerButton:[CalendarConstants titleForEventType:CalendarEventListTypeCategory]];
 		
 		NSString *catID = [queryDict objectForKey:@"catID"];
@@ -298,7 +298,7 @@
 {
 	NSString *regionString = [queryDict objectForKey:@"region"];
 	if (regionString != nil) {
-		calVC.view;
+		(void)calVC.view;
 		//[calVC.mapView unserializeRegion:regionString];
 	}
 	
@@ -306,7 +306,7 @@
 	if (eventIDString != nil) {
 		NSInteger eventID = [eventIDString intValue];
 		MITCalendarEvent *event = [CalendarDataManager eventWithID:eventID];
-		calVC.view;
+		(void)calVC.view;
 		//calVC.mapView.shouldNotDropPins = YES;
 		calVC.events = [calVC.events arrayByAddingObject:event];
 		

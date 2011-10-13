@@ -49,7 +49,7 @@ NSString * const NewsLocalPathBookmarks = @"bookmarks";
     if ([localPath isEqualToString:LocalPathFederatedSearch]) {
         // fedsearch?query
         self.selectedResult = nil;
-        storyListChannelController.view;
+        (void)storyListChannelController.view;
         storyListChannelController.totalAvailableResults = totalResults;
         [storyListChannelController presentSearchResults:self.searchResults searchText:query];
         [self resetNavStack];
@@ -95,7 +95,7 @@ NSString * const NewsLocalPathBookmarks = @"bookmarks";
     // force main news viewController to load here
     // because it fetches things from core data which
     // affects search results we pass to it later on
-    storyListChannelController.view;
+    (void)storyListChannelController.view;
     
     [super performSearchForString:searchText];
     

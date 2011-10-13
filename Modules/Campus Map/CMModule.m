@@ -123,7 +123,7 @@ NSString * const MapsLocalPathList = @"list";
     if ([localPath isEqualToString:LocalPathFederatedSearch]) {
         // fedsearch?query
         self.selectedResult = nil;
-        self.campusMapVC.view;
+        (void)self.campusMapVC.view;
         self.campusMapVC.searchResults = self.searchResults;
         self.campusMapVC.searchBar.text = query;
         self.campusMapVC.lastSearchText = query;
@@ -153,7 +153,7 @@ NSString * const MapsLocalPathList = @"list";
                 annotation.coordinate = CLLocationCoordinate2DMake([saved.latitude floatValue], [saved.longitude floatValue]);
                 annotation.name = saved.name;
             }
-            self.campusMapVC.view; // make sure mapview is loaded
+            (void)self.campusMapVC.view; // make sure mapview is loaded
             self.campusMapVC.searchBar.text = saved.name;
             self.campusMapVC.lastSearchText = saved.name;
             [self.campusMapVC.searchController setActive:NO animated:NO];
@@ -186,7 +186,7 @@ NSString * const MapsLocalPathList = @"list";
         }
         
         [self resetNavStack];
-        self.campusMapVC.view;
+        (void)self.campusMapVC.view;
 	            
         // populate search bar
         self.campusMapVC.searchBar.text = query;
