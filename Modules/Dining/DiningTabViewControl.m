@@ -36,7 +36,6 @@
 
 @implementation DiningTabViewControl
 @synthesize tabs = _tabs;
-@synthesize selectedTab = _selectedTab;
 @synthesize delegate = _delegate;
 
 - (id)initWithFrame:(CGRect)frame {
@@ -194,6 +193,11 @@
 	
 	return self.tabs.count - 1;
 	
+}
+
+- (int)selectedTab
+{
+    return _selectedTab;
 }
 
 -(void) setSelectedTab:(int) selectedTab
