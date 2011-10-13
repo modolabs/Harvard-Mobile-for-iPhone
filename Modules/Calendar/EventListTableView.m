@@ -24,6 +24,14 @@
     return 0;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    if (isSearchResults) {
+        return tableView.sectionHeaderHeight;
+    }
+    return 0;
+}
+
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
 	UIView *titleView = nil;
     NSString *titleString = nil;
