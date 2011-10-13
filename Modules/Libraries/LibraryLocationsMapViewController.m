@@ -208,8 +208,7 @@
 		double latDelta = 0.004;
 		double lonDelta = 0.004; 
 		
-		
-		MKCoordinateSpan span = {latitudeDelta: latDelta, longitudeDelta: lonDelta};
+		MKCoordinateSpan span = MKCoordinateSpanMake(latDelta, lonDelta);
 		MKCoordinateRegion regionToReturn = {center, span};
 		
 		regionToReturn.span.latitudeDelta = latDelta;
