@@ -81,7 +81,7 @@
 	
 	self.title = NSLocalizedString(@"Bus Stop", nil);
 	
-	UIView *headerView = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 235)] autorelease];
+	UIView *headerView = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 235)] autorelease];
 	headerView.backgroundColor = [UIColor clearColor];
 	
 	int mapBuffer = 15;
@@ -90,7 +90,7 @@
 	int mapSizeX = self.view.frame.size.width - mapBufferX*2;
 	int mapSizeY = 185;
 	
-	int titleWidth = headerView.frame.size.width;
+	int titleWidth = headerView.frame.size.width - 20;
 	CGSize titleSize = [self.shuttleStop.title sizeWithFont:[UIFont fontWithName:CONTENT_TITLE_FONT size:CONTENT_TITLE_FONT_SIZE]
                                           constrainedToSize:CGSizeMake(titleWidth, 300)
                                               lineBreakMode:UILineBreakModeWordWrap];
@@ -147,7 +147,10 @@
 	UIImage *im = [[UIImage imageNamed:@"shuttles/shuttle-transloc.png"] retain];
 	UIImageView * logoImView = [[[UIImageView alloc] initWithImage:im] retain];
 	
-	logoView = [[UIView alloc] initWithFrame:CGRectMake(mapSizeX - 2*mapBufferX, mapSizeY, logoImView.frame.size.width, logoImView.frame.size.height)];
+	logoView = [[UIView alloc] initWithFrame:CGRectMake(mapSizeX - 2*mapBufferX,
+                                                        mapBufferY + mapSizeY - logoImView.frame.size.height - 10,
+                                                        logoImView.frame.size.width,
+                                                        logoImView.frame.size.height)];
 	logoView.backgroundColor = [UIColor clearColor];
 	[logoView addSubview:logoImView];
 	[headerView addSubview:logoView];
