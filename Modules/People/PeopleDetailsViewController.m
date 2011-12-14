@@ -55,15 +55,11 @@ NSString * const RequestLookupAddress = @"address";
 	self.title = @"Info";
 	[self.tableView applyStandardColors];
 	
-	// get fullname for header
-	NSMutableArray *multiPartAttribute = [[NSMutableArray alloc] initWithCapacity:2];	
+	// get fullname for header	
 	NSString *value;
-	if ((value = [self.personDetails formattedValueForKey:@"givenname"]))
-		[multiPartAttribute addObject:value];
-	if ((value = [self.personDetails formattedValueForKey:@"sn"]))
-		[multiPartAttribute addObject:value];
-	self.fullname = [multiPartAttribute componentsJoinedByString:@" "];
-	[multiPartAttribute release];
+    self.fullname = @"";
+	if ((value = [self.personDetails formattedValueForKey:@"cn"]))
+		self.fullname = value;
 	
 	// populate remaining contents to be displayed
 	self.sectionArray = [NSMutableArray array];
