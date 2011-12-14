@@ -266,15 +266,21 @@
 #pragma mark UIWebView delegate
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
-	CGSize size = [webView sizeThatFits:CGSizeZero];
     CGRect frame = _whatsHereView.frame;
-    frame.size.height = size.height;
+    frame.size.height = 
+        [[webView stringByEvaluatingJavaScriptFromString: @"document.body.offsetHeight"] intValue] + 15;
     _whatsHereView.frame = frame;
-
-    // prevent short webview from scrolling
-    // http://stackoverflow.com/questions/500761/stop-uiwebview-from-bouncing-vertically
-    if (size.height <= _tabViewContainer.frame.size.height) {
-        [_whatsHereView stringByEvaluatingJavaScriptFromString:@"document.ontouchmove = function(event){ event.preventDefault();}"];     
+    CGSize size = frame.size;
+    
+    // Icky hack for pre-iOS 5
+    UIScrollView *subview = nil;
+    for(UIView *view in webView.subviews) {
+        if([view isKindOfClass:[UIScrollView class]]) {
+            subview = (UIScrollView *)view;
+            subview.bounces = NO;
+            subview.scrollEnabled = NO;
+            subview.decelerationRate = 0;
+        }
     }
     
     frame = _tabViewContainer.frame;
@@ -283,10 +289,12 @@
         _tabViewContainer.frame = frame;
     }
     
-    size = _scrollView.frame.size;
-    size.height = _tabViewContainer.frame.size.height + _tabViewContainer.frame.origin.y;
-    if (size.height > _scrollView.frame.size.height) {
-        [_scrollView setContentSize:size];
+    if (webView == [_tabViews objectAtIndex:_tabViewControl.selectedTab]) {
+        size = _scrollView.frame.size;
+        size.height = _tabViewContainer.frame.size.height + _tabViewContainer.frame.origin.y;
+        if (size.height > _scrollView.frame.size.height) {
+            [_scrollView setContentSize:size];
+        }
     }
 }
 
