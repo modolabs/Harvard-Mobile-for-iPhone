@@ -163,6 +163,7 @@
                 } else {
                     NSError *error = nil;
                     aStop = [ShuttleDataManager stopWithRoute:self.routeID stopID:stopID error:&error];
+                    [aStop updateInfo:aDict referenceDate:now];
                     [_stopsById setObject:aStop forKey:stopID];
                     [self.stops addObject:aStop];
                     ShuttleStopMapAnnotation* annotation = [[[ShuttleStopMapAnnotation alloc] initWithShuttleStop:aStop] autorelease];
