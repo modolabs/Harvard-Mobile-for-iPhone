@@ -163,6 +163,7 @@
                 } else {
                     NSError *error = nil;
                     aStop = [ShuttleDataManager stopWithRoute:self.routeID stopID:stopID error:&error];
+                    [aStop updateInfo:aDict referenceDate:now];
                     [_stopsById setObject:aStop forKey:stopID];
                     [self.stops addObject:aStop];
                     ShuttleStopMapAnnotation* annotation = [[[ShuttleStopMapAnnotation alloc] initWithShuttleStop:aStop] autorelease];
@@ -311,20 +312,21 @@
 	if (_liveStatusFailed) {
 		return @"Real time tracking failed to load.";
 	}
-	
-	ShuttleStop *aStop = [self.stops lastObject];
-	if (aStop.nextScheduledDate) { // we have something from the server
-		if (self.vehicleLocations && self.vehicleLocations.count > 0) {
-			summaryString = [NSString stringWithString:@"Real time bus tracking online."];
-		} else if (self.isRunning) {
-			summaryString = [NSString stringWithString:@"Tracking offline."];
-		} else {
-			summaryString = [NSString stringWithString:@"Bus not running."];
-		}
-	} else {
-		summaryString = [NSString stringWithString:@"Loading..."];
-	}
-	
+    
+    if (!self.isRunning) {
+        summaryString = @"Bus not running.";
+    } else {
+        ShuttleStop *aStop = [self.stops lastObject];
+        if (aStop.nextScheduledDate) { // we have something from the server
+            if (self.vehicleLocations && self.vehicleLocations.count > 0) {
+                summaryString = [NSString stringWithString:@"Real time bus tracking online."];
+            } else {
+                summaryString = [NSString stringWithString:@"Tracking offline."];
+            }
+        } else {
+            summaryString = [NSString stringWithString:@"Loading..."];
+        }
+    }
 	return summaryString;
 }
 

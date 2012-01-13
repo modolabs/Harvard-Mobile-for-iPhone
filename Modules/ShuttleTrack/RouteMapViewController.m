@@ -49,14 +49,15 @@
 - (void)viewDidLoad {
 	
     [super viewDidLoad];
-	[self addLoadingIndicator];
-	[self setupMapView];
+    [self addLoadingIndicator];
+    [self setupMapView];
     
     NSString *detailString = [NSString stringWithFormat:@"/shuttleschedule/route?id=%@&view=map", _route.routeID];
     [[AnalyticsWrapper sharedWrapper] trackPageview:detailString];
 }
 
 -(void)setupMapView {
+    DLog(@"%@", self.mapView);
 	self.mapView.delegate = self;
 	self.mapView.scrollEnabled = YES;
 	
@@ -207,6 +208,12 @@
 	[super viewWillAppear:animated];
 	[[ShuttleDataManager sharedDataManager] registerDelegate:self];
 	[self setupMapView];
+    // use pathlocations as a test for whether this route is populated.
+    // if the route is not running, we need to manually remove the loading indicator and show the map
+    // since we won't get any further data about the route if we flip to the list and back.
+    if (self.route.pathLocations.count && !self.route.isRunning) {
+        [self routeInfoReceived:self.route forRouteID:self.route.routeID];
+    }
 }
 
 -(void) viewDidAppear:(BOOL)animated

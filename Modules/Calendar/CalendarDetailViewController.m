@@ -531,8 +531,13 @@
 	if ([summaryArray count] > 0)
 		summary = [summaryArray objectAtIndex:0];
 
+	NSString *timeSummary = [event dateStringWithDateStyle:NSDateFormatterFullStyle timeStyle:NSDateFormatterShortStyle separator:@"\n"];
 
-	return [NSString stringWithFormat:@"I thought you might be interested in this event...\n%@\n%@\n%@", event.title, [self twitterUrl], summary];
+	return [NSString stringWithFormat:@"I thought you might be interested in this event...\n\n%@\n%@\n\n%@\n\n%@", 
+            event.title, 
+            [self twitterUrl], 
+            timeSummary,
+            summary];
 }
 
 - (NSString *)fbDialogPrompt {
