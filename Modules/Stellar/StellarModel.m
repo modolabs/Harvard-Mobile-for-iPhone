@@ -61,22 +61,18 @@ NSString* cleanPersonName(NSString *personName);
 }
 
 + (BOOL) classesFreshForCourse: (StellarCourse *)course term: (NSString *)term {
-	// check for an existance of a last cached date first
-	if (![course.term length] || !course.lastCache || !term) {
-		return NO;
-	}
-
-	// check if term is old
-	if (![course.term isEqualToString:term]) {
-		// new term remove all the classes for this course
-		[course removeStellarClasses:course.stellarClasses];
-		course.lastChecksum = nil;
-		course.lastCache = nil;
-		[CoreDataManager saveData];
-		return NO;
-	}
-		
-	return (-[course.lastCache timeIntervalSinceNow] < 2 * DAY);
+    // check if term is old or invalid and if so remove all old classes and flush caches so we refresh
+    if (![course.term isEqualToString:term]) {
+        if (course.stellarClasses.count) {
+            [course removeStellarClasses:course.stellarClasses];
+        }
+        course.lastChecksum = nil;
+        course.lastCache = nil;
+        [CoreDataManager saveData];
+        return NO;
+    }
+    
+    return (-[course.lastCache timeIntervalSinceNow] < 2 * DAY);
 }
 	
 + (void) loadClassesForCourse: (StellarCourse *)stellarCourse delegate: (NSObject<ClassesLoadedDelegate>*) delegate {
@@ -496,8 +492,7 @@ NSString* cleanPersonName(NSString *personName);
 
 - (void) markCourseAsNew {
 	self.stellarCourse.lastCache = [NSDate dateWithTimeIntervalSinceNow:0];
-	//self.stellarCourse.term = [[NSUserDefaults standardUserDefaults] objectForKey:StellarTermKey];
-	//self.stellarCourse.term = @"Fall 2010";
+	self.stellarCourse.term = [[NSUserDefaults standardUserDefaults] objectForKey:StellarTermKey];
 	[CoreDataManager saveData];
 }
 	
