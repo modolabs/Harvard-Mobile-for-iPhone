@@ -32,12 +32,12 @@ static const NSInteger kAnnouncementBadgeLabel = 0x41;
 - (void)addBadgeLabelToAnnouncement {
 	UILabel *badgeLabel = [[UILabel alloc] initWithFrame:
 						   CGRectMake(0, 
-									  0, 
+									  -1, 
 									  newAnnouncement.frame.size.width, 
 									  newAnnouncement.frame.size.height)];
 	badgeLabel.backgroundColor = [UIColor clearColor];
 	badgeLabel.textColor = [UIColor whiteColor];
-	badgeLabel.font = [UIFont boldSystemFontOfSize:17.0f];
+	badgeLabel.font = [UIFont boldSystemFontOfSize:14.0f];
 	badgeLabel.textAlignment = UITextAlignmentCenter;
 	badgeLabel.tag = kAnnouncementBadgeLabel;
 	[newAnnouncement addSubview:badgeLabel];
@@ -63,7 +63,7 @@ static const NSInteger kAnnouncementBadgeLabel = 0x41;
 	self.view.backgroundColor = [UIColor clearColor];
 	
 	shuttleRoutesTableView = [[ShuttleRoutes alloc] initWithStyle: UITableViewStyleGrouped];
-	shuttleRoutesTableView.parentViewController = self.navigationController;
+	shuttleRoutesTableView.parentNavigationViewController = self.navigationController;
 	shuttleRoutesTableView.mainViewController = self;
 	
 	//tabViewContainer = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 420.0)];
@@ -71,13 +71,13 @@ static const NSInteger kAnnouncementBadgeLabel = 0x41;
 	
 	announcementsTab  = [[AnnouncementsTableViewController alloc] initWithStyle:UITableViewStylePlain];
 	//announcementsTab = [[AnnouncementsViewController alloc] initWithNibName:@"AnnouncementsViewController" bundle:nil];
-	announcementsTab.parentViewController = self.navigationController;
+	announcementsTab.parentNavigationViewController = self.navigationController;
 	
 	JSONAPIRequest *api = [JSONAPIRequest requestWithJSONAPIDelegate:self];
 	BOOL dispatched = [api requestObjectFromModule:@"shuttles" command:@"announcements" parameters:nil];
 	
 	contactsTab = [[ContactsTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
-	contactsTab.parentViewController = self.navigationController;
+	contactsTab.parentNavigationViewController = self.navigationController;
 	
 	if (dispatched == NO)
 		[self couldNotConnectToServer];

@@ -13,10 +13,10 @@
 
 	NSMutableArray * harvardAnnouncements;
 	NSMutableArray * mascoAnnouncements;
-	UINavigationController *parentViewController;
+	UINavigationController *parentNavigationViewController;
 }
 
-@property (nonatomic, retain) UINavigationController *parentViewController;
+@property (nonatomic, retain) UINavigationController *parentNavigationViewController;
 @property (nonatomic, retain) NSMutableArray * harvardAnnouncements;
 @property (nonatomic, retain) NSMutableArray * mascoAnnouncements;
 
