@@ -433,6 +433,7 @@ NSInteger phoneNumberSort(id num1, id num2, void *context){
         textLabel.text = @"Location";
         textLabel.font = cellFont;
         textLabel.textColor = cell.textLabel.textColor;
+        textLabel.backgroundColor = [UIColor clearColor];
         textLabel.tag = 7685;
         [cell.contentView addSubview:textLabel];
         currentHeight += labelHeight;
@@ -444,6 +445,7 @@ NSInteger phoneNumberSort(id num1, id num2, void *context){
         detailTextLabel.lineBreakMode = UILineBreakModeWordWrap;
         detailTextLabel.numberOfLines = 0;
         detailTextLabel.textColor = cell.detailTextLabel.textColor;
+        detailTextLabel.backgroundColor = [UIColor clearColor];
         detailTextLabel.tag = 7686;
         [cell.contentView addSubview:detailTextLabel];
         currentHeight += labelHeight;

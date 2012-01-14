@@ -33,7 +33,7 @@
     
 	self.segControl = [[[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"Bookmarks", @"Recents", @"Browse", nil]] autorelease];
 	[segControl setSegmentedControlStyle:UISegmentedControlStyleBar];
-	[segControl setFrame:CGRectMake(0, 0, self.view.frame.size.width - 30, segControl.frame.size.height)];
+	[segControl setFrame:CGRectMake(0, 0, self.view.frame.size.width - 12, segControl.frame.size.height)];
 	[segControl setTintColor:[UIColor darkGrayColor]];
 	[segControl addTarget:self action:@selector(switchToSegment:) forControlEvents:UIControlEventValueChanged];
 	
