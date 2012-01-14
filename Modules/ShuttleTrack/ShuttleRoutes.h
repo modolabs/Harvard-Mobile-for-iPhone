@@ -30,7 +30,7 @@
 
 	NSArray* _contactInfo;
 	
-	UINavigationController *parentViewController;
+	UINavigationController *parentNavigationViewController;
 	ShuttlesMainViewController *mainViewController;
 	
 	int currentTabInMainView;
@@ -43,7 +43,7 @@
 @property (nonatomic, retain) NSArray* nonSaferideRoutes;
 @property (nonatomic, retain) NSArray* sections;
 @property BOOL isLoading;
-@property (nonatomic, retain) UINavigationController *parentViewController;
+@property (nonatomic, retain) UINavigationController *parentNavigationViewController;
 @property (nonatomic, retain) ShuttlesMainViewController *mainViewController;
 @property int currentTabMainView;
 

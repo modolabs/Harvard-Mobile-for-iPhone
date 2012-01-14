@@ -14,12 +14,12 @@
 
 @interface ContactsTableViewController : UITableViewController <JSONAPIDelegate> {
 
-	UINavigationController *parentViewController;
+	UINavigationController *parentNavigationViewController;
 	ContactsSystemDetailsViewController *detailsViewController;
     NSMutableDictionary *aboutSystemText;
 }
 
-@property (nonatomic, retain) UINavigationController *parentViewController;
+@property (nonatomic, retain) UINavigationController *parentNavigationViewController;
 
 
 -(NSArray *)getEmergencyPhoneNumbers;

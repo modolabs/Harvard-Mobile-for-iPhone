@@ -15,7 +15,7 @@
 
 @synthesize harvardAnnouncements;
 @synthesize mascoAnnouncements;
-@synthesize parentViewController;
+@synthesize parentNavigationViewController;
 
 
 #define GROUPED_VIEW_CELL_COLOR [UIColor colorWithHexString:@"#FDFAF6"] 
@@ -288,7 +288,7 @@
 		detailViewController.titleString = [announcementDetails objectForKey:@"title"];
 		detailViewController.htmlStringToDisplay = [announcementDetails objectForKey:@"html"];
 		detailViewController.dateString = [announcementDetails objectForKey:@"date"];
-		[self.parentViewController pushViewController:detailViewController animated:YES];
+		[self.parentNavigationViewController pushViewController:detailViewController animated:YES];
 	}
 	else {
 		return;
@@ -314,7 +314,7 @@
 	
 	[harvardAnnouncements release];
 	[mascoAnnouncements release];
-	[parentViewController release];
+	self.parentNavigationViewController = nil;
 }
 
 
@@ -322,7 +322,7 @@
     [super dealloc];
 	[harvardAnnouncements release];
 	[mascoAnnouncements release];
-	[parentViewController release];
+	self.parentNavigationViewController = nil;
 }
 
 

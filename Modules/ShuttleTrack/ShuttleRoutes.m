@@ -23,7 +23,7 @@
 @synthesize nonSaferideRoutes = _nonSaferideRoutes;
 @synthesize sections = _sections;
 @synthesize isLoading = _isLoading;
-@synthesize parentViewController;
+@synthesize parentNavigationViewController;
 @synthesize currentTabMainView;
 @synthesize mainViewController;
 
@@ -33,6 +33,7 @@
 	self.saferideRoutes = nil;
 	self.nonSaferideRoutes = nil;
 	self.sections = nil;
+    self.parentNavigationViewController = nil;
 	
 	[_shuttleRunningImage release];
 	[_shuttleNotRunningImage release];
@@ -55,7 +56,7 @@
 	
 	[[ShuttleDataManager sharedDataManager] unregisterDelegate:self];
 	
-
+    self.parentNavigationViewController = nil;
 }
 
 
@@ -245,7 +246,7 @@
 		*/
 		
 		//[self.navigationController pushViewController:routeVC animated:YES];
-		[self.parentViewController pushViewController:routeVC animated:YES];
+		[self.parentNavigationViewController pushViewController:routeVC animated:YES];
 		
 	}
 	

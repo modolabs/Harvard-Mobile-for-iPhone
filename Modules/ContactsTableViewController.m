@@ -11,7 +11,7 @@
 #import "JSONAPIRequest.h"
 
 @implementation ContactsTableViewController
-@synthesize parentViewController;
+@synthesize parentNavigationViewController;
 
 #define GROUPED_VIEW_CELL_COLOR [UIColor colorWithHexString:@"#FDFAF6"] 
 
@@ -209,7 +209,7 @@ static NSString const * kShuttlesCalendar = @"Shuttles Calendar";
                 detailsViewController.detailsString = htmlString;
             }
             detailsViewController.titleString = key;
-			[self.parentViewController pushViewController:detailsViewController animated:YES];	
+			[self.parentNavigationViewController pushViewController:detailsViewController animated:YES];
 			break;
 		case 1:
 			phoneNumber = [[self getShuttleServicePhoneNumbers] objectAtIndex:indexPath.row];
@@ -256,11 +256,12 @@ static NSString const * kShuttlesCalendar = @"Shuttles Calendar";
 - (void)viewDidUnload {
     // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
     // For example: self.myOutlet = nil;
+	self.parentNavigationViewController = nil;
 }
 
 
 - (void)dealloc {
-    parentViewController = nil;
+    self.parentNavigationViewController = nil;
     [aboutSystemText release];
     [detailsViewController release];
     [super dealloc];
