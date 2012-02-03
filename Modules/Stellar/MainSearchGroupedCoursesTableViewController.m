@@ -145,7 +145,6 @@
 	[url setPathWithViewController:self extension:course.number];
     
     NSString *detailString = [NSString stringWithFormat:@"/courses/search?courseGroup=%@", stellarCourseGroupString];
-NSLog(@"%@", detailString);
     [[AnalyticsWrapper sharedWrapper] trackPageview:detailString];
 }
 
