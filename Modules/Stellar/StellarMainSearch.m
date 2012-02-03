@@ -97,19 +97,18 @@
 
 #pragma mark UITableViewDelegate methods
 
-// TODO: this method needs to be rethought;
-// currently it leaks an instance of MainSearchGroupdCoursesTableViewController with each execution.
 - (void) tableView: (UITableView *)tableView didSelectRowAtIndexPath: (NSIndexPath *)indexPath {
 	[tableView deselectRowAtIndexPath:indexPath animated:NO];
+    
+    MainSearchGroupedCoursesTableViewController *vc = [[[MainSearchGroupedCoursesTableViewController alloc] initWithCourse:nil] autorelease];
+    
+    vc.navigationItem.title = @"Search Results";
 	
-	//viewController.searchController.searchBar.text = @"art and blue";
-	
-	MainSearchGroupedCoursesTableViewController * vc = [[MainSearchGroupedCoursesTableViewController alloc] initWithViewController:viewController];	
-	
-	//StellarSearch *s_search = [[StellarSearch alloc] initWithViewController:viewController];
 	UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
 	[vc setCourseGroupString:cell.detailTextLabel.text];
 	[vc setSearchString: viewController.searchController.searchBar.text];
+    
+    [viewController.navigationController pushViewController:vc animated:YES];
 
 	[StellarModel executeStellarSearch:viewController.searchController.searchBar.text courseGroupName:[[self.groups allKeys] objectAtIndex: indexPath.row] courseName:@"" delegate:vc];
 
