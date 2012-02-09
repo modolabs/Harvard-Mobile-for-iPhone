@@ -1,9 +1,9 @@
 #import "Constants.h"
 
 #ifdef USE_MOBILE_DEV
-NSString * const MITMobileWebDomainString =        @"mobile-staging.harvard.edu";
-NSString * const MITMobileWebAPIURLString = @"http://mobile-staging.harvard.edu/api/";
-NSString * const KurogoAPIURLString       = @"http://mobile-staging.harvard.edu/rest/";
+NSString * const MITMobileWebDomainString =        @"local.harvard.edu";
+NSString * const MITMobileWebAPIURLString = @"http://local.harvard.edu/api/";
+NSString * const KurogoAPIURLString       = @"http://local.harvard.edu/rest/";
 #else
     #ifdef USE_MOBILE_TEST
     NSString * const MITMobileWebDomainString = @"mobile-dev.harvard.edu";
