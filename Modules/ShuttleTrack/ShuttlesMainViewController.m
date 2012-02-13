@@ -4,7 +4,7 @@
 
 enum {
     RunningTabIndex = 0,
-    //OfflineTabIndex,
+    OfflineTabIndex,
     NewsTabIndex,
     InfoTabIndex
 };
@@ -84,8 +84,8 @@ static const NSInteger kAnnouncementBadgeLabel = 0x41;
 	[tabView addTab:@"Running"];	
 	[_tabViewsArray insertObject:shuttleRoutesTableView.view atIndex: RunningTabIndex];
 	
-	//[tabView addTab:@"Offline"];
-	//[_tabViewsArray insertObject:shuttleRoutesTableView.view atIndex: OfflineTabIndex];
+	[tabView addTab:@"Offline"];
+	[_tabViewsArray insertObject:shuttleRoutesTableView.view atIndex: OfflineTabIndex];
 	
 	[tabView addTab:@"News"];
 	[_tabViewsArray insertObject:announcementsTab.view atIndex: NewsTabIndex];
@@ -170,18 +170,15 @@ static const NSInteger kAnnouncementBadgeLabel = 0x41;
 	switch (tabIndex) {
         case RunningTabIndex:
             shuttleRoutesTableView.view.hidden = NO;
+            //-[ShuttleRoutes setShuttleRoutes:] calls tableView reloadData as a side effect
             [shuttleRoutesTableView setShuttleRoutes:shuttleRoutesTableView.shuttleRoutes];
-            //[shuttleRoutesTableView.tableView reloadData];
             analyticsAction = @"running tab pressed";
             break;
-        /*
         case OfflineTabIndex:
             shuttleRoutesTableView.view.hidden = NO;
             [shuttleRoutesTableView setShuttleRoutes:shuttleRoutesTableView.shuttleRoutes];
-            //[shuttleRoutesTableView.tableView reloadData];
             analyticsAction = @"offline tab pressed";
             break;
-        */
         case NewsTabIndex:
             announcementsTab.view.hidden = NO;
             [announcementsTab.tableView reloadData];
