@@ -47,7 +47,7 @@ ShuttleDataManagerDelegate, MKMapViewDelegate>
 	
 	MITModuleURL* url;
 	
-	NSArray *routes;
+	NSArray *_routes;
 	NSMutableArray *routesRunningCurrentlyThroughThisStop;
 	NSMutableArray *routesNotRunningCurrentlyThroughThisStop;
 	
