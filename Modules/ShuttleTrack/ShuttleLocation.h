@@ -18,10 +18,8 @@
 @property (nonatomic) CGFloat speed;
 @property (nonatomic) CLLocationCoordinate2D coordinate;
 @property (nonatomic) NSInteger vehicleId;
-@property (nonatomic, assign) UIImage *image;
+@property (nonatomic, retain) UIImage *image;
 
-+ (void)clearAllMarkerImages;
-
--(id) initWithDictionary:(NSDictionary*)dictionary;
+- (id)initWithDictionary:(NSDictionary*)dictionary;
 
 @end

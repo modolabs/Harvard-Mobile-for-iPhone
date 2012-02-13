@@ -18,7 +18,10 @@
 	ShuttleRouteStop *_routeStop;
 }
 
-- (void)updateInfo:(NSDictionary *)stopInfo referenceDate:(NSDate *)refDate;
+//- (void)updateInfo:(NSDictionary *)stopInfo referenceDate:(NSDate *)refDate;
+
+- (void)updateStaticInfo:(NSDictionary *)stopInfo;
+- (void)updateArrivalTimes:(NSArray *)arrives;
 
 - (id)initWithRouteStop:(ShuttleRouteStop *)routeStop;
 - (id)initWithStopLocation:(ShuttleStopLocation *)stopLocation routeID:(NSString *)routeID;

@@ -1,11 +1,3 @@
-//
-//  AnnouncementsTableViewController.m
-//  Harvard Mobile
-//
-//  Created by Muhammad Amjad on 9/22/10.
-//  Copyright 2010 Modo Labs. All rights reserved.
-//
-
 #import "AnnouncementsTableViewController.h"
 #import "MITUIConstants.h"
 #import "MultiLineTableViewCell.h"

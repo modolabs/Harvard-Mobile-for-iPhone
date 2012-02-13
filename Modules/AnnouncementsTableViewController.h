@@ -1,24 +1,16 @@
-//
-//  AnnouncementsTableViewController.h
-//  Harvard Mobile
-//
-//  Created by Muhammad Amjad on 9/22/10.
-//  Copyright 2010 Modo Labs. All rights reserved.
-//
-
 #import <UIKit/UIKit.h>
 #import "MultiLineTableViewCell.h"
 
 @interface AnnouncementsTableViewController : UITableViewController {
 
-	NSMutableArray * harvardAnnouncements;
-	NSMutableArray * mascoAnnouncements;
+	NSArray * harvardAnnouncements;
+	NSArray * mascoAnnouncements;
 	UINavigationController *parentNavigationViewController;
 }
 
 @property (nonatomic, retain) UINavigationController *parentNavigationViewController;
-@property (nonatomic, retain) NSMutableArray * harvardAnnouncements;
-@property (nonatomic, retain) NSMutableArray * mascoAnnouncements;
+@property (nonatomic, retain) NSArray * harvardAnnouncements;
+@property (nonatomic, retain) NSArray * mascoAnnouncements;
 
 @end
 

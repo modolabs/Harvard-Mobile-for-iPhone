@@ -186,6 +186,7 @@
 
 -(void) viewWillDisappear:(BOOL)animated
 {
+	[super viewWillDisappear:animated];
 	[[ShuttleDataManager sharedDataManager] unregisterDelegate:self];
 	
 	[_pollingTimer invalidate];

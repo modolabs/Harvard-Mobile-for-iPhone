@@ -148,19 +148,21 @@
 
 
 -(void)assignRoutePoints {
-    MKMapPoint* pointArr = malloc(sizeof(CLLocationCoordinate2D) * self.route.pathLocations.count);
-    for (int idx = 0; idx < self.route.pathLocations.count; idx++) {
-		CLLocation* location = [self.route.pathLocations objectAtIndex:idx];
-		CLLocationCoordinate2D coordinate = location.coordinate;
-		MKMapPoint point = MKMapPointForCoordinate(coordinate);
-		pointArr[idx] = point;
-	}
-	
-	// create the polyline based on the array of points. 
-    self.routeLine = [MKPolyline polylineWithPoints:pointArr count:self.route.pathLocations.count];
-    free(pointArr);
-    if (nil != self.routeLine) {
-        [self.mapView addOverlay:self.routeLine];
+    for (NSArray *segment in self.route.pathLocations) {
+        MKMapPoint* pointArr = malloc(sizeof(CLLocationCoordinate2D) * segment.count);
+        for (int idx = 0; idx < segment.count; idx++) {
+            CLLocation* location = [segment objectAtIndex:idx];
+            CLLocationCoordinate2D coordinate = location.coordinate;
+            MKMapPoint point = MKMapPointForCoordinate(coordinate);
+            pointArr[idx] = point;
+        }
+        
+        // create the polyline based on the array of points. 
+        MKPolyline *polyline = [MKPolyline polylineWithPoints:pointArr count:segment.count];
+        free(pointArr);
+        if (nil != polyline) {
+            [self.mapView addOverlay:polyline];
+        }
     }
 }
 
@@ -245,7 +247,7 @@
 	[_routeStatusLabel release];
     [logoView release];
     
-    [ShuttleLocation clearAllMarkerImages];
+    //[ShuttleLocation clearAllMarkerImages];
     
 	self.route = nil;
 	//self.routeInfo = nil;
@@ -345,22 +347,24 @@
 	double maxLat = -90;
 	double minLon = 180;
 	double maxLon = -180;
-	
-	for (CLLocation* location in self.route.pathLocations) {
-		CLLocationCoordinate2D coordinate = location.coordinate;
-		if (coordinate.latitude < minLat) {
-			minLat = coordinate.latitude;
-		}
-		if (coordinate.latitude > maxLat) {
-			maxLat = coordinate.latitude;
-		}
-		if(coordinate.longitude < minLon) {
-			minLon = coordinate.longitude;
-		}
-		if (coordinate.longitude > maxLon) {
-			maxLon = coordinate.longitude;
-		}
-	}
+
+	for (NSArray *segment in self.route.pathLocations) {
+        for (CLLocation* location in segment) {
+            CLLocationCoordinate2D coordinate = location.coordinate;
+            if (coordinate.latitude < minLat) {
+                minLat = coordinate.latitude;
+            }
+            if (coordinate.latitude > maxLat) {
+                maxLat = coordinate.latitude;
+            }
+            if(coordinate.longitude < minLon) {
+                minLon = coordinate.longitude;
+            }
+            if (coordinate.longitude > maxLon) {
+                maxLon = coordinate.longitude;
+            }
+        }
+    }
 	
 	CLLocationCoordinate2D center;
     CGFloat latDelta = maxLat - minLat;
@@ -562,7 +566,7 @@
 		
 		annotationView.frame = imageView.frame;
 		//NSURL *url = [NSURL URLWithString:self.routeInfo.urlForStopMarker];
-		NSURL *url = [NSURL URLWithString:self.route.urlForStopMarker];
+		NSURL *url = [NSURL URLWithString:self.route.stopMarkerURL];
 		NSData *data = [NSData dataWithContentsOfURL:url];
 		UIImage *stop = [[UIImage alloc] initWithData:data];
 		UIImageView* stopView = [[[UIImageView alloc] initWithImage:stop] autorelease];
