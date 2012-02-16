@@ -320,26 +320,10 @@
 
 -(void) updateUpcomingStops
 {
-	for(ShuttleStopMapAnnotation* annotation in _route.annotations) 
-	{
-		ShuttleStop* stopInfo = [_routeStops objectForKey:annotation.shuttleStop.stopID];
-		
-		//ShuttleRoute *info = self.routeInfo;
-		//if (info.upcoming != annotation.shuttleStop.upcoming) 
-		//if ([info.nextStopId isEqualToString:stopInfo.stopID])
-		if ([self.route.nextStopId isEqualToString:stopInfo.stopID])
-		{
-			annotation.shuttleStop.upcoming = YES; //info.upcoming;
-			[self updateStopAnnotation:annotation];
-		} 
-		
-		[self updateStopAnnotation:annotation];
+	for (ShuttleStopMapAnnotation* annotation in _route.annotations) {
+		//ShuttleStop* stopInfo = [_routeStops objectForKey:annotation.shuttleStop.stopID];
+        [self.mapView addAnnotation:annotation];
 	}
-}
-
--(void) updateStopAnnotation:(ShuttleStopMapAnnotation*)annotation
-{
-	[self.mapView addAnnotation:annotation];
 }
 
 #pragma mark User actions
@@ -419,13 +403,15 @@
 	if ([annotation isKindOfClass:[ShuttleStopMapAnnotation class]]) 
 	{
 		annotationView = [[[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"gufileg"] autorelease];
-		UIImage* pin = [UIImage imageNamed:@"shuttles/shuttle-stop-dot.png"];
-		UIImageView* imageView = [[[UIImageView alloc] initWithImage:pin] autorelease];
-		
-		BOOL upComing = NO;
-		if ([((ShuttleStopMapAnnotation *)annotation).shuttleStop.stopID isEqualToString:self.route.nextStopId]) {
-			upComing = YES;
+        //UIImage *image = [[ShuttleDataManager sharedDataManager] imageForURL:self.route.stopMarkerURL];
+        NSString *imageName = @"shuttles/shuttle-stop-dot.png";
+        ShuttleStop *stop = [(ShuttleStopMapAnnotation *)annotation shuttleStop];
+		if (stop.upcoming) {
+            imageName = @"shuttles/shuttle-stop-dot-next.png";
 		}
+		UIImage *image = [UIImage imageNamed:imageName];
+        
+        annotationView.image = image;
 		
 		UIButton *myDetailButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
 		myDetailButton.frame = CGRectMake(0, 0, 23, 23);
@@ -433,16 +419,7 @@
 		myDetailButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
 		// Set the button as the callout view
 		annotationView.rightCalloutAccessoryView = myDetailButton;
-		
-		annotationView.frame = imageView.frame;
-		//NSURL *url = [NSURL URLWithString:self.routeInfo.urlForStopMarker];
-		NSURL *url = [NSURL URLWithString:self.route.stopMarkerURL];
-		NSData *data = [NSData dataWithContentsOfURL:url];
-		UIImage *stop = [[UIImage alloc] initWithData:data];
-		UIImageView* stopView = [[[UIImageView alloc] initWithImage:stop] autorelease];
-		annotationView.canShowCallout = YES;
-		[annotationView addSubview:stopView];
-		annotationView.backgroundColor = [UIColor clearColor];		
+        annotationView.canShowCallout = YES;
 	}
 	else if([annotation isKindOfClass:[ShuttleLocation class]])
 	{

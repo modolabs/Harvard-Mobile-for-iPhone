@@ -24,7 +24,6 @@
 - (id)initWithCache:(ShuttleRouteCache *)cachedRoute;
 - (void)updateInfo:(NSDictionary *)routeInfo;
 - (void)getStopsFromCache;
-- (void)updatePath;
 
 - (NSString *)fullSummary;
 - (NSString *)trackingStatus;
@@ -35,7 +34,6 @@
 @property (nonatomic, assign) BOOL gpsActive;
 @property (nonatomic, assign) BOOL isRunning;
 
-@property (nonatomic, retain) NSString *nextStopId;
 @property (nonatomic, retain) NSArray *vehicleLocations;
 
 // drawing properties

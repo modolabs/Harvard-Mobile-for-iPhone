@@ -11,7 +11,7 @@
 
 // live properties
 @synthesize liveStatusFailed = _liveStatusFailed, gpsActive = _gpsActive, isRunning = _isRunning,
-vehicleLocations = _vehicleLocations, nextStopId = _nextStopId;
+vehicleLocations = _vehicleLocations;
 
 // drawing properties
 @synthesize agency = _agency, color = _color, stopMarkerURL, genericMarkerURL, genericMarkerImage;
@@ -148,8 +148,6 @@ vehicleLocations = _vehicleLocations, nextStopId = _nextStopId;
                 }
             }
         }
-        // TODO: figure out which stop is next and set stop ID here
-        //self.nextStopId = 
     }
     
     NSArray *segments = [routeInfo objectForKey:@"paths"];
@@ -253,6 +251,9 @@ vehicleLocations = _vehicleLocations, nextStopId = _nextStopId;
     self = [super init];
     if (self != nil) {
 		self.routeID = [dict objectForKey:@"id"];
+        if (!self.routeID) { // old api
+            self.routeID = [dict objectForKey:@"route_id"];
+        }
 		_vehicleLocations = nil;
 		_pathLocations = nil;
 		_stopAnnotations = nil;
