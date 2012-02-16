@@ -412,13 +412,7 @@
 		UIImage *image = [UIImage imageNamed:imageName];
         
         annotationView.image = image;
-		
-		UIButton *myDetailButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
-		myDetailButton.frame = CGRectMake(0, 0, 23, 23);
-		myDetailButton.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
-		myDetailButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
-		// Set the button as the callout view
-		annotationView.rightCalloutAccessoryView = myDetailButton;
+		annotationView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
         annotationView.canShowCallout = YES;
 	}
 	else if([annotation isKindOfClass:[ShuttleLocation class]])
