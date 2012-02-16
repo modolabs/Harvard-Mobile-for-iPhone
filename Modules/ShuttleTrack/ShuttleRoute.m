@@ -118,7 +118,7 @@ vehicleLocations = _vehicleLocations;
     self.genericMarkerURL = [routeInfo objectForKey:@"vehicleIconURL"];
 	self.stopMarkerURL = [routeInfo objectForKey:@"stopIconURL"];
 
-    if (self.genericMarkerImage && !self.genericMarkerURL) {
+    if (!self.genericMarkerImage && self.genericMarkerURL) {
         self.genericMarkerImage = [[ShuttleDataManager sharedDataManager] imageForURL:self.genericMarkerURL];
     }
     
