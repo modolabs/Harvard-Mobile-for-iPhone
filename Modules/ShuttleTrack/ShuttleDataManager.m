@@ -390,8 +390,8 @@ static ShuttleDataManager* s_dataManager = nil;
             NSArray *routesDicts = [response objectForKey:@"routes"];
             for (NSDictionary *routeDict in routesDicts) {
                 NSString *routeID = [routeDict objectForKey:@"routeId"];
-                NSString *title = [routeDict objectForKey:@"title"];
-                NSNumber *running = [routeDict objectForKey:@"running"]; // bool
+                //NSString *title = [routeDict objectForKey:@"title"];
+                //NSNumber *running = [routeDict objectForKey:@"running"]; // bool
                 NSArray *arrives = [routeDict objectForKey:@"arrives"];
 
                 NSError *error = nil;
@@ -415,6 +415,9 @@ static ShuttleDataManager* s_dataManager = nil;
             NSUInteger urgentCount = 0;
             for (NSDictionary *agency in response) {
                 NSString *agencyID = [agency objectForKey:@"agency"];
+                if (!agencyID) {
+                    agencyID = [agency objectForKey:@"name"];
+                }
                 NSArray *announcements = [agency objectForKey:@"announcements"];
                 for (NSDictionary *announcement in announcements) {
                     BOOL urgent = [[announcement objectForKey:@"urgent"] boolValue];
