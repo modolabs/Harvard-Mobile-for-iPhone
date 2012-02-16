@@ -477,13 +477,13 @@ static int compareLatitudes(id p1, id p2, void *context) {
         [[annView superview] bringSubviewToFront:annView];
         
         for (ShuttleLocation *anOldLocation in _oldVehicleAnnotations) {
-            if (anOldLocation.vehicleId == locationAnnotation.vehicleId) {
+            if ([anOldLocation.vehicleId isEqualToString:locationAnnotation.vehicleId]) {
                 CGPoint startPoint = [mapView convertCoordinate:anOldLocation.coordinate toPointToView:nil];
                 CGPoint endPoint = [mapView convertCoordinate:locationAnnotation.coordinate toPointToView:nil];
                 CGFloat dx = floor(endPoint.x - startPoint.x) / 2.5;
                 CGFloat dy = floor(endPoint.y - startPoint.y) / 2.5;
 
-                //NSLog(@"vehicle %d dx: %.1f, dy: %.1f", locationAnnotation.vehicleId, dx, dy);
+                DLog(@"vehicle %@ dx: %.1f, dy: %.1f", locationAnnotation.vehicleId, dx, dy);
 
                 if (fabs(dx) + fabs(dy) > 0) {
 

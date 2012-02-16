@@ -7,7 +7,6 @@
 	int _secsSinceReport;
 	int _heading;
     CGFloat _speed;
-    NSInteger vehicleId;
     UIImage *_image;
 
 	CLLocationCoordinate2D _coordinate;
@@ -17,7 +16,7 @@
 @property (nonatomic) NSInteger heading;
 @property (nonatomic) CGFloat speed;
 @property (nonatomic) CLLocationCoordinate2D coordinate;
-@property (nonatomic) NSInteger vehicleId;
+@property (nonatomic, retain) NSString *vehicleId;
 @property (nonatomic, retain) UIImage *image;
 
 - (id)initWithDictionary:(NSDictionary*)dictionary;

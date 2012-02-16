@@ -9,13 +9,16 @@
 @synthesize vehicleId = _vehicleId;
 @synthesize image = _image;
 
-static NSMutableDictionary *s_markerImages = nil;
-
 - (id)initWithDictionary:(NSDictionary*)dictionary
 {
 	if (self = [super init])
 	{
-        _vehicleId = [[dictionary objectForKey:@"id"] integerValue];
+        id vehicleId = [dictionary objectForKey:@"id"];
+        if (![vehicleId isKindOfClass:[NSString class]]) {
+            self.vehicleId = [vehicleId description];
+        } else {
+            self.vehicleId = (NSString *)vehicleId;
+        }
         
         NSDictionary *coords = [dictionary objectForKey:@"coords"];
         if ([coords isKindOfClass:[NSDictionary class]]) {
@@ -55,6 +58,7 @@ static NSMutableDictionary *s_markerImages = nil;
 - (void)dealloc
 {
     self.image = nil;
+    self.vehicleId = nil;
     [super dealloc];
 }
 
