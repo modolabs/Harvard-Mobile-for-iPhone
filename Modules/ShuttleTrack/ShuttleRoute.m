@@ -11,7 +11,7 @@
 
 // live properties
 @synthesize liveStatusFailed = _liveStatusFailed, gpsActive = _gpsActive, isRunning = _isRunning,
-vehicleLocations = _vehicleLocations;
+vehicleLocations = _vehicleLocations, stopAnnotations = _stopAnnotations;
 
 // drawing properties
 @synthesize agency = _agency, color = _color, stopMarkerURL, genericMarkerURL, genericMarkerImage;
@@ -124,6 +124,7 @@ vehicleLocations = _vehicleLocations;
     
 	NSArray *stops = [routeInfo objectForKey:@"stops"];
     if (stops) {
+        NSMutableArray* formattedStopAnnotations = [NSMutableArray arrayWithCapacity:stops.count];
         for (NSDictionary *aDict in stops) {
             NSString *stopID = [aDict objectForKey:@"id"];
             if (stopID) {
@@ -133,11 +134,6 @@ vehicleLocations = _vehicleLocations;
                     aStop = [ShuttleDataManager stopWithRoute:self.routeID stopID:stopID error:&error];
                     [_stopsById setObject:aStop forKey:stopID];
                     [self.stops addObject:aStop];
-                    ShuttleStopMapAnnotation* annotation = [[[ShuttleStopMapAnnotation alloc] initWithShuttleStop:aStop] autorelease];
-                    if(!_stopAnnotations) {
-                        _stopAnnotations = [[NSMutableArray alloc] init];
-                    }
-                    [_stopAnnotations addObject:annotation];
                 }
 
                 aStop.upcoming = NO;
@@ -146,8 +142,12 @@ vehicleLocations = _vehicleLocations;
                 if (arrives) {
                     [aStop updateArrivalTimes:arrives];
                 }
+                
+                ShuttleStopMapAnnotation* annotation = [[[ShuttleStopMapAnnotation alloc] initWithShuttleStop:aStop] autorelease];
+                [formattedStopAnnotations addObject:annotation];
             }
         }
+		self.stopAnnotations = formattedStopAnnotations;
     }
     
     NSArray *segments = [routeInfo objectForKey:@"paths"];

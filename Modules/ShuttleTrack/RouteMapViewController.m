@@ -216,6 +216,10 @@
 	[_largeUpcomingStopImage release];
 	_mapView.delegate = nil;
 	[_mapView release];
+	[_vehicleAnnotations release];
+	[_oldVehicleAnnotations release];
+	[_stopAnnotations release];
+	[_oldStopAnnotations release];
 	[_routeStops release];
 	[_gpsButton release];
 	[_routeTitleLabel release];
@@ -320,10 +324,17 @@
 
 -(void) updateUpcomingStops
 {
-	for (ShuttleStopMapAnnotation* annotation in _route.annotations) {
-		//ShuttleStop* stopInfo = [_routeStops objectForKey:annotation.shuttleStop.stopID];
-        [self.mapView addAnnotation:annotation];
+	if (_oldStopAnnotations != _stopAnnotations) {
+		[_oldStopAnnotations release];
 	}
+    
+	_oldStopAnnotations = _stopAnnotations;
+	_stopAnnotations = [[NSArray alloc] initWithArray:self.route.stopAnnotations];
+    
+	[_mapView addAnnotations:_stopAnnotations];
+    
+	// this prevents blinking when annotation view are swapped too fast
+	[_mapView performSelector:@selector(removeAnnotations:) withObject:_oldStopAnnotations afterDelay:0.2];
 }
 
 #pragma mark User actions
@@ -403,13 +414,17 @@
 	if ([annotation isKindOfClass:[ShuttleStopMapAnnotation class]]) 
 	{
 		annotationView = [[[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"gufileg"] autorelease];
-        //UIImage *image = [[ShuttleDataManager sharedDataManager] imageForURL:self.route.stopMarkerURL];
-        NSString *imageName = @"shuttles/shuttle-stop-dot.png";
         ShuttleStop *stop = [(ShuttleStopMapAnnotation *)annotation shuttleStop];
-		if (stop.upcoming) {
-            imageName = @"shuttles/shuttle-stop-dot-next.png";
-		}
-		UIImage *image = [UIImage imageNamed:imageName];
+        UIImage *image = nil;
+        if (stop.upcoming) {
+            image = [UIImage imageNamed:@"shuttles/shuttle-stop-dot-next.png"];
+            
+        } else if (self.route.stopMarkerURL && self.route.stopMarkerURL.length) {
+            image = [[ShuttleDataManager sharedDataManager] imageForURL:self.route.stopMarkerURL];
+            
+        } else {
+            image = [UIImage imageNamed:@"shuttles/shuttle-stop-dot.png"];
+        }
         
         annotationView.image = image;
 		annotationView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];

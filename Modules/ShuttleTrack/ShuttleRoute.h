@@ -35,6 +35,7 @@
 @property (nonatomic, assign) BOOL isRunning;
 
 @property (nonatomic, retain) NSArray *vehicleLocations;
+@property (nonatomic, retain) NSArray *stopAnnotations;
 
 // drawing properties
 
