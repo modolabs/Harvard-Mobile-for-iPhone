@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>AboutAppText</key>
-	<string>The Harvard iPhone/iPod Touch application is part of a broader initiative to improve the mobile experience of students, faculty, staff, visitors, and neighbors who interact with Harvard's campus and community. We will continue to develop, expand and improve this application. We welcome your ideas and feedback.</string>
+	<string>The Harvard iPhone/iPod Touch application is part of a broader initiative to improve the mobile experience of students, faculty, staff, visitors, and neighbors who interact with Harvard&apos;s campus and community. We will continue to develop, expand and improve this application. We welcome your ideas and feedback.</string>
 	<key>AboutHarvardText</key>
 	<string>Harvard University is devoted to excellence in teaching, learning, and research, and to developing leaders in many disciplines who make a difference globally. The University has twelve degree-granting Schools in addition to the Radcliffe Institute for Advanced Study.
 
@@ -16,13 +16,24 @@ Established in 1636, Harvard is the oldest institution of higher education in th
 	<string>Harvard</string>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
-	<key>CFBundleIconFile</key>
-	<string></string>
 	<key>CFBundleIconFiles</key>
 	<array>
 		<string>Icon.png</string>
 		<string>Icon@2x.png</string>
 	</array>
+	<key>CFBundleIcons</key>
+	<dict>
+		<key>CFBundlePrimaryIcon</key>
+		<dict>
+			<key>CFBundleIconFiles</key>
+			<array>
+				<string>Icon.png</string>
+				<string>Icon@2x.png</string>
+			</array>
+			<key>UIPrerenderedIcon</key>
+			<false/>
+		</dict>
+	</dict>
 	<key>CFBundleIdentifier</key>
 	<string>edu.harvard.harvardmobile</string>
 	<key>CFBundleInfoDictionaryVersion</key>
