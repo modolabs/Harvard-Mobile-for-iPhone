@@ -101,11 +101,9 @@ static const NSInteger kAnnouncementBadgeLabel = 0x41;
 	
 	if (haveNewAnnouncements == YES) {
 		newAnnouncement.hidden = NO;
-		[[newAnnouncement superview] bringSubviewToFront:newAnnouncement];
 	}
 	else {
 		newAnnouncement.hidden = YES;
-		[[newAnnouncement superview] sendSubviewToBack:newAnnouncement];
 	}
 	
 	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh
@@ -197,13 +195,10 @@ static const NSInteger kAnnouncementBadgeLabel = 0x41;
 
 	if (haveNewAnnouncements == YES) {
 		newAnnouncement.hidden = NO;
-		[[newAnnouncement superview] bringSubviewToFront:newAnnouncement];
 	}
 	else {
 		newAnnouncement.hidden = YES;
-		[[newAnnouncement superview] sendSubviewToBack:newAnnouncement];
 	}
-
 }
 
 - (void)announcementsReceived:(NSDictionary *)announcements urgentCount:(NSUInteger)urgentCount
