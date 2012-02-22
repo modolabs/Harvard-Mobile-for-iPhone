@@ -195,6 +195,44 @@
     return result;
 }
 */
+
+- (void)updateStaticInfo:(NSDictionary *)stopInfo
+{
+    NSString *title = [stopInfo objectForKey:@"title"];
+    if ([title isKindOfClass:[NSString class]]) {
+        self.title = title;
+    }
+    NSDictionary *coords = [stopInfo objectForKey:@"coords"];
+    if ([coords isKindOfClass:[NSDictionary class]]) {
+        id lat = [coords objectForKey:@"lat"];
+        if ([lat respondsToSelector:@selector(doubleValue)]) {
+            self.latitude = [lat doubleValue];
+        }
+        id lon = [coords objectForKey:@"lon"];
+        if ([lon respondsToSelector:@selector(doubleValue)]) {
+            self.longitude = [lon doubleValue];
+        }
+    }
+}
+
+- (void)updateArrivalTimes:(NSArray *)arrives
+{
+    if ([arrives isKindOfClass:[NSArray class]] && arrives.count) {
+        id arrival = [arrives objectAtIndex:0];
+        if ([arrival respondsToSelector:@selector(doubleValue)]) { // true if NSString or NSNumber
+            self.nextScheduledDate = [NSDate dateWithTimeIntervalSince1970:[arrival doubleValue]];
+        }
+        NSMutableArray *moreTimes = [NSMutableArray array];
+        for (NSInteger i = 1; i < arrives.count; i++) {
+            arrival = [arrives objectAtIndex:i];
+            if ([arrival respondsToSelector:@selector(doubleValue)]) {
+                [moreTimes addObject:[NSDate dateWithTimeIntervalSince1970:[arrival doubleValue]]];
+            }
+        }
+        self.predictions = moreTimes;
+    }
+}
+/*
 // predictions are provided as offsets from the "now" field in the API
 - (void)updateInfo:(NSDictionary *)stopInfo referenceDate:(NSDate *)refDate
 {
@@ -234,6 +272,7 @@
         self.predictions = nil;
     }
 }
+*/
 
 #pragma mark -
 

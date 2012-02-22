@@ -144,7 +144,7 @@
 	
 	[url setPathWithViewController:self extension:course.number];
     
-    NSString *detailString = [NSString stringWithFormat:@"/courses/search?q=%@", self.title];
+    NSString *detailString = [NSString stringWithFormat:@"/courses/search?courseGroup=%@", stellarCourseGroupString];
     [[AnalyticsWrapper sharedWrapper] trackPageview:detailString];
 }
 
@@ -341,7 +341,7 @@
 	
 	actualCount = actual_count;
 	self.classes = classesLoaded;
-	[self viewDidLoad];
+	//[self viewDidLoad];
 	[mainSearchClassesTableView reloadData];
 	[self hideLoadingView];
 	

@@ -2,8 +2,8 @@
 
 #ifdef USE_MOBILE_DEV
 NSString * const MITMobileWebDomainString =        @"local.harvard.edu";
-NSString * const MITMobileWebAPIURLString = @"http://local.harvard.edu/harvard-kurogo/api/";
-NSString * const KurogoAPIURLString       = @"http://local.harvard.edu/harvard-kurogo/rest/";
+NSString * const MITMobileWebAPIURLString = @"http://local.harvard.edu/api/";
+NSString * const KurogoAPIURLString       = @"http://local.harvard.edu/rest/";
 #else
     #ifdef USE_MOBILE_TEST
     NSString * const MITMobileWebDomainString = @"mobile-dev.harvard.edu";

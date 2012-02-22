@@ -22,7 +22,9 @@
 	//ShuttleRoute* _routeInfo;
 	
 	NSArray *_vehicleAnnotations;
-    NSArray *_oldVehicleAnnotations;
+	NSArray *_oldVehicleAnnotations;
+	NSArray *_stopAnnotations;
+	NSArray *_oldStopAnnotations;
 	
 	// extended route info keyed by stop ID
 	NSMutableDictionary* _routeStops;

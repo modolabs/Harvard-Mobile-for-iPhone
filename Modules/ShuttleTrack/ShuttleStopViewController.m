@@ -175,7 +175,7 @@
 	
 	ShuttleRouteViewController *parentController = (ShuttleRouteViewController *)[MITModuleURL parentViewController:self];		
 	ShuttleRoutes *shuttleRoutes = parentController.parentShuttleRoutes;
-	routes = shuttleRoutes.shuttleRoutes;
+	_routes = shuttleRoutes.shuttleRoutes;
 	
 	routesRunningCurrentlyThroughThisStop = [[NSMutableArray alloc] init];
 	routesNotRunningCurrentlyThroughThisStop = [[NSMutableArray alloc] init];
@@ -186,6 +186,7 @@
 
 -(void) viewWillDisappear:(BOOL)animated
 {
+	[super viewWillDisappear:animated];
 	[[ShuttleDataManager sharedDataManager] unregisterDelegate:self];
 	
 	[_pollingTimer invalidate];
@@ -264,16 +265,17 @@
 #pragma mark Table view methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-   //return self.shuttleStopSchedules.count;
-	//return routes.count;
-	
-	if (dataLoaded == YES)
-		return 2;
-	
-	else {
-		return 1;
-	}
-
+	if (dataLoaded) {
+        NSInteger count = 0;
+        if ([routesRunningCurrentlyThroughThisStop count]) {
+            count++;
+        }
+        if ([routesNotRunningCurrentlyThroughThisStop count]) {
+            count++;
+        }
+        return count;
+    }
+    return 1;
 }
 
 
@@ -381,17 +383,16 @@
 		route = [routesNotRunningCurrentlyThroughThisStop objectAtIndex:indexPath.row];
 	
 
-	ShuttleRouteViewController *parentController = (ShuttleRouteViewController *)[MITModuleURL parentViewController:self];		
+	ShuttleRouteViewController *parentController = (ShuttleRouteViewController *)[MITModuleURL parentViewController:self];
 	
 	ShuttleRouteViewController *routeVC = [[[ShuttleRouteViewController alloc] initWithNibName:@"ShuttleRouteViewController" bundle:nil ] autorelease];
 	routeVC.route = route;
 	routeVC.parentShuttleRoutes = parentController.parentShuttleRoutes;
 
-	[self.navigationController popViewControllerAnimated:NO];
-	[parentController.parentShuttleRoutes.navigationController popViewControllerAnimated:NO];
-	[parentController.parentShuttleRoutes.navigationController pushViewController:routeVC animated:YES];
-	
-	
+    UINavigationController *navC = self.navigationController;
+    [navC popViewControllerAnimated:NO];
+    [navC popViewControllerAnimated:NO];
+    [navC pushViewController:routeVC animated:YES];
 }
 
 #pragma mark MKMapViewDelegate
@@ -451,7 +452,7 @@
 				[otherSchedules addObject:routeStopSchedule];
 			}
 			
-			for (ShuttleRoute* route in routes) {
+			for (ShuttleRoute* route in _routes) {
 				if ([route.routeID isEqualToString:routeStopSchedule.routeID]) {
 					if (route.isRunning){
 						if (![routesRunningCurrentlyThroughThisStop containsObject:route])

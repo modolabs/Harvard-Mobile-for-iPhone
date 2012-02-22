@@ -1,6 +1,5 @@
-
 #import "ShuttleLocation.h"
-#import "ConnectionDetector.h"
+#import "ShuttleDataManager.h"
 
 @implementation ShuttleLocation
 @synthesize coordinate = _coordinate;
@@ -10,43 +9,36 @@
 @synthesize vehicleId = _vehicleId;
 @synthesize image = _image;
 
-static NSMutableDictionary *s_markerImages = nil;
-
-+ (void)clearAllMarkerImages
-{
-    [s_markerImages release];
-    s_markerImages = nil;
-}
-
 - (id)initWithDictionary:(NSDictionary*)dictionary
 {
 	if (self = [super init])
 	{
-        _vehicleId = [[dictionary objectForKey:@"id"] integerValue];
+        id vehicleId = [dictionary objectForKey:@"id"];
+        if (![vehicleId isKindOfClass:[NSString class]]) {
+            self.vehicleId = [vehicleId description];
+        } else {
+            self.vehicleId = (NSString *)vehicleId;
+        }
         
-		_coordinate.latitude = [[dictionary objectForKey:@"lat"] doubleValue];
-		_coordinate.longitude = [[dictionary objectForKey:@"lon"] doubleValue];
-
-		self.secsSinceReport = [[dictionary objectForKey:@"secsSinceReport"] intValue];
+        NSDictionary *coords = [dictionary objectForKey:@"coords"];
+        if ([coords isKindOfClass:[NSDictionary class]]) {
+            _coordinate.latitude = [[coords objectForKey:@"lat"] doubleValue];
+            _coordinate.longitude = [[coords objectForKey:@"lon"] doubleValue];
+        }
+        
+        id lastSeen = [dictionary objectForKey:@"lastSeen"];
+        if ([lastSeen respondsToSelector:@selector(integerValue)]) {
+            NSTimeInterval lastSeenTime = [lastSeen integerValue];
+            self.secsSinceReport = (int)[[NSDate date] timeIntervalSince1970] - lastSeenTime;
+        }
+        
 		self.heading = [[dictionary objectForKey:@"heading"] intValue];
         self.speed = [[dictionary objectForKey:@"speed"] floatValue];
-		
-        if (s_markerImages == nil)
-            s_markerImages = [[NSMutableDictionary alloc] init];
         
         NSString *iconURL = [dictionary objectForKey:@"iconURL"];
-        NSString *hash = [NSString stringWithFormat:@"%d", [iconURL hash]];
-        UIImage *image = [s_markerImages objectForKey:hash];
-        if (image == nil) {
-            NSURL *url = [NSURL URLWithString:iconURL];
-            if ([ConnectionDetector isConnected]) {
-                // TODO: make sure this doens't block
-                NSData *data = [NSData dataWithContentsOfURL:url];
-                image = [[UIImage alloc] initWithData:data];
-                [s_markerImages setObject:image forKey:hash];
-            }
+        if ([iconURL isKindOfClass:[NSString class]]) {
+            self.image = [[ShuttleDataManager sharedDataManager] imageForURL:iconURL];
         }
-        self.image = image;
 	}
 	
 	return self;
@@ -65,7 +57,8 @@ static NSMutableDictionary *s_markerImages = nil;
 
 - (void)dealloc
 {
-    _image = nil;
+    self.image = nil;
+    self.vehicleId = nil;
     [super dealloc];
 }
 

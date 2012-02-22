@@ -3,15 +3,9 @@
 #import "ShuttleRouteCache.h"
 
 @interface ShuttleRoute : NSObject <MITMapRoute> {
-    NSString *_tag;
     BOOL _gpsActive;
     BOOL _isRunning;
-	BOOL _liveStatusFailed;
 	ShuttleRouteCache *_cache;
-	NSString * agency;
-	NSString *genericUrlForMarker;
-	NSString *nextStopId;
-	NSString *urlForStopMarker;
 	
     NSMutableArray *_stops;
 	NSMutableDictionary *_stopsById;
@@ -24,39 +18,47 @@
 	
 	// locations, if available of any vehicles on the route. 
 	NSArray* _vehicleLocations;
-	
-	UIImage *genericShuttleMarker;
 }
 
 - (id)initWithDictionary:(NSDictionary *)dict;
 - (id)initWithCache:(ShuttleRouteCache *)cachedRoute;
 - (void)updateInfo:(NSDictionary *)routeInfo;
-- (NSString *)trackingStatus;
 - (void)getStopsFromCache;
-- (void)updatePath;
 
-@property (readwrite, retain) NSString *tag;
-@property (readwrite, retain) NSArray* vehicleLocations;
+- (NSString *)fullSummary;
+- (NSString *)trackingStatus;
 
-@property (readonly) NSString *fullSummary;
-@property (assign) BOOL gpsActive;
-@property (assign) BOOL isRunning;
-@property (assign) BOOL liveStatusFailed;
-@property (readwrite, retain) ShuttleRouteCache *cache;
-@property (readwrite, retain) NSString * agency;
-@property (readwrite, retain) NSString * color;
-@property (readwrite, retain) NSString *genericUrlForMarker;
-@property (readwrite, retain) NSString *nextStopId;
-@property (readwrite, retain) NSString *urlForStopMarker;
-@property (nonatomic, retain) UIImage *genericShuttleMarker;
+// transient properties
 
-@property (readwrite, retain) NSString *routeDescription;
-@property (readwrite, retain) NSString *title;
-@property (readwrite, retain) NSString *summary;
+@property (nonatomic, assign) BOOL liveStatusFailed;
+@property (nonatomic, assign) BOOL gpsActive;
+@property (nonatomic, assign) BOOL isRunning;
+
+@property (nonatomic, retain) NSArray *vehicleLocations;
+@property (nonatomic, retain) NSArray *stopAnnotations;
+
+// drawing properties
+
+@property (nonatomic, retain) NSString *agency;
+@property (nonatomic, retain) NSString *color;
+
+@property (nonatomic, retain) NSString *stopMarkerURL;
+@property (nonatomic, retain) NSString *genericMarkerURL;
+@property (nonatomic, retain) UIImage *genericMarkerImage;
+
+// properties of associated ShuttleRouteCache object
+
+@property (nonatomic, retain) NSString *routeDescription;
+@property (nonatomic, retain) NSString *title;
+@property (nonatomic, retain) NSString *summary;
+@property (nonatomic, assign) NSInteger interval;
 @property (nonatomic, retain) NSString *routeID;
-@property (assign) NSInteger interval;
-@property (readwrite, retain) NSMutableArray *stops;
-@property (assign) NSInteger sortOrder;
-@property (readwrite, retain) NSArray *path;
+@property (nonatomic, assign) NSInteger sortOrder;
+@property (nonatomic, retain) NSArray *path;
+
+// other core data properties
+
+@property (readwrite, retain) ShuttleRouteCache *cache;
+@property (nonatomic, retain) NSMutableArray *stops;
 
 @end

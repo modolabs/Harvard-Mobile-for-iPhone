@@ -7,6 +7,7 @@
 #import "RootViewController.h"
 #import "SpringboardViewController.h"
 #import "AnalyticsWrapper.h"
+#import "UIKit+MITAdditions.h"
 
 @implementation MIT_MobileAppDelegate
 
@@ -50,7 +51,19 @@
     self.window.rootViewController.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     
     self.springboard = [[SpringboardViewController alloc] initWithNibName:nil bundle:nil];
-    theNavController = [[ModoNavigationController alloc] initWithRootViewController:self.springboard];
+    
+    theNavController = [[UINavigationController alloc] initWithRootViewController:self.springboard];
+    if ([theNavController.navigationBar respondsToSelector:@selector(setBackgroundImage:forBarMetrics:)]) {
+        // for iOS 5
+        UIImage *image = [[UIImage imageNamed:@"global/navbar-background.png"] stretchableImageWithLeftCapWidth:0.0 topCapHeight:0.0];
+        theNavController.navigationBar.tintColor = [UIColor colorWithHexString:@"#870E16"];
+        [theNavController.navigationBar setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
+    } else {
+        [theNavController release];
+        // for pre-iOS 5, use navigation controller wrapper to fake a custom nav bar
+        theNavController = [[ModoNavigationController alloc] initWithRootViewController:self.springboard];
+    }
+    
     theNavController.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:MITImageNameBackground]];
     [self.window addSubview:theNavController.view];
     

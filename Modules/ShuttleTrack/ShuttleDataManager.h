@@ -20,6 +20,9 @@
 // message sent when a shuttle route is received. If request fails, this is called with nil
 -(void) routeInfoReceived:(ShuttleRoute*)shuttleRoute forRouteID:(NSString*)routeID;
 
+- (void)announcementsReceived:(NSDictionary *)announcements urgentCount:(NSUInteger)urgentCount;
+- (void)infoReceived:(NSDictionary *)info;
+
 @end
 
 
@@ -40,6 +43,14 @@
 	
 	// counter to limit error dialogs from requests on the 2 second timer
 	NSInteger _requestRouteErrorCount;
+
+    JSONAPIRequest *_infoRequest;
+    JSONAPIRequest *_routesRequest;
+    JSONAPIRequest *_routeRequest;
+    JSONAPIRequest *_stopRequest;
+    JSONAPIRequest *_announcementsRequest;
+    
+    NSMutableDictionary *_markerImages;
 }
 
 @property (readonly) NSArray* shuttleRoutes;
@@ -67,15 +78,12 @@
 
 -(void) unregisterDelegate:(id<ShuttleDataManagerDelegate>)delegate;
 
-// request the routes from the server.
--(void) requestRoutes;
+- (void)requestInfo;
+- (void)requestRoutes;
+- (void)requestRoute:(NSString *)routeID;
+- (void)requestStop:(NSString *)stopID;
+- (void)requestAnnouncements;
 
-// request full information about a particular stop
--(void) requestStop:(NSString*)stopID;
-
-// request full information about a particular route
-- (void)requestFullRoute:(NSString*)routeID;
-
-- (void)requestRoute:(NSString*)routeID;
+- (UIImage *)imageForURL:(NSString *)urlString;
 
 @end

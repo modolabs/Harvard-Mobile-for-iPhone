@@ -10,33 +10,23 @@
 @implementation ShuttleRoute
 
 // live properties
-@synthesize tag = _tag;
-@synthesize gpsActive = _gpsActive;
-@synthesize isRunning = _isRunning;
-@synthesize liveStatusFailed = _liveStatusFailed;
-@synthesize vehicleLocations = _vehicleLocations;
-@synthesize cache = _cache;
-@synthesize agency;
-@synthesize color;
-@synthesize genericUrlForMarker;
-@synthesize urlForStopMarker;
-@synthesize nextStopId;
-@synthesize genericShuttleMarker;
-@synthesize stops = _stops;
+@synthesize liveStatusFailed = _liveStatusFailed, gpsActive = _gpsActive, isRunning = _isRunning,
+vehicleLocations = _vehicleLocations, stopAnnotations = _stopAnnotations;
 
-// cached properties
+// drawing properties
+@synthesize agency = _agency, color = _color, stopMarkerURL, genericMarkerURL, genericMarkerImage;
+
+// ShuttleRouteCache
 @dynamic routeDescription;
 @dynamic title;
 @dynamic summary;
 @dynamic interval;
-//@dynamic stops;
 @dynamic routeID;
 @dynamic sortOrder;
 @dynamic path;
-//@dynamic agency;
 
-@dynamic fullSummary;
-
+// other core data
+@synthesize cache = _cache, stops = _stops;
 
 #pragma mark Getters and setters
 
@@ -114,80 +104,93 @@
 
 - (void)updateInfo:(NSDictionary *)routeInfo
 {
-	self.title = [routeInfo objectForKey:@"title"];
-	self.routeDescription = [routeInfo objectForKey:@"description"];
-	self.summary = [routeInfo objectForKey:@"summary"];
-	self.interval = [[routeInfo objectForKey:@"interval"] intValue];
+    // these are included in routes api
 	self.agency = [routeInfo objectForKey:@"agency"];
+	self.title = [routeInfo objectForKey:@"title"];
+	self.summary = [routeInfo objectForKey:@"summary"];
+	self.routeDescription = [routeInfo objectForKey:@"description"];
 	self.color = [routeInfo objectForKey:@"color"];
-	self.genericUrlForMarker = [routeInfo objectForKey:@"genericIconUrl"];
-	self.urlForStopMarker = [routeInfo objectForKey:@"stopMarkerUrl"];
-	
-	if (nil != self.genericUrlForMarker) {
-		if (nil == self.genericShuttleMarker) {
-			
-			NSURL *url = [NSURL URLWithString:self.genericUrlForMarker];
-			NSData *data = [NSData dataWithContentsOfURL:url];
-			self.genericShuttleMarker = [[UIImage alloc] initWithData:data];
-			//self.genericUrlForMarker = [[[UIImageView alloc] initWithImage:marker] autorelease];
-		}
-	}
-	
-	self.tag = [routeInfo objectForKey:@"tag"];
-	self.gpsActive = [[routeInfo objectForKey:@"gpsActive"] boolValue];
-	self.isRunning = [[routeInfo objectForKey:@"isRunning"] boolValue];
-    
-    NSDate *now = [NSDate date];
-    NSNumber *nowSeconds = [routeInfo objectForKey:@"now"];
-    if (nowSeconds && [nowSeconds isKindOfClass:[NSNumber class]]) {
-        now = [NSDate dateWithTimeIntervalSince1970:[nowSeconds doubleValue]];
-    }
-    
-    NSArray *array = [routeInfo objectForKey:@"path"];
-	if (array) {
-		self.path = array;
-        
-        if (!_pathLocations.count) {
-            [self updatePath];
-        }
-    }
+	self.isRunning = [[routeInfo objectForKey:@"running"] boolValue];
+	self.gpsActive = [[routeInfo objectForKey:@"live"] boolValue];
+	self.interval = [[routeInfo objectForKey:@"frequency"] intValue];
 
-	array = [routeInfo objectForKey:@"stops"];
-    if (array) {
-        for (NSDictionary *aDict in array) {
+    // these come in the route api
+    self.genericMarkerURL = [routeInfo objectForKey:@"vehicleIconURL"];
+	self.stopMarkerURL = [routeInfo objectForKey:@"stopIconURL"];
+
+    if (!self.genericMarkerImage && self.genericMarkerURL) {
+        self.genericMarkerImage = [[ShuttleDataManager sharedDataManager] imageForURL:self.genericMarkerURL];
+    }
+    
+	NSArray *stops = [routeInfo objectForKey:@"stops"];
+    if (stops) {
+        NSMutableArray* formattedStopAnnotations = [NSMutableArray arrayWithCapacity:stops.count];
+        for (NSDictionary *aDict in stops) {
             NSString *stopID = [aDict objectForKey:@"id"];
             if (stopID) {
                 ShuttleStop *aStop = [_stopsById objectForKey:stopID];
-                if (aStop) {
-                    [aStop updateInfo:aDict referenceDate:now];
-                } else {
+                if (!aStop) {
                     NSError *error = nil;
                     aStop = [ShuttleDataManager stopWithRoute:self.routeID stopID:stopID error:&error];
-                    [aStop updateInfo:aDict referenceDate:now];
                     [_stopsById setObject:aStop forKey:stopID];
                     [self.stops addObject:aStop];
-                    ShuttleStopMapAnnotation* annotation = [[[ShuttleStopMapAnnotation alloc] initWithShuttleStop:aStop] autorelease];
-                    if(!_stopAnnotations) {
-                        _stopAnnotations = [[NSMutableArray alloc] init];
-                    }
-                    [_stopAnnotations addObject:annotation];
                 }
-                if ([aDict objectForKey:@"upcoming"]) {
-                    self.nextStopId = stopID;
+
+                aStop.upcoming = NO;
+                [aStop updateStaticInfo:aDict];
+                NSArray *arrives = [aDict objectForKey:@"arrives"];
+                if (arrives) {
+                    [aStop updateArrivalTimes:arrives];
                 }
+                
+                ShuttleStopMapAnnotation* annotation = [[[ShuttleStopMapAnnotation alloc] initWithShuttleStop:aStop] autorelease];
+                [formattedStopAnnotations addObject:annotation];
             }
         }
-	}
-	
-    if ((array = [routeInfo objectForKey:@"vehicleLocations"]) != nil) {
-		
-		NSMutableArray* formattedVehicleLocations = [NSMutableArray arrayWithCapacity:array.count];
-		for (NSDictionary* dictionary in array) {
+		self.stopAnnotations = formattedStopAnnotations;
+    }
+    
+    NSArray *segments = [routeInfo objectForKey:@"paths"];
+	if ([segments isKindOfClass:[NSArray class]]) {
+        NSMutableArray *paths = [NSMutableArray array];
+        for (id segment in segments) {
+            if ([segment isKindOfClass:[NSArray class]]) {
+                NSMutableArray *aPath = [NSMutableArray array];
+                for (id coord in (NSArray *)segment) {
+                    if ([coord isKindOfClass:[NSDictionary class]]) {
+                        id lat = [coord objectForKey:@"lat"];
+                        id lon = [coord objectForKey:@"lon"];
+                        if ([lat respondsToSelector:@selector(doubleValue)] && [lon respondsToSelector:@selector(doubleValue)]) {
+                            CLLocation *location = [[[CLLocation alloc] initWithLatitude:[lat doubleValue] longitude:[lon doubleValue]] autorelease];
+                            [aPath addObject:location];
+                        }
+                    }
+                }
+                [paths addObject:aPath];
+            }
+        }
+        
+        //self.pathLocations = paths;
+        self.path = paths;
+    }
+
+    NSArray *vehicles = [routeInfo objectForKey:@"vehicles"];
+    if (vehicles) {
+		NSMutableArray* formattedVehicleLocations = [NSMutableArray arrayWithCapacity:vehicles.count];
+		for (NSDictionary* dictionary in vehicles) {
+            NSString *nextStop = [dictionary objectForKey:@"nextStop"];
+            if (nextStop) {
+                ShuttleStop *stop = [_stopsById objectForKey:nextStop];
+                if (stop) {
+                    stop.upcoming = YES;
+                }
+            }
+            
 			ShuttleLocation* shuttleLocation = [[[ShuttleLocation alloc] initWithDictionary:dictionary] autorelease];
 			[formattedVehicleLocations addObject:shuttleLocation];
 		}
 		self.vehicleLocations = formattedVehicleLocations;
-	}
+    }
 }
 
 - (void)getStopsFromCache
@@ -217,14 +220,16 @@
 		ShuttleStopMapAnnotation* annotation = [[[ShuttleStopMapAnnotation alloc] initWithShuttleStop:shuttleStop] autorelease];
 		[_stopAnnotations addObject:annotation];
 	}
-		
+	/*	
 	if (_pathLocations == nil) {
 		[self updatePath];
 	}
+    */
 }
-
+/*
 - (void)updatePath
 {
+    self.pathLocations = nil;
 	if (_pathLocations != nil) {
 		[_pathLocations removeAllObjects];
 		_pathLocations = nil;
@@ -240,16 +245,18 @@
         [_pathLocations addObject:location];
     }
 }
-
+*/
 - (id)initWithDictionary:(NSDictionary *)dict
 {
     self = [super init];
     if (self != nil) {
-		self.routeID = [dict objectForKey:@"route_id"];
+		self.routeID = [dict objectForKey:@"id"];
+        if (!self.routeID) { // old api
+            self.routeID = [dict objectForKey:@"route_id"];
+        }
 		_vehicleLocations = nil;
 		_pathLocations = nil;
 		_stopAnnotations = nil;
-		_liveStatusFailed = NO;
 		
 		[self updateInfo:dict];
 		[self getStopsFromCache];
@@ -261,7 +268,6 @@
 {
     if (self != nil) {
 		self.cache = cachedRoute;
-		_liveStatusFailed = NO;
 		_stops = nil;
     }
     return self;
@@ -269,12 +275,10 @@
 
 -(void) dealloc
 {
-	self.tag = nil;
 	self.cache = nil;
 	
 	[_stops release];
     self.vehicleLocations = nil;
-	//[_vehicleLocations release];	
 	[_pathLocations release];
 	[_stopAnnotations release];
 	
@@ -283,49 +287,27 @@
 
 - (NSString *)fullSummary 
 {
-	/*NSString* summaryString = [NSString stringWithFormat:@"Route loop repeats every %d minutes.", self.interval]; //self.interval];
-	if (nil != self.summary) {
-		summaryString = [NSString stringWithFormat:@"%@ %@", self.summary, summaryString];
-	}*/
-	
-	NSString* summaryString;   // = [NSString stringWithFormat:@"Route loop repeats every %d minutes.", self.interval]; //self.interval];
-	NSString* desciptionString = [NSString stringWithFormat:@""];
-	
-	if (nil != self.routeDescription) {
-		if ([self.routeDescription length] > 0)
-			desciptionString = [NSString stringWithFormat:@"%@\n", self.routeDescription]; //self.interval];
-	}
-	if (nil != self.summary) {
-		summaryString = [desciptionString stringByAppendingFormat:@"%@", [self summary]]; //[NSString stringWithFormat:@"%@", [self.summary];//, summaryString];
-	}
-	else {
-		summaryString = [desciptionString stringByAppendingFormat:@""];
-	}
-	
-    return [NSString stringWithFormat:@"%@\n%@", [self trackingStatus], summaryString];
+    NSMutableArray *parts = [NSMutableArray array];
+    if (self.routeDescription.length) {
+        [parts addObject:self.routeDescription];
+    }
+    if (self.summary.length) {
+        [parts addObject:self.summary];
+    }
+    return [parts componentsJoinedByString:@"\n"];
 }
 
 - (NSString *)trackingStatus
 {
-	NSString *summaryString = nil;
-	
-	if (_liveStatusFailed) {
-		return @"Real time tracking failed to load.";
-	}
-    
-    if (!self.isRunning) {
+    NSString *summaryString = nil;
+    if (self.liveStatusFailed) {
+        summaryString = @"Real time tracking failed to load.";
+    } else if (!self.isRunning) {
         summaryString = @"Bus not running.";
+    } else if (!self.gpsActive) {
+        summaryString = @"Tracking offline.";
     } else {
-        ShuttleStop *aStop = [self.stops lastObject];
-        if (aStop.nextScheduledDate) { // we have something from the server
-            if (self.vehicleLocations && self.vehicleLocations.count > 0) {
-                summaryString = [NSString stringWithString:@"Real time bus tracking online."];
-            } else {
-                summaryString = [NSString stringWithString:@"Tracking offline."];
-            }
-        } else {
-            summaryString = [NSString stringWithString:@"Loading..."];
-        }
+        summaryString = @"Real time bus tracking online.";
     }
 	return summaryString;
 }
@@ -365,7 +347,8 @@
 // array of CLLocations making up the path of this route
 -(NSArray*) pathLocations
 {
-	return _pathLocations;
+	//return _pathLocations;
+    return self.path;
 }
 
 // array of MKAnnotations that are to be included with this route

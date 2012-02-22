@@ -2,7 +2,6 @@
 
 @class MITModule;
 @class SpringboardViewController;
-@class ModoNavigationController;
 
 // subclass UIWindow to receive shake events
 @interface MotionDetectorWindow : UIWindow {
@@ -13,7 +12,7 @@
 @interface MIT_MobileAppDelegate : NSObject <UIApplicationDelegate> {
     
     MotionDetectorWindow *window;
-    ModoNavigationController *theNavController;
+    UINavigationController *theNavController;
     SpringboardViewController *theSpringboard;
     UIViewController *appModalHolder;
     
@@ -30,7 +29,7 @@
 - (void)dismissAppModalViewControllerAnimated:(BOOL)animated;
 
 @property (nonatomic, retain) IBOutlet MotionDetectorWindow *window;
-@property (nonatomic, retain) ModoNavigationController *theNavController;
+@property (nonatomic, retain) UINavigationController *theNavController;
 @property (nonatomic, retain) SpringboardViewController *springboard;
 @property (nonatomic, retain) NSArray *modules;
 @property (nonatomic, retain) NSData *deviceToken;

@@ -90,7 +90,8 @@
 	
 	// request up to date route information
 	[[ShuttleDataManager sharedDataManager] registerDelegate:self];
-    [[ShuttleDataManager sharedDataManager] requestFullRoute:self.route.routeID];
+    //[[ShuttleDataManager sharedDataManager] requestFullRoute:self.route.routeID];
+    [[ShuttleDataManager sharedDataManager] requestRoute:self.route.routeID];
     [self startPolling];
 }
 
@@ -199,7 +200,7 @@
         cell.textLabel.text = aStop.title;
 
         if (aStop.upcoming) {
-            cell.imageView.image = self.route.genericShuttleMarker;
+            cell.imageView.image = self.route.genericMarkerImage;
         } else {
             cell.imageView.image = [UIImage blankImageOfSize:CGSizeMake(18, 18)];
         }

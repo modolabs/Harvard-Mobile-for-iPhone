@@ -80,4 +80,8 @@ static AnalyticsWrapper *s_sharedWrapper = nil;
     // TODO: figure out what to do about successful and failed event dispatches
 }
 
+- (void)hitDispatched:(NSString *)hitString
+{
+}
+
 @end

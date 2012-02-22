@@ -1,19 +1,13 @@
-//
-//  ShuttlesMainViewController.m
-//  Harvard Mobile
-//
-//  Created by Muhammad Amjad on 9/17/10.
-//  Copyright 2010 Modo Labs. All rights reserved.
-//
-
 #import "ShuttlesMainViewController.h"
 #import "MITUIConstants.h"
 #import "AnalyticsWrapper.h"
 
-#define RunningTabIndex 0
-#define OfflineTabIndex 1
-#define NewsTabIndex 2
-#define InfoTabIndex 3
+enum {
+    RunningTabIndex = 0,
+    OfflineTabIndex,
+    NewsTabIndex,
+    InfoTabIndex
+};
 
 static const NSInteger kAnnouncementBadgeLabel = 0x41;
 
@@ -51,6 +45,15 @@ static const NSInteger kAnnouncementBadgeLabel = 0x41;
 @synthesize tabView;
 @synthesize haveNewAnnouncements;
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [[ShuttleDataManager sharedDataManager] unregisterDelegate:self];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [[ShuttleDataManager sharedDataManager] registerDelegate:self];
+}
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
@@ -60,31 +63,23 @@ static const NSInteger kAnnouncementBadgeLabel = 0x41;
 	newAnnouncement.image = [UIImage imageNamed:@"shuttles/shuttle-news-badge.png"];
 	[self addBadgeLabelToAnnouncement];
 	
-	self.view.backgroundColor = [UIColor clearColor];
-	
 	shuttleRoutesTableView = [[ShuttleRoutes alloc] initWithStyle: UITableViewStyleGrouped];
 	shuttleRoutesTableView.parentNavigationViewController = self.navigationController;
 	shuttleRoutesTableView.mainViewController = self;
 	
-	//tabViewContainer = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 420.0)];
-	tabViewContainer.backgroundColor = [UIColor whiteColor];
-	
 	announcementsTab  = [[AnnouncementsTableViewController alloc] initWithStyle:UITableViewStylePlain];
-	//announcementsTab = [[AnnouncementsViewController alloc] initWithNibName:@"AnnouncementsViewController" bundle:nil];
 	announcementsTab.parentNavigationViewController = self.navigationController;
-	
-	JSONAPIRequest *api = [JSONAPIRequest requestWithJSONAPIDelegate:self];
-	BOOL dispatched = [api requestObjectFromModule:@"shuttles" command:@"announcements" parameters:nil];
+    
+    [[ShuttleDataManager sharedDataManager] registerDelegate:self];
+    [[ShuttleDataManager sharedDataManager] requestInfo];
+    [[ShuttleDataManager sharedDataManager] requestAnnouncements];
 	
 	contactsTab = [[ContactsTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
 	contactsTab.parentNavigationViewController = self.navigationController;
 	
-	if (dispatched == NO)
-		[self couldNotConnectToServer];
-	
-	if (_tabViewsArray == nil)
+	if (_tabViewsArray == nil) {
 		_tabViewsArray = [[NSMutableArray alloc] initWithCapacity:3];
-	
+	}
 	
 	[tabView addTab:@"Running"];	
 	[_tabViewsArray insertObject:shuttleRoutesTableView.view atIndex: RunningTabIndex];
@@ -102,12 +97,7 @@ static const NSInteger kAnnouncementBadgeLabel = 0x41;
 	tabView.hidden = NO;
 	tabViewContainer.hidden = NO;
 	
-	[tabView setNeedsDisplay];
-	[tabView setDelegate:self];
-		
 	[self addLoadingIndicator];
-	//[tabViewContainer addSubview:shuttleRoutesTableView.view];
-	//[tabViewContainer addSubview:webView];
 	
 	if (haveNewAnnouncements == YES) {
 		newAnnouncement.hidden = NO;
@@ -118,11 +108,14 @@ static const NSInteger kAnnouncementBadgeLabel = 0x41;
 		[[newAnnouncement superview] sendSubviewToBack:newAnnouncement];
 	}
 	
-	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshRoutes)];
+	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh
+                                                                                           target:self
+                                                                                           action:@selector(refreshRoutes)];
 	
-	[tabView setSelectedTab:0];
+	[tabView setSelectedTab:RunningTabIndex];
 	shuttleRoutesTableView.currentTabMainView = RunningTabIndex;
-		[tabView setNeedsDisplay];
+
+    //[tabView setNeedsDisplay];
 }
 
 
@@ -165,53 +158,43 @@ static const NSInteger kAnnouncementBadgeLabel = 0x41;
 	{
 		[subview removeFromSuperview];
 	}
-	
-	if (tabIndex == RunningTabIndex) {
-		announcementsTab.view.hidden = YES;
-		contactsTab.view.hidden = YES;
-		shuttleRoutesTableView.currentTabMainView = RunningTabIndex;
-		[shuttleRoutesTableView setShuttleRoutes:shuttleRoutesTableView.shuttleRoutes];
-		//[shuttleRoutesTableView.tableView reloadData];
-		//[self removeLoadingIndicator];
-		[tabViewContainer addSubview:[_tabViewsArray objectAtIndex:tabIndex]];
-		shuttleRoutesTableView.view.hidden = NO;
-        [[AnalyticsWrapper sharedWrapper] trackEvent:@"shuttleschedule" action:@"running tab pressed" label:nil];
-	}
-	
-	else if (tabIndex == OfflineTabIndex) {
-		announcementsTab.view.hidden = YES;
-		contactsTab.view.hidden = YES;
-		shuttleRoutesTableView.currentTabMainView = OfflineTabIndex;
-		[shuttleRoutesTableView setShuttleRoutes:shuttleRoutesTableView.shuttleRoutes];
-		[shuttleRoutesTableView.tableView reloadData];
-		[tabViewContainer addSubview:[_tabViewsArray objectAtIndex:tabIndex]];
-		shuttleRoutesTableView.view.hidden = NO;
-        [[AnalyticsWrapper sharedWrapper] trackEvent:@"shuttleschedule" action:@"offline tab pressed" label:nil];
-	}
-	
-	else if (tabIndex == NewsTabIndex) {
-		shuttleRoutesTableView.view.hidden = YES;
-		contactsTab.view.hidden = YES;
-		shuttleRoutesTableView.currentTabMainView = NewsTabIndex;
-		//[tabViewContainer addSubview:[_tabViewsArray objectAtIndex:tabIndex]];
-		[tabViewContainer addSubview:[_tabViewsArray objectAtIndex:tabIndex]];
-		[announcementsTab.tableView reloadData];
-		announcementsTab.view.hidden = NO;
-        [[AnalyticsWrapper sharedWrapper] trackEvent:@"shuttleschedule" action:@"news tab pressed" label:nil];
-	}
-	
-	else {
-		announcementsTab.view.hidden = YES;
-		shuttleRoutesTableView.view.hidden = YES;
-		shuttleRoutesTableView.currentTabMainView = InfoTabIndex;
-		//[shuttleRoutesTableView setShuttleRoutes:shuttleRoutesTableView.shuttleRoutes];
-		//[shuttleRoutesTableView.tableView reloadData];
-		[tabViewContainer addSubview:[_tabViewsArray objectAtIndex:tabIndex]];
-		[contactsTab.tableView reloadData];
-		contactsTab.view.hidden = NO;
-        [[AnalyticsWrapper sharedWrapper] trackEvent:@"shuttleschedule" action:@"info tab pressed" label:nil];
-	}
-	
+    
+    NSString *analyticsAction = nil;;
+    shuttleRoutesTableView.currentTabMainView = tabIndex;
+    [tabViewContainer addSubview:[_tabViewsArray objectAtIndex:tabIndex]];
+    
+    announcementsTab.view.hidden = YES;
+    contactsTab.view.hidden = YES;
+    shuttleRoutesTableView.view.hidden = YES;
+
+	switch (tabIndex) {
+        case RunningTabIndex:
+            shuttleRoutesTableView.view.hidden = NO;
+            //-[ShuttleRoutes setShuttleRoutes:] calls tableView reloadData as a side effect
+            [shuttleRoutesTableView setShuttleRoutes:shuttleRoutesTableView.shuttleRoutes];
+            analyticsAction = @"running tab pressed";
+            break;
+        case OfflineTabIndex:
+            shuttleRoutesTableView.view.hidden = NO;
+            [shuttleRoutesTableView setShuttleRoutes:shuttleRoutesTableView.shuttleRoutes];
+            analyticsAction = @"offline tab pressed";
+            break;
+        case NewsTabIndex:
+            announcementsTab.view.hidden = NO;
+            [announcementsTab.tableView reloadData];
+            analyticsAction = @"news tab pressed";
+            break;
+        case InfoTabIndex:
+            contactsTab.view.hidden = NO;
+            [contactsTab.tableView reloadData];
+            analyticsAction = @"info tab pressed";
+            break;
+    }
+
+    if (analyticsAction) {
+        [[AnalyticsWrapper sharedWrapper] trackEvent:@"shuttleschedule" action:analyticsAction label:nil];
+    }
+
 	if (haveNewAnnouncements == YES) {
 		newAnnouncement.hidden = NO;
 		[[newAnnouncement superview] bringSubviewToFront:newAnnouncement];
@@ -223,75 +206,32 @@ static const NSInteger kAnnouncementBadgeLabel = 0x41;
 
 }
 
-
-- (void)request:(JSONAPIRequest *)request jsonLoaded:(id)result {
-	
-	NSArray * agencies =(NSArray *)[result objectForKey:@"agencies"];	
-	NSMutableArray * announcementsTemp = [NSMutableArray array];
-	
-	int new = 0;
-	for (int i =0; i < [agencies count]; i++) {
-		
-		NSDictionary * agency = (NSDictionary *)[agencies objectAtIndex:i];
-		NSString * agencyName = [agency objectForKey:@"name"];
-		
-		NSArray * announcements = [agency objectForKey:@"announcements"];
-		
-		for (int j =0; j < [announcements count]; j ++) {
-			[announcementsTemp addObject:[announcements objectAtIndex:j]];
-			NSDictionary * announcementDetails = [announcements objectAtIndex:j];
-			BOOL urgent = [[announcementDetails objectForKey:@"urgent"] boolValue];
-			NSString * dateString = [announcementDetails objectForKey:@"date"];
-			
-			NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
-			[dateFormatter setDateFormat:@"YYYY/MM/dd"];
-			NSDate* dateAnnouncement = [dateFormatter dateFromString:dateString];
-			
-			NSDate *today = [NSDate date];
-			
-			if (([today timeIntervalSinceDate:dateAnnouncement] <= (48*60*60)) || (urgent == YES)) {
-				new++;
-			}
-		}
-		
-		
-		if ([agencyName isEqualToString:@"harvard"]) {
-			announcementsTab.harvardAnnouncements = announcementsTemp;
-			//announcementsTab.mascoAnnouncements = announcementsTemp;
-		}
-		else if ([agencyName isEqualToString:@"masco"])
-			announcementsTab.mascoAnnouncements = announcementsTemp;
-	}
-
-	
+- (void)announcementsReceived:(NSDictionary *)announcements urgentCount:(NSUInteger)urgentCount
+{
+    // TODO: redo AnnouncementsTableViewController so it doesn't hard code agencies
+    NSArray *harvard = [announcements objectForKey:@"harvard"];
+    if ([harvard isKindOfClass:[NSArray class]] && harvard.count) {
+        announcementsTab.harvardAnnouncements = harvard;
+    }
+    NSArray *masco = [announcements objectForKey:@"masco"];
+    if ([masco isKindOfClass:[NSArray class]] && masco.count) {
+        announcementsTab.mascoAnnouncements = masco;
+    }
 	[announcementsTab.tableView reloadData];
-	//[announcementsTab.harvardAnnouncementsTableView reloadData];
-	//[announcementsTab.mascoAnnouncementsTableView
 
-	if (new > 0) {
-		newAnnouncement.hidden = NO;
-		haveNewAnnouncements = YES;
-		UILabel *badgeLabel = (UILabel *)[newAnnouncement viewWithTag:
-										  kAnnouncementBadgeLabel];
-		if ([badgeLabel isKindOfClass:[UILabel class]])
-		{
-			badgeLabel.text = [NSString stringWithFormat:@"%d", new];
-			[[newAnnouncement superview] bringSubviewToFront:newAnnouncement];			
-		}
-	}	
-	else {
-		newAnnouncement.hidden = YES;
-		haveNewAnnouncements = NO;
-		[[newAnnouncement superview] sendSubviewToBack:newAnnouncement];
-	}
+    if (urgentCount) {
+        newAnnouncement.hidden = NO;
+        haveNewAnnouncements = YES;
+        UILabel *badgeLabel = (UILabel *)[newAnnouncement viewWithTag:kAnnouncementBadgeLabel];
+        badgeLabel.text = [NSString stringWithFormat:@"%d", urgentCount];
+    } else {
+        newAnnouncement.hidden = YES;
+    }
 }
 
--(void)couldNotConnectToServer {
+- (void)infoReceived:(NSDictionary *)info
+{
 }
-
-
-
-
 
 - (void)addLoadingIndicator
 {
