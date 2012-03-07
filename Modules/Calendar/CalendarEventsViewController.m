@@ -326,9 +326,7 @@
             case CalendarEventListTypeAcademic:
                 pageName = @"/calendar/year?type=academic";
                 if (dateRangeDidChange) {
-                    NSDateComponents *comps = [[NSCalendar currentCalendar] components:NSYearCalendarUnit | NSMonthCalendarUnit
-                                                                              fromDate:self.startDate];
-                    pageName = [NSString stringWithFormat:@"%@&year=%d&month=%d", pageName, [comps year], [comps month]];
+                    pageName = [NSString stringWithFormat:@"%@&year=%d", pageName, [CalendarConstants academicStartYearForDate:self.startDate]];
                 }
                 break;
             case CalendarEventListTypeCategory:
@@ -897,15 +895,11 @@
 		}
 		case CalendarEventListTypeAcademic:
 		{
-			NSCalendar *calendar = [NSCalendar currentCalendar];
-			NSUInteger unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit;
-			NSDateComponents *comps = [calendar components:unitFlags fromDate:startDate];
-			NSString *month = [NSString stringWithFormat:@"%d", [comps month]];
-			NSString *year = [NSString stringWithFormat:@"%d", [comps year]];
+			NSString *year = [NSString stringWithFormat:@"%d", [CalendarConstants academicStartYearForDate:self.startDate]];
 
 			requestDispatched = [apiRequest requestObjectFromModule:CalendarTag
 															command:[CalendarConstants apiCommandForEventType:activeEventList]
-														 parameters:[NSDictionary dictionaryWithObjectsAndKeys:year, @"year", month, @"month", nil]];
+														 parameters:[NSDictionary dictionaryWithObjectsAndKeys:year, @"year", nil]];
 			break;
 		}
 		default:
