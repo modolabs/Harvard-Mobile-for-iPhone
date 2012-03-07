@@ -484,7 +484,11 @@
 }
 
 - (BOOL)canShowMap:(CalendarEventListType)listType {
-	return (listType == CalendarEventListTypeEvents || listType == CalendarEventListTypeExhibits);
+	// Trumba stopped returning lat/lons in their events when they switched from Google to Bing.
+	// Leaving this functionality intact but disabled in case they restore the lat/lon fields.
+	return false;
+
+	//return (listType == CalendarEventListTypeEvents || listType == CalendarEventListTypeExhibits);
 }
 
 - (BOOL)shouldShowDatePicker:(CalendarEventListType)listType {
