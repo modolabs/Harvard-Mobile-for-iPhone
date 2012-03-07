@@ -658,6 +658,7 @@
 		8D1107310486CEB800E47090 /* Mobile-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Mobile-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		A163D3F212C9523A004E423B /* LibrarySearchCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LibrarySearchCode.h; sourceTree = "<group>"; };
 		A163D3F312C9523A004E423B /* LibrarySearchCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LibrarySearchCode.m; sourceTree = "<group>"; };
+		A16B33DD150812D30081F59A /* Calendar 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Calendar 2.xcdatamodel"; sourceTree = "<group>"; };
 		A1EFCDDE12B163EE0092D9E1 /* libProj.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libProj.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1EFCDF312B164710092D9E1 /* Proj_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Proj_Prefix.pch; path = Proj/Proj_Prefix.pch; sourceTree = SOURCE_ROOT; };
 		A1EFCDF512B164710092D9E1 /* aasincos.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = aasincos.c; path = Proj/src/aasincos.c; sourceTree = SOURCE_ROOT; };
@@ -3434,9 +3435,10 @@
 		EB83929F1163FD6E0067C0A3 /* Calendar.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				A16B33DD150812D30081F59A /* Calendar 2.xcdatamodel */,
 				EB8392401163ED440067C0A3 /* Calendar.xcdatamodel */,
 			);
-			currentVersion = EB8392401163ED440067C0A3 /* Calendar.xcdatamodel */;
+			currentVersion = A16B33DD150812D30081F59A /* Calendar 2.xcdatamodel */;
 			path = Calendar.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
