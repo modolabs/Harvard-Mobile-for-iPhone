@@ -326,9 +326,7 @@
             case CalendarEventListTypeAcademic:
                 pageName = @"/calendar/year?type=academic";
                 if (dateRangeDidChange) {
-                    NSDateComponents *comps = [[NSCalendar currentCalendar] components:NSYearCalendarUnit | NSMonthCalendarUnit
-                                                                              fromDate:self.startDate];
-                    pageName = [NSString stringWithFormat:@"%@&year=%d&month=%d", pageName, [comps year], [comps month]];
+                    pageName = [NSString stringWithFormat:@"%@&year=%d", pageName, [CalendarConstants academicStartYearForDate:self.startDate]];
                 }
                 break;
             case CalendarEventListTypeCategory:
@@ -486,7 +484,11 @@
 }
 
 - (BOOL)canShowMap:(CalendarEventListType)listType {
-	return (listType == CalendarEventListTypeEvents || listType == CalendarEventListTypeExhibits);
+	// Trumba stopped returning lat/lons in their events when they switched from Google to Bing.
+	// Leaving this functionality intact but disabled in case they restore the lat/lon fields.
+	return false;
+
+	//return (listType == CalendarEventListTypeEvents || listType == CalendarEventListTypeExhibits);
 }
 
 - (BOOL)shouldShowDatePicker:(CalendarEventListType)listType {
@@ -897,15 +899,11 @@
 		}
 		case CalendarEventListTypeAcademic:
 		{
-			NSCalendar *calendar = [NSCalendar currentCalendar];
-			NSUInteger unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit;
-			NSDateComponents *comps = [calendar components:unitFlags fromDate:startDate];
-			NSString *month = [NSString stringWithFormat:@"%d", [comps month]];
-			NSString *year = [NSString stringWithFormat:@"%d", [comps year]];
+			NSString *year = [NSString stringWithFormat:@"%d", [CalendarConstants academicStartYearForDate:self.startDate]];
 
 			requestDispatched = [apiRequest requestObjectFromModule:CalendarTag
 															command:[CalendarConstants apiCommandForEventType:activeEventList]
-														 parameters:[NSDictionary dictionaryWithObjectsAndKeys:year, @"year", month, @"month", nil]];
+														 parameters:[NSDictionary dictionaryWithObjectsAndKeys:year, @"year", nil]];
 			break;
 		}
 		default:

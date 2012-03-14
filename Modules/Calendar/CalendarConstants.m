@@ -63,32 +63,30 @@ NSString * const CalendarEventAPISearch = @"search";
 
 + (NSString *)dateStringForEventType:(CalendarEventListType)listType forDate:(NSDate *)aDate
 {
-	NSDate *now = [NSDate date];	
-	if ((listType == CalendarEventListTypeEvents
-         || listType == CalendarEventListTypeExhibits)
-		&& [now compare:aDate] != NSOrderedAscending
-		&& [now timeIntervalSinceDate:aDate] < [CalendarConstants intervalForEventType:listType fromDate:aDate forward:YES]) {
-		return @"Today";
-	}
-
 	NSString *dateString = nil;
-	NSDateFormatter *df = [[NSDateFormatter alloc] init];
+
 	if (listType == CalendarEventListTypeAcademic) {
-		[df setDateFormat:@"yyyy"];
+		NSInteger year = [CalendarConstants academicStartYearForDate:aDate];
+		dateString = [NSString stringWithFormat:@"%i-%i", year, year+1];
 		
 	} else {
+		NSDate *now = [NSDate date];
+		if ((listType == CalendarEventListTypeEvents
+			 || listType == CalendarEventListTypeExhibits)
+			 && [now compare:aDate] != NSOrderedAscending
+			 && [now timeIntervalSinceDate:aDate] < [CalendarConstants intervalForEventType:listType fromDate:aDate forward:YES]) {
+			return @"Today";
+		}
+		
+		NSDateFormatter *df = [[NSDateFormatter alloc] init];
+		
 		//[df setDateStyle:kCFDateFormatterMediumStyle];
 		//[df setDateFormat:@"EEEE, MMM. dd"];
 		[df setDateFormat:@"EEEE M/dd"];
+		
+		dateString = [df stringFromDate:aDate];
+		[df release];
 	}
-	
-	dateString = [df stringFromDate:aDate];
-	[df release];
-	
-	int nextYearDate = [dateString intValue] + 1;
-	
-	if (listType == CalendarEventListTypeAcademic) 
-		dateString = [NSString stringWithFormat:@"%@-%i", dateString, nextYearDate];
 	
 	return dateString;
 }
@@ -118,6 +116,24 @@ NSString * const CalendarEventAPISearch = @"search";
 		default:
 			return 86400.0 * sign;
 	}
+}
+
++ (NSInteger)academicStartYearForDate:(NSDate *)date
+{
+    NSDateFormatter *df = [[NSDateFormatter alloc] init];
+    
+    [df setDateFormat:@"yyyy"];
+    NSInteger year = [[df stringFromDate:date] intValue];
+    
+    [df setDateFormat:@"M"];
+    NSInteger month = [[df stringFromDate:date] intValue];
+    if (month < 8) {
+        year--;
+    }
+    
+    [df release];
+    
+    return year;
 }
 
 @end

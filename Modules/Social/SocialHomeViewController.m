@@ -158,7 +158,7 @@ dateFormatter = _dateFormatter, retweetId = _retweetId;
             return NO;
         }
         
-        if ([urlString rangeOfString:@"loadMore"].location == 0) {
+        if ([urlString rangeOfString:@"loadmore"].location == 0) {
             [self requestItems];
             
             return NO;

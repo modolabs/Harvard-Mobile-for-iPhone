@@ -45,5 +45,6 @@ extern NSString * const CalendarEventAPISearch;
 + (NSString *)titleForEventType:(CalendarEventListType)listType;
 + (NSTimeInterval)intervalForEventType:(CalendarEventListType)listType fromDate:(NSDate *)aDate forward:(BOOL)forward;
 + (NSString *)dateStringForEventType:(CalendarEventListType)listType forDate:(NSDate *)aDate;
++ (NSInteger)academicStartYearForDate:(NSDate *)date;
 
 @end
