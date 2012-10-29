@@ -732,7 +732,8 @@ numberOfRowsInSection:(NSInteger)section
 	NSString *key = [self.list objectAtIndex:section];
 	NSArray *keySection = [self.menuDict objectForKey:key];
     
-	cell.textLabel.text = (NSString *) [[keySection objectAtIndex:row] objectForKey:@"item"];
+    NSString *itemText = (NSString *) [[keySection objectAtIndex:row] objectForKey:@"item"];
+    cell.textLabel.text = ([itemText isKindOfClass:[NSNull class]]) ? @"" : itemText;
 	cell.selectionStyle = UITableViewCellSelectionStyleNone;
 	cell.backgroundColor = GROUPED_VIEW_CELL_COLOR;
 	
